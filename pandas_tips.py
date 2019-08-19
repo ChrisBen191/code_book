@@ -163,6 +163,11 @@ df["New Column Name"] = [Array]
 # creates a 'running tally' column summing summing all numeric values in a particular row (indicated by axis=1)
 df['Running Total'] = df.sum(axis=1)
 
+# creates a rolling window calculation on the column specified, window_size_int provides the number
+# of observations to be calculated; .sum() can be replaced with count(), mean(), etc.
+rolling = df['Column Name'].rolling( window_size_int, min_periods=None,  )
+rolling.sum()
+
 # 'bins' the 'data_to_bin' values based on the 'binsd' increments (can also pass an integer '# of bins' instead)
 # can also pass along optional 'bin_labels'; saved as 'bin_data'
 data_to_bin = [1,2,3,4,5,6,7,8,9,10]
@@ -173,8 +178,6 @@ bin_data = pd.cut( data_to_bin, bins, labels=bin_labels)
 # 'qcut' bins the data based on sample quantiles; because sample quantiles are used, the bins will roughly be of 
 # equal size. Can also pass own quantiles (#s between 0 and 1, inclusive)
 equal_bin_data = pd.qcut(data_to_bin, quartile_cut_integer)
-
-
 
 ################################# DATA PARSING COMMANDS  ################################
 
@@ -190,7 +193,6 @@ df.loc[: , ["Column 1", "Column 2", "Column 3"]]
 
 # 'unstacks' a grouped df by more than one column, easier to read formatcd ..
 groupby_df.unstack()
-
 
 # displays the mean of values in "Column Name 2" grouped by the values in "Column Name 1";
 # 'mean' can be replaced with min, max, median, std, count, etc. 
