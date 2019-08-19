@@ -56,7 +56,11 @@ df.columns
 df.count()
 
 # displays summary statistics of all columns in the df (mean, median, average, etc.)
-df.describe()
+df_description = df.describe()
+
+# displays the specified statistic from the column specified; can be assigned to a variable
+# can use count, mean, min, 25%, etc.
+std_col_name = df_description['Column Name']['std']
 
 # displays the column specified
 df["Column Name"] or df.column_name
