@@ -37,9 +37,17 @@ Deletes the specified column from the table
 
 # QUERY COMMANDS
 
+Used to display all databases that can be connected to
+    
+    SHOW databases;
+
 Used to connect to the specified database to begin querying
 
     USE database_name;
+
+Used to display all tables from the database connected to
+
+    SHOW tables;
 
 Displays the specified column(s), use wildcard (*) to query every column in the table specified
 

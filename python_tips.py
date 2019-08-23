@@ -28,7 +28,6 @@ with open("file_path/file_name.json") as json_file:
 # writes data to a 'csv' file
 with open(data_output, 'w', newline="") as csvfile:
   writer = csv.writer(csvfile)
-
 ################################ INSPECTING DATA ################################
 
 # displays the num of items in an object, num of characters in a string, num of 
