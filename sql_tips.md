@@ -1,4 +1,8 @@
 # CRUD COMMANDS
+Creates a database with the given name specified.
+
+    `CREATE DATABASE db_name;`
+
 Creates a 'virtual table' saved as a view based on the specified subquery; allows a SELECT query to be saved as a temporary table
 
     CREATE VIEW view_name AS (subquery)'
