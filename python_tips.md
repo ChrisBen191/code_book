@@ -127,14 +127,14 @@ Create a list of uppercase characters from a string
 
     [ s.upper() for s in "Hello World" ]
 
-Opens the file specified and 'reads' the data; to append data to existing file use 'a', 'w' to create a file/overwrite an existing file, and 'r+' to read/write
+Opens the file specified and reads the data, denoted by **r**; to append data to existing file use **a**. To create a file/overwrite an existing file, use **w**; use **r+** to read/write.
 
     with open ('file_name.file_type', 'r') as fileobj:
       print("test")
 
 # DICTIONARIES
 
-Creates a dictionary using a colon to separate the ' 'keys' and 'values' of the dictionary; keys and values can be strings or numbers
+Creates a dictionary using a colon to separate the **keys** and **values** of the dictionary; keys and values can be strings or numbers.
 
     dict = {
       'first key': 'value',
@@ -142,19 +142,19 @@ Creates a dictionary using a colon to separate the ' 'keys' and 'values' of the 
       'third key': 'value'
     }
 
-Selects the 'value' with the cooresponding key in the dictionary specified
+Selects the **value** assigned to the denoted key from the dictionary specified
 
     variable = dict['key']
 
-Selects the 'value' with the cooresponding key in the dictionary specified if the key exists; if not the second parameter is given as the value instead 
+Selects the **value** assigned to the denoted key from the dictionary specified; if the key does not exist, the second parameter is given as a value instead.
 
     variable = dict.get('key',0)
 
-Deletes the key/value pair from the dictionary specified
+Deletes the **key/value** pair from the dictionary specified.
 
     del dict['key']
 
-Creates a list of dictionaries, using square brackets to encase the dicts; dicts are called by using their 'index' value
+Creates **dict_list**, a list of dictionaries, using square brackets to encase the dicts; dicts are called by using their 'index' value
 
     dict_list = [
       {'first dict key' : 'value' },
@@ -162,15 +162,15 @@ Creates a list of dictionaries, using square brackets to encase the dicts; dicts
       {'third dict key' : 'value' }
     ]
 
-Selects the 'value' with the cooresponding key in the dictonary specified from a 'dict list' using it's 'index' value
+From **dict_list**, a list of dictionaries, selects the **value** assigned to the denoted key from the dictionary specified by it's index value.
 
     variable = dict_list[dict_index]['key']
 
-Appends a new dictionary to the 'dict list' specified
+Appends a new dictionary to **dict_list** specified.
 
     dict_list.append(dict)
 
-Creates a dict of dictionaries 
+Creates **dict_dict**, a dictionary of dictionaries, using curly brackets to encase the dicts; dicts are called by using their **dict_key** value. 
 
     dict_dict = {
       'dict key' : {'inner dict key':'value'},
@@ -178,13 +178,13 @@ Creates a dict of dictionaries
       'dict key_3' : {'inner dict key':'value'}
     }
 
-Selects the 'value' with the cooresponding 'inner dict key' in the dictionary specified from a 'dict dict' using it's 'dict key'
+From **dict_dict**, a dictionary of dictionaries, selects the **value** assigned to the denoted **inner_dict_key** from the inner dictionary specified by the **dict_key**. Similar to indexing in list but using key instead.
 
     variable = dict_dict['dict key']['inner dict key']
 
-Prints 'list value' if it is in the 'list', inside the dictionary specified
+Prints **list_item** if it is in the **list**, inside the dictionary specified
 
-    if 'list value' in dict[list]:
+    if 'list_item' in dict[list]:
       print('list value')
 
 Loops through the values of the dictionary specified, and prints the 'value'
