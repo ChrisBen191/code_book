@@ -4,18 +4,18 @@
 
 # IMPORTING DATA
 
-Imports from a csv file
+Imports from a **csv** file
 
     data_path = "file_path/file_name.csv"
     df = pd.read_csv(data_path)
     df.head()
 
-Imports from a csv file and converts to a dict
+Imports from a **csv** file and converts to a **dict**
 
     df = pd.read_csv("file_path/file_name.csv")
     d = df.to_dict()
 
-Imports from a JSON file
+Imports from a **JSON** file
 
     url = "https://URL-DIRECTING-TO-JSON-DATA.json"
     df = pd.read_json(url, orient='columns')
@@ -23,29 +23,29 @@ Imports from a JSON file
 
 # EXPORTING DATA
 
-Writes the df to a csv file; 'index=True' writes row names (default)
+Writes the df to a **csv file**; index=True writes row names (default)
 
     df.to_csv("file_path/file_name.csv", index=False)
 
-Writes the df to an Excel file; 'index=True' writes row names (default)
+Writes the df to an **Excel file**; index=True writes row names (default)
 
     df.to_excel("file_path/file_name.xlsx", index=False)
 
-Writes the df to a JSON file
+Writes the df to a **JSON file**
 
     df.to_json(file_name)
-
-Saves the df as an HTML table
+u
+Saves the df as an **HTML table**
 
     df.to_html(file_name)
 
-Writes the df to the SQL table specified 
+Writes the df to the **SQL table specified** 
 
     df.to_sql(table_name, connection_object)
 
 # INSPECTING DATA
 
-Displays the first n rows in the df specified
+Displays the **first n rows** in the df specified
 
     df.head(n)
 
@@ -69,6 +69,10 @@ Displays total count of variables in each column; used to identify incomplete / 
 
     df.count()
 
+Displays the df sorted by the **column specified**, shows the entire df.
+
+    df.sort_values('Column Name', ascending=False)
+
 Displays summary statistics of all columns in the df (mean, median, average, etc.)
 
     df_description = df.describe()
@@ -89,7 +93,7 @@ Displays the instances(counts) of unique values in the column specified in the d
 
     df["Column Name"].value_counts()
 
-Displays the df sorted by the column specified in the df
+Displays the df sorted by the **column specified** in the df; only shows the column.
     
     df["Column Name"].sort_values(ascending=False) 
 
