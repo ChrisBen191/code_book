@@ -36,4 +36,13 @@ Stores a 'duration' of time specified (year, month, day, etc.), which is then us
 
         duration = datetime.timedelta(duration)
 
+# PANDAS DATETIME
+Creates a range of dates starting with the provided date; # of dates depends on the periods value given, frequency provides time value to iterate (year, month, day, etc).
+
+        pd.date_range( 'YYYY-MM-DD, periods=int, freq='D')
+
+Converts date formats a single format; use optional **format** parameter to map unorthodox date values to make conversion easier.
+
+        pd.to_datetime( [array_of_dates], format='string_code_to_parse')
+
 

@@ -269,3 +269,20 @@ Iterates over rows in a df
     for index, row in df.iterrows():
       print(row['ColumnName1'], row['ColumnName2'])
 
+# RESAMPLING COMMANDS
+
+**Resample,** a time-based groupby, provides an aggregration (mean, sum, count, std, etc) on time series data based on the **rule parameter**, which describes the frequency with which to apply the aggregration function. [Reference](http://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#offset-aliases)
+    
+    df.resample( rule='A').mean()
+
+# ROLLING COMMANDS
+
+Used to create a **rolling aggregration** (mean, sum, count, std, etc) based on the **window value**; if using daily time stamps, pandas infers the window value as days.
+
+    df.rolling(window=int).mean()
+
+# EXPANDING COMMANDS
+
+Used to create an **expanding aggregration** (mean, sum, count, std, etc) which takes account all data from the time series up to each point in time.
+
+    df.expanding().mean()
