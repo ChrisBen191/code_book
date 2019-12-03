@@ -17,6 +17,7 @@
 
 ## SQL
 [SQL Snippets](SQL/sql_snippets.md)
+
 [TSQL Snippets](SQL/tsql_snippets.md)
 
 ## PHP
