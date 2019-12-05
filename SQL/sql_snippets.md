@@ -1,62 +1,78 @@
 # CRUD COMMANDS
 Creates a database with the given name specified.
 
-    CREATE DATABASE db_name;
-
+```SQL
+CREATE DATABASE db_name;
+```
 Creates a 'virtual table' saved as a view based on the specified subquery; allows a SELECT query to be saved as a temporary table
 
-    CREATE VIEW view_name AS (subquery)
-
+```SQL
+CREATE VIEW view_name AS (subquery)
+```
 Adds a column to the specified table; the column datatype and column definition (NULL or NOT NULL must be specified
 
-    ALTER TABLE table_name 
-    ADD COLUMN new_column_name  datatype  column_definition		
-
+```SQL
+ALTER TABLE table_name 
+ADD COLUMN new_column_name  datatype  column_definition		
+```
 Updates an existing column to the specified datatype (int to bigint, varchar(10), etc.)	
 
-    ALTER TABLE table_name 
-    MODIFY column_name  new_data_type
-
+```SQL
+ALTER TABLE table_name 
+MODIFY column_name  new_data_type
+```
 Inserts data with the values specified, into the columns specified, into the table specified	
 
-    INSERT INTO table_name (column_1,  column_2) 
-    VALUES (value_1,  value_2);
+```SQL
+INSERT INTO table_name (column_1,  column_2) 
+VALUES (value_1,  value_2);
+```
 
 Changes the specified column name to the new
 
-    CHANGE column_name new_column_name
+```SQL
+CHANGE column_name new_column_name
+```
 
 Drops the specified table from the database
 
-    DROP TABLE table_name;
-
+```SQL
+DROP TABLE table_name;
+```
 Drops the specified view from the database
 
-    DROP VIEW view_name;
-
+```SQL
+DROP VIEW view_name;
+```
 Deletes the specified column from the table
 
-    ALTER TABLE table_name 
-    DROP column_name;
-
+```SQL
+ALTER TABLE table_name 
+DROP column_name;
+```
+ 
 # QUERY COMMANDS
 
 Used to display all databases that can be connected to
     
-    SHOW databases;
-
+```SQL
+SHOW databases;
+```
 Used to connect to the specified database to begin querying
 
-    USE database_name;
-
+```SQL
+USE database_name;
+```
 Used to display all tables from the database connected to
-
-    SHOW tables;
-
+```SQL
+SHOW tables;
+```
 Displays the specified column(s), use wildcard (*) to query every column in the table specified
 
-    SELECT column_name 
-    FROM table_name;
+```SQL
+SELECT column_name 
+FROM table_name;
+```
 
 Assigns an alias to a column/record/table to make easier to query
 
