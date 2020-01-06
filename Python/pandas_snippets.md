@@ -49,7 +49,7 @@ Displays the **first n rows** in the df specified
 
     df.head(n)
 
-Displays the last n rows in the df specified
+Displays the **last n rows** in the df specified
 
     df.tail(n)
 
@@ -57,15 +57,15 @@ Displays Index, Datatype, and Memory info
 
     df.info()
 
-Display the data type of each column in the df (object,float,etc.)
+Display the **data type** of each column in the df (object,float,etc.)
 
     df.dtypes
 
-Display a list of all column names in the df
+Display a list of all **column names** in the df
 
     df.columns
 
-Displays total count of variables in each column; used to identify incomplete / missing rows
+Displays **total count of variables in each column**; used to identify incomplete / missing rows.
 
     df.count()
 
