@@ -2,18 +2,27 @@
 
 Dependency for manipulating json files–
 
+```python
     import json
-
+```
 Dependency for manipulating csv files
 
+```python
     import csv
+```
 
 Dependency for ***os.path.join()*** command
 
+```python
     import os
+```
 
 Dependency for manipulating pickle files
 
+```python
+    import pickle
+```
+    
 # IMPORTING DATA
 
 Creates a list composed of each row in the csv stored as a list; assigned to the *data* variable
