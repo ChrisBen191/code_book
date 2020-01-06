@@ -12,6 +12,8 @@ Dependency for ***os.path.join()*** command
 
     import os
 
+Dependency for manipulating pickle files
+
 # IMPORTING DATA
 
 Creates a list composed of each row in the csv stored as a list; assigned to the *data* variable
@@ -27,14 +29,21 @@ Reads a csv file using the *os* dependency; **os.path.join()** requires no back 
 Imports from the JSON file specified
 
     with open("file_path/file_name.json") as json_file:
-      data = json.load(json_file)
+        data = json.load(json_file)
+
+Imports from the pickle file specified and enters **write** mode
+
+    with open('pickled_file.pkl', 'w') as file:
+        data = pickle.load(file)
+
+
 
 # EXPORTING  DATA
 
 Writes data to a 'csv' file
 
     with open(data_output, 'w', newline="") as csvfile:
-      writer = csv.writer(csvfile)
+        writer = csv.writer(csvfile)
 
     
 # INSPECTING DATA
