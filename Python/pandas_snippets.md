@@ -5,147 +5,104 @@ import pandas as pd
 ```
 # IMPORTING DATA
 
-Imports from a **csv** file
+Imports a **csv** file and saves as a DataFrame
 
 ```python
 data_path = "file_path/file_name.csv"
 df = pd.read_csv(data_path)
+
 df.head()
 ```
-Imports from a **csv** file and converts to a **dict**
+
+Imports a **JSON** file and saves as a DataFrame
+```python
+url = "https://URL-DIRECTING-TO-JSON-DATA.json"
+df = pd.read_json(url, orient='columns')
+
+df.head()
+```
+
+Imports a **csv** file and saves as a dictionary
 ```python
 df = pd.read_csv("file_path/file_name.csv")
 d = df.to_dict()
 ```
-Imports from a **JSON** file
-```python
-url = "https://URL-DIRECTING-TO-JSON-DATA.json"
-df = pd.read_json(url, orient='columns')
-df.head()
-```
+
 # EXPORTING DATA
 
-Writes the df to a **csv file**; index=True writes row names (default)
+Writes the df to a **csv** file
 ```python
 df.to_csv("file_path/file_name.csv", index=False)
+
+# index=True writes row names (default)
 ```
-Writes the df to an **Excel file**; index=True writes row names (default)
+Writes the df to an **Excel** file 
 ```python
 df.to_excel("file_path/file_name.xlsx", index=False)
+
+# index=True writes row names (default)
 ```
 Writes the df to a **JSON file**
 ```python
 df.to_json(file_name)
 ```
-Saves the df as an **HTML table**
+Writes the df in an  **HTML table** format
 ```python
 df.to_html(file_name)
 ```
-Writes the df to the **SQL table specified** 
+Writes the df to the **SQL table** specified
 ```python
 df.to_sql(table_name, connection_object)
 ```
 # INSPECTING DATA
-
-Displays the **first n rows** in the df specified
-```python
-df.head(n)
-```
-
-Displays the **last n rows** in the df specified
-```python
-df.tail(n)
-```
-
-Displays Index, Datatype, and Memory info
-```python
-df.info()
-```
-
-Display the **data type** of each column in the df (object,float,etc.)
-```python
-df.dtypes
-```
-
-Display a list of all **column names** in the df
-```python
-df.columns
-```
-
-Displays **total count of variables in each column**; used to identify incomplete / missing rows.
-```python
-df.count()
-```
-
-Displays the df sorted by the **column specified**, shows the entire df.
-```python
-df.sort_values('Column Name', ascending=False)
-```
-
-Displays summary statistics of all columns in the df (mean, median, average, etc.)
-```python
-df_description = df.describe()
-```
-
-Displays the specified statistic from the column specified; can be assigned to a variable can use count, mean, min, 25%, etc.
-```python
-std_col_name = df_description['Column Name']['std']
-```
-
-Displays the column specified
-```python
-df["Column Name"] or df.column_name
-```
-Displays every unique element in the column specified in the df
-```python
-df["Column Name"].unique()
-```
-Displays the instances(counts) of unique values in the column specified in the df
-```python
-df["Column Name"].value_counts()
-```
-Displays the df sorted by the **column specified** in the df; only shows the column.
-```python
-df["Column Name"].sort_values(ascending=False) 
-```
-Displays a Boolean value (True/False) for each row in the column specified depending on the conditional statement
-```python
-df["Column Name"] == "String/Var/Int"
-```
+|Method      |        |
+|:---:|---      |
+|`df.info()`|   Displays Index, Datatype, and Memory info
+|`df.describe()`|   Displays summary statistics of all possible aggregrate columns in the df (mean, median, average, etc.)
+|`df.dtypes`|   Display the **data type** of each column in the df (object,float,etc.)
+|`df.head(n)`|   Displays the **first n rows** in the df specified (default n=5)
+|`df.tail(n)`|   Displays the **last n rows** in the df specified (default n=5)
+|`df.columns`|  Displays a list of all **column names** in the df
+|`df.count()`|   Displays **total count of variables in each column**; used to identify incomplete / missing rows.
+|`df['Column Name']`|   Displays **all** values of the column specified
+|`df['Column Name'].unique()`|      Displays every **unique** value in the column specified
+|`df['Column Name'].value_counts()`|     Displays the **counts** of unique values in the column specified
+|`df["Column Name"] == "String/Var/Int"`|   Displays a Boolean value (True/False) for each row in the column specified depending on the conditional statement
+|`df.sort_values('Column_Name', ascending=False)`|  Displays the column in the df specified, **sorted by the values** in the column
 
 # MODIFIER COMMANDS
+|Method      |        |
+|:---:|---      |
+|`del df["Column Name"]`|   **Deletes** the column specified from the df
+|`df["Column Name"].astype(float)`| Converts the datatype of the specified column to a **float**
+|`df["Column Name"].astype(str)`| Converts the datatype of the specified column to a **string**
+|`df["New Column Name"] = [Array]`|     Creates a new column in the df with an list of values 
+|`df.["Column Name"].replace("Value", "New Value" )`| Replaces a value in the specified column
 
-Drops rows with missing information; used to remove incomplete / missing rows
+**Drops** or **deletes** rows with missing information; used to remove incomplete/missing rows; can use other *'how'* parameters
 ```python
-df.dropna( how="any")
+# drops rows from any column
+df.dropna(how='any')
+
+# can be used on a specific column
+df['Column Name'].dropna(how='any')
 ```
 
-Sets the df index using one or more existing columns / arrays (of the correct length); **inplace = True** does not create a new object, instead it overwrites the existing df
+**Sets** the df index using one or more existing columns / arrays (of the correct length)
 ```python
 df.set_index(keys, inplace=True)
+
+# 'inplace=True' overwrites the existing df
 ```
 
-Resets the index of the df (removes multi-index df); **inplace=True** does not create a new object.
+**Resets** the index of the df (also can revert a multi-index df)
 ```python
 df.reset_index(inplace=True)
+
+# 'inplace=True' overwrites the existing df
 ```
 
-Converts to dtype of the specified column to an integerr
-```python
-pd.to_numeric(df["Column Name"])
-```
-
-Converts the dtype of the specified column to a float; can be used to convert dtype to string (str)
-```python
-df["Column Name"].astype(float)
-```
-
-Deletes the column specified from the df
-```python
-del df["Column Name"]
-```
-
-Renames the columns specified in the df
+**Renames** the columns specified in the df
 ```python
 df.rename(columns = {
     "Old Name" : "New Name",
@@ -153,133 +110,112 @@ df.rename(columns = {
 })
 ```
 
-Replaces a value in the specified column; used for value normalization for a value in a df column
-```python
-df.["Column Name"].replace("Value", "New Value" )
-```
-
-Replaces the values in the specified column; used for value normalization for values in df column
+**Replaces** multiple values in the specified column
 ```python
 df["Column Name"].replace({
     "Value1": "New String Value",
     "Value2": "New String Value"
 })
+
+# used for value normalization for a df column
 ```
 
-Reorganizes the df and creates a new object (requires two sets of brackets)
+**Reorganizes** the df as needed; creates a new object
 ```python
-new_df = df[["Column 2","Column 3","Column 1"]]
+new_df = df[['Column 2', 'Column 3', 'Column 1']]
 ```
 
-Creates a new df using the array containing the names of the columns to be copied
+Creates a **new df**
 ```python
-new_df = df[columns_to_copy_array].copy()
-```
+df = pd.DataFrame({
 
-Creates a new df that can be assigned to a variable
-```python
-pd.DataFrame({
     "Column Title1": variable,
     "Column Title2": [array],
-    "Column Title3": df["Column Name"]
+    "Column Title3": old_df["Column Name"]
+    
 })
 ```
 
-Creates a df from a dictonary specified
+Creates a **DataFrame** from a dictonary specified
 ```python
 pd.DataFrame.from_dict(dict_data)
 ```
 
-Merges two dfs specified by the shared column specified
+Merges **multiple dfs** specified by the shared column specified; similar to **SQL JOIN** method
 
 ```python
-pd.merge(df_one, df_two, on="Shared Column")
+pd.merge(df_one, df_two, on="Shared Column", how='left')
+
+# 'how' determines left, inner, outer, right join
 ```
 
-Merges two dfs along rows; no shared column is needed
+Merges multiple dfs along rows; no shared column is needed
 ```python
-pd.concat([df_one, df_two])
-```
+pd.concat([df_one, df_two], axis=1)
 
-Creates 'bins' accoring to the bins array, labeled according to the labels specified
-```python
-pd.cut( df["Column Name"], bins, labels=group_names)
+# axis=0 (index), axis=1 (columns), default 0
 ```
 
 # AGGREGATE COMMANDS
+|Command      |        |
+|:---:|---      |
+|`df["Column Name"].mean()`|    Displays the average of the values in the column specified
+|`df["Column Name"].sum()`|     Displays the total of the values in the column specified
+|`df["Column Name"].min()`|     Displays the lowest value in the column specified
+|`df["Column Name"].max()`|     Displays the largest value in the column specified
 
-Displays the average of the values in the column specified
-```python
-df["Column Name"].mean()
-```
-
-Displays the total of the values in the column specified
-```python
-df["Column Name"].sum()
-```
-
-Displays the lowest value in the column specified
-```python
-df["Column Name"].min()
-```
-Displays the largest value in the column specified
-```python
-df["Column Name"].max()
-```
-Creates a new column in the df with an list of values 
-```python
-df["New Column Name"] = [Array]
-```
-
-Creates a 'running tally' column summing summing all numeric values in a particular row (indicated by axis=1)
+Creates a 'running tally' column summing all numeric values in a particular row (indicated by axis=1)
 ```python
 df['Running Total'] = df.sum(axis=1)
 ```
 
-Creates a rolling window calculation on the column specified, window_size_int provides the number of observations to be calculated; .sum() can be replaced with count(), mean(), etc.
+Creates a rolling window calculation on the column specified
 ```python
-rolling = df['Column Name'].rolling( window_size_int, min_periods=None,  )
+rolling = df['Column Name'].rolling( window_size_int, min_periods=None)
+
 rolling.sum()
+
+# 'window_size_int' provides the number of observations to be calculated
+# sum() can be replaced with count(), mean(), etc.
 ```
 
-**Bins** the 'data_to_bin' values based on the 'binsd' increments (can also pass an integer '# of bins' instead); can also pass along optional 'bin_labels'; saved as 'bin_data'.
+**Bins** the *'data_to_bin'* values based on the *'bins'* increments
 ```python
 data_to_bin = [1,2,3,4,5,6,7,8,9,10]
-bins = [interval_1, interval_2,...]
-bin_labels = ['label1', 'label2',...]
-bin_data = pd.cut( data_to_bin, bins, labels=bin_labels)
-```
 
-**Qcut** bins the data based on sample quantiles; because sample quantiles are used, the bins will roughly be of equal size. Can also pass own quantiles (#s between 0 and 1, inclusive)
-```python
-equal_bin_data = pd.qcut(data_to_bin, quartile_cut_integer)
+# can also pass an interval for bins instead (bins = [1-2, 3-4, ...])
+bins = 5
+
+# 'bin_labels' are an optional parameter
+bin_labels = ['label1', 'label2',...]
+
+# saved as 'bin_data'
+bin_data = pd.cut( data_to_bin, bins, labels=bin_labels)
+
 ```
 
 # DATA PARSING COMMANDS
 
-Converts the column specified into a list
+Converts the column specified into a **list**
 ```python
 list_from_column = df['Column Name'].tolist()
 ```
 
-Displays all rows for the columns specified
+Displays all **rows** for the columns specified, denoted by the colon
 ```python
 df.loc[: , ["Column 1", "Column 2", "Column 3"]]
 ```
 
-Groups data by values in the column specified (displayed with '.count()'); used to create grouped/binned dfs
+**Groups** data by values in the column specified; aggregrates by bracketed column and aggregrate method
 ```python
-df.groupby( ["Column Name1", "Column Name2"] ).count()
+gropuby_df = df.groupby( ["Column Name1", "Column Name2"] )['Column 3'].count()
+
+# can use sum(), mean(), max(), std(), etc.
 ```
 
-**Unstacks** a grouped df by more than one column, easier to read formatcd ..
+**Unstacks** a grouped df by more than one column, easier to read format
 ```python
 groupby_df.unstack()
-```
-
-Displays the mean of values in "Column Name 2" grouped by the values in "Column Name 1"; 'mean' can be replaced with min, max, median, std, count, etc. 
-```python
-df.groupby("Column Name1")["Column Name2"].mean()
 ```
 
 Displays rows where the conditional statement is true; used to create specific dfs

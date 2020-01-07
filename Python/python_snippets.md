@@ -1,5 +1,5 @@
 # DEPENDENCIES
-|   |   |
+| Command  |   |
 |:---:|---|
 |`import csv`| dependency for manipulating **csv** files
 |`import json`| dependency for manipulating **json** files
@@ -9,7 +9,7 @@
 
 # IMPORTING DATA
 
-Creates a list composed of each row in the csv stored as a list; assigned to the *data* variable
+Creates a list composed of each row in the csv stored as a list; assigned to the **data** variable
 ```python
 csv_file = open('file.csv')
 csv_reader = csv.reader(csv_file)
@@ -81,7 +81,7 @@ variable += 1
 ```
 
 # LIST MANIPULATION
-|   	|   	|
+|Method	|   	|
 |:---:	|---	|
 |`list.append('value')`   	|adds the value specified to the **end** of list
 |`list.insert(index, 'value')`	|**inserts** the value into the list at the index specified
