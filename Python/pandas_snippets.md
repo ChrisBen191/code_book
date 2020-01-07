@@ -77,7 +77,7 @@ df.to_sql(table_name, connection_object)
 |`df["Column Name"].astype(float)`| Converts the datatype of the specified column to a **float**
 |`df["Column Name"].astype(str)`| Converts the datatype of the specified column to a **string**
 |`df["New Column Name"] = [Array]`|     Creates a new column in the df with an list of values 
-|`df.["Column Name"].replace("Value", "New Value" )`| Replaces a value in the specified column
+|`df["Column Name"].replace("Value", "New Value")`| Replaces a value in the specified column
 
 **Drops** or **deletes** rows with missing information; used to remove incomplete/missing rows; can use other *'how'* parameters
 ```python
