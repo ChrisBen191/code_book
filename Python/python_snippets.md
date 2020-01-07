@@ -1,27 +1,11 @@
 # DEPENDENCIES
+|   |   |
+|:---:|---|
+|`import csv`| dependency for manipulating **csv** files
+|`import json`| dependency for manipulating **json** files
+| `import os`| depdendency for **os.path.join()** command
+|`import pickle`| dependency for manipulating pickle files
 
-Dependency for manipulating json files–
-
-```python
-import json
-```
-Dependency for manipulating csv files
-
-```python
-import csv
-```
-
-Dependency for ***os.path.join()*** command
-
-```python
-import os
-```
-
-Dependency for manipulating pickle files
-
-```python
-import pickle
-```
 
 # IMPORTING DATA
 
@@ -96,37 +80,17 @@ Shorthand statement for increasing the 'variable' by 1 (variable = variable + 1)
 variable += 1
 ```
 
-# LIST MODIFIER COMMANDS
+# LIST MANIPULATION
+|   	|   	|
+|:---:	|---	|
+|`list.append('value')`   	|adds the value specified to the **end** of list
+|`list.insert(index, 'value')`	|**inserts** the value into the list at the index specified
+|`list.remove('value')`     | **removes** the element with the corresponding 'value' from the list specified
+|`list.upper()`  | **uppercases** each string element in the list specified
+|`list.lower()` | **lowercases** each string element in the list specified
+|`list.title()` | uppercases the **initial letter** in each element in the list specified
 
-Adds, or 'appends' the value to the end of the list specified
-```python
-list.append('value')
-```
 
-Adds the value to the list specified; value is 'inserted' into the list at the index specified and moves every element in the list after the index an addititonal index position
-```python
-list.insert(index, 'value')
-```
-
-Removes the element with the cooresponding 'value' from the list specified
-```python
-list.remove('value')
-```
-
-Uppercases each string element in the list specified 
-```python
-list.upper()
-```
-
-Lowercases each string element in the list specified
-```python
-list.lower()
-```
-
-Converts the initial capital letter to each element in the list specified
-```python
-list.title()
-```
 
 Deletes the element with the 'index_num' from the list specified
 ```python
