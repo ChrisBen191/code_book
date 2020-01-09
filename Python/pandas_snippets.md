@@ -81,10 +81,10 @@ df.to_sql(table_name, connection_object)
 
 **Drops** or **deletes** rows with missing information; used to remove incomplete/missing rows; can use other *'how'* parameters
 ```python
-# drops rows from any column
+# drops rows from any column with null values
 df.dropna(how='any')
 
-# can be used on a specific column
+# drops rows with null values in a specific column
 df['Column Name'].dropna(how='any')
 ```
 
