@@ -1,4 +1,5 @@
-# MATPLOTLIB
+<center> MATPLOTLIB </center>
+=========================
 
 # DEPENDENCIES
 
@@ -98,7 +99,8 @@ plt.plot(x, y_1)
 ```
 ---
 
-# SEABORN
+<center> SEABORN </center>
+=========================
 
 # IMPORTS
 imports the **seaborn** dependency to create plots with pandas DataFrames
@@ -108,7 +110,7 @@ import seaborn as sns
 ```
 
 # GRAPHING
-plots a linear regression graph
+plots a **linear regression** graph
 ```python
 # data parameter is required, and x/y must be in string format
 sns.lmplot(x='Column_Name', y='Column_Name_2', data=df)
@@ -157,7 +159,6 @@ sns.boxplot(x='Column_Name', y='Column_Name_2', data=df)
 ```python
 # the distribution is denser where the violin plot is thicker
 sns.violinplot(x='Column_Name', y='Column_Name_2, data=df)
-
 ```
 
 **jointplots** provide a plot with histograms (of individual coordinates) above and to the side of the main plot
@@ -173,5 +174,118 @@ sns.pairplot(df)
 **heatmaps** plot covariance matrices when pairplot() plots become visually overwhelming
 ```python
 sns.heatmap(cov_matrix)
+```
+
+---
+
+<center> BOKEH </center>
+=========================
+Visual properties of shapes are called glyphs in Bokeh. The visual properties of these glyphs such as position or color can be assigned single values (size=10, fill_color='red'). Other glyph properties can be set as lists or arrays (x=[1,2,3], size=[10,20,30]).
+
+# DEPENDENCIES
+
+allows plots to be saved to an **html file** and using a browser to display the file
+```python
+from bokeh.io import output_file, show
+```
+
+allows plots to be displayed inline in a **jupyter notebook**
+```python 
+from bokeh.io import output_notebook, show
+```
+
+imports the **figure object** to be able to create a figure instance
+```python
+from bokeh.plotting import figure
+```
+
+imports **Column Data Source object** to be able to create a ColumnDataSource instance
+```python
+from bokeh.models import ColumnDataSource
+```
+
+imports the **Hover Tool object** to be able to create a HoverTool instance
+```python
+from bokeh.models import HoverTool
+```
+
+imports the **Categorical Color Mapper object** to be able to create a CategoricalColorMapper instance
+```python
+from bokeh.models import CategoricalColorMapper
+```
+
+# EXPORTING
+
+saves the plot to an **html file**
+```python
+output_file('file_name.html')
+```
+
+# GRAPHING
+
+creates the **figure object** to be used; plot is commonly referenced as 'p'
+```python
+# can also use 'plot_height' parameter; can utilize other 'tool' objects (box_select, lasso_select, etc.)
+plot = figure(plot_width=400, tools='pan, box_zoom')
+```
+
+**marker glyphs** determine the mark style used on the plot
+```python
+# can use other markers such as asterisk(), cross(), square(), triangle(), etc. 
+plot.circle(x, y)ls
+
+# displays the plot in a browser(HTML) or inline a Jupyter Notebook
+show(plot)
+```
+
+**line glyphs** plots a line through the coordinates specified
+```python
+# can use other parameters such as 'line_width'
+ plot.line(x, y)
+```
+
+# MODIFIER COMMANDS
+
+creates a **ColumnDataSource instance** which defines data that can be used on multiple glyphs in a plot
+```python
+# source is created by passing a data dictonary through the ColumnDataSource initializer
+# all columnns in the column data source instance must be the same length
+source = ColumnDataSource( data={
+    'x': [1,2,3,4,5],
+    'y':[6,7,8,9,10]
+})
+
+# can also create a column data source instance using DataFrames
+source = ColumnDataSource(df)
+```
+
+creates a **HoverTool instance** which defines the hover behavior of the plot
+```python
+hover = HoverTool(tooltips=None, mode='hline')
+
+# passing the hover instance in the 'tool' parameter to be able to specify a hover policy in the 'plot' figure object
+plot = figure(tools=[hover, 'crosshair'])
+
+# if the plot has been defined, use the 'add_tools()' function to add more tools
+p.add_tools(hover)
+
+# a circle glyph with hover policies
+plot.circle(x, y, hover_color='red', hover_size=10)
+```
+
+creates a **CategoricalColorMapper instance** which defines the colors to be mapped to the data
+```python
+mapper = CategoricalColorMapper(
+    factors=['Data_Category_1', 'Data_Category_2', 'Data_Category_3'],
+    palette=['red', 'green', 'blue']
+)
+
+# a circle glyph with color mapping policies by passing a 'color' dictionary
+# the 'field' value should be the column containing the 'factors'
+plot.circle(x, y, color={'field': 'Column_Name',
+                         'transform':mapper})
+
+# can also be formatted as follows
+plot.circle(x, y, color=dict(field='origin', transform=mapper))
 ```
 
