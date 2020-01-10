@@ -15,6 +15,8 @@
 
 [Numpy Snippets](Python/numpy_snippets.md)
 
+[Time Series](Python/time_series.md)
+
 ## SQL
 [SQL Snippets](SQL/sql_snippets.md)
 
