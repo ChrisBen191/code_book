@@ -1,55 +1,83 @@
 # DEPENDENCIES
-
-        import numpy as np
-
+```python
+import numpy as np
+```
 
 # NUMPY METHODS
 
 Stores the **square root** of the value **x** and stores it as a variable.
-
-        square_root = np.sqrt(x)
+```python
+square_root = np.sqrt(x)
+```
 
 Takes the **value** and raises it by the power of the **power_value**.
-
-        power_of_num = np.power(power_value, value)
+```python
+power_of_num = np.power(power_value, value)
+```
 
 Takes the **sine** of the value specified and stores it as a variable.
+```python
+sine_of_num = np.sin(value)
+```
 
-        sine_of_num = np.sin(value)
+Computes the 2D **covariance matrix** for the x and y arrays specified
+```python
+np.cov(x, y)
+```
+
+Computes the **Pearson Correlation coefficient** for the x and y arrays specified
+```python
+# pearson coefficient is condsidered easier to interpret than covariance
+np.corrcoef(x, y)
+```
 
 Creates **arr_list**,  a list of arrays.
-
-        arr_list = [[1,2,3], [4,5,6], [7,8,9]]
+```python
+arr_list = [[1,2,3], [4,5,6], [7,8,9]]
+```
 
 Creates a **matrix** from a **arr_list**, a list of arrays. 
-
-        my_matrix = np.array(arr_list)
+```python
+my_matrix = np.array(arr_list)
+```
 
 Displays the **shape** of the matrix (row and column count).
-
-        my_matrix.shape
+```python
+my_matrix.shape
+```
 
 Arranges the values in the array specified; uses a **start** and **end** value, as well as an option **interval** amount. **End** value is not included in calculation.
+```python
+np.arange( start_int, end_int, interval_int)
+```
 
-        np.arange( start_int, end_int, interval_int)
+Calculates the **percentiles** of the specified data
+```python
+# the second parameter takes no an array of the percentiles to calculate
+np.percentile(data, [25, 50,75])
+```
 
 Creates a matrix of **zeroes** of the shape **num_rows** and **num_columns** specified. Can use **np.ones()** to produce a matrix of **ones**.
-
-        np.zeroes( num_of_rows , num_of_columns)
+```python
+np.zeroes( num_of_rows , num_of_columns)
+```
 
 Returns **linearly spaced** numbers over the specified interval; the **start** and **end** are included in the calculation.
-
-        np.linspace( start_int, end_int, amt_of_nums )
+```python
+np.linspace( start_int, end_int, amt_of_nums )
+```
 
 Creates an **identity matrix** (ones across the diagonal matrix) with the number of rows/columns specified by **matrix_num**.
-
-        identity_matrix = np.eye( matrix_num )
+```python
+identity_matrix = np.eye( matrix_num )
+```
 
 Creates **random_arr**, an array containing the **num_of_values** of random numbers specified
-
-        random_arr = np.random.rand( num_of_values )
+```python
+random_arr = np.random.rand( num_of_values )
+```
 
 Creates **rando_arr**, an array containing the **num_of_values** of random numbers specified; **randn** however returns samples from the **standard normal distribution** (0 to 1) so values closer to zero are more likely to appear.
-
-        random_arr = np.random.randn( num_of_values )
-
+```python
+random_arr = np.random.randn( num_of_values )
+```

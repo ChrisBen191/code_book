@@ -75,7 +75,11 @@ creates a label for the **y-axis**
 ```python
 plt.ylabel('Label for Y-Axis')
 ```
-
+creates a **margin** around the plot to keep data off of the edges
+```python
+# the following provides a 2% buffer around plot edges
+plt.margins(0.02)
+```
 # GRAPHING
 plots multiple **line graphs**
 ```python
@@ -126,11 +130,15 @@ sns.lmplot(x='Column_Name', y='Column_Name_2', data=df, col='Column_Name_3')
 
 # .regplot() is less restrictive than .lmplot()
 sns.regplot()
+
+plt.show()
 ```
 
 plots the **residuals of a regression**; residual structure suggests a simple/single linear regression is not appropriate
 ```python
 sns.residplot(x='Column_Name', y='Column_Name_2', data=df, color='red')
+
+plt.show()
 ```
 
 **strip plot** displays values on a number line to visualize samples of a single variable
@@ -140,6 +148,8 @@ sns.stripplot(y='Column_Name', data=df)
 
 # jitter spreads out split plot points (by size parameter) so they don't overlap
 sns.stripplot(y='Column_Name', data=df, size=num, jitter=True)
+
+plt.show()
 ```
 
 **swarmplot** automatically arranges repeated points to avoid overlap and provide a sense of distribution
@@ -148,32 +158,44 @@ sns.swarmplot(x='Column_Name', y='Column_Name_2', data=df)
 
 # 'hue' parameter displays the colors of a categorial column within the plot
 sns.swarmplot(x='Column_Name', y='Column_Name_2', data=df, hue='Column_Name_3')
+
+plt.show()
 ```
 
 **boxplot** displays the minimum, maximum, and median values of a dataset along the 1st and 3rd quartiles and outliers
 ```python
 sns.boxplot(x='Column_Name', y='Column_Name_2', data=df)
+
+plt.show()
 ```
 
 **violinplots** show curved distributions (KDE) wrapped around a box plot 
 ```python
 # the distribution is denser where the violin plot is thicker
 sns.violinplot(x='Column_Name', y='Column_Name_2, data=df)
+
+plt.show()
 ```
 
 **jointplots** provide a plot with histograms (of individual coordinates) above and to the side of the main plot
 ```python
 sns.jointplot(x='Column_Name', y='Column_Name', data=df)
+
+plt.show()
 ```
 
 **pairplots** provide jointplots for all possible pairs of numerical column variables in a df
 ```python
 sns.pairplot(df)
+
+plt.show()
 ```
 
 **heatmaps** plot covariance matrices when pairplot() plots become visually overwhelming
 ```python
 sns.heatmap(cov_matrix)
+
+plt.show()
 ```
 
 ---
@@ -214,6 +236,26 @@ imports the **Categorical Color Mapper object** to be able to create a Categoric
 from bokeh.models import CategoricalColorMapper
 ```
 
+imports the **row method** to place glyphs side by side
+```python
+from bokeh.layouts import row
+```
+
+imports the **column method** to place glyphs on top of one another
+```python
+from bokeh.layouts import column
+```
+
+imports the **Grid Plot method** which allows to create rows and columns in one method
+```python
+from bokeh.layouts import gridplot
+```
+
+imports **Tabs and Panels** which allow creation of tabbed layouts
+```python
+from bokeh.models.widgets import Tabs, Panel
+```
+
 # EXPORTING
 
 saves the plot to an **html file**
@@ -242,6 +284,8 @@ show(plot)
 ```python
 # can use other parameters such as 'line_width'
  plot.line(x, y)
+
+show(plot)
 ```
 
 # MODIFIER COMMANDS
