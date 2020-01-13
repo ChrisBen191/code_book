@@ -10,15 +10,14 @@ import numpy as np
 | `np.power(power_value, value)` | Takes the **value** specified and raises it by the value of **power_value**. |
 | `np.sin(value)`                | Calculates the **sine** of the value specified                               |
 | `np.cov(x, y)`                 | Computes the 2D **covariance matrix** for the x and y arrays specified       |
-|                                |                                                                              |
-|                                |                                                                              |
+|`np.corrcoef(x, y)`                          |Computes the **Pearson Correlation coefficient** (condsidered easier to interpret than covariance) for the x and y arrays specified|
+|`np.zeroes( num_of_rows , num_of_columns)`|Creates a matrix of **zeroes** of the shape **num_rows** and **num_columns** specified.|
 
 
-Computes the **Pearson Correlation coefficient** for the x and y arrays specified
-```python
-# pearson coefficient is condsidered easier to interpret than covariance
-np.corrcoef(x, y)
-```
+ Can use **np.ones()** to produce a matrix of **ones**.
+
+
+
 
 Creates **arr_list**,  a list of arrays.
 ```python
@@ -44,11 +43,6 @@ Calculates the **percentiles** of the specified data
 ```python
 # the second parameter takes no an array of the percentiles to calculate
 np.percentile(data, [25, 50,75])
-```
-
-Creates a matrix of **zeroes** of the shape **num_rows** and **num_columns** specified. Can use **np.ones()** to produce a matrix of **ones**.
-```python
-np.zeroes( num_of_rows , num_of_columns)
 ```
 
 Returns **linearly spaced** numbers over the specified interval; the **start** and **end** are included in the calculation.
