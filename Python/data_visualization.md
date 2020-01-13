@@ -1,14 +1,14 @@
--> MATPLOTLIB <-
+# MATPLOTLIB
 =========================
 
-# DEPENDENCIES
+## DEPENDENCIES
 
 imports the **matplotlib** dependency to create plots
 ```python
 import matplotlib.pyplot as plt
 ```
 
-# IMPORTING
+## IMPORTING
 loads **image** and displays it
 ```python
 img = plt.imread('image_file.png')
@@ -20,14 +20,14 @@ plt.axis('off')
 plt.imshow(img)
 ```
 
-# EXPORTING
+## EXPORTING
 **exports** the plot
 ```python
 # saving as a 'png' file
 plt.savefig('image_name.png')
 ```
 
-# SIZING ATTRIBUTES
+## SIZING ATTRIBUTES
 resizes the **x and y limits** of the graph
 ```python
 # x limit only
@@ -48,7 +48,7 @@ improves the **spacing** between subplots
 ```python
 plt.tight_layout()
 ```
-# GRAPHING ATTRIBUTES
+## GRAPHING ATTRIBUTES
 determines the style of graph to be used to plot
 ```python
 # use 'plt.style.available' to view a list of available styles
@@ -80,7 +80,7 @@ creates a **margin** around the plot to keep data off of the edges
 # the following provides a 2% buffer around plot edges
 plt.margins(0.02)
 ```
-# GRAPHING
+## GRAPHING
 plots multiple **line graphs**
 ```python
 plt.plot(x, y, color='blue')
@@ -103,17 +103,17 @@ plt.plot(x, y_1)
 ```
 ---
 
--> SEABORN <-
+# SEABORN
 =========================
 
-# IMPORTS
+## IMPORTS
 imports the **seaborn** dependency to create plots with pandas DataFrames
 ```python
 # seaborn is built on top of matplotlib; plt.show() displays seaborn plots
 import seaborn as sns
 ```
 
-# GRAPHING
+## GRAPHING
 plots a **linear regression** graph
 ```python
 # data parameter is required, and x/y must be in string format
@@ -200,11 +200,11 @@ plt.show()
 
 ---
 
--> BOKEH <-
+# BOKEH
 =========================
 Visual properties of shapes are called glyphs in Bokeh. The visual properties of these glyphs such as position or color can be assigned single values (size=10, fill_color='red'). Other glyph properties can be set as lists or arrays (x=[1,2,3], size=[10,20,30]).
 
-# DEPENDENCIES
+## DEPENDENCIES
 
 allows plots to be saved to an **html file** and using a browser to display the file
 ```python
@@ -256,14 +256,14 @@ imports **Tabs and Panels** which allow creation of tabbed layouts
 from bokeh.models.widgets import Tabs, Panel
 ```
 
-# EXPORTING
+## EXPORTING
 
 saves the plot to an **html file**
 ```python
 output_file('file_name.html')
 ```
 
-# GRAPHING
+## GRAPHING
 
 creates the **figure object** to be used; plot is commonly referenced as 'p'
 ```python
@@ -288,7 +288,7 @@ show(plot)
 show(plot)
 ```
 
-# MODIFIER COMMANDS
+## MODIFIER COMMANDS
 
 creates a **ColumnDataSource instance** which defines data that can be used on multiple glyphs in a plot
 ```python
