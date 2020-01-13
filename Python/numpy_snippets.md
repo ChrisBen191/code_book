@@ -4,26 +4,15 @@ import numpy as np
 ```
 
 # NUMPY METHODS
+|                                |                                                                              |
+| ------------------------------ | ---------------------------------------------------------------------------- |
+| `np.sqrt(value)`               | Calcaulates the **square root** of the value specified                       |
+| `np.power(power_value, value)` | Takes the **value** specified and raises it by the value of **power_value**. |
+| `np.sin(value)`                | Calculates the **sine** of the value specified                               |
+| `np.cov(x, y)`                 | Computes the 2D **covariance matrix** for the x and y arrays specified       |
+|                                |                                                                              |
+|                                |                                                                              |
 
-Stores the **square root** of the value **x** and stores it as a variable.
-```python
-square_root = np.sqrt(x)
-```
-
-Takes the **value** and raises it by the power of the **power_value**.
-```python
-power_of_num = np.power(power_value, value)
-```
-
-Takes the **sine** of the value specified and stores it as a variable.
-```python
-sine_of_num = np.sin(value)
-```
-
-Computes the 2D **covariance matrix** for the x and y arrays specified
-```python
-np.cov(x, y)
-```
 
 Computes the **Pearson Correlation coefficient** for the x and y arrays specified
 ```python

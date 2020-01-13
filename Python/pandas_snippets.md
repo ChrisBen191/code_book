@@ -55,29 +55,29 @@ Writes the df to the **SQL table** specified
 df.to_sql(table_name, connection_object)
 ```
 # INSPECTING DATA
-|Method      |        |
-|:---:|---      |
-|`df.info()`|   Displays Index, Datatype, and Memory info
-|`df.describe()`|   Displays summary statistics of all possible aggregrate columns in the df (mean, median, average, etc.)
-|`df.dtypes`|   Display the **data type** of each column in the df (object,float,etc.)
-|`df.head(n)`|   Displays the **first n rows** in the df specified (default n=5)
-|`df.tail(n)`|   Displays the **last n rows** in the df specified (default n=5)
-|`df.columns`|  Displays a list of all **column names** in the df
-|`df.count()`|   Displays **total count of variables in each column**; used to identify incomplete / missing rows.
-|`df['Column Name']`|   Displays **all** values of the column specified
-|`df['Column Name'].unique()`|      Displays every **unique** value in the column specified
-|`df['Column Name'].value_counts()`|     Displays the **counts** of unique values in the column specified
-|`df["Column Name"] == "String/Var/Int"`|   Displays a Boolean value (True/False) for each row in the column specified depending on the conditional statement
-|`df.sort_values('Column_Name', ascending=False)`|  Displays the column in the df specified, **sorted by the values** in the column
+|                      Method                      |                                                                                                                   |
+| :----------------------------------------------: | ----------------------------------------------------------------------------------------------------------------- |
+|                   `df.info()`                    | Displays Index, Datatype, and Memory info                                                                         |
+|                 `df.describe()`                  | Displays summary statistics of all possible aggregrate columns in the df (mean, median, average, etc.)            |
+|                   `df.dtypes`                    | Display the **data type** of each column in the df (object,float,etc.)                                            |
+|                   `df.head(n)`                   | Displays the **first n rows** in the df specified (default n=5)                                                   |
+|                   `df.tail(n)`                   | Displays the **last n rows** in the df specified (default n=5)                                                    |
+|                   `df.columns`                   | Displays a list of all **column names** in the df                                                                 |
+|                   `df.count()`                   | Displays **total count of variables in each column**; used to identify incomplete / missing rows.                 |
+|               `df['Column Name']`                | Displays **all** values of the column specified                                                                   |
+|           `df['Column Name'].unique()`           | Displays every **unique** value in the column specified                                                           |
+|        `df['Column Name'].value_counts()`        | Displays the **counts** of unique values in the column specified                                                  |
+|     `df["Column Name"] == "String/Var/Int"`      | Displays a Boolean value (True/False) for each row in the column specified depending on the conditional statement |
+| `df.sort_values('Column_Name', ascending=False)` | Displays the column in the df specified, **sorted by the values** in the column                                   |
 
 # MODIFIER COMMANDS
-|Method      |        |
-|:---:|---      |
-|`del df["Column Name"]`|   **Deletes** the column specified from the df
-|`df["Column Name"].astype(float)`| Converts the datatype of the specified column to a **float**
-|`df["Column Name"].astype(str)`| Converts the datatype of the specified column to a **string**
-|`df["New Column Name"] = [Array]`|     Creates a new column in the df with an list of values 
-|`df["Column Name"].replace("Value", "New Value")`| Replaces a value in the specified column
+|                      Method                       |                                                               |
+| :-----------------------------------------------: | ------------------------------------------------------------- |
+|              `del df["Column Name"]`              | **Deletes** the column specified from the df                  |
+|         `df["Column Name"].astype(float)`         | Converts the datatype of the specified column to a **float**  |
+|          `df["Column Name"].astype(str)`          | Converts the datatype of the specified column to a **string** |
+|         `df["New Column Name"] = [Array]`         | Creates a new column in the df with an list of values         |
+| `df["Column Name"].replace("Value", "New Value")` | Replaces a value in the specified column                      |
 
 **Drops** or **deletes** rows with missing information; used to remove incomplete/missing rows; can use other *'how'* parameters
 ```python
@@ -157,12 +157,12 @@ pd.concat([df_one, df_two], axis=1)
 ```
 
 # AGGREGATE COMMANDS
-|Command      |        |
-|:---:|---      |
-|`df["Column Name"].mean()`|    Displays the average of the values in the column specified
-|`df["Column Name"].sum()`|     Displays the total of the values in the column specified
-|`df["Column Name"].min()`|     Displays the lowest value in the column specified
-|`df["Column Name"].max()`|     Displays the largest value in the column specified
+|          Command           |                                                            |
+| :------------------------: | ---------------------------------------------------------- |
+| `df["Column Name"].mean()` | Displays the average of the values in the column specified |
+| `df["Column Name"].sum()`  | Displays the total of the values in the column specified   |
+| `df["Column Name"].min()`  | Displays the lowest value in the column specified          |
+| `df["Column Name"].max()`  | Displays the largest value in the column specified         |
 
 Creates a 'running tally' column summing all numeric values in a particular row (indicated by axis=1)
 ```python
