@@ -1,10 +1,10 @@
 # DEPENDENCIES
-| Command  |   |
-|:---:|---|
-|`import csv`| dependency for manipulating **csv** files
-|`import json`| dependency for manipulating **json** files
-| `import os`| depdendency for **os.path.join()** command
-|`import pickle`| dependency for manipulating pickle files
+|     Command     |                                            |
+| :-------------: | ------------------------------------------ |
+|  `import csv`   | dependency for manipulating **csv** files  |
+|  `import json`  | dependency for manipulating **json** files |
+|   `import os`   | depdendency for **os.path.join()** command |
+| `import pickle` | dependency for manipulating pickle files   |
 
 
 # IMPORTING DATA

@@ -1,5 +1,5 @@
 # MATPLOTLIB
-=========================
+---
 
 ## DEPENDENCIES
 
@@ -104,7 +104,7 @@ plt.plot(x, y_1)
 ---
 
 # SEABORN
-=========================
+---
 
 ## IMPORTS
 imports the **seaborn** dependency to create plots with pandas DataFrames
@@ -201,7 +201,7 @@ plt.show()
 ---
 
 # BOKEH
-=========================
+---
 Visual properties of shapes are called glyphs in Bokeh. The visual properties of these glyphs such as position or color can be assigned single values (size=10, fill_color='red'). Other glyph properties can be set as lists or arrays (x=[1,2,3], size=[10,20,30]).
 
 ## DEPENDENCIES

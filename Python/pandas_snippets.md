@@ -90,6 +90,7 @@ df['Column Name'].dropna(how='any')
 
 **Sets** the df index using one or more existing columns / arrays (of the correct length)
 ```python
+# providing a key array will create a multiindex df
 df.set_index(keys, inplace=True)
 
 # 'inplace=True' overwrites the existing df
@@ -156,6 +157,15 @@ pd.concat([df_one, df_two], axis=1)
 # axis=0 (index), axis=1 (columns), default 0
 ```
 
+**Boolean Filters** help provide logic in filtering and refining data
+```python
+# produces a boolean series with True/False values for each row in the column specified
+bool_filter = df['Column Name'] > 50
+
+# applying 'bool_filter' filters the df to display records where bool_filter is True
+df[bool_filter]
+```
+
 # AGGREGATE COMMANDS
 |          Command           |                                                            |
 | :------------------------: | ---------------------------------------------------------- |
@@ -201,11 +211,6 @@ Converts the column specified into a **list**
 list_from_column = df['Column Name'].tolist()
 ```
 
-Displays all **rows** for the columns specified, denoted by the colon
-```python
-df.loc[: , ["Column 1", "Column 2", "Column 3"]]
-```
-
 **Groups** data by values in the column specified; aggregrates by bracketed column and aggregrate method
 ```python
 gropuby_df = df.groupby( ["Column Name1", "Column Name2"] )['Column 3'].count()
@@ -218,34 +223,37 @@ gropuby_df = df.groupby( ["Column Name1", "Column Name2"] )['Column 3'].count()
 groupby_df.unstack()
 ```
 
-Displays rows where the conditional statement is true; used to create specific dfs
+Locates and displays records according to **row/column indexing**
 ```python
-df.loc[ df["Column Name"] == "String/Var/Int", :]
-```
-
-Allows for more than one conditional statement; can use & (and) or | (or)
-```python
-df.loc[ (df['Column Name'] == "String/Var/Int" ) & (df['Column Name'] == "String/Var/Int"), : ]
-```
-
-Displays the data stored in the df using row/column indexing
-```python
+# uses indexing instead of column or row labels
 df.iloc[row_num, col_num]
+
+# retrieves the slice of rows/columns specified
+df.iloc[ row:row, col:col ]
 ```
 
-Displays the data stored in the specified range of rows/columns using row/column indexing
+Locates and displays records according to the **row/column labels**
 ```python
-df.iloc[row:row, col:col]
+# this example retrieves data from rows 1, 2, and 3 and from the 'Test Scores' column only    
+df.loc[['Jan', 'Feb', 'March'] , "Test Scores"]
+
+# slicing with ':' does not require square brackets like an array or list would
+df.loc['Jan':'March', "Test Scores"]
+
+# the colon denotes all rows to be returned
+df.loc[: , ["Column 1", "Column 2", "Column 3"]]
+
+# the colon denotes all columns to be returned
+df.loc[["Row 1", "Row 2", "Row 3"], : ]
 ```
 
-Displays the data contained in the specified row and column, must have row/column index
+Locates and displays records where the conditional statement is **True**
 ```python
-df.loc["Row Name", "Column Name"]
-```
+# displays all columns for rows where the conditional statement is true
+df.loc[ df["Column Name"] == "String/Var/Int", :]
 
-Displays the data contained in the rows/columns specified; this method can return duplicates.
-```python
-df.loc[[ "Row 1", "Row 2"], ["Column X", "Column Y"]]
+# displays all rows for columns where the conditional statement is true
+df.loc[ : , df["Column Name"] == "String/Var/Int"]
 ```
 
 Iterates over rows in a df
@@ -256,9 +264,12 @@ for index, row in df.iterrows():
 
 # RESAMPLING COMMANDS
 
-**Resample,** a time-based groupby, provides an aggregration (mean, sum, count, std, etc) on time series data based on the **rule parameter**, which describes the frequency with which to apply the aggregration function. [Reference](http://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#offset-aliases)
+[**Resample,**](http://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#offset-aliases) a time-based groupby, provides an aggregration on time series data based on the **rule parameter**, which describes the frequency with which to apply the aggregration function.
 ```python
+# other aggregrates include sum, count, std, etc.
 df.resample( rule='A').mean()
+
+# other frequencies/rules include hourly, daily, weekly, monthly, etc
 ```
 
 # ROLLING COMMANDS
