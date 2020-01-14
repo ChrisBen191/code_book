@@ -1,48 +1,16 @@
 # TERMINAL NAVIGATION COMMANDS
-
-Used to **change directory**, or to navigate into the directory/folder specified
-
-        $ cd folder_name
-
-Displays the **present working directory**, or the path to the current directory
-
-        $ pwd
-
-**Lists** all non-hidden items/documents in the current directory
-
-        $ ls
-
-**Lists** all hidden and non-hidden items in the current directory
-
-        $ ls -A
-
-Creates a file in the current location, in the file type specified 
-
-        $ touch file_name.file_type	
-
-Copies the specified file to the specified directory
-
-        $ cp file_to_be_moved    directory/path/to/copy/file
-
-Moves the specified file to the directory specified
-
-        $ mv file_to_be_moved    directory/path/to/move/file
-
-Deletes the file (cannot delete a folder/directory)
-
-        $ rm file_name
-
-Creates a new directory in the current directory
-
-        $ mkdir folder_name	
-
-Copies the specified folder to the specified directory
-
-        $ cp -R folder_to_be_moved    directory/path/to/move/folder
-
-Deletes an entire folder/directory and its contents
-
-        $ rm -rf folder_name	
+|                          Commands                           |                                                                                                 |
+| :---------------------------------------------------------: | ----------------------------------------------------------------------------------------------- |
+|                            `pwd`                            | Displays the **present working directory**, or the path to the current directory                |
+|                            `ls`                             | **Lists** all non-hidden items/documents in the current directory; add '-A' flag to show hidden |
+|                      `cd folder_name`                       | Used to **change directory**, or to navigate into the directory/folder specified                |
+|                 `touch file_name.file_type`                 | **Creates a file** in the current location/directory, in the file type specified                |
+|                       `rm file_name`                        | **Deletes the file** specified (cannot delete a folder/directory)                               |
+|                     `mkdir folder_name`                     | **Creates a new directory** in the current directory                                            |
+|                    `rm -rf folder_name`                     | **Deletes an entire folder/directory** and its contents                                         |
+|    `mv file_to_be_moved    directory/path/to/move/file`     | Moves the specified file to the directory specified                                             |
+|    `cp file_to_be_moved    directory/path/to/copy/file`     | Copies the specified file to the specified directory                                            |
+| `cp -R folder_to_be_moved    directory/path/to/move/folder` | Copies the specified folder to the specified directory                                          |
 
 # GITHUB COMMANDS
 
