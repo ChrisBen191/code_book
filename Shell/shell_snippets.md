@@ -1,13 +1,25 @@
-# TERMINAL NAVIGATION COMMANDS
-|                          Commands                           |                                                                                                 |
-| :---------------------------------------------------------: | ----------------------------------------------------------------------------------------------- |
-|                            `pwd`                            | Displays the **present working directory**, or the path to the current directory                |
-|                            `ls`                             | **Lists** all non-hidden items/documents in the current directory; add '-A' flag to show hidden |
-|                      `cd folder_name`                       | Used to **change directory**, or to navigate into the directory/folder specified                |
-|                 `touch file_name.file_type`                 | **Creates a file** in the current location/directory, in the file type specified                |
-|                       `rm file_name`                        | **Deletes the file** specified (cannot delete a folder/directory)                               |
-|                     `mkdir folder_name`                     | **Creates a new directory** in the current directory                                            |
-|                    `rm -rf folder_name`                     | **Deletes an entire folder/directory** and its contents                                         |
+# SHELL NAVIGATION COMMANDS
+|      Commands       |                                                                                                 |
+| :-----------------: | ----------------------------------------------------------------------------------------------- |
+|        `pwd`        | Displays the **present working directory**, or the path to the current directory                |
+|        `ls`         | **Lists** all non-hidden items/documents in the current directory; add '-A' flag to show hidden |
+|  `cd folder_name`   | Used to **change directory**, or to navigate into the directory/folder specified                |
+|      `history`      | Provides the **historical** commands passed through the Shell                                   |
+| `man shell_command` | Provides the **manual** for the shell command specified                                         |
+
+# SHELL MODIFIER COMMANDS
+
+|          Commands           |                                                                                  |
+| :-------------------------: | -------------------------------------------------------------------------------- |
+| `touch file_name.file_type` | **Creates a file** in the current location/directory, in the file type specified |
+|       `rm file_name`        | **Deletes the file** specified (cannot delete a folder/directory)                |
+|     `mkdir folder_name`     | **Creates a new directory** in the current directory                             |
+|    `rm -rf folder_name`     | **Deletes an entire folder/directory** and its contents                          |
+
+Displays or prints the variable or string specified
+```console
+echo hello world!
+```
 
 **Moves** the specified **file** to the directory specified
 ```console
@@ -27,6 +39,28 @@ mv -R folder_to_be_moved    directory/path/to/move/folder
 **Copies** the specified **folder** to the specified directory
 ```console
 cp -R folder_to_be_moved    directory/path/to/copy/folder
+```
+
+Searches and displays the **term** specified in the **file(s)** specified
+```console
+grep term file
+
+# FLAGS
+-c : count of matching lines, not matching text
+-h : do NOT print names of files when searching multiple files
+-i : ignore case sensitivity
+-l : print names of matching files, not matching text
+-n : print line numbers for matching lines
+-v : invert the match; show lines that DON'T match
+```
+Counts and displays the number of character, words, or lines in a file specified
+```console
+wc file_name
+
+# FLAGS
+-c : counts characters in file
+-w : counts words in file
+-l : counts lines in file
 ```
 
 # GITHUB COMMANDS
