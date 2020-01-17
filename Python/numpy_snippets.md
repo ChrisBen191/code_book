@@ -4,19 +4,20 @@ import numpy as np
 ```
 
 # NUMPY METHODS
-|                                            |                                                                                                                                                         |
-| :----------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|              `np.sqrt(value)`              | Calcaulates the **square root** of the value specified                                                                                                  |
-|       `np.power(power_value, value)`       | Takes the **value** specified and raises it by the value of **power_value**                                                                             |
-|              `np.sin(value)`               | Calculates the **sine** of the value specified                                                                                                          |
-|               `np.cov(x, y)`               | Computes the 2D **covariance matrix** for the x and y arrays specified                                                                                  |
-|            `np.corrcoef(x, y)`             | Computes the **Pearson Correlation coefficient** (condsidered easier to interpret than covariance) for the x and y arrays specified                     |
-| `np.zeroes( num_of_rows , num_of_columns)` | Creates a matrix of **zeroes** of the shape **num_rows** and **num_columns** specified                                                                  |
-|  `np.ones( num_of_rows , num_of_columns)`  | Creates a matrix of **ones** of the shape **num_rows** and **num_columns** specified                                                                    |
-|     `np.percentile(data, [25, 50,75])`     | Calculates the **percentiles** of the specified data; the second parameter takes an array of the percentiles                                            |
-|     `np.random.rand( num_of_values )`      | Computes random values, containing the **num_of_values** of random numbers specified                                                                    |
-|     `np.random.randn( num_of_values )`     | Creates an array containing the **num_of_values** of random numbers specified; **randn** samples are from the **standard normal distribution** (0 to 1) |
-
+|                  Command                   |                                                                                                                              |
+| :----------------------------------------: | ---------------------------------------------------------------------------------------------------------------------------- |
+|              `np.mean(array)`              | Calculates the **average** of the array specified                                                                            |
+|             `np.median(array)`             | Calculates the **median** of the array specified; not as affected by outliers as the **mean**                                |
+|              `np.sqrt(value)`              | Calcaulates the **square root** of the value specified                                                                       |
+|       `np.power(power_value, value)`       | Takes the **value** specified and raises it by the value of **power_value**                                                  |
+|              `np.sin(value)`               | Calculates the **sine** of the value specified                                                                               |
+|               `np.cov(x, y)`               | Computes the 2D **covariance matrix** for the x and y arrays specified                                                       |
+|              `np.var(array)`               | Calculates the **variance** (mean squared distance of the data from their mean); units are squared and not useful            |
+|              `np.std(array)`               | Calculates the **standard deviation** (square root of variance); or spread of the data from the median                       |
+|            `np.corrcoef(x, y)`             | Computes the **Pearson Correlation coefficient** (condsidered easier to interpret than covariance) for the x and y specified |
+| `np.zeroes( num_of_rows , num_of_columns)` | Creates a matrix of **zeroes** of the shape **num_rows** and **num_columns** specified                                       |
+|  `np.ones( num_of_rows , num_of_columns)`  | Creates a matrix of **ones** of the shape **num_rows** and **num_columns** specified                                         |
+|     `np.percentile(data, [25, 50,75])`     | Calculates the **percentiles** of the specified data; the second parameter takes an array of the percentiles requested       |
 
 
 Creates **arr_list**,  a list of arrays.
@@ -48,3 +49,24 @@ Creates an **identity matrix** (ones across the diagonal matrix) with the number
 ```python
 identity_matrix = np.eye( matrix_num )
 ```
+
+Seeds the random number generating algorithm to provide **repoduccibility**; provides pseudorandom number generation
+```python
+np.random.seed(int)
+```
+
+Computes a **random number** between 0 and 1; useful for **Bernoulli trials** (experiement with two options, TRUE or FALSE)
+```python
+# 'size' parameter provides an array with the amount of variables specified
+np.random.random(size=10)
+```
+
+Computes random values, containing the **num_of_values** of random numbers specified
+```python
+np.random.rand( num_of_values )
+```
+ 
+ Creates an array containing the **num_of_values** of random numbers specified; **randn** samples are from the **standard normal distribution** (0 to 1)
+ ```python
+ np.random.randn( num_of_values )
+ ```

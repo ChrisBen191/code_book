@@ -27,59 +27,26 @@ plt.imshow(img)
 plt.savefig('image_name.png')
 ```
 
-## SIZING ATTRIBUTES
-resizes the **x and y limits** of the graph
-```python
-# x limit only
-plt.xlim(x_min, x_max)
-
-# y limit only
-plt.ylim(y_min, y_max)
-
-# x and y limits together
-plt.axis((x_min, x_max, y_min, y_max))
-
-# axis('equal') = equal scaling on x,y axes
-# axis('square') = forces square plot
-# axis('tight') = sets xlim(), ylim() to show all data
-```
-
-improves the **spacing** between subplots
-```python
-plt.tight_layout()
-```
 ## GRAPHING ATTRIBUTES
+
+|                 Command                  |                                                                                                                          |
+| :--------------------------------------: | ------------------------------------------------------------------------------------------------------------------------ |
+|       `plt.title('Title of Plot')`       | creates a **title** for the plot                                                                                         |
+|     `plt.xlabel('Label for X-Axis')`     | creates a label for the **x-axis**                                                                                       |
+|     `plt.ylabel('Label for Y-Axis')`     | creates a label for the **y-axis**                                                                                       |
+|         `plt.xlim(x_min, x_max)`         | resizes the **x limits** of the graph                                                                                    |
+|         `plt.ylim(y_min, y_max)`         | resizes the **y limits** of the graph                                                                                    |
+| `plt.axis((x_min, x_max, y_min, y_max))` | resizes the **x and y limits** of the graph, can use 'equal', 'square' or 'tight' parameters                             |
+|        `plt.margins(buffer_pct)`         | creates a **margin** around the plot to keep data off of the edges                                                       |
+|           `plt.tight_layout()`           | improves the **spacing** between subplots                                                                                |
+|     `plt.legend(loc='upper right')`      | creates a **legend** for the plot; use the 'label' parameter in each **plt** command to specify a different legend label |
+
 determines the style of graph to be used to plot
 ```python
 # use 'plt.style.available' to view a list of available styles
 plt.style.use('ggplot')
 ```
 
-creates a **legend** for the plot; placement is determined by the 'loc' parameter
-```python
-# use the 'label' parameter in each plt command to specify a specific legend label
-plt.legend(loc='upper right')
-```
-
-creates a **title** for the plot
-```python
-plt.title('Title of Plot')
-```
-
-creates a label for the **x-axis**
-```python
-plt.xlabel('Label for X-Axis')
-```
-
-creates a label for the **y-axis**
-```python
-plt.ylabel('Label for Y-Axis')
-```
-creates a **margin** around the plot to keep data off of the edges
-```python
-# the following provides a 2% buffer around plot edges
-plt.margins(0.02)
-```
 ## GRAPHING
 plots multiple **line graphs**
 ```python
@@ -91,6 +58,12 @@ plt.plot(x, y_2, color='red')
 plt.show()
 ```
 
+plots a **histogram** with the bins specified
+```python
+# can  pass an integer (bins=10) or an interval for bins instead (bins = [1-2, 3-4, ...])
+plt.hist(array, bins=bins)
+```
+
 **subplot** automatically determines the layout for multiple plots; plots are placed according to parameters 
 ```python
 # 1=nrows, 2=ncols, nsubplot=1
@@ -100,6 +73,100 @@ plt.plot(x, y)
 # the second subplot would require nsubplot=2; nsubplot starts at the top left corner
 plt.subplot(1, 2, 2)
 plt.plot(x, y_1)
+```
+
+creates an **ECDF** (Empirical Cumulative Distribution Function). The **ECDF** allows you to plot a feature of your data, in order from least to greatest, to see the whole featrure as if it's distributed across the data set.
+```python
+# need to sort the x data to propertly plot the ECDF
+x = np.sort(df['Column Name'])
+
+# creates a y-axis with evenly spaced data points (with a maximum of one)
+y = np.arange(1, len(x)+1) / len(x)
+
+# this will plot data points only without a line connecting the data
+plt.plot(x, y, marker='.', linestyle='none')
+
+# provides a margin keep the data off of the edges
+plt.margins(0.02)
+
+# read from the x-value, then the y-value determines the percentage of the data that is less than the chosen x-value
+plt.show()
+```
+
+creates a **Binomial CDF** plot providing a set of probabilities of discrete outcomes. Numpy's version of **Bernoulli Trials**
+```python
+# n= number of Bernoulli trials, p=probability of success, size= # of times to repeat the experiement
+samples = np.random.binomial(n, p, size=int)
+
+# using the 'ecdf' custom function 
+x, y = ecdf(samples)
+
+# plots the Binomial CDF with markers and no lines
+plt.plot(x, y, marker='.', linestyle='none')
+
+plt.show()
+```
+
+creates a **Piosson CDF**
+```python
+'''
+Poisson Process = the timing of the next event is completely independent of of when the previous event happened
+Poisson Distributed = the average number of arrivals of a Poisson process in a given amount of time; limit of the Binomial distribution for low probability of success and large number of trials
+'''
+
+# r = mean of the Poisson distribution (r = n*p), size = # of times to repeat the experiement
+samples = np.random.poisson(r, size=int)
+
+# using the 'ecdf' custom function 
+x, y = ecdf(samples)
+
+# plots the Poisson CDF with markers and no lines
+plt.plot(x, y, marker='.', linestyle='none')
+
+plt.show()
+```
+
+creates a **Normal PDF**
+```python
+# compute the mean for the normal distribution
+mean = np.mean(array)
+
+# compute the std for the normal distrubution
+std = np.std(array)
+
+# parametrizes the normal distrubution; size = # of times to repeat the experiement
+samples = np.random.normal(mean, std, size=int)
+
+# plots a histogram of the samples with the # of bins specified
+plt.hist(samples, normed=True, histtype='step', bins=int)
+
+plt.show()
+```
+
+creates a **Normal CDF** and compares it to the **ECDF** of the data
+```python
+# compute the mean for the normal distribution
+mean = np.mean(array)
+
+# compute the std for the normal distrubution
+std = np.std(array)
+
+# parametrizes the normal distrubution; size = # of times to repeat the experiement
+samples = np.random.normal(mean, std, size=int)
+
+# computes the ECDF of the data
+x, y = ecdf(array)
+
+# computes the Normal ECDF
+x_theor, y_theor = ecdf(samples)
+
+# plots the Normal ECDF
+plt.plot(x_theor, y_theor)
+
+# plots the ECDF
+plt.plot(x, y, marker='.', linestyle='none')
+
+plt.show()
 ```
 ---
 
@@ -164,7 +231,7 @@ plt.show()
 
 **boxplot** displays the minimum, maximum, and median values of a dataset along the 1st and 3rd quartiles and outliers
 ```python
-sns.boxplot(x='Column_Name', y='Column_Name_2', data=df)
+sns.boxplot(x='Categorical Column', y='Column_Name_2', data=df)
 
 plt.show()
 ```

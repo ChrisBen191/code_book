@@ -1,4 +1,6 @@
-# SHELL NAVIGATION COMMANDS
+# SHELL
+---
+# NAVIGATION COMMANDS
 |      Commands       |                                                                                                 |
 | :-----------------: | ----------------------------------------------------------------------------------------------- |
 |        `pwd`        | Displays the **present working directory**, or the path to the current directory                |
@@ -7,7 +9,7 @@
 |      `history`      | Provides the **historical** commands passed through the Shell                                   |
 | `man shell_command` | Provides the **manual** for the shell command specified                                         |
 
-# SHELL MODIFIER COMMANDS
+# MODIFIER COMMANDS
 
 |          Commands           |                                                                                  |
 | :-------------------------: | -------------------------------------------------------------------------------- |
@@ -63,7 +65,9 @@ wc file_name
 -l : counts lines in file
 ```
 
-# GITHUB COMMANDS
+# GITHUB
+---
+## MODIFIER COMMANDS
 
 Clones the specified respository to the local machine
 ```console
@@ -109,4 +113,6 @@ Performed after a **git pull**; reapplies stashed local files and changes to the
 git stash pop	
 ```
 
+# CONDA 
+---
 

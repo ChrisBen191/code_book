@@ -285,3 +285,57 @@ Used to create an **expanding aggregration** (mean, sum, count, std, etc) which 
 ```python
 df.expanding().mean()
 ```
+
+# ANALYSIS FUNCTIONS
+function that consumes an **array of data** to produce the x and y values of an **ECDF** as two arrays to be unpacked
+```python
+def ecdf(data):
+    """
+    Compute ECDF for a one-dimensional array of measurements.
+    """
+    
+    # Number of data points: n
+    n = len(data)
+
+    # x-data for the ECDF: x
+    x = np.sort(data)
+
+    # y-data for the ECDF: y
+    y = np.arange(1, n+1) / n
+
+    return x, y
+
+# unpacks the arrays generated from the 'ecdf' function; showing multiple EDCFs computed
+x_values, y_values = ecdf(df['Column Name'])
+x_values_2, y_values_2 = ecdf(df['Column Name 2'])
+
+
+# using matplotlib to plot the formatted arrays in an EDCF style; showing multiple EDCFs plotted
+plt.plot(x_values, y_values, marker='.', linestyle='none')
+plt.plot(x_values_2, y_values_2, marker='.', linestyle='none')
+
+plt.show()
+```
+
+function that creates a **Bernoulli Trial**, which returns the number of successes out of n Bernoulli trials
+```python
+def perform_bernoulli_trials(n, p):
+    """
+    Perform n Bernoulli trials with success probability p
+    and return number of successes.
+    """
+    
+    # Initialize number of successes: n_success
+    n_success = 0
+
+    # Perform trials
+    for i in range(n):
+        # Choose random number between zero and one: random_number
+        random_number = np.random.random()
+
+        # If less than p, it's a success so add one to n_success
+        if random_number < p:
+            n_success += 1
+
+    return n_success
+```
