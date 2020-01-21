@@ -9,6 +9,10 @@
 ## Shell
 [Shell Snippets](Shell/shell_snippets.md)
 
++ [Shell](Shell/shell_snippets.md#SHELL)
++ [Github](Shell/shell_snippets.md#GITHUB)
++ [Conda](Shell/shell_snippets.md#CONDA)
+
 ## Python
 [Python Snippets](Python/python_snippets.md)
 
