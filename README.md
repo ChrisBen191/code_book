@@ -17,6 +17,10 @@
 [Numpy Snippets](Python/numpy_snippets.md)
 
 [Data Visualization Snippets](Python/data_visualization.md)
+    
++ [Matplotlib](Python/data_visualization.md#MATPLOTLIB)
++ [Seaborn](Python/data_visualization.md#SEABORN)
++ [Bokeh](Python/data_visualization.md#BOKEH)
 
 [Time Series Snippets](Python/time_series.md)
 
