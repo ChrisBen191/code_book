@@ -8,6 +8,7 @@
 |  `cd folder_name`   | Used to **change directory**, or to navigate into the directory/folder specified                |
 |      `history`      | Provides the **historical** commands passed through the Shell                                   |
 | `man shell_command` | Provides the **manual** for the shell command specified                                         |
+|  ` cat file-name`   | Displays the first few lines of a file in the shell                                             |
 
 # MODIFIER COMMANDS
 
@@ -115,4 +116,27 @@ git stash pop
 
 # CONDA 
 ---
+
+|            Commands             |                                                                |
+| :-----------------------------: | -------------------------------------------------------------- |
+|        `conda env list`         | displays a list of all **environments** on the system          |
+|          `conda list`           | displays all packages installed in **the current environment** |
+|   `conda create -n env-name`    | **creates** the environment with the name specified            |
+| `conda env remove --n env-name` | **deletes** the environment specified from the system          |
+|    `conda activate env-name`    | activates the **environment** specified                        |
+|       `conda deactivate`        | **deactivates** the current environment in use                 |
+
+creates a **yml file** that contains the exact versions of packages in an environment for reproducibility
+```console
+conda env export > env-name.yml
+
+# FLAGS
+-n : specify the name of environment to export if not current active environment
+-f : saves the environment info to a file; can use 'shell piping' instead
+```
+
+imports a **yml file** to reproduce an environment with exact versions of the packages being used 
+```console
+conda env create -f env-name.yml
+```
 
