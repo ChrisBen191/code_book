@@ -32,6 +32,3 @@
 [SQL Snippets](SQL/sql_snippets.md)
 
 [T-SQL Snippets](SQL/tsql_snippets.md)
-
-## PHP
-[PHP Snippets](PHP/php_snippets.md)
