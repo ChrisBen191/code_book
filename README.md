@@ -1,10 +1,12 @@
 # Code Book
 
 *Contains snippets of the current languages and libraries I'm developing in.*
-***
 
-<img src="code_book_cover.jpeg" alt="Image of Floating Book" height="350" width="350"/>
-<!-- ![Image of Floating Book](code_book_cover.jpeg) -->
+<p align="center">
+<img src="code_book_cover.jpeg" alt="Image of Floating Book" height="450" width="450"/>
+</p>
+
+***
 
 ## Shell
 [Shell Snippets](Shell/shell_snippets.md)
