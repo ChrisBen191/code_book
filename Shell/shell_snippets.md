@@ -85,6 +85,11 @@ Stages all unstaged files to be uploaded
 git add -A
 ```
 
+Removes a file added in an earlier commit
+```console
+git rm
+```
+
 Commits the staged files to be pushed to remote repository; requires message
 ```console
 git commit -m "put your message here(usually what was added)"	
