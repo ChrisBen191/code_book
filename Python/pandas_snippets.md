@@ -167,12 +167,18 @@ df[bool_filter]
 ```
 
 # AGGREGATE COMMANDS
-|          Command           |                                                            |
-| :------------------------: | ---------------------------------------------------------- |
-| `df["Column Name"].mean()` | Displays the average of the values in the column specified |
-| `df["Column Name"].sum()`  | Displays the total of the values in the column specified   |
-| `df["Column Name"].min()`  | Displays the lowest value in the column specified          |
-| `df["Column Name"].max()`  | Displays the largest value in the column specified         |
+|              Command               |                                                                                             |
+| :--------------------------------: | ------------------------------------------------------------------------------------------- |
+|     `df['Column Name'].mean()`     | Displays the average of the values in the column specified                                  |
+|     `df['Column Name'].sum()`      | Displays the total of the values in the column specified                                    |
+|     `df['Column Name'].min()`      | Displays the lowest value in the column specified                                           |
+|     `df['Column Name'].max()`      | Displays the largest value in the column specified                                          |
+|    `df['Column Name'].idxmin()`    | Displays the **FIRST** occurence of the index of the **smallest value** in the specified column |
+|    `df['Column Name'].idxmax()`    | Displays the **FIRST** occurence of the index of the **largest value** in the specified column  |
+| `df.nsmallest(int, 'Column Name')` | Displays the **int amount** of **smallest values** in the column specified                          |
+| `df.nlargest(int, 'Column Name')`  | Displays the **int amount** of **largest values** in the column specified                           |
+
+
 
 Creates a 'running tally' column summing all numeric values in a particular row (indicated by axis=1)
 ```python
