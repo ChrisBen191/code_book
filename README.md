@@ -14,7 +14,7 @@
 + [Conda](Shell/shell_snippets.md#CONDA)
 
 ## Python
-[Python Snippets](Python/python_snippets.md)
+[Python Snippets](Python/python_snippets.md#NATIVE-PYTHON)
 
 + [Numpy Snippets](Python/python_snippets.md#NUMPY)
 + [Pandas Snippets](Python/python_snippets.md#PANDAS)
