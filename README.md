@@ -16,9 +16,8 @@
 ## Python
 [Python Snippets](Python/python_snippets.md)
 
-+ [Pandas Snippets](Python/python_snippets.md#PANDAS)
-
 + [Numpy Snippets](Python/python_snippets.md#NUMPY)
++ [Pandas Snippets](Python/python_snippets.md#PANDAS)
 
 [Data Visualization Snippets](Python/data_visualization.md)
     
