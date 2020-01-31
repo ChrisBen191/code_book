@@ -3,8 +3,8 @@
 *Contains snippets of the current languages and libraries I'm developing in.*
 ***
 
-
-![Image of Floating Book](https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80)*Photo by Jaredd Craig on Unsplash*
+<img src="code_book_cover.jpeg" alt="Image of Floating Book" height="350" width="350"/>
+<!-- ![Image of Floating Book](code_book_cover.jpeg) -->
 
 ## Shell
 [Shell Snippets](Shell/shell_snippets.md)
