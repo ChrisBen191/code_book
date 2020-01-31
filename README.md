@@ -30,4 +30,3 @@
 ## SQL
 [SQL Snippets](SQL/sql_snippets.md)
 
-[T-SQL Snippets](SQL/tsql_snippets.md)
