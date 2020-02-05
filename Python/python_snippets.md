@@ -35,6 +35,30 @@ with open('pickled_file.pkl', 'w') as file:
     data = pickle.load(file)
 ```
 
+Imports data from similar files using the **glob** library (wildcard search)
+```python
+import glob
+
+# list stating the differences in the csvs to be imported
+csv_list = [1,2,3,4,5]
+
+# initalizing an empty list to store the df's created
+df_list = []
+
+# looping over each list_element to create 'file_name'
+for list_element in csv_list:
+    file_name = f'../Path/To/File/{list_element}_rest_of_filename'
+
+    # using glob to wildcard search the appropriate csv file; file type added at end of string
+    for file in glob.glob(file_name + '*.csv'):
+
+        # saving each df generated to 'df_list'
+        df_list.append(pd.read_csv(file, index_col=None))
+
+# concatinating the stored dfs together, row-wise or union-style
+complete_df = pd.concat(df_list, axis=0)
+```
+
 ## EXPORTING  DATA
 
 Writes data to a 'csv' file
@@ -415,6 +439,9 @@ np.random.rand( num_of_values )
  np.random.randn( num_of_values )
  ```
 
+Function that ranks
+
+
  # PANDAS
 
  ## DEPENDENCIES
@@ -459,16 +486,26 @@ Writes the df to an **Excel** file
 ```python
 df.to_excel("file_path/file_name.xlsx", index=False)
 
-# index=True writes row names (default)
+# use 'ExcelWriter' when exporting to multiple spreadsheets is needed
+with pd.ExcelWriter('../file_path/file_name.xlsx') as writer:
+    
+    # stores 'df_one' to an excel sheet with sheet_name specified
+    df_one.to_excel(writer, sheet_name='df_one_data', index=False)
+
+    # stores 'df_two' to an excel sheet with sheet_name specified
+    df_two.to_excel(writer, sheet_name='df_two_data', index=False)
 ```
+
 Writes the df to a **JSON file**
 ```python
 df.to_json(file_name)
 ```
+
 Writes the df in an  **HTML table** format
 ```python
 df.to_html(file_name)
 ```
+
 Writes the df to the **SQL table** specified
 ```python
 df.to_sql(table_name, connection_object)
@@ -629,6 +666,19 @@ bin_labels = ['label1', 'label2',...]
 bin_data = pd.cut( data_to_bin, bins, labels=bin_labels)
 ```
 
+Returns a **count** of **Groupby elements** in a format acceptable to be added to the original dataframe as a new column
+```python
+df['New Column'] = df.groupby('Grouped Column')['Date/Organizing Column'].transform('count')
+```
+
+Returns a **rank** of **Groupby elements** in a format acceptable to be added to the original dataframe as a new column
+```python
+df['New Column'] = df.groupby('Grouped Column')['Date/Organizing Column'].rank(ascending=True, method='first')
+
+# ascending=True will appropriately rank when organized by date
+# method='first' will appropriatey rank when a date has multiple records
+```
+
 ## DATA PARSING COMMANDS
 
 Converts the column specified into a **list**
@@ -648,7 +698,7 @@ gropuby_df = df.groupby( ["Column Name1", "Column Name2"] )['Column 3'].count()
 groupby_df.unstack()
 ```
 
-Locates and displays records according to **row/column indexing**
+**Locates and displays** records according to **row/column indexing**
 ```python
 # uses indexing instead of column or row labels
 df.iloc[row_num, col_num]
@@ -657,7 +707,7 @@ df.iloc[row_num, col_num]
 df.iloc[ row:row, col:col ]
 ```
 
-Locates and displays records according to the **row/column labels**
+**Locates and displays** records according to the **row/column labels**
 ```python
 # this example retrieves data from rows 1, 2, and 3 and from the 'Test Scores' column only    
 df.loc[['Jan', 'Feb', 'March'] , "Test Scores"]
@@ -672,7 +722,7 @@ df.loc[: , ["Column 1", "Column 2", "Column 3"]]
 df.loc[["Row 1", "Row 2", "Row 3"], : ]
 ```
 
-Locates and displays records where the conditional statement is **True**
+**Locates and displays** records where the conditional statement is **True**
 ```python
 # displays all columns for rows where the conditional statement is true
 df.loc[ df["Column Name"] == "String/Var/Int", :]
@@ -681,10 +731,38 @@ df.loc[ df["Column Name"] == "String/Var/Int", :]
 df.loc[ : , df["Column Name"] == "String/Var/Int"]
 ```
 
-Iterates over rows in a df
+**Iterates** over rows in a df
 ```python
 for index, row in df.iterrows():
     print(row['ColumnName1'], row['ColumnName2'])
+```
+
+Applies a **function to a series** in the dataframe and returns the result to a column in the dataframe
+```python
+# custom function determines if value is 'True' or 'False'
+def custom_function(x):
+    if x == True:
+        return 1
+    
+    else:
+        return 0
+
+# stores the results to a column in the df; axis=0 applies the function row-wise (default), axis=1 applies the function column-wise
+df['New Column'] = df['Column Name'].apply(custom_function, axis=0)
+```
+
+Applies a **function to a dataframe** and returns the result to a column in the dataframe
+```python
+# custom function determines if value is 'True' or 'False'; checks multiple columns in the df
+def custom_function(df):
+    if df['Column One'] == True or df['Column Two'] == True:
+        return 1
+    
+    else:
+        return 0
+
+# stores the results to a column in the df; axis=0 applies the function row-wise (default), axis=1 applies the function column-wise
+df['New Column'] = df.apply(custom_function, axis=0)
 ```
 
 ## RESAMPLING COMMANDS
