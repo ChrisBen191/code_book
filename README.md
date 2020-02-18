@@ -18,6 +18,7 @@
 ## Python
 [Python Snippets](Python/python_snippets.md#NATIVE-PYTHON)
 
++ [Timing / Profiling Code](Python/python_snippets.md#TIMING-AND-PROFILING-CODE)
 + [Numpy Snippets](Python/python_snippets.md#NUMPY)
 + [Pandas Snippets](Python/python_snippets.md#PANDAS)
 

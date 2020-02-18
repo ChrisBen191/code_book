@@ -364,6 +364,49 @@ Retrieves information from an 'instance' cooresponding to the 'attribute_name' s
 class_instance_info = class_instance.attribute_name
 ```
 
+## TIMING AND PROFILING CODE
+
+### RUNTIME
+
+Calculates **runtime** with IPython magic command
+```python
+# magic command is added before the line of code to be analyzed (LINE MAGIC MODE)
+%timeit rand_nums = np.random.rand(1000)
+
+# magic command with two %s will analyze the block/cell of code (CELL MAGIC MODE)
+%%timeit
+nums = []
+for x in range(10):
+    nums.append(x)
+
+# %timeit runs through the code multiple times to provide and mean and std dev 
+# of the actual runtime; also provides the number of runs and loops taken
+
+# FLAGS
+'''
+-r: sets the number of runs to complete
+-n: sets the number of loops to complete
+-o: saves the output of %timeit into a variable
+'''
+
+times = %timeit -r2 -n10 -o rand_nums = np.random.rand(1000)
+```
+
+# RUNTIME PROFILING
+**Line Profiler** provides the run times for each line of code in a function with a summary of run times
+```python
+# loads the line_profiler into the session
+%load_ext line_profiler
+
+# lprun runs the profiler on the function specified
+%lprun -f function_name function_name(parameter1, parameter2, parameter3)
+
+# FLAGS
+'''
+-f: indicates a function will be profiled
+'''
+```
+
 # NUMPY
 
 ## DEPENDENCIES
