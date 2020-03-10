@@ -21,7 +21,7 @@ preform a linear regression using **pandas**
 pd.ols(y, x)
 ```
 
-preform a linear regression using **statsmodels**
+preform a **single linear regression** using **statsmodels**
 ```python
 import statsmodels.api as sm
 # regression boilerplate = sm.OLS(y, x).fit()
@@ -40,6 +40,21 @@ results = sm.OLS(pct_df['Column_Name_1'], df[['const', 'Column_Name_2']]).fit()
 
 # 'summary' provides an in depth analysis; review the 'coef' and 'R-squared' information 
 print(results.summary())
+```
+
+perform a **linear regression** using **statsmodels**
+```python
+import statsmodels.formula.api as smf
+
+# the first arguement in OLS is a formula that specifies the variables in regression
+results = smf.ols('predict_column ~ informing_column', data=df).fit()
+
+# if using more than one column to inform regression, just add to formula
+results = smf.ols('predict_column ~ informing_column + additional_column', data=df).fit()
+
+# params provides analysis 
+results.params
+
 ```
 
 **autocorrelation** is the correleation of a single times series with a lagged copy of itself

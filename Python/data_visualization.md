@@ -236,10 +236,19 @@ sns.boxplot(x='Categorical Column', y='Column_Name_2', data=df)
 plt.show()
 ```
 
+**KDE plots** show curved distributions
+```python
+sns.kdeplot(data_array)
+
+plt.show()
+```
+
 **violinplots** show curved distributions (KDE) wrapped around a box plot 
 ```python
 # the distribution is denser where the violin plot is thicker
 sns.violinplot(x='Column_Name', y='Column_Name_2, data=df)
+
+# inner=None will simplify the plot and remove data points
 
 plt.show()
 ```

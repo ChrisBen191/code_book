@@ -98,6 +98,81 @@ Converts the number specified into a string
 str(1000)
 ```
 
+Creates a **range object** using specified **start** and **stop** values (stop not inclusive)
+```python
+# increments are specified using STEP
+num_range = range(start, stop, step)
+
+# converts RANGE OBJECT to a list
+nums_list = list(num_range)
+```
+
+Creates an **enumerate object** with an **index-item pair** for each item in the object specified 
+```python
+# indexing starting at START value specified
+enumerate_values = enumerate(list, start = int)
+
+# converts the ENUMERATE OBJECT to a list
+indexed_list = list(enumerate_values)
+```
+
+Passes a function using **map** to each item on the list
+```python
+rounded_values = map(round, list)
+
+# converts the MAP OBJECT to a list
+rounded_list = list(rounded_values)
+
+# MAP can be used with lambda to pass anonymous functions without looping
+squared_values = map(lambda x: x**2, list)
+
+# converts the MAP OBJECT to a list
+squares_list = list(squared_values)
+```
+
+Utilizes the **counter module** to create a **counter dict** of each value and their counts
+```python
+from collections import Counter
+
+# collects the COUNT of values in the list specified
+list_count = Counter(list)
+
+# displays a COUNTER DICT of k, v pairs of the value and their counts
+print(list_count)
+```
+
+Determines all possible **combinations** in a list specified
+```python
+from itertools import combinations
+
+# '2' indicates NUM OF COMBINATIONS, '*' unpacks the COMBO OBJECT to a list
+combos_list = [ *combinations(list, 2) ]
+```
+
+Using the **set method** compares the values in two sets (unique values, no duplicates)
+```python
+# converting two LISTS into SETS; stores unique values (no duplicates)
+set_a = set(list_1)
+set_b = set(list_2)
+
+# INTERSECTION collects values shared between the two sets
+both_sets = set_a.intersection(set_b)
+
+#DIFFERENCE collects values only in the set specified
+set_a_only = set_a.difference(set_b)
+set_b_only = set_b.difference(set_a)
+
+# SYMMETRIC_DIFFERENCE collects values that exist in ONE of the sets, but NOT BOTH
+set_a.symmetric_difference(set_b)
+
+# UNION collects all values from each set (no duplicates)
+set_a.union(set_b)
+
+# check to see if a POSSIBLE VALUE is a member of a set; faster than list looping
+if 'Possible Value' in set:
+	print('Possible Value')
+```
+
 ## LIST MANIPULATION
 |            Method             |                                                                                |
 | :---------------------------: | ------------------------------------------------------------------------------ |
@@ -126,6 +201,16 @@ slice_list = list[2:5]
 *Slices* elements from the 2nd element through the end of the list specified, then assigned to the 'slice_list'
 ```python
 slice_list = list[2:]
+```
+
+Creates a **zip object** by combining two lists; the '*' unpacks the zip_object into a list
+```python
+zipped_list = [*zip(list_1, list2)]
+
+# displays ZIPPED_LIST
+print(zipped_list)
+
+# combines lists to the smallest length
 ```
 
 ## LIST COMPREHENSIONS
@@ -343,7 +428,7 @@ variable = function_name(1, 3)
 
 ## CLASSES
 
-Creates a 'class' instance called 'Class_Name' with defined attributes specified (def __init__);  'self.attribute...' indicates there will be a variable with the same value as the defined attributes specified
+Creates a 'class' instance called 'Class_Name' with defined attributes snbrnalivecified (def __init__);  'self.attribute...' indicates there will be a variable with the same value as the defined attributes specified
 ```python
 class Class_Name():
     
@@ -660,10 +745,13 @@ pd.concat([df_one, df_two], axis=1)
 **Boolean Filters** help provide logic in filtering and refining data
 ```python
 # produces a boolean series with True/False values for each row in the column specified
-bool_filter = df['Column Name'] > 50
+bool_mask = df['Column Name'] > 50
 
 # applying 'bool_filter' filters the df to display records where bool_filter is True
-df[bool_filter]
+df[bool_mask]
+
+# applying ~ before the mask will filter the df to display records where the bool_filter is False
+df[~bool_mask]
 ```
 
 ## AGGREGATE COMMANDS
