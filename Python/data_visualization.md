@@ -46,8 +46,44 @@ determines the style of graph to be used to plot
 # use 'plt.style.available' to view a list of available styles
 plt.style.use('ggplot')
 ```
+plots a **vertical/horziontal line** on the plot, typically used to indicate **percentiles**
+```python
+# plots a VERTICAL line, when using matplotlib axes
+ax.axvline(x=df['Column_Name'], color='r', label='Column')
+
+# plots a HORIZONTAL line, when using matplotlib axes
+ax.axhline(x=df['Column_Name'], color='r', label='Column')
+
+# can include LINESTYLE and LINEWIDTH PARAMETERS in addition to others
+
+# call legend to display label
+ax.legend()
+
+plt.show()
+```
 
 ## GRAPHING
+creates a **figure** with the number of **axes** specified
+```python
+# creates a plot with 1row/2columns that share y-axis label SHAREX=TRUE is also valid.
+fig, (ax0, ax1) = plt.subplots(nrows=1, ncols=2, sharey=True)
+
+# plot SEABORN distribution on AX0
+sns.distplot(df['Column_Name'], ax=ax0)
+
+# setting axis specific values for AX0
+ax0.set(title, xlabel, ylabel, xlim, ylim, ...)
+
+# plot SEABORN distribution on AX1
+sns.distplot(df['Column_Name_2'], ax=ax1)
+
+# setting axis specific values for AX1
+ax1.set(title, xlabel, ylabel, xlim, ylim, ...)
+
+# add additional axes (ax2, ax3,...) and adjust nrows/ncols to added plots as needed
+plt.show()
+```
+
 plots multiple **line graphs**
 ```python
 plt.plot(x, y, color='blue')
@@ -78,7 +114,7 @@ plt.plot(x, y_1)
 creates an **ECDF** (Empirical Cumulative Distribution Function). The **ECDF** allows you to plot a feature of your data, in order from least to greatest, to see the whole featrure as if it's distributed across the data set.
 ```python
 # need to sort the x data to propertly plot the ECDF
-x = np.sort(df['Column Name'])
+x = np.sort(df['Column_Name'])
 
 # creates a y-axis with evenly spaced data points (with a maximum of one)
 y = np.arange(1, len(x)+1) / len(x)
@@ -180,35 +216,68 @@ imports the **seaborn** dependency to create plots with pandas DataFrames
 import seaborn as sns
 ```
 
+## GRAPHING ATTRIBUTES
+
+|               Command                |                                                                                 |
+| :----------------------------------: | ------------------------------------------------------------------------------- |
+| `sns.despine(left=True, right=True)` | removes spines of the plot; add parameters of spines as needed                  |
+|        `sns.color_palette()`         | returns the current color palette in use                                        |
+|           `sns.palplot()`            | displays the color palettes in jupyter notebook                                 |
+|       `sns.set_style('dark')`        | sets the default SEABORN theme (white/dark, whitegrid/darkgrid, ticks)          |
+|     `sns.set(color_codes=True)`      | sets plots to use matplotlib color codes                                        |
+|      `sns.set_palette(palette)`      | sets the SEABORN color palette (deep, muted, pastell, bright, dark, colorblind) |
+
+
 ## GRAPHING
+
+plots a barplot, which provides the stats of a categorical column specified
+```python
+# provides a horizontal bar plot with the CATEGORICAL_COLUMN values on the y-axis; switch axes as needed
+sns.barplot(x='Column_Name', y='Categorical_Column', data=df)
+
+plt.show()
+```
+
+plots a **distplot**, which provides a histogram and kde density curve, as well as distribution with *rug=True*
+```python
+# creates a histogram with kde=False
+sns.distplot( df['Column_Name'], kde=False, bins=int)
+
+# creates a kde curve with hist=False
+sns.distplot( df['Column_Name'], hist=False, bins=int)
+
+# creates a rug plot with rug=True to view the distribution of data
+sns.distplot( df['Column_Name'], rug=True, bins=int)
+
+# uses the KEYWORDS_DICT to shade the area under the kde curve
+sns.distplot( df['Column_Name'], kde_kws={ shade':True})
+
+plt.show()
+
+```
+
 plots a **linear regression** graph
 ```python
-# data parameter is required, and x/y must be in string format
-sns.lmplot(x='Column_Name', y='Column_Name_2', data=df)
+# plots a single linear regression model fit to data specified
+sns.regplot(x='Column_Name', y='Column_Name2', data=df)
 
-# 'order' parameter dictates higher order regressions
-sns.lmplot(x='Column_Name', y='Column_Name_2', data=df, order=2)
-
-# 'hue' parameter groups subsets of data on the same plot
-sns.lmplot(x='Column_Name', y='Column_Name_2', data=df, hue='Column_Name_3')
-
-# 'col' and 'row' parameters create subplots in the respective layout
-sns.lmplot(x='Column_Name', y='Column_Name_2', data=df, col='Column_Name_3')
-
-# .regplot() is less restrictive than .lmplot()
-sns.regplot()
+# change the polynomial regression using the ORDER parameter
+sns.regplot(x='Column_Name', y='Column_Name2', data=df, order=2)
 
 plt.show()
 ```
 
-plots the **residuals of a regression**; residual structure suggests a simple/single linear regression is not appropriate
+plots a **residual plot**, useful for evaluating the fit of a model
 ```python
-sns.residplot(x='Column_Name', y='Column_Name_2', data=df, color='red')
+sns.residplot(x='Column_Name', y='Column_Name2', data=df, color='red')
+
+# change the polynomial regression using the ORDER parameter
+sns.residplot(x='Column_Name', y='Column_Name2', data=df, order=2)
 
 plt.show()
 ```
 
-**strip plot** displays values on a number line to visualize samples of a single variable
+**strip plot** plots the scatterplot of a categorical variable
 ```python
 # using the 'x' parameter will provide a grouped strip plot
 sns.stripplot(y='Column_Name', data=df)
@@ -219,19 +288,19 @@ sns.stripplot(y='Column_Name', data=df, size=num, jitter=True)
 plt.show()
 ```
 
-**swarmplot** automatically arranges repeated points to avoid overlap and provide a sense of distribution
+**swarmplot** plots the scatterplot of a categorical variable; prevents points from overlapping 
 ```python
-sns.swarmplot(x='Column_Name', y='Column_Name_2', data=df)
+sns.swarmplot(x='Column_Name', y='Column_Name2', data=df)
 
 # 'hue' parameter displays the colors of a categorial column within the plot
-sns.swarmplot(x='Column_Name', y='Column_Name_2', data=df, hue='Column_Name_3')
+sns.swarmplot(x='Column_Name', y='Column_Name2', data=df, hue='Column_Name3')
 
 plt.show()
 ```
 
 **boxplot** displays the minimum, maximum, and median values of a dataset along the 1st and 3rd quartiles and outliers
 ```python
-sns.boxplot(x='Categorical Column', y='Column_Name_2', data=df)
+sns.boxplot(x='Categorical Column', y='Column_Name2', data=df)
 
 plt.show()
 ```
@@ -246,16 +315,16 @@ plt.show()
 **violinplots** show curved distributions (KDE) wrapped around a box plot 
 ```python
 # the distribution is denser where the violin plot is thicker
-sns.violinplot(x='Column_Name', y='Column_Name_2, data=df)
+sns.violinplot(x='Column_Name', y='Column_Name2, data=df)
 
 # inner=None will simplify the plot and remove data points
 
 plt.show()
 ```
-
-**jointplots** provide a plot with histograms (of individual coordinates) above and to the side of the main plot
+**lvplots** show a hybrid between a boxplot and violinplot and is relatively quick to render
 ```python
-sns.jointplot(x='Column_Name', y='Column_Name', data=df)
+# the distribution is denser where the lvplot is thicker
+sns.lvplot(x='Column_Name', y='Column_Name2', data=df)
 
 plt.show()
 ```
@@ -269,10 +338,111 @@ plt.show()
 
 **heatmaps** plot covariance matrices when pairplot() plots become visually overwhelming
 ```python
-sns.heatmap(cov_matrix)
+sns.heatmap(df.corr())
 
 plt.show()
 ```
+
+## AXES GRIDS
+
+creates a **FacetGrid**, useful for plotting conditional relationships
+```python
+
+# creates a FacetGrid for ROW='Column Name';  specify the order of the rows using ROW_ORDER
+fg = sns.FacetGrid(df,  row='Categorical Column', row_order=['Cat_Value_1', 'Cat_Value_2', 'Cat_Value_3'])
+# use col, col_order to create FacetGrid COLUMN-WISE
+
+
+# Map a BOXPLOT of specified column onto the grid; can map other PLOTS
+fg.map(sns.boxplot, 'Column_Name')
+
+# Show the plot
+plt.show()
+```
+
+creates a **factorplot**, a simplier way to use a **FacetGrid** for categorical data
+```python
+# Create a FACTOR PLOT (simplier FacetGrid) that contains BOXPLOTS of the column specified
+sns.factorplot(data=df, x='Column_Name', kind='box', row='Categorical Column')
+# use col, col_order to create factorplot COLUMN-WISE
+
+plt.show()
+```
+
+creates a **lmplot**, which is a **liner regression (regplot)** on a FacetGrid
+```python
+# data parameter is required, and x/y must be in string format
+sns.lmplot(x='Column_Name', y='Column_Name2', data=df)
+
+# 'order' parameter dictates higher order regressions
+sns.lmplot(x='Column_Name', y='Column_Name2', data=df, order=2)
+
+# 'hue' parameter groups subsets of data on the same plot
+sns.lmplot(x='Column_Name', y='Column_Name2', data=df, hue='Categorical_Column')
+
+# 'col' and 'row' parameters create subplots in the respective layout
+sns.lmplot(x='Column_Name', y='Column_Name2', data=df, col='Categorical_Column')
+
+plt.show()
+```
+
+creates a **PairGrid**, which shows pairwise relationships between data elements
+```python
+# creates a PAIRGRID comparing the VARS specified
+g = sns.PairGrid( df,  vars=['ColumnName_1', 'Column_Name_2'])
+
+# specifies the kind of PLOT in the diagonal / off-diagonal 
+g2 = g.map_diag(plt.hist)
+g3 = g2.map_offdiag(plt.scatter)
+
+plt.show()
+```
+
+creates a **pairplot**, a simplier way to use a **PairGrid**
+```python
+# creates a PAIRPLOT (simplier PairGrid) comparing the VARS specified
+sns.pairplot(data=df,
+        vars=['ColumnName_1', 'ColumnName_2'],
+        kind='scatter',
+        hue='Categorical_Column',
+        palette='RdBu',					# other palettes are available
+        diag_kws={'alpha':.5})		    # other KWs are available
+
+plt.show()
+```
+
+creates a **JointGrid**, which combines **univariate** plots (histogram, kde, rug) with **bivariate** plots (scatter, regression)
+```python
+# create a JOINTGRID comparing the X/Y VALUES specified
+g = sns.JointGrid(x='Column_Name', y='Column_Name2', data=df) 
+
+# MAIN-PLOT, MARGINAL-PLOT
+g.plot(sns.regplot, sns.distplot)
+
+plt.show()
+```
+
+creates a **jointplot**, a simplier way to use a **JointGrid**
+```python
+# creates a JOINTPLOT w/ a 2ND ORDER POLYNOMIAL REGRESSION
+sns.jointplot(x='X_axis_column',
+         y='Y_axis_column',
+         kind='reg',            # other plots are available
+         data=df,
+         order=2)
+
+# creates a JOINTPLOT w/ SCATTER and MARGINAL KDEPLOT
+g = (sns.jointplot(x="temp",
+             y="registered",
+             kind='scatter',
+             data=df,
+             marginal_kws=dict(bins=10, rug=True)).plot_joint(sns.kdeplot))
+
+plt.show()
+```
+
+
+
 
 ---
 
