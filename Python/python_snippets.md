@@ -23,17 +23,7 @@ Reads a csv file using the *os* dependency; **os.path.join()** requires no back 
 csv_file = os.path.join("folder_name", "file.csv")
 ```
 
-Imports from the JSON file specified
-```python
-with open("file_path/file_name.json") as json_file:
-    data = json.load(json_file)
-```
 
-Imports from the pickle file specified and enters **write** mode
-```python
-with open('pickled_file.pkl', 'w') as file:
-    data = pickle.load(file)
-```
 
 Imports data from similar files using the **glob** library (wildcard search)
 ```python
@@ -57,14 +47,6 @@ for list_element in csv_list:
 
 # concatinating the stored dfs together, row-wise or union-style
 complete_df = pd.concat(df_list, axis=0)
-```
-
-## EXPORTING  DATA
-
-Writes data to a 'csv' file
-```python
-with open(data_output, 'w', newline="") as csvfile:
-    writer = csv.writer(csvfile)
 ```
 
 ## INSPECTING DATA
@@ -235,11 +217,7 @@ Create a list of uppercase characters from a string
 [ s.upper() for s in "Hello World" ]
 ```
 
-Opens the file specified and reads the data, denoted by **r**; to append data to existing file use **a**. To create a file/overwrite an existing file, use **w**; use **r+** to read/write.
-```python
-with open ('file_name.file_type', 'r') as fileobj:
-    print("test")
-```
+
 
 ## DICTIONARIES
 
@@ -378,13 +356,51 @@ for element in list:
 
 ## FUNCTIONS
 
-Packaged code under the 'function_name' function; must be called before statement is printed
+Functions provide "packaged code";  must be called before code is ran
 ```python
+def function(arg_1, arg_2=42):
+	"""Description of what the function does. Google Docstring Style
+	Args:
+    arg_1 (str): Description of arg_1 that can break onto the next line if needed.
+    arg_2 (int, optional): Write optional when an argument has a default value.
 
-def function_name():
-    print('statement')
+    Returns:
+    bool: Optional description of the return value Extra lines are not indented.
 
-function_name()
+    Raises:
+    ValueError: Include any error types that the function intentionally raises.
+
+    Notes:
+    See https://www.datacamp.com/community/tutorials/docstrings-python for more info.
+	"""
+
+function()
+```
+
+Function that creates a new DataFrame
+```python
+# Use an immutable variable for the default argument 
+def better_add_column(values, df=None):
+  """Add a column of `values` to a DataFrame `df`.
+    The column will be named "col_<n>" where "n" is
+    the numerical index of the column.
+
+  Args:
+    values (iterable): The values of the new column
+    df (DataFrame, optional): The DataFrame to update.
+      If no DataFrame is passed, one is created by default.
+
+  Returns:
+    DataFrame
+  """
+
+  # Update the function to create a default DataFrame
+  if df is None:
+    df = pandas.DataFrame()
+  
+  df['col_{}'.format(len(df.columns))] = values
+  return df
+
 ```
 Packaged code under the 'function_name' function with 'first_number' and 'second_number' arguments; when function is called, data is passed into the function (in positional order) and prints the 'total'
 ```python
@@ -449,7 +465,77 @@ Retrieves information from an 'instance' cooresponding to the 'attribute_name' s
 class_instance_info = class_instance.attribute_name
 ```
 
+## CONTEXT MANAGERS
+
+Opens the file and reads the data using the **with context manager**
+```python
+with open ('file_name.file_type', 'r') as fileobj:
+    print("test")
+
+# r= read data, a= append data, w = write/overwrite, r+= read/write
+```
+
+Opens the JSON file specified using the **with context manager**
+```python
+with open("file_path/file_name.json") as json_file:
+    data = json.load(json_file)
+```
+
+Opens the pickle file specified using the **with context manager**
+```python
+with open('pickled_file.pkl', 'w') as file:
+    data = pickle.load(file)
+```
+
+Writes data to a 'csv' file using the **with context manager**
+```python
+# 'w' tells the context manager to write to the csvfile
+with open(data_output, 'w', newline="") as csvfile:
+    writer = csv.writer(csvfile)
+```
+
+Defining custom context manager that changes the current path to view files, then reverts to original path
+```python
+import os
+
+@contextlib.contextmanager
+def my_context_mgr():
+
+    # save the CURRENT working directory
+    old_dir = os.getcwd()
+
+    # change directory to the PATH specified
+    os.chdir(path)
+
+    yield
+
+    # change back to OLD_DIR
+    os.chir(old_dir)
+
+# running custom CONTEXT MANAGER with path specified
+with my_context_mgr('.data_folder/sub_folder'):
+
+    # CONTEXT MANAGER yields the PATH files, then reverts to OLD_DIR
+    project_Files = os.listdir()
+```
 ## TIMING AND PROFILING CODE
+
+### TIME MODULE
+Utilizes the **time module** to calculate time between **Start** and **End** times
+```python
+import time
+
+# create START_TIME and END_TIME variables
+start_time = time.time()
+
+# run code between START_TIME and END_TIME to calculate RUN_TIME
+result = 5 + 2
+
+end_time = time.time()
+
+# difference in seconds is time it took to run, can divide by 60 to get minutes
+run_time = end_time - start_time
+```
 
 ### RUNTIME
 
@@ -477,7 +563,7 @@ for x in range(10):
 times = %timeit -r2 -n10 -o rand_nums = np.random.rand(1000)
 ```
 
-# RUNTIME PROFILING
+### RUNTIME PROFILING
 **Line Profiler** provides the run times for each line of code in a function with a summary of run times
 ```python
 # loads the line_profiler into the session
@@ -515,6 +601,12 @@ import numpy as np
 |  `np.ones( num_of_rows , num_of_columns)`  | A matrix of **ones** of the shape **num_rows** and **num_columns** specified                                    |
 |     `np.percentile(data, [25, 50,75])`     | The **percentiles** of the specified data; the second parameter takes an array of the percentiles requested     |
 
+
+**Vectorizes** the Pandas series; faster than **apply** for iterating down columns
+```python
+# vectorizes the values in column specified
+df['Column_Name'].values.sum(axis=1)
+```
 
 Creates **arr_list**,  a list of arrays.
 ```python
@@ -567,7 +659,11 @@ np.random.rand( num_of_values )
  np.random.randn( num_of_values )
  ```
 
-Function that ranks
+Samples **random rows** and returns records according to the **size** parameter
+```python
+# returns all columns for the RANDOM_ROWS of size specified
+sample_pop = df.iloc[np.randint(low=0, high=df.shape[0], size=int), :]
+```
 
 
  # PANDAS
@@ -696,12 +792,16 @@ df.rename(columns = {
 })
 ```
 
-**Replaces** multiple values in the specified column
+Replaces values using the **replace** method
 ```python
-df["Column Name"].replace({
-    "Value1": "New String Value",
-    "Value2": "New String Value"
-})
+# replace multiple values with ONE R_VALUE specified
+df['Column_Name'].replace(['Value1', 'Value2'], 'R_Value', inplace=True)
+
+# replace multple values with multiple R_VALUES, one-to-one mapping
+df['Column_Name'].replace(['Value1', 'Value2', 'Value3'], ['R_Value1', 'R_Value2', 'R_Value3'], inplace=True)
+
+# Replaces multiple values in the specified column using a DICT (fast)
+df["Column Name"].replace({"Value1": "New String Value", "Value2": "New String Value"}, inplace=True)
 
 # used for value normalization for a df column
 ```
@@ -836,6 +936,9 @@ df.iloc[row_num, col_num]
 
 # retrieves the slice of rows/columns specified
 df.iloc[ row:row, col:col ]
+
+# creates a new copy of the slice instead of just referencing the original df
+new_df = df.iloc[ row:row, col:col].copy()
 ```
 
 **Locates and displays** records according to the **row/column labels**
@@ -846,10 +949,10 @@ df.loc[['Jan', 'Feb', 'March'] , "Test Scores"]
 # slicing with ':' does not require square brackets like an array or list would
 df.loc['Jan':'March', "Test Scores"]
 
-# the colon denotes all rows to be returned
+# the colon denotes all ROWS to be returned w/specified columns
 df.loc[: , ["Column 1", "Column 2", "Column 3"]]
 
-# the colon denotes all columns to be returned
+# the colon denotes all COLUMNS to be returned w/specified rows
 df.loc[["Row 1", "Row 2", "Row 3"], : ]
 ```
 
@@ -896,7 +999,35 @@ def custom_function(df):
 df['New Column'] = df.apply(custom_function, axis=0)
 ```
 
-## RESAMPLING COMMANDS
+Utilizes **transform** to apply a function to the **groupby object** and broadcasts the values
+```python
+# defining the min-max transformation
+min_max_tr = lambda x: (x - x.min()) / (x.max() - x.min())
+
+# creating the GROUPBY_OBJECT
+groupby_object = df.groupby('Column_Name')
+
+# apply the transformation to the GROUPBY_OBJECT; applies to all numerical values
+transformed_group = groupby_object.transform(min_max_tr)
+
+# defining a LAMBDA function to fill NaN values with the MEDIAN
+missing_trans = lambda x: x.fillna(x.median())
+
+# creating a GROUPBY_OBJECT
+groupby_object =df.groupby('Column_Name')
+
+# applying the transformation to the GROUPBY_OBJECT
+trans_object =groupby_object.transform(missing_trans)
+```
+
+## SAMPLING COMMANDS
+
+Samples random rows
+```python
+
+# int= # of records to return, axis=0 samples random ROWS
+sample_pop = df.sample(int, axis=0) 
+```
 
 [**Resample,**](http://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#offset-aliases) a time-based groupby, provides an aggregration on time series data based on the **rule parameter**, which describes the frequency with which to apply the aggregration function.
 ```python
