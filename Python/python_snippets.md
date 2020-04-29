@@ -23,8 +23,6 @@ Reads a csv file using the *os* dependency; **os.path.join()** requires no back 
 csv_file = os.path.join("folder_name", "file.csv")
 ```
 
-
-
 Imports data from similar files using the **glob** library (wildcard search)
 ```python
 import glob
@@ -444,15 +442,60 @@ variable = function_name(1, 3)
 
 ## CLASSES
 
-Creates a 'class' instance called 'Class_Name' with defined attributes snbrnalivecified (def __init__);  'self.attribute...' indicates there will be a variable with the same value as the defined attributes specified
+Creates class called **Custom_Class**
 ```python
-class Class_Name():
+class Custom_Class():
     
     def __init__(self, attribute_name, attribute_name_two, attribute_name_three):
 
         self.attribute_name = attribute_name
         self.attribute_name_two = attribute_name_two
         self.attribute_name_three= attribute_name_three
+```
+
+**Class Attributes** are variables that are assigned inside classes but outside of **init**
+```python
+class CsvFile:
+ 	
+    # class attributes
+    instances = []
+    
+    def __init__(self, file):
+
+    	# creates csv file
+    	self.data = pd.read_csv(file)
+        
+        # appends the filename to the INSTANCES class attribute
+        self.__class__.instances.append(file)
+
+# CLASS ATTRIBUTES can be accessed via classes, unlike instance methods
+CsvFile.instances
+```
+
+**Class Methods** allow the first parameter to represent the class, creating multiple instances
+```python
+class CsvFile:
+ 	
+    # class attributes
+    instances = []
+    
+    def __init__(self, file):
+    
+    	# creates csv file
+    	self.data = pd.read_csv(file)
+        
+        # appends the filename to the INSTANCES class attribute
+        self.__class__.instances.append(file)
+    
+    @classmethod
+    def instantiate(cls, filenames):
+    	return map(cls, filenames)
+ 
+ # CsvFile can be called with a csv path defined
+csv_1 = CsvFile('document1.csv')
+ 
+ # now can pass multiple csv paths using the INSTANTIATE class method
+csv_1, csv_2 = CsvFile.instantiate(['document1.csv', 'document2.csv'])   
 ```
 
 Creates an 'instance' of 'Class_Name' using the values provided; stored in 'class_instance'
@@ -465,9 +508,81 @@ Retrieves information from an 'instance' cooresponding to the 'attribute_name' s
 class_instance_info = class_instance.attribute_name
 ```
 
-## CONTEXT MANAGERS
+Showing **Inheritance**, where a class inherits the attribute of a different class
+```python
+'''
+NAME IS A CLASS ATT. OF ANIMAL; INHERITED BY MAMMAL/REPTILE BY PASSING NAME
+INTO MAMMAL/REPTILE AS A PARAMETER
+'''
 
-Opens the file and reads the data using the **with context manager**
+# Create a class Animal
+class Animal:
+	def __init__(self, name):
+		self.name = name
+
+# Create a class Mammal, which INHERITS from Animal
+class Mammal(Animal):
+	def __init__(self, name, animal_type):
+		self.animal_type = animal_type
+
+# Create a class Reptile, which also inherits from Animal
+class Reptile(Animal):
+	def __init__(self, name, animal_type):
+		self.animal_type = animal_type
+
+# Instantiate a mammal with name 'Daisy' and animal_type 'dog': daisy
+daisy = Mammal('Daisy', 'dog')
+
+# Instantiate a reptile with name 'Stella' and animal_type 'alligator': stella
+stella = Reptile('Stella', 'alligator')
+
+# Print both objects
+print(daisy)
+print(stella)
+```
+
+Showing **Polymorphism**, where a class displays inheritance and also modifies/morphs other attributes.
+```python
+'''
+MAMMAL/REPTILE EACH INHERIT FROM SPINAL_CORD FROM VERTEBRATE
+EACH MORPH/MODIFY THE TEMPERATURE_REGULATION CLASS ATTRIBUTE
+'''
+# create VERTEBRATE class
+class Vertebrate:
+    spinal_cord = True
+    
+    def __init__(self, name):
+        self.name = name
+
+# create MAMMAL class, inherits spinal_cord from VERTEBRATE 
+class Mammal(Vertebrate):
+    def __init__(self, name, animal_type):
+        self.animal_type = animal_type
+        self.temperature_regulation = True
+
+# create REPTILE class, inherits spinal_cord from VERTEBRATE
+class Reptile(Vertebrate):
+    def __init__(self, name, animal_type):
+        self.animal_type = animal_type
+        self.temperature_regulation = False
+
+# Instantiate a mammal with name 'Daisy' and animal_type 'dog'
+daisy = Mammal('Daisy', 'dog')
+
+# Instantiate a reptile with name 'Stella' and animal_type 'alligator'
+stella = Reptile('Stella', 'alligator')
+
+# Print stella's attributes spinal_cord and temperature_regulation
+print("Stella Spinal cord: " + str(stella.spinal_cord))
+print("Stella temperature regulation: " + str(stella.temperature_regulation))
+
+# Print daisy's attributes spinal_cord and temperature_regulation
+print("Daisy Spinal cord: " + str(daisy.spinal_cord))
+print("Daisy temperature regulation: " + str(daisy.temperature_regulation))
+```
+
+## CONTEXT MANAGERS
+Opens the file and reads the data using the **with context manager**    
 ```python
 with open ('file_name.file_type', 'r') as fileobj:
     print("test")
