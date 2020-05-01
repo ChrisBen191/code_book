@@ -13,12 +13,14 @@
 + [Shell](Shell/shell_snippets.md#SHELL)
 + [Github](Shell/shell_snippets.md#GITHUB)
 + [Conda](Shell/shell_snippets.md#CONDA)
++ [Linux](Shell/shell_snippets.md#LINUX)
 
 ## Python
 [Python](Python/python_snippets.md#NATIVE-PYTHON)
 + [Timing / Profiling Code](Python/python_snippets.md#TIMING-AND-PROFILING-CODE)
 + [Numpy](Python/python_snippets.md#NUMPY)
 + [Pandas](Python/python_snippets.md#PANDAS)
++ [SQLAlchemy](Python/python_snippets.md#SQLALCHEMY)
 
 [Data Visualization](Python/data_visualization.md)
 + [Matplotlib](Python/data_visualization.md#MATPLOTLIB)

@@ -14,6 +14,24 @@ X = df.drop('Target_Column', axis=1).values
 X_scaled = scale(X, axis=0)
 ```
 
+Scale data using **StandardScaler** transformer in **sklearn.preprocessing**
+```python
+# importing STANDARD_SCALER
+from sklearn.preprocessing import StandardScaler
+
+# initializing the STANDARD SCALER
+scaler = StandardScaler()
+
+# fitting scaler to the data being scaled
+scaler.fit(X)
+
+# each feature to have MEAN=0 and STD=1
+StandardScaler(copy=True, with_mean=True, with_std=True)
+
+# transform data
+samples_scaled = scaler.transform(X)
+```
+
 Replace missing data using **Imputer** transformer in **sklearn.preprocessing**
 ```python
 # importing TRAIN_TEST_SPLIT and IMPUTER
@@ -72,6 +90,8 @@ cv_results = cross_val_score(reg, X, y, cv=5)
 # cv_results = array of CV scores (R-squared for LR)
 ```
 
+# SUPERVISED LEARNING
+
 ## CLASSIFICATION MODELS
 
 ### K-Nearest Neighbors
@@ -113,17 +133,63 @@ from sklearn.linear_model import LogisticRegression
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
 # instantiating a LOGISTIC_REGRESSION classifier
-logreg = LogisticRegression()
+lr = LogisticRegression()
 
 # fit the model to the training data
-logreg.fit(X_train, y_train)
+lr.fit(X_train, y_train)
 
 # predict the labels for the TEST data
-y_pred = logreg.predict(X_test)
+y_pred = lr.predict(X_test)
 
 # scoring the model accuracy with the TRAIN and TEST data
-train_score = logreg.score(X_train, y_train)
-test_score = logreg.score(X_test, y_test)
+train_score = lr.score(X_train, y_train)
+test_score = lr.score(X_test, y_test)
+```
+
+### Support Vector Machines (SVC)
+```python
+# importing TRAIN_TEST_SPLIT and SVC
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+
+# splitting the data into TRAIN/TEST (70%/30%) sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
+
+# instantiating a SVC classifier
+svm = SVC()
+
+# fit the model to the training data
+svm.fit(X_train, y_train)
+
+# predict the labels for the TEST data
+pred = svm.predict(X_test)
+
+# scoring the model accuracy with the TRAIN and TEST data
+train_score = svm.score(X_train, y_train)
+test_score = svm.score(X_test, y_test)
+```
+
+### LinearSVC
+```python
+# importing TRAIN_TEST_SPLIT and LINEARSVC
+from sklearn.model_selection import train_test_split
+from sklearn.svm import LinearSVC
+
+# splitting the data into TRAIN/TEST (70%/30%) sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
+
+# instantiating a LINEARSVC classifier
+svm = LinearSVC()
+
+# fit the model to the training data
+svm.fit(X_train, y_train)
+
+# predict the labels for the TEST data
+pred = svm.predict(X_test)
+
+# scoring the model accuracy with the TRAIN and TEST data
+train_score = svm.score(X_train, y_train)
+test_score = svm.score(X_test, y_test)
 ```
 
 ## REGRESSION MODELS
@@ -307,10 +373,10 @@ X = df.drop('Target_Column', axis=1).values
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
 # instantiating a LOGISTIC_REGRESSION classifier
-logreg = LogisticRegression()
+lr = LogisticRegression()
 
 # PREDICT_PROBA predicts probabilities w/out threshold; [:,1] are labels for the '1' binary label
-y_pred_prob = logreg.predict_proba(X_test)[:,1]
+y_pred_prob = lr.predict_proba(X_test)[:,1]
 
 # unpack ROC curve values: fpr, tpr, thresholds
 fpr, tpr, thresholds = roc_curve(y_test, y_pred_prob)
@@ -339,14 +405,14 @@ X = df.drop('Target_Column', axis=1).values
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
 # instantiating a LOGISTIC_REGRESSION classifier
-logreg = LogisticRegression()
+lr = LogisticRegression()
 
 # fit the LOG_REG model
-logreg.fit(X_train, y_train)
+lr.fit(X_train, y_train)
 
 # compute predicted probabilities of model labels w/out threshold;
 # [:,1] are labels for the '1' binary label
-y_pred_prob = logreg.predict_proba(X_test)[:,1]
+y_pred_prob = lr.predict_proba(X_test)[:,1]
 
 # compute the ROC_AUC_SCORE
 score = roc_auc_score(y_test, y_pred_prob)
@@ -364,10 +430,10 @@ y = df['Target_Column'].values
 X = df.drop('Target_Column', axis=1).values
 
 # instantiating a LOGISTIC_REGRESSION classifier
-logreg = LogisticRegression()
+lr = LogisticRegression()
 
 # CROSS_VALIDATING the model; scoring='roc_auc' provides AUC (Area Under ROC Curve) Scores
-cv_results = cross_val_score(logreg, X, y, cv=5, scoring='roc_auc')
+cv_results = cross_val_score(lr, X, y, cv=5, scoring='roc_auc')
 
 # compute the average ROC_AUC_SCORE
 mean_score = np.mean(cv_results)
@@ -396,19 +462,19 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, rando
 param_grid = {'C': np.arange(0, 10, 1)}
 
 # instantiating a LOGISTIC_REGRESSION classifier
-logreg = LogisticRegression()
+lr = LogisticRegression()
 
 # intantiating the GRIDSEARCH_OBJECT
-logreg_cv = GridSearchCV(logreg, param_grid, cv=5)
+lr_cv = GridSearchCV(lr, param_grid, cv=5)
 
 # fit the LOG_REG model
-logreg_cv.fit(X_train, y_train)
+lr_cv.fit(X_train, y_train)
 
 # returns a DICT of the BEST PREFORMING parameters and values
-best_p = logreg_cv.best_params_ 
+best_p = lr_cv.best_params_ 
 
 # returns the SCORE of the BEST PREFORMING parameter
-best_score = logreg_cv.best_score_
+best_score = lr_cv.best_score_
 ```
 
 Using a **K-Nearest Neighbors** Model
