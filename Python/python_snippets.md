@@ -1219,3 +1219,273 @@ def perform_bernoulli_trials(n, p):
 
     return n_success
 ```
+
+# SQLALCHEMY
+
+## IMPORTING DATA
+
+Creating a **connection** to the specified database; displaying table names
+```python
+# Import CREATE_ENGINE
+from sqlalchemy import create_engine
+
+# create an engine connecting to SQLite file
+engine = create_engine('sqlite:///database_file.sqlite')
+
+# CONNECTION via created engine
+con = engine.connect()
+
+# Print table names
+print(engine.table_names())
+```
+
+**Reflecting** the database and building the metadata based on that information; opposite
+of creating a table by hand.
+```python
+# MetaData conatains info about reflected table in the database
+# Table object reads from the engine, autoloads the columns, and populates the MetaData
+from sqlalchemy import create_engine, MetaData, Table
+
+# create an engine connecting to SQLite file
+engine = create_engine('sqlite:///database_file.sqlite')
+
+# instantiating a META_DATA object
+metadata = MetaData()
+
+# reflecting TABLE_NAME table from the engine
+table = Table('table_name', metadata, autoload=True, autoload_with=engine)
+
+# Print TABLE_NAME table MetaData with REPR function
+print(repr(table))
+```
+
+Connecting to an **existing database**, and creating a **table**
+```python
+
+# Import create_engine, MetaData, Table, Column, String, and Integer
+from sqlalchemy import create_engine, MetaData, Table, Column, String, Integer
+
+# creating an engine to connect to sqllite file
+engine = create_engine('sqlite:///filename.sqlite')
+
+# initializing MetaData
+metadata = MetaData()
+
+# building the PEOPLE table
+census = Table('people', metadata,
+               Column('name', String(30)),
+               Column('sex', String(1)),
+               Column('age', Integer()))
+
+# Create the table in the database
+metadata.create_all(engine)
+```
+
+## EXPORTING DATA
+
+Converting the ResultSet object **results** to a pandas DataFrame
+```python
+# Import CREATE_ENGINE
+from sqlalchemy import create_engine
+
+# import pandas
+import pandas as pd
+
+# create an ENGINE connecting to SQLite file
+engine = create_engine('sqlite:///database_file.sqlite')
+
+# CONNECTION via created engine
+con = engine.connect()
+
+# building a query for ENTIRE TABLE: 'SELECT * FROM table'
+stmt = select([table])
+
+# execute STMT and grab all results
+results = connection.execute(stmt).fetchall()
+
+# create df from RESULTS
+df = pd.DataFrame(table_results)
+
+# Set COLUMN NAMES as query column names
+df.columns = results[0].keys()
+```
+
+## FILTERING, ORDERING, AND GROUPING
+
+Using **Group By** function and the **func** function to group and aggregrate query
+```python
+ # import func
+from sqlalchemy import func
+
+# building a query: 'SELECT state, COUNT(age) FROM table...'
+stmt = select([table.columns.state, func.count(table.columns.age)])
+
+# building group by: '...GROUP BY(state)'
+stmt = stmt.group_by(table.columns.state)
+
+# execute the queryand grapping all results
+results = connection.execute(stmt).fetchall()
+
+# print results and keys/column names of the results returned
+print(results)
+print(results[0].keys())
+```
+
+Using **Order By** function to order query in descending order
+```python
+# Import desc
+from sqlalchemy import desc
+
+# building a query: 'SELECT state FROM table...'
+stmt = select([table.columns.state])
+
+# building order by: '...ORDER BY state DESC'
+rev_stmt = stmt.order_by(desc(table.columns.state))
+
+# execute the query and grabbing all results
+rev_results = con.execute(rev_stmt).fetchall()
+
+# Print the first 10 rev_results
+print(rev_results[:10])
+```
+
+Counting the **distinct values** from the column specified, and displaying the **scalar value**
+```python
+# building a query: 'SELECT COUNT(DISTINCT(state)) FROM table...'
+stmt = select([func.count(table.columns.state.distinct())])
+
+# execute the query and grab the SCALAR result
+distinct_state_count = connection.execute(stmt).scalar()
+
+# Print the distinct_state_count
+print(distinct_state_count)
+```
+
+## ADVANCED QUERIES
+
+Building a query to calculate a value between two columns; group by **state** and order by **pop change**. Limiting query to 5 records.
+```python
+# buildng the query: 'SELECT...'
+stmt = select([
+
+    # selecting STATE column..
+    table.columns.state, 
+
+    # calculating difference between in POPULATION from 2000 to 2008 and labeling as POP_CHANGE
+    (table.columns.pop2008 - table.columns.pop2000).label('pop_change')
+
+    ])
+
+# buidling group by: '...GROUP BY state'
+stmt_grouped = stmt.group_by(census.columns.state)
+
+# building order by: '...ORDER BY 'pop_change' DESC
+stmt_ordered = stmt_grouped.order_by(desc('pop_change'))
+
+# buildling limit: '...LIMIT(5)'
+stmt_top5 = stmt_ordered.limit(5)
+
+# execute the query and grab 5 RECORDS
+results = connection.execute(stmt_top5).fetchall()
+```
+
+## MODIFYING DATA
+
+**Inserting** a row into an existing table; using **select** statement to verify updates
+```python
+# Import insert and select from sqlalchemy
+from sqlalchemy import insert, select
+
+# building an INSERT statement to insert a record into the table 
+insert_stmt = insert(table).values(name='Chris', count=1, amount=100.00, valid=True)
+
+# execute the INSERT statement 
+results = con.execute(insert_stmt)
+
+
+# build a SELECT statement to validate the record was added
+proof_stmt = select([table]).where(data.columns.name == 'Chris')
+
+# executing the SELECT statement and printing results
+proof_result = con.execute(proof_stmt).first()
+print(proof_result)
+```
+
+Inserting multiple rows into an existing table by building a list of dictionaries.
+```python
+
+# Build a list of dictionaries: values_list
+# building a LIST of DICTS
+values_list = [
+    {'name': 'Chris', 'count': 1, 'amount': 100.00, 'valid': True},
+    {'name': 'Nevi', 'count':2, 'amount':75.00, 'valid':False}
+]
+
+# building an INSERT statement to insert the records
+stmt = insert(table)
+
+# executing the INSERT statement WITH the VALUES_LIST
+results = con.execute(stmt, values_list)
+
+# display the ROWCOUNT of the table to confirm updates.
+print(results.rowcount)
+```
+
+Using **pandas** to insert multiple rows into an existing table
+```python
+# import pandas
+import pandas as pd
+
+# import the csv as a df
+df = pd.read_csv("file_name.csv", header=None)
+
+# APPEND the df to table using if_exists='append'
+df.to_sql(name='table', con=con, if_exists='append', index=False)
+```
+
+**Deleting** rows from the specified table
+```python
+# Import delete, select
+from sqlalchemy import delete, select
+
+# building DELETE statement
+delete_stmt = delete(table).where(table.columns.state == 'Texas')
+
+# execute the DELETE statement and print ROW_COUNT
+results = con.execute(delete_stmt)
+print(results.rowcount)
+```
+
+Deleting rows from the specified table with multiple conditions
+```python
+# building DELETE statement
+delete_stmt = delete(census)
+
+# appending a WHERE clause to target sex and age
+delete_stmt = delete_stmt.where(
+    and_(census.columns.sex == 'M', census.columns.age == 36))
+
+# execute the DELETE statement
+results = connection.execute(delete_stmt)
+```
+
+## CREATING TABLES
+Creating a **table** using constraints(unique, default, nullable, etc.)
+```python
+# Import Table, Column, String, Integer, Float, Boolean from sqlalchemy
+from sqlalchemy import Table, Column, String, Integer, Float, Boolean
+
+# Define a new table with a name, count, amount, and valid column: data
+data = Table('data', metadata,
+             Column('name', String(255), unique=True),
+             Column('count', Integer(), default=1),
+             Column('amount', Float()),
+             Column('valid', Boolean(), default=False)
+)
+
+# Use the metadata to create the table
+metadata.create_all(engine)
+
+# Print the table details
+print(repr(metadata.tables['data']))
+```
