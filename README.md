@@ -35,6 +35,7 @@
 + [Hyperparameter Tuning](Python/machine_learning.md##HYPERPARAMETER-TUNING)
 + [Pipelines](Python/machine_learning.md##PIPELINES)
 
+[APIs](Python/api.md)
 [Time Series](Python/time_series.md)
 
 ## SQL
