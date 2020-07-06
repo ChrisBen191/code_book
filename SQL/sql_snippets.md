@@ -22,12 +22,12 @@ ADD COLUMN new_column_name  datatype  column_definition
 -- Deletes the specified column from the table 
 DROP column_name
 ```
-
+****
 **Subsitutes missing data** from the column specified with a value or other column
 ```SQL
 SELECT 
     column_name1,
-    ISNULL(column_name2, 'No Value') --can use another column as the replacement parameter
+    ISNULL(column_name_2, 'No Value') --ISNULL(column_name_2, column_name3) uses other column for replacement
 FROM table_name
 ```
 
@@ -35,7 +35,7 @@ FROM table_name
 ```SQL
 SELECT
     column_name1,
-    COALESCE(column_name2, column_name3, column_name4, 'All Null') --can pass a variable at the end of all columns are null
+    COALESCE(column_name_2, column_name_3, column_name4, 'All Null') --can pass a variable at the end of all columns are null
 FROM table_name
 ```
 
@@ -180,6 +180,74 @@ SELECT column_name
 FROM table_1 
 LEFT JOIN table_2 
     ON table_1.column_name = table_2.column_name;		
+```
+## WINDOW FUNCTIONS
+
+Numbers **each row** in the table specified.
+```SQL
+SELECT *,
+    ROW_NUMBER() OVER() AS Row_N
+FROM table_1
+ORDER BY Row_N ASC;
+```
+
+Numbers **each row ordered by the values** in the column specified.
+```SQL
+SELECT
+    column_name,                                                    -- column = year, age, etc. 
+    ROW_NUMBER() OVER() AS Row_N
+FROM (
+    SELECT DISTINCT(column_name)
+    FROM table_1
+    ORDER BY column_name ASC                                        -- if categorical, order by is not needed
+) AS values_to_be_numbered
+
+ORDER BY column_name ASC;                                           -- if categorical, order by is not needed
+```
+
+Numbers **each row ordered by the values** in the column specified; order of assignment specified in **OVER()** clause.
+```SQL
+SELECT
+    column_name,                                                    -- column = year, age, etc. 
+    ROW_NUMBER() OVER(ORDER BY column_name DESC) AS Row_N           -- ASC/DESC indicates how to number values in column_name
+FROM (
+    SELECT DISTINCT(column_name)
+    FROM table_1
+) AS values_to_be_numbered
+
+ORDER BY column_name DESC;                                          -- if categorical, order by is not needed
+```
+
+Numbers **each row ordered by the values** in the column specified, but splits the table into partitions based on **another column's values.** 
+```SQL
+SELECT
+    column_name,
+    COUNT(column_name) OVER (PARTITION BY column_name_2) AS Row_N   -- splits the table by values in COLUMN_NAME_2
+FROM table_1
+ORDER BY column_name ASC;
+```
+
+Ranks **each row ordered by the values** in the column specified, but assigns duplicate values the same rank.
+```SQL
+--- after repeated ranks, RANK() will skip over the next rank (i.e, 1, 2, 2, 4, 5,...)
+SELECT
+    column_name,
+    RANK() OVER(ORDER BY column_name DESC) AS Rank_N                -- ASC/DESC indicates how to rank values in column_name
+FROM table_1
+ORDER BY column_name DESC
+```
+
+Ranks **each row ordered by the values** in the column specified, but assigns duplicate values the same rank.
+```SQL
+--- after repated ranks, DENSE_RANK() will NOT skip over the next rank (i.e, 1, 2, 2, 3, 4, 5,...)
+SELECT
+    column_name,
+    DENSE_RANK() OVER(ORDER BY column_name DESC) AS Rank_N         -- ASC/DESC indicates how to rank values in column_name
+FROM table_1
+ORDER BY column_name DESC
+```
+
+```SQL
 ```
 
 # T-SQL
