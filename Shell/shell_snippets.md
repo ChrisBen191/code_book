@@ -145,3 +145,35 @@ imports a **yml file** to reproduce an environment with exact versions of the pa
 conda env create -f env-name.yml
 ```
 
+# LINUX
+display which version of the Linux kernel is running
+```console
+uname -srm
+
+# provide a longer, more descriptive version
+uname --kernel-name --kernel-release --machine
+```
+
+Display information on what distribution is running on a system
+```console
+cat /etc/os-release`
+```
+
+## TMUX
+|         Commands `C-b==CTRL+b` `C-d==CTRL+d`         |                                                                 |
+| :--------------------------------------------------: | --------------------------------------------------------------- |
+|                      `tmux ls`                       | displays all **sessions** currently running (detached/attached) |
+|                       `C-b "`                        | splits **panes** horizontally                                   |
+|                       `C-b %`                        | splits **panes** vertically                                   |
+|                  `C-b <arrow key>`                   | navigates split **panes**                                       |
+|                       `C-b z`                        | fullscreen/minimizes active **pane**                            |
+|                   `C-d` OR `exit`                    | closes currently active **pane**                                |
+|                       `C-b c`                        | creates new **window**                                          |
+|                       `C-b p`                        | switches to **previous window**                                 |
+|                       `C-b n`                        | switches to **next window**                                     |
+|                       `C-b ,`                        | renames current **window**                                      |
+|                       `C-b &`                        | closes current **window**                                       |
+|              `tmux new -s session-name`              | creates new session named `session-name`                        |
+| `tmux rename -session session-name new-session-name` | renames `session-name`                                          |
+|                  `C-b d` or `C-b D`                  | detaches current **session** (D allows selection)               |
+|      `tmux atttach -t session-name` OR `tmux a`      | attaches to `session-name` OR will connect to last session      |
