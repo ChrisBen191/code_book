@@ -1,3 +1,4 @@
+
 # SHELL
 ---
 # NAVIGATION COMMANDS
@@ -160,20 +161,23 @@ cat /etc/os-release`
 ```
 
 ## TMUX
-|         Commands `C-b==CTRL+b` `C-d==CTRL+d`         |                                                                 |
-| :--------------------------------------------------: | --------------------------------------------------------------- |
-|                      `tmux ls`                       | displays all **sessions** currently running (detached/attached) |
-|                       `C-b "`                        | splits **panes** horizontally                                   |
-|                       `C-b %`                        | splits **panes** vertically                                   |
-|                  `C-b <arrow key>`                   | navigates split **panes**                                       |
-|                       `C-b z`                        | fullscreen/minimizes active **pane**                            |
-|                   `C-d` OR `exit`                    | closes currently active **pane**                                |
-|                       `C-b c`                        | creates new **window**                                          |
-|                       `C-b p`                        | switches to **previous window**                                 |
-|                       `C-b n`                        | switches to **next window**                                     |
-|                       `C-b ,`                        | renames current **window**                                      |
-|                       `C-b &`                        | closes current **window**                                       |
-|              `tmux new -s session-name`              | creates new session named `session-name`                        |
-| `tmux rename -session session-name new-session-name` | renames `session-name`                                          |
-|                  `C-b d` or `C-b D`                  | detaches current **session** (D allows selection)               |
-|      `tmux atttach -t session-name` OR `tmux a`      | attaches to `session-name` OR will connect to last session      |
+| Commands `C-b==CTRL+b` `C-d==CTRL+d` |                                                                 |
+| :----------------------------------: | --------------------------------------------------------------- |
+|      `tmux new -s session-name`      | creates new session named `session-name`                        |
+|              `tmux ls`               | displays all **sessions** currently running (detached/attached) |
+|          `C-b d` or `C-b D`          | detaches current **session** *(D allows selection)*             |
+| `tmux a -t session-name` OR `tmux a` | attaches to `session-name` OR will connect to last session      |
+|        `tmux kill-session -a`        | kill all sessions but the **current session**                   |
+| `tmux kill-session -t session-name`  | kill `session-name` specified                                   |
+|               `C-b "`                | splits **panes** horizontally                                   |
+|               `C-b %`                | splits **panes** vertically                                     |
+|          `C-b <arrow key>`           | navigates split **panes**                                       |
+|               `C-b z`                | fullscreen/minimizes active **pane**                            |
+|           `C-d` OR `exit`            | closes currently active **pane**                                |
+|               `C-b c`                | creates new **window**                                          |
+|               `C-b p`                | switches to **previous window**                                 |
+|               `C-b n`                | switches to **next window**                                     |
+|               `C-b ,`                | renames current **window**                                      |
+|               `C-b &`                | closes current **window**                                       |
+
+
