@@ -180,4 +180,13 @@ cat /etc/os-release`
 |               `C-b ,`                | renames current **window**                                      |
 |               `C-b &`                | closes current **window**                                       |
 
+Enters **pane resizing** mode by bringing up a prompt at the bottom of the pane
+```console
+C-b :
+```
+
+Then type the following in the bottom prompt to **specify direction and # of cells** to move   
+```console
+resize-pane -<D, U, L, R> 10
+```
 
