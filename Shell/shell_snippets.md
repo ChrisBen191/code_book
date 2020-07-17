@@ -155,11 +155,19 @@ uname -srm
 uname --kernel-name --kernel-release --machine
 ```
 
-Display information on what distribution is running on a system
+display information on what distribution is running on a system
 ```console
 cat /etc/os-release`
 ```
 
+creates a **log of the output of a .py file** to the file specified
+```console
+ipython python_file.py prod 2>&1 | tee log/output_file.txt
+
+-- 'ipython' or 'python' can be used
+-- 'prod 2>&1' indicates to record "standard errors" (2) in the same location as "standard output" (1)
+-- 'tee' displays output and records it to log/output_file.txt 
+```
 ## TMUX
 | Commands `C-b==CTRL+b` `C-d==CTRL+d` |                                                                 |
 | :----------------------------------: | --------------------------------------------------------------- |
@@ -183,10 +191,9 @@ cat /etc/os-release`
 Enters **pane resizing** mode by bringing up a prompt at the bottom of the pane
 ```console
 C-b :
-```
 
-Then type the following in the bottom prompt to **specify direction and # of cells** to move   
-```console
+--Then type the following in the bottom prompt to  specify direction and # of cells to move  
+
 resize-pane -<D, U, L, R> 10
 ```
 
