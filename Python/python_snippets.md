@@ -1489,3 +1489,4 @@ metadata.create_all(engine)
 # Print the table details
 print(repr(metadata.tables['data']))
 ```
+
