@@ -1,6 +1,7 @@
 # NATIVE PYTHON
 
 ## DEPENDENCIES
+
 |     Command     |                                            |
 | :-------------: | ------------------------------------------ |
 |  `import csv`   | dependency for manipulating **csv** files  |
@@ -8,22 +9,24 @@
 |   `import os`   | depdendency for **os.path.join()** command |
 | `import pickle` | dependency for manipulating pickle files   |
 
-
 ## IMPORTING DATA
 
 Creates a list composed of each row in the csv stored as a list; assigned to the **data** variable
+
 ```python
 csv_file = open('file.csv')
 csv_reader = csv.reader(csv_file)
 data = list(csv_reader)
 ```
 
-Reads a csv file using the *os* dependency; **os.path.join()** requires no back or forward slashes in the filepath
+Reads a csv file using the _os_ dependency; **os.path.join()** requires no back or forward slashes in the filepath
+
 ```python
 csv_file = os.path.join("folder_name", "file.csv")
 ```
 
 Imports data from similar files using the **glob** library (wildcard search)
+
 ```python
 import glob
 
@@ -50,6 +53,7 @@ complete_df = pd.concat(df_list, axis=0)
 ## INSPECTING DATA
 
 Displays the num of items in an object, num of characters in a string, num of elements in an array, etc.
+
 ```python
 len(object)
 ```
@@ -57,6 +61,7 @@ len(object)
 ## MODIFIER COMMANDS
 
 Displays the text below with the variables specified
+
 ```python
 name = 'Chris'
 age = 29
@@ -65,20 +70,25 @@ f_string = f'Hello, {name}. You are {age}.'
 ```
 
 Converts the string specified into an integer, if possible
+
 ```python
 int('string')
 ```
+
 Converts the string specified into a number with decimal places, if possible
+
 ```python
 float('string')
 ```
 
 Converts the number specified into a string
+
 ```python
 str(1000)
 ```
 
 Creates a **range object** using specified **start** and **stop** values (stop not inclusive)
+
 ```python
 # increments are specified using STEP
 num_range = range(start, stop, step)
@@ -87,7 +97,8 @@ num_range = range(start, stop, step)
 nums_list = list(num_range)
 ```
 
-Creates an **enumerate object** with an **index-item pair** for each item in the object specified 
+Creates an **enumerate object** with an **index-item pair** for each item in the object specified
+
 ```python
 # indexing starting at START value specified
 enumerate_values = enumerate(list, start = int)
@@ -97,6 +108,7 @@ indexed_list = list(enumerate_values)
 ```
 
 Passes a function using **map** to each item on the list
+
 ```python
 rounded_values = map(round, list)
 
@@ -111,6 +123,7 @@ squares_list = list(squared_values)
 ```
 
 Utilizes the **counter module** to create a **counter dict** of each value and their counts
+
 ```python
 from collections import Counter
 
@@ -122,6 +135,7 @@ print(list_count)
 ```
 
 Determines all possible **combinations** in a list specified
+
 ```python
 from itertools import combinations
 
@@ -130,6 +144,7 @@ combos_list = [ *combinations(list, 2) ]
 ```
 
 Using the **set method** compares the values in two sets (unique values, no duplicates)
+
 ```python
 # converting two LISTS into SETS; stores unique values (no duplicates)
 set_a = set(list_1)
@@ -143,10 +158,22 @@ set_a_only = set_a.difference(set_b)
 set_b_only = set_b.difference(set_a)
 
 # SYMMETRIC_DIFFERENCE collects values that exist in ONE of the sets, but NOT BOTH
-set_a.symmetric_difference(set_b)
+differences = set_a.symmetric_difference(set_b)
 
 # UNION collects all values from each set (no duplicates)
-set_a.union(set_b)
+union_set = set_a.union(set_b)
+
+# add a single value to the set only if the value is unique
+set.add('value')
+
+# merges a list of values into the set, only if the values are unique
+set.update(list_of_values)
+
+# removes an element from the set
+set.discard(value)
+
+# removes and returns an element from the set
+pop_value = set.pop(value)
 
 # check to see if a POSSIBLE VALUE is a member of a set; faster than list looping
 if 'Possible Value' in set:
@@ -154,6 +181,7 @@ if 'Possible Value' in set:
 ```
 
 ## LIST MANIPULATION
+
 |            Method             |                                                                                |
 | :---------------------------: | ------------------------------------------------------------------------------ |
 |    `list.append('value')`     | adds the value specified to the **end** of list                                |
@@ -162,28 +190,37 @@ if 'Possible Value' in set:
 |        `list.upper()`         | **uppercases** each string element in the list specified                       |
 |        `list.lower()`         | **lowercases** each string element in the list specified                       |
 |        `list.title()`         | uppercases the **initial letter** in each element in the list specified        |
+|  `list_one.extend(list_two)`  | "appends" list_two to list_one; similar to .append()                           |
+|     `list.pop(position)`      | Removes or "pops" the position(int) or index specified in 'list_name'          |
+|     `list.index('value')`     | provides the position of an item in a list                                     |
+|        `sorted(list)`         | provides the items in a list sorted in alphabetic/numeric order, ascending     |
 
 Deletes the element with the 'index_num' from the list specified
+
 ```python
 del list[index_num]
 ```
 
-*Slices* elements from the beginning of the list through 4 (0,1,2,3,4) from the list specified then assigned to 'slice_list'
+_Slices_ elements from the beginning of the list through 4 (0,1,2,3,4) from the list specified then assigned to 'slice_list'
+
 ```python
 slice_list = list[:5]
 ```
 
-*Slices* elements 2 through 4 (2,3,4) from the list specified then assigned to 'slice_list'
+_Slices_ elements 2 through 4 (2,3,4) from the list specified then assigned to 'slice_list'
+
 ```python
 slice_list = list[2:5]
 ```
 
-*Slices* elements from the 2nd element through the end of the list specified, then assigned to the 'slice_list'
+_Slices_ elements from the 2nd element through the end of the list specified, then assigned to the 'slice_list'
+
 ```python
 slice_list = list[2:]
 ```
 
-Creates a **zip object** by combining two lists; the '*' unpacks the zip_object into a list
+Creates a **zip object** by combining two lists; the '\*' unpacks the zip_object into a list
+
 ```python
 zipped_list = [*zip(list_1, list2)]
 
@@ -196,30 +233,33 @@ print(zipped_list)
 ## LIST COMPREHENSIONS
 
 Creates a new list by applying an expression to each element of an iterable specified
+
 ```python
 [ expression for element in iterable ]
 ```
 
-Each element in the iterable is plugged into the expression if the 'if' condition evaluates to true 
+Each element in the iterable is plugged into the expression if the 'if' condition evaluates to true
+
 ```python
 [ expression for element in iterable if condition ]
 ```
 
 **if/else** clause which is used before the 'for loop'
+
 ```python
 [ x if x in 'aeiou' else '*' for x in 'apple' ]
 ```
 
 Create a list of uppercase characters from a string
+
 ```python
 [ s.upper() for s in "Hello World" ]
 ```
 
-
-
 ## DICTIONARIES
 
 Creates a dictionary using a colon to separate the **keys** and **values** of the dictionary; keys and values can be strings or numbers.
+
 ```python
 dict = {
     'first key': 'value',
@@ -229,21 +269,25 @@ dict = {
 ```
 
 Selects the **value** assigned to the denoted key from the dictionary specified
+
 ```python
 variable = dict['key']
 ```
 
 Selects the **value** assigned to the denoted key from the dictionary specified; if the key does not exist, the second parameter is given as a value instead.
+
 ```python
 variable = dict.get('key',0)
 ```
 
 Deletes the **key/value** pair from the dictionary specified.
+
 ```python
 del dict['key']
 ```
 
 Creates **dict_list**, a list of dictionaries, using square brackets to encase the dicts; dicts are called by using their 'index' value
+
 ```python
 dict_list = [
     {'first dict key' : 'value' },
@@ -253,16 +297,19 @@ dict_list = [
 ```
 
 From **dict_list**, a list of dictionaries, selects the **value** assigned to the denoted key from the dictionary specified by it's index value.
+
 ```python
 variable = dict_list[dict_index]['key']
 ```
 
 Appends a new dictionary to **dict_list** specified.
+
 ```python
 dict_list.append(dict)
 ```
 
-Creates **dict_dict**, a dictionary of dictionaries, using curly brackets to encase the dicts; dicts are called by using their **dict_key** value. 
+Creates **dict_dict**, a dictionary of dictionaries, using curly brackets to encase the dicts; dicts are called by using their **dict_key** value.
+
 ```python
 dict_dict = {
     'dict key' : {'inner dict key':'value'},
@@ -272,28 +319,34 @@ dict_dict = {
 ```
 
 From **dict_dict**, a dictionary of dictionaries, selects the **value** assigned to the denoted **inner_dict_key** from the inner dictionary specified by the **dict_key**. Similar to indexing in list but using key instead.
+
 ```python
 variable = dict_dict['dict key']['inner dict key']
 ```
 
 Prints **list_item** if it is in the **list**, inside the dictionary specified
+
 ```python
 if 'list_item' in dict[list]:
     print('list value')
 ```
 
 Loops through the **values** of the dictionary specified, and prints the 'value'
+
 ```python
 for v in dict.values():
     print(v)
 ```
+
 Loops through the **keys** of the dictionary specified, and prints the 'key'
+
 ```python
 for k in dict.keys():
     print(k)
 ```
 
 Loops through the **keys and values** of the dictionary specified, and prints the 'key/value' pair
+
 ```python
 for k,v in dict.items():
     print(k,v)
@@ -302,12 +355,14 @@ for k,v in dict.items():
 ## IF STATEMENTS
 
 Code that prints the 'statement' if the variable specified equals the 'value'; (<, >, <=, >=, !=) can be used in placed of the '==' sign. 'value' can be string, integer, etc.
+
 ```python
 if variable == 'value':
     print('statement')
 ```
 
 **If** statement with more than one possible condition; 'elif' is intermediate conditonal and 'else' is always used as the final statement (when no conditions were met)
+
 ```python
 if variable == 'value':
     print('statement')
@@ -320,6 +375,7 @@ else:
 ```
 
 **If** statement when one or more conditions must be met before the 'statment' is printed; if using 'or', then at least one of the conditions must be met for the the 'statement' to be printed
+
 ```python
 if variable == 'value' and variable_two == 'value':
     print('statement')
@@ -328,33 +384,37 @@ if variable == 'value' and variable_two == 'value':
 ## FOR LOOPS
 
 Iterates, or 'loops' through each element in the list specified and prints the 'statement'
+
 ```python
 for element in list:
     print('statement')
 ```
 
-## NESTED FOR LOOPS 
+## NESTED FOR LOOPS
 
 Iterates, or 'loops' through each element in the list specified and then prints the 'statment' if the condition is met; 'break' stops looping the code once the condition is met
+
 ```python
 for element in list:
-    
+
     if element == 'value':
         print('statement')
         break
 ```
 
 Elements in 'other_list' (inner loop) are completely iterated over during each iteration of the elements in the list specified (outer loop)
+
 ```python
 for element in list:
-    
+
     for other_element in other_list:
         print(element, other_element)
 ```
 
 ## FUNCTIONS
 
-Functions provide "packaged code";  must be called before code is ran
+Functions provide "packaged code"; must be called before code is ran
+
 ```python
 def function(arg_1, arg_2=42):
 	"""Description of what the function does. Google Docstring Style
@@ -376,8 +436,9 @@ function()
 ```
 
 Function that creates a new DataFrame
+
 ```python
-# Use an immutable variable for the default argument 
+# Use an immutable variable for the default argument
 def better_add_column(values, df=None):
   """Add a column of `values` to a DataFrame `df`.
     The column will be named "col_<n>" where "n" is
@@ -395,12 +456,14 @@ def better_add_column(values, df=None):
   # Update the function to create a default DataFrame
   if df is None:
     df = pandas.DataFrame()
-  
+
   df['col_{}'.format(len(df.columns))] = values
   return df
 
 ```
+
 Packaged code under the 'function_name' function with 'first_number' and 'second_number' arguments; when function is called, data is passed into the function (in positional order) and prints the 'total'
+
 ```python
 def function_name(first_number, second_number):
 
@@ -411,6 +474,7 @@ function_name(1 , 3)
 ```
 
 Packaged code under the 'function_name' function; when function is called, data is passed into the function using the 'keyword' arguments specified (positional order is ignored due to assignment)
+
 ```python
 def function_name(first_number, second_number):
 
@@ -420,7 +484,8 @@ def function_name(first_number, second_number):
 function_name(second_number = 1, first_number = 3)
 ```
 
-Packaged code under the 'function_name' function with a default value assigned to the 'second_number' argument; 'default' values do not have to be included when calling the function keyword arguments without defaults must come before arguments with an assigned default value  
+Packaged code under the 'function_name' function with a default value assigned to the 'second_number' argument; 'default' values do not have to be included when calling the function keyword arguments without defaults must come before arguments with an assigned default value
+
 ```python
 def function_name(first_number, second_number = 1):
 
@@ -431,6 +496,7 @@ function_name(first_number = 3)
 ```
 
 Function using the 'return' statement to be able to assign the result of running the function to a variable
+
 ```python
 def function_name(first_number, second_number):
 
@@ -443,9 +509,10 @@ variable = function_name(1, 3)
 ## CLASSES
 
 Creates class called **Custom_Class**
+
 ```python
 class Custom_Class():
-    
+
     def __init__(self, attribute_name, attribute_name_two, attribute_name_three):
 
         self.attribute_name = attribute_name
@@ -454,17 +521,18 @@ class Custom_Class():
 ```
 
 **Class Attributes** are variables that are assigned inside classes but outside of **init**
+
 ```python
 class CsvFile:
- 	
+
     # class attributes
     instances = []
-    
+
     def __init__(self, file):
 
     	# creates csv file
     	self.data = pd.read_csv(file)
-        
+
         # appends the filename to the INSTANCES class attribute
         self.__class__.instances.append(file)
 
@@ -473,42 +541,46 @@ CsvFile.instances
 ```
 
 **Class Methods** allow the first parameter to represent the class, creating multiple instances
+
 ```python
 class CsvFile:
- 	
+
     # class attributes
     instances = []
-    
+
     def __init__(self, file):
-    
+
     	# creates csv file
     	self.data = pd.read_csv(file)
-        
+
         # appends the filename to the INSTANCES class attribute
         self.__class__.instances.append(file)
-    
+
     @classmethod
     def instantiate(cls, filenames):
     	return map(cls, filenames)
- 
+
  # CsvFile can be called with a csv path defined
 csv_1 = CsvFile('document1.csv')
- 
+
  # now can pass multiple csv paths using the INSTANTIATE class method
-csv_1, csv_2 = CsvFile.instantiate(['document1.csv', 'document2.csv'])   
+csv_1, csv_2 = CsvFile.instantiate(['document1.csv', 'document2.csv'])
 ```
 
 Creates an 'instance' of 'Class_Name' using the values provided; stored in 'class_instance'
+
 ```python
 class_instance = Class_Name('value', 'value', 'value')
 ```
 
-Retrieves information from an 'instance' cooresponding to the 'attribute_name' specified 
+Retrieves information from an 'instance' cooresponding to the 'attribute_name' specified
+
 ```python
 class_instance_info = class_instance.attribute_name
 ```
 
 Showing **Inheritance**, where a class inherits the attribute of a different class
+
 ```python
 '''
 NAME IS A CLASS ATT. OF ANIMAL; INHERITED BY MAMMAL/REPTILE BY PASSING NAME
@@ -542,6 +614,7 @@ print(stella)
 ```
 
 Showing **Polymorphism**, where a class displays inheritance and also modifies/morphs other attributes.
+
 ```python
 '''
 MAMMAL/REPTILE EACH INHERIT FROM SPINAL_CORD FROM VERTEBRATE
@@ -550,11 +623,11 @@ EACH MORPH/MODIFY THE TEMPERATURE_REGULATION CLASS ATTRIBUTE
 # create VERTEBRATE class
 class Vertebrate:
     spinal_cord = True
-    
+
     def __init__(self, name):
         self.name = name
 
-# create MAMMAL class, inherits spinal_cord from VERTEBRATE 
+# create MAMMAL class, inherits spinal_cord from VERTEBRATE
 class Mammal(Vertebrate):
     def __init__(self, name, animal_type):
         self.animal_type = animal_type
@@ -582,7 +655,9 @@ print("Daisy temperature regulation: " + str(daisy.temperature_regulation))
 ```
 
 ## CONTEXT MANAGERS
-Opens the file and reads the data using the **with context manager**    
+
+Opens the file and reads the data using the **with context manager**
+
 ```python
 with open ('file_name.file_type', 'r') as fileobj:
     print("test")
@@ -591,18 +666,21 @@ with open ('file_name.file_type', 'r') as fileobj:
 ```
 
 Opens the JSON file specified using the **with context manager**
+
 ```python
 with open("file_path/file_name.json") as json_file:
     data = json.load(json_file)
 ```
 
 Opens the pickle file specified using the **with context manager**
+
 ```python
 with open('pickled_file.pkl', 'w') as file:
     data = pickle.load(file)
 ```
 
 Writes data to a 'csv' file using the **with context manager**
+
 ```python
 # 'w' tells the context manager to write to the csvfile
 with open(data_output, 'w', newline="") as csvfile:
@@ -610,6 +688,7 @@ with open(data_output, 'w', newline="") as csvfile:
 ```
 
 Defining custom context manager that changes the current path to view files, then reverts to original path
+
 ```python
 import os
 
@@ -633,10 +712,13 @@ with my_context_mgr('.data_folder/sub_folder'):
     # CONTEXT MANAGER yields the PATH files, then reverts to OLD_DIR
     project_Files = os.listdir()
 ```
+
 ## TIMING AND PROFILING CODE
 
 ### TIME MODULE
+
 Utilizes the **time module** to calculate time between **Start** and **End** times
+
 ```python
 import time
 
@@ -655,6 +737,7 @@ run_time = end_time - start_time
 ### RUNTIME
 
 Calculates **runtime** with IPython magic command
+
 ```python
 # magic command is added before the line of code to be analyzed (LINE MAGIC MODE)
 %timeit rand_nums = np.random.rand(1000)
@@ -665,7 +748,7 @@ nums = []
 for x in range(10):
     nums.append(x)
 
-# %timeit runs through the code multiple times to provide and mean and std dev 
+# %timeit runs through the code multiple times to provide and mean and std dev
 # of the actual runtime; also provides the number of runs and loops taken
 
 # FLAGS
@@ -679,7 +762,9 @@ times = %timeit -r2 -n10 -o rand_nums = np.random.rand(1000)
 ```
 
 ### RUNTIME PROFILING
+
 **Line Profiler** provides the run times for each line of code in a function with a summary of run times
+
 ```python
 # loads the line_profiler into the session
 %load_ext line_profiler
@@ -696,11 +781,13 @@ times = %timeit -r2 -n10 -o rand_nums = np.random.rand(1000)
 # NUMPY
 
 ## DEPENDENCIES
+
 ```python
 import numpy as np
 ```
 
 ## METHODS
+
 |                  Command                   | What is Calculated                                                                                              |
 | :----------------------------------------: | --------------------------------------------------------------------------------------------------------------- |
 |              `np.mean(array)`              | The **average** of the array specified                                                                          |
@@ -716,78 +803,89 @@ import numpy as np
 |  `np.ones( num_of_rows , num_of_columns)`  | A matrix of **ones** of the shape **num_rows** and **num_columns** specified                                    |
 |     `np.percentile(data, [25, 50,75])`     | The **percentiles** of the specified data; the second parameter takes an array of the percentiles requested     |
 
-
 **Vectorizes** the Pandas series; faster than **apply** for iterating down columns
+
 ```python
 # vectorizes the values in column specified
 df['Column_Name'].values.sum(axis=1)
 ```
 
-Creates **arr_list**,  a list of arrays.
+Creates **arr_list**, a list of arrays.
+
 ```python
 arr_list = [[1,2,3], [4,5,6], [7,8,9]]
 ```
 
-Creates a **matrix** from a **arr_list**, a list of arrays. 
+Creates a **matrix** from a **arr_list**, a list of arrays.
+
 ```python
 my_matrix = np.array(arr_list)
 ```
 
 Displays the **shape** of the matrix (row and column count).
+
 ```python
 my_matrix.shape
 ```
 
 Arranges the values in the array specified; uses a **start** and **end** value, as well as an option **interval** amount. **End** value is not included in calculation.
+
 ```python
 np.arange( start_int, end_int, interval_int)
 ```
 
 Returns **linearly spaced** numbers over the specified interval; the **start** and **end** are included in the calculation.
+
 ```python
 np.linspace( start_int, end_int, amt_of_nums )
 ```
 
 Creates an **identity matrix** (ones across the diagonal matrix) with the number of rows/columns specified by **matrix_num**.
+
 ```python
 identity_matrix = np.eye( matrix_num )
 ```
 
 Seeds the random number generating algorithm to provide **repoduccibility**; provides pseudorandom number generation
+
 ```python
 np.random.seed(int)
 ```
 
 Computes a **random number** between 0 and 1; useful for **Bernoulli trials** (experiement with two options, TRUE or FALSE)
+
 ```python
 # 'size' parameter provides an array with the amount of variables specified
 np.random.random(size=10)
 ```
 
 Computes random values, containing the **num_of_values** of random numbers specified
+
 ```python
 np.random.rand( num_of_values )
 ```
- 
- Creates an array containing the **num_of_values** of random numbers specified; **randn** samples are from the **standard normal distribution** (0 to 1)
- ```python
- np.random.randn( num_of_values )
- ```
+
+Creates an array containing the **num_of_values** of random numbers specified; **randn** samples are from the **standard normal distribution** (0 to 1)
+
+```python
+np.random.randn( num_of_values )
+```
 
 Samples **random rows** and returns records according to the **size** parameter
+
 ```python
 # returns all columns for the RANDOM_ROWS of size specified
 sample_pop = df.iloc[np.randint(low=0, high=df.shape[0], size=int), :]
 ```
 
+# PANDAS
 
- # PANDAS
-
- ## DEPENDENCIES
+## DEPENDENCIES
 
 ```python
 import pandas as pd
 ```
+
 ## IMPORTING DATA
 
 Imports a **csv** file and saves as a DataFrame
@@ -800,6 +898,7 @@ df.head()
 ```
 
 Imports a **JSON** file and saves as a DataFrame
+
 ```python
 url = "https://URL-DIRECTING-TO-JSON-DATA.json"
 df = pd.read_json(url, orient='columns')
@@ -808,6 +907,7 @@ df.head()
 ```
 
 Imports a **csv** file and saves as a dictionary
+
 ```python
 df = pd.read_csv("file_path/file_name.csv")
 d = df.to_dict()
@@ -816,18 +916,21 @@ d = df.to_dict()
 ## EXPORTING DATA
 
 Writes the df to a **csv** file
+
 ```python
 df.to_csv("file_path/file_name.csv", index=False)
 
 # index=True writes row names (default)
 ```
-Writes the df to an **Excel** file 
+
+Writes the df to an **Excel** file
+
 ```python
 df.to_excel("file_path/file_name.xlsx", index=False)
 
 # use 'ExcelWriter' when exporting to multiple spreadsheets is needed
 with pd.ExcelWriter('../file_path/file_name.xlsx') as writer:
-    
+
     # stores 'df_one' to an excel sheet with sheet_name specified
     df_one.to_excel(writer, sheet_name='df_one_data', index=False)
 
@@ -836,21 +939,25 @@ with pd.ExcelWriter('../file_path/file_name.xlsx') as writer:
 ```
 
 Writes the df to a **JSON file**
+
 ```python
 df.to_json(file_name)
 ```
 
-Writes the df in an  **HTML table** format
+Writes the df in an **HTML table** format
+
 ```python
 df.to_html(file_name)
 ```
 
 Writes the df to the **SQL table** specified
+
 ```python
 df.to_sql(table_name, connection_object)
 ```
 
 ## INSPECTING DATA
+
 |                      Method                      | What is Displayed                                                                                 |
 | :----------------------------------------------: | ------------------------------------------------------------------------------------------------- |
 |                   `df.info()`                    | The Index, Datatype, and Memory info                                                              |
@@ -867,6 +974,7 @@ df.to_sql(table_name, connection_object)
 | `df.sort_values('Column_Name', ascending=False)` | The column in the df specified, **sorted by the values** in the column                            |
 
 ## MODIFIER COMMANDS
+
 |                      Method                       |                                                               |
 | :-----------------------------------------------: | ------------------------------------------------------------- |
 |              `del df["Column Name"]`              | **Deletes** the column specified from the df                  |
@@ -875,7 +983,8 @@ df.to_sql(table_name, connection_object)
 |         `df["New Column Name"] = [Array]`         | Creates a new column in the df with an list of values         |
 | `df["Column Name"].replace("Value", "New Value")` | Replaces a value in the specified column                      |
 
-**Drops** or **deletes** rows with missing information; used to remove incomplete/missing rows; can use other *'how'* parameters
+**Drops** or **deletes** rows with missing information; used to remove incomplete/missing rows; can use other _'how'_ parameters
+
 ```python
 # drops rows from any column with null values
 df.dropna(how='any')
@@ -885,6 +994,7 @@ df['Column Name'].dropna(how='any')
 ```
 
 **Sets** the df index using one or more existing columns / arrays (of the correct length)
+
 ```python
 # providing a key array will create a multiindex df
 df.set_index(keys, inplace=True)
@@ -893,6 +1003,7 @@ df.set_index(keys, inplace=True)
 ```
 
 **Resets** the index of the df (also can revert a multi-index df)
+
 ```python
 df.reset_index(inplace=True)
 
@@ -900,6 +1011,7 @@ df.reset_index(inplace=True)
 ```
 
 **Renames** the columns specified in the df
+
 ```python
 df.rename(columns = {
     "Old Name" : "New Name",
@@ -908,6 +1020,7 @@ df.rename(columns = {
 ```
 
 Replaces values using the **replace** method
+
 ```python
 # replace multiple values with ONE R_VALUE specified
 df['Column_Name'].replace(['Value1', 'Value2'], 'R_Value', inplace=True)
@@ -922,22 +1035,25 @@ df["Column Name"].replace({"Value1": "New String Value", "Value2": "New String V
 ```
 
 **Reorganizes** the df as needed; creates a new object
+
 ```python
 new_df = df[['Column 2', 'Column 3', 'Column 1']]
 ```
 
 Creates a **new df**
+
 ```python
 df = pd.DataFrame({
 
     "Column Title1": variable,
     "Column Title2": [array],
     "Column Title3": old_df["Column Name"]
-    
+
 })
 ```
 
 Creates a **DataFrame** from a dictonary specified
+
 ```python
 pd.DataFrame.from_dict(dict_data)
 ```
@@ -951,6 +1067,7 @@ pd.merge(df_one, df_two, on="Shared Column", how='left')
 ```
 
 Merges multiple dfs along rows; no shared column is needed
+
 ```python
 pd.concat([df_one, df_two], axis=1)
 
@@ -958,6 +1075,7 @@ pd.concat([df_one, df_two], axis=1)
 ```
 
 **Boolean Filters** help provide logic in filtering and refining data
+
 ```python
 # produces a boolean series with True/False values for each row in the column specified
 bool_mask = df['Column Name'] > 50
@@ -970,6 +1088,7 @@ df[~bool_mask]
 ```
 
 ## AGGREGATE COMMANDS
+
 |              Command               | What is Displayed                                                                      |
 | :--------------------------------: | -------------------------------------------------------------------------------------- |
 |     `df['Column Name'].mean()`     | The average of the values in the column specified                                      |
@@ -981,14 +1100,14 @@ df[~bool_mask]
 | `df.nsmallest(int, 'Column Name')` | The **int amount** of **smallest values** in the column specified                      |
 | `df.nlargest(int, 'Column Name')`  | The **int amount** of **largest values** in the column specified                       |
 
-
-
 Creates a 'running tally' column summing all numeric values in a particular row (indicated by axis=1)
+
 ```python
 df['Running Total'] = df.sum(axis=1)
 ```
 
 Creates a rolling window calculation on the column specified
+
 ```python
 rolling = df['Column Name'].rolling( window_size_int, min_periods=None)
 
@@ -998,7 +1117,8 @@ rolling.sum()
 # sum() can be replaced with count(), mean(), etc.
 ```
 
-**Bins** the *'data_to_bin'* values based on the *'bins'* increments
+**Bins** the _'data_to_bin'_ values based on the _'bins'_ increments
+
 ```python
 data_to_bin = [1,2,3,4,5,6,7,8,9,10]
 
@@ -1013,11 +1133,13 @@ bin_data = pd.cut( data_to_bin, bins, labels=bin_labels)
 ```
 
 Returns a **count** of **Groupby elements** in a format acceptable to be added to the original dataframe as a new column
+
 ```python
 df['New Column'] = df.groupby('Grouped Column')['Date/Organizing Column'].transform('count')
 ```
 
 Returns a **rank** of **Groupby elements** in a format acceptable to be added to the original dataframe as a new column
+
 ```python
 df['New Column'] = df.groupby('Grouped Column')['Date/Organizing Column'].rank(ascending=True, method='first')
 
@@ -1028,11 +1150,13 @@ df['New Column'] = df.groupby('Grouped Column')['Date/Organizing Column'].rank(a
 ## DATA PARSING COMMANDS
 
 Converts the column specified into a **list**
+
 ```python
 list_from_column = df['Column Name'].tolist()
 ```
 
 **Groups** data by values in the column specified; aggregrates by bracketed column and aggregrate method
+
 ```python
 gropuby_df = df.groupby( ["Column Name1", "Column Name2"] )['Column 3'].count()
 
@@ -1040,11 +1164,13 @@ gropuby_df = df.groupby( ["Column Name1", "Column Name2"] )['Column 3'].count()
 ```
 
 **Unstacks** a grouped df by more than one column, easier to read format
+
 ```python
 groupby_df.unstack()
 ```
 
 **Locates and displays** records according to **row/column indexing**
+
 ```python
 # uses indexing instead of column or row labels
 df.iloc[row_num, col_num]
@@ -1057,8 +1183,9 @@ new_df = df.iloc[ row:row, col:col].copy()
 ```
 
 **Locates and displays** records according to the **row/column labels**
+
 ```python
-# this example retrieves data from rows 1, 2, and 3 and from the 'Test Scores' column only    
+# this example retrieves data from rows 1, 2, and 3 and from the 'Test Scores' column only
 df.loc[['Jan', 'Feb', 'March'] , "Test Scores"]
 
 # slicing with ':' does not require square brackets like an array or list would
@@ -1072,6 +1199,7 @@ df.loc[["Row 1", "Row 2", "Row 3"], : ]
 ```
 
 **Locates and displays** records where the conditional statement is **True**
+
 ```python
 # displays all columns for rows where the conditional statement is true
 df.loc[ df["Column Name"] == "String/Var/Int", :]
@@ -1081,18 +1209,20 @@ df.loc[ : , df["Column Name"] == "String/Var/Int"]
 ```
 
 **Iterates** over rows in a df
+
 ```python
 for index, row in df.iterrows():
     print(row['ColumnName1'], row['ColumnName2'])
 ```
 
 Applies a **function to a series** in the dataframe and returns the result to a column in the dataframe
+
 ```python
 # custom function determines if value is 'True' or 'False'
 def custom_function(x):
     if x == True:
         return 1
-    
+
     else:
         return 0
 
@@ -1101,12 +1231,13 @@ df['New Column'] = df['Column Name'].apply(custom_function, axis=0)
 ```
 
 Applies a **function to a dataframe** and returns the result to a column in the dataframe
+
 ```python
 # custom function determines if value is 'True' or 'False'; checks multiple columns in the df
 def custom_function(df):
     if df['Column One'] == True or df['Column Two'] == True:
         return 1
-    
+
     else:
         return 0
 
@@ -1115,6 +1246,7 @@ df['New Column'] = df.apply(custom_function, axis=0)
 ```
 
 Utilizes **transform** to apply a function to the **groupby object** and broadcasts the values
+
 ```python
 # defining the min-max transformation
 min_max_tr = lambda x: (x - x.min()) / (x.max() - x.min())
@@ -1138,13 +1270,15 @@ trans_object =groupby_object.transform(missing_trans)
 ## SAMPLING COMMANDS
 
 Samples random rows
+
 ```python
 
 # int= # of records to return, axis=0 samples random ROWS
-sample_pop = df.sample(int, axis=0) 
+sample_pop = df.sample(int, axis=0)
 ```
 
 [**Resample,**](http://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#offset-aliases) a time-based groupby, provides an aggregration on time series data based on the **rule parameter**, which describes the frequency with which to apply the aggregration function.
+
 ```python
 # other aggregrates include sum, count, std, etc.
 df.resample( rule='A').mean()
@@ -1155,6 +1289,7 @@ df.resample( rule='A').mean()
 ## ROLLING COMMANDS
 
 Used to create a **rolling aggregration** (mean, sum, count, std, etc) based on the **window value**; if using daily time stamps, pandas infers the window value as days.
+
 ```python
 df.rolling(window=int).mean()
 ```
@@ -1162,18 +1297,21 @@ df.rolling(window=int).mean()
 ## EXPANDING COMMANDS
 
 Used to create an **expanding aggregration** (mean, sum, count, std, etc) which takes account all data from the time series up to each point in time.
+
 ```python
 df.expanding().mean()
 ```
 
 ## ANALYSIS FUNCTIONS
+
 function that consumes an **array of data** to produce the x and y values of an **ECDF** as two arrays to be unpacked
+
 ```python
 def ecdf(data):
     """
     Compute ECDF for a one-dimensional array of measurements.
     """
-    
+
     # Number of data points: n
     n = len(data)
 
@@ -1198,13 +1336,14 @@ plt.show()
 ```
 
 function that creates a **Bernoulli Trial**, which returns the number of successes out of n Bernoulli trials
+
 ```python
 def perform_bernoulli_trials(n, p):
     """
     Perform n Bernoulli trials with success probability p
     and return number of successes.
     """
-    
+
     # Initialize number of successes: n_success
     n_success = 0
 
@@ -1225,6 +1364,7 @@ def perform_bernoulli_trials(n, p):
 ## IMPORTING DATA
 
 Creating a **connection** to the specified database; displaying table names
+
 ```python
 # Import CREATE_ENGINE
 from sqlalchemy import create_engine
@@ -1241,6 +1381,7 @@ print(engine.table_names())
 
 **Reflecting** the database and building the metadata based on that information; opposite
 of creating a table by hand.
+
 ```python
 # MetaData conatains info about reflected table in the database
 # Table object reads from the engine, autoloads the columns, and populates the MetaData
@@ -1260,6 +1401,7 @@ print(repr(table))
 ```
 
 Connecting to an **existing database**, and creating a **table**
+
 ```python
 
 # Import create_engine, MetaData, Table, Column, String, and Integer
@@ -1284,6 +1426,7 @@ metadata.create_all(engine)
 ## EXPORTING DATA
 
 Converting the ResultSet object **results** to a pandas DataFrame
+
 ```python
 # Import CREATE_ENGINE
 from sqlalchemy import create_engine
@@ -1313,6 +1456,7 @@ df.columns = results[0].keys()
 ## FILTERING, ORDERING, AND GROUPING
 
 Using **Group By** function and the **func** function to group and aggregrate query
+
 ```python
  # import func
 from sqlalchemy import func
@@ -1332,6 +1476,7 @@ print(results[0].keys())
 ```
 
 Using **Order By** function to order query in descending order
+
 ```python
 # Import desc
 from sqlalchemy import desc
@@ -1350,6 +1495,7 @@ print(rev_results[:10])
 ```
 
 Counting the **distinct values** from the column specified, and displaying the **scalar value**
+
 ```python
 # building a query: 'SELECT COUNT(DISTINCT(state)) FROM table...'
 stmt = select([func.count(table.columns.state.distinct())])
@@ -1364,12 +1510,13 @@ print(distinct_state_count)
 ## ADVANCED QUERIES
 
 Building a query to calculate a value between two columns; group by **state** and order by **pop change**. Limiting query to 5 records.
+
 ```python
 # buildng the query: 'SELECT...'
 stmt = select([
 
     # selecting STATE column..
-    table.columns.state, 
+    table.columns.state,
 
     # calculating difference between in POPULATION from 2000 to 2008 and labeling as POP_CHANGE
     (table.columns.pop2008 - table.columns.pop2000).label('pop_change')
@@ -1392,14 +1539,15 @@ results = connection.execute(stmt_top5).fetchall()
 ## MODIFYING DATA
 
 **Inserting** a row into an existing table; using **select** statement to verify updates
+
 ```python
 # Import insert and select from sqlalchemy
 from sqlalchemy import insert, select
 
-# building an INSERT statement to insert a record into the table 
+# building an INSERT statement to insert a record into the table
 insert_stmt = insert(table).values(name='Chris', count=1, amount=100.00, valid=True)
 
-# execute the INSERT statement 
+# execute the INSERT statement
 results = con.execute(insert_stmt)
 
 
@@ -1412,6 +1560,7 @@ print(proof_result)
 ```
 
 Inserting multiple rows into an existing table by building a list of dictionaries.
+
 ```python
 
 # Build a list of dictionaries: values_list
@@ -1432,6 +1581,7 @@ print(results.rowcount)
 ```
 
 Using **pandas** to insert multiple rows into an existing table
+
 ```python
 # import pandas
 import pandas as pd
@@ -1444,6 +1594,7 @@ df.to_sql(name='table', con=con, if_exists='append', index=False)
 ```
 
 **Deleting** rows from the specified table
+
 ```python
 # Import delete, select
 from sqlalchemy import delete, select
@@ -1457,6 +1608,7 @@ print(results.rowcount)
 ```
 
 Deleting rows from the specified table with multiple conditions
+
 ```python
 # building DELETE statement
 delete_stmt = delete(census)
@@ -1470,7 +1622,9 @@ results = connection.execute(delete_stmt)
 ```
 
 ## CREATING TABLES
+
 Creating a **table** using constraints(unique, default, nullable, etc.)
+
 ```python
 # Import Table, Column, String, Integer, Float, Boolean from sqlalchemy
 from sqlalchemy import Table, Column, String, Integer, Float, Boolean
@@ -1489,4 +1643,3 @@ metadata.create_all(engine)
 # Print the table details
 print(repr(metadata.tables['data']))
 ```
-
