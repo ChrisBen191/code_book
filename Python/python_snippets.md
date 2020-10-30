@@ -14,7 +14,11 @@
 Creates a list composed of each row in the csv stored as a list; assigned to the **data** variable
 
 ```python
+import csv
+
 csv_file = open('file.csv')
+
+# using reader from csv to import the csv file; storing as list assigned to data
 csv_reader = csv.reader(csv_file)
 data = list(csv_reader)
 ```
@@ -22,7 +26,23 @@ data = list(csv_reader)
 Reads a csv file using the _os_ dependency; **os.path.join()** requires no back or forward slashes in the filepath
 
 ```python
+import os 
+
 csv_file = os.path.join("folder_name", "file.csv")
+
+"""Continue same as above"""
+```
+
+Creates a dictionary composed of each row in the csv; assigned to the **data** variable
+
+```python
+import csv
+
+csv_file = open('file.csv')
+
+# using DictReader from csv to import the csv file; storing as list of dicts assigned to data
+dict_reader = csv.DictReader(csv_file)
+data = list(dict_reader)
 ```
 
 Imports data from similar files using the **glob** library (wildcard search)
@@ -128,10 +148,32 @@ Utilizes the **counter module** to create a **counter dict** of each value and t
 from collections import Counter
 
 # collects the COUNT of values in the list specified
-list_count = Counter(list)
+counter_dict = Counter(list)
 
 # displays a COUNTER DICT of k, v pairs of the value and their counts
-print(list_count)
+print(counter_dict)
+
+# displays the most_common values by frequency specified (i.e. most_common(5) == top 5)
+print(counter_dict.most_common(5))
+```
+Utilizes the defaultdict module to create a dictionary specified with the default value passed;
+this prevents Python from returning a KeyError if a value doesn't exist
+
+```python
+from collections import defaultdict
+
+# creating a new dict, with the default value of an empty list
+new_dict = defaultdict(list)
+
+# looping over dict w/data, appending value_list to the new_dict dict where key==value1 
+for value1, value_list in data_dict:
+    new_dict[value1].append(value_list)
+
+print(list(new_dict))
+```
+
+```python
+from collections import OrderedDict
 ```
 
 Determines all possible **combinations** in a list specified
@@ -182,18 +224,18 @@ if 'Possible Value' in set:
 
 ## LIST MANIPULATION
 
-|            Method             |                                                                                |
-| :---------------------------: | ------------------------------------------------------------------------------ |
-|    `list.append('value')`     | adds the value specified to the **end** of list                                |
-| `list.insert(index, 'value')` | **inserts** the value into the list at the index specified                     |
-|    `list.remove('value')`     | **removes** the element with the corresponding 'value' from the list specified |
-|        `list.upper()`         | **uppercases** each string element in the list specified                       |
-|        `list.lower()`         | **lowercases** each string element in the list specified                       |
-|        `list.title()`         | uppercases the **initial letter** in each element in the list specified        |
-|  `list_one.extend(list_two)`  | "appends" list_two to list_one; similar to .append()                           |
-|     `list.pop(position)`      | Removes or "pops" the position(int) or index specified in 'list_name'          |
-|     `list.index('value')`     | provides the position of an item in a list                                     |
-|        `sorted(list)`         | provides the items in a list sorted in alphabetic/numeric order, ascending     |
+|            Method             |                                                                                              |
+| :---------------------------: | -------------------------------------------------------------------------------------------- |
+|    `list.append('value')`     | adds the value specified to the **end** of list                                              |
+| `list.insert(index, 'value')` | **inserts** the value into the list at the index specified                                   |
+|    `list.remove('value')`     | **removes** the element with the corresponding 'value' from the list specified               |
+|     `list.pop(position)`      | **removes** or "pops" the element with the corresponding index value from the list specified |
+|        `list.upper()`         | **uppercases** each string element in the list specified                                     |
+|        `list.lower()`         | **lowercases** each string element in the list specified                                     |
+|        `list.title()`         | **uppercases the initial letter** in each element in the list specified                      |
+|  `list_one.extend(list_two)`  | "appends" list_two to list_one; similar to .append()                                         |
+|     `list.index('value')`     | provides the **position or index** of an item in a list                                      |
+|        `sorted(list)`         | provides the items in a list sorted in **alphabetic/numeric order**, ascending               |
 
 Deletes the element with the 'index_num' from the list specified
 
@@ -258,6 +300,14 @@ Create a list of uppercase characters from a string
 
 ## DICTIONARIES
 
+|           Method            |                                                                                                                   |
+| :-------------------------: | ----------------------------------------------------------------------------------------------------------------- |
+| `dict[new_key] = new_value` | updates the dict with a new k:v pair denoted by passed key and value                                              |
+| `dict.update(second_dict)`  | updates the dict with a passed dictionary, tuple(s), etc.                                                         |
+|      `dict.pop(value)`      | safely removes the value from the dict if it exists                                                               |
+|   `dict.get(value, 'NA')`   | safely retrieves the value from the dict if it exists, else it returns secondary value (default None)             |
+|        `key in dict`        | boolean statement for if key exists in specified dict; commonly used in conditional statements when parsing dicts |
+
 Creates a dictionary using a colon to separate the **keys** and **values** of the dictionary; keys and values can be strings or numbers.
 
 ```python
@@ -266,24 +316,6 @@ dict = {
     'second key': 'value',
     'third key': 'value'
     }
-```
-
-Selects the **value** assigned to the denoted key from the dictionary specified
-
-```python
-variable = dict['key']
-```
-
-Selects the **value** assigned to the denoted key from the dictionary specified; if the key does not exist, the second parameter is given as a value instead.
-
-```python
-variable = dict.get('key',0)
-```
-
-Deletes the **key/value** pair from the dictionary specified.
-
-```python
-del dict['key']
 ```
 
 Creates **dict_list**, a list of dictionaries, using square brackets to encase the dicts; dicts are called by using their 'index' value
@@ -350,6 +382,27 @@ Loops through the **keys and values** of the dictionary specified, and prints th
 ```python
 for k,v in dict.items():
     print(k,v)
+```
+
+```python
+# assigns data_dict2 (dict) as the value of specified key in data_dict (dict)
+data_dict[key] = data_dict2
+
+
+# assigns data_dict2 (dict) as the value of specified key in data_dict (dict)
+data_dict[key].update(data_dict2)
+
+for record in data_dict:
+
+    # captures the minimum key value for specified key when sorted descending; [0] denotes only 1 record return
+    lowest_ranked = sorted(data_dict[key], reverse=True)[0]
+
+    # captures the maximum value for specified key when sorted ascending; [0] denotes only 1 record return
+    highest_ranked = sorted(data_dict[key])[0]
+
+    # displays the value captured at the lowest/highest ranked values safely
+    print(data_dict.get(lowest_ranked, 'Not existing'))
+    print(data_dict.get(highest_ranked, 'Not existing'))
 ```
 
 ## IF STATEMENTS
