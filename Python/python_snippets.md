@@ -168,8 +168,8 @@ from collections import namedtuple
 
 # list of tuples with bbq joint information, stored as bbq_tuples
 bbq_tuples = [
-    ('Jack Jordans', 'Odessa', 'brisket', 12),
-    ('Russels', 'Denver', 'brisket burt ends', 25),
+    ('Jack Jordans', 'Odessa', 'smoked sausage', 12),
+    ('Russels', 'Denver', 'brisket burnt ends', 25),
     ('Franklins', 'Austin', 'chopped sandwich', 15)
 ]
 
@@ -186,14 +186,15 @@ for joint, location, special, special_price in bbq_tuples:
     details = Barbeque(joint, location, special, special_price)
     bbq_joints.append(details)
     
+# diplays the Barbeque nametuples
 bbq_joints
 ```
 
 
 
 
-    [Barbeque(name='Jack Jordans', location='Odessa', special='brisket', special_price=12),
-     Barbeque(name='Russels', location='Denver', special='brisket burt ends', special_price=25),
+    [Barbeque(name='Jack Jordans', location='Odessa', special='smoked sausage', special_price=12),
+     Barbeque(name='Russels', location='Denver', special='brisket burnt ends', special_price=25),
      Barbeque(name='Franklins', location='Austin', special='chopped sandwich', special_price=15)]
 
 
@@ -202,12 +203,12 @@ bbq_joints
 ```python
 # nametuples' attributes are now easily accessible
 for joint in bbq_joints:
-    print(f'{joint.name} in {joint.location} has a great {joint.special} special!')
+    print(f'{joint.name} BBQ in {joint.location} has a great {joint.special} special!')
 ```
 
-    Jack Jordans in Odessa has a great brisket special!
-    Russels in Denver has a great brisket burt ends special!
-    Franklins in Austin has a great chopped sandwich special!
+    Jack Jordans BBQ in Odessa has a great smoked sausage special!
+    Russels BBQ in Denver has a great brisket burnt ends special!
+    Franklins BBQ in Austin has a great chopped sandwich special!
 
 
 ## Itertools Module
@@ -365,10 +366,11 @@ dinner = ['steak', 'cereal', 'burger', 'pasta', 'salmon']
 
 zipped_list = [*zip(breakfast, dinner)]
 
-print(zipped_list)
+print(f'Tuple Count equals length of smallest passed list:\n {zipped_list}')
 ```
 
-    [('cereal', 'steak'), ('scrambled eggs', 'cereal'), ('yogurt', 'burger')]
+    Tuple Count equals length of smallest passed list:
+     [('cereal', 'steak'), ('scrambled eggs', 'cereal'), ('yogurt', 'burger')]
 
 
 ## List Comprehensions
@@ -377,7 +379,15 @@ print(zipped_list)
 
 ```python
 price_list = [15.99, 7.95, 34.50, 20.20, 11.59]
+print(f'Starting Prices:\n {price_list}')
+```
 
+    Starting Prices:
+     [15.99, 7.95, 34.5, 20.2, 11.59]
+
+
+
+```python
 # determing 15% discount for each item in price list w/list comprehension
 discounts = [price * (0.85) for price in price_list]
 
@@ -408,10 +418,11 @@ price_levels = ['expensive' if price>10 else 'cheap' for price in discounts]
 
 # assume $10 gift card can be applied to only $15 and more...
 after_gc = [price-10 if price>=15 else price for price in discounts]
-print(after_gc)
+print(f'Prices after GiftCard applied:\n {after_gc}')
 ```
 
-    [13.59, 6.76, 19.32, 7.170000000000002, 9.85]
+    Prices after GiftCard applied:
+     [13.59, 6.76, 19.32, 7.170000000000002, 9.85]
 
 
 ## Dictionaries
@@ -424,3 +435,150 @@ print(after_gc)
 |      `dict.pop(value)`      | safely removes the value from the dict if it exists                                                               |
 |   `dict.get(value, 'NA')`   | safely retrieves the value from the dict if it exists, else it returns secondary value (default None)             |
 |        `key in dict`        | boolean statement for if key exists in specified dict; commonly used in conditional statements when parsing dicts |
+
+### dictionary
+
+
+```python
+# creates a dictionary of key:value pairs
+meal_dict = {
+    'breakfast': 'scrambled eggs',
+    'lunch': 'sandwich',
+    'dinner': 'steak'
+}
+
+# dictionary is accessed by providing the key in brackets
+lunch = meal_dict['lunch']
+print(f'Lunch Meal: {lunch}')
+```
+
+    Lunch Meal: sandwich
+
+
+### List of dictionaries
+
+
+```python
+# creates a list of dictionaries of key:value pairs
+list_of_dicts = [
+    {'breakfast': 'scrambled eggs'},
+    {'lunch': 'sandwich'},
+    {'dinner': 'steak'}
+]
+
+# dictionary is accessed by providing index of dict in list, then providing the key for that dict
+lunch = list_of_dicts[1]['lunch']
+print(f'Lunch Meal: {lunch}')
+```
+
+    Lunch Meal: sandwich
+
+
+
+```python
+snack = {'snack': 'cheezits'}
+
+# appends adds the snack dict the list_of_dicts
+list_of_dicts.append(snack)
+print(list_of_dicts)
+```
+
+    [{'breakfast': 'scrambled eggs'}, {'lunch': 'sandwich'}, {'dinner': 'steak'}, {'snack': 'cheezits'}, {'snack': 'cheezits'}, {'snack': 'cheezits'}]
+
+
+### Dict of dictionaries
+
+
+```python
+dict_of_dicts = {
+    'breakfast': {'light': 'yogurt', 'medium': 'breakfast sandwich', 'heavy': 'hangover burger'},
+    'lunch': {'light': 'sandwich', 'medium': 'pizza', 'heavy': 'fried chicken'},
+    'dinner': {'light': 'steak salad', 'medium': 'spagetti', 'heavy': 'steak'}
+}
+
+# dictionary is access by providing the key to the nested dict, then providing the key for that dict
+lunch = dict_of_dicts['lunch']['light']
+print(f'Lunch Meal: {lunch}')
+```
+
+    Lunch Meal: sandwich
+
+
+
+```python
+snacks = {'snacks': {'light': 'cheezeits', 'medium': 'potato chips', 'heavy': 'chocolate cake'}}
+
+# updates dict_of_dicts with snacks dictionary
+dict_of_dicts.update(snacks)
+
+for meal_key in dict_of_dicts:
+    print(f'Meals for {meal_key}:\n {dict_of_dicts[meal_key]}\n')
+```
+
+    Meals for breakfast:
+     {'light': 'yogurt', 'medium': 'breakfast sandwich', 'heavy': 'hangover burger'}
+    
+    Meals for lunch:
+     {'light': 'sandwich', 'medium': 'pizza', 'heavy': 'fried chicken'}
+    
+    Meals for dinner:
+     {'light': 'steak salad', 'medium': 'spagetti', 'heavy': 'steak'}
+    
+    Meals for snacks:
+     {'light': 'cheezeits', 'medium': 'potato chips', 'heavy': 'chocolate cake'}
+    
+
+
+### Dictionary Modifiers
+
+
+```python
+sport_dict = {
+    'basketball': ['lakers', 'spurs', 'nets'],
+    'football': ['cowboys', 'chiefs', 'seahawks'],
+}
+
+# conditional to determine if element is inside of football list in sport_dict
+if 'cowboys' in sport_dict['football']:
+    print('The team is inside the dictionary!')
+```
+
+    The team is inside the dictionary!
+
+
+
+```python
+# loops through sport_dict to display the sport keys
+print('List of Sports: (keys representing each sport)')
+for sport in sport_dict.keys():
+    print(sport)
+
+# loops through sport_dict to display the list of teams
+print('\nList of Teams: (values for each sport key)')
+for teams in sport_dict.values():
+    print(teams)
+    
+# loops through sport_dict to display the sport keys and corresponding team values
+for sport, teams in sport_dict.items():
+    print(f'\n{sport} Teams: \n {teams}')
+```
+
+    List of Sports: (keys representing each sport)
+    basketball
+    football
+    soccer
+    
+    List of Teams: (values for each sport key)
+    ['lakers', 'spurs', 'nets']
+    ['cowboys', 'chiefs', 'seahawks']
+    ['dynamo', 'red bulls', 'rockies']
+    
+    basketball Teams: 
+     ['lakers', 'spurs', 'nets']
+    
+    football Teams: 
+     ['cowboys', 'chiefs', 'seahawks']
+    
+    soccer Teams: 
+     ['dynamo', 'red bulls', 'rockies']
+
