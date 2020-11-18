@@ -201,7 +201,7 @@ if 'Possible Value' in set:
 |  `list_one.extend(list_two)`  | "appends" list_two to list_one; similar to .append()                                         |
 |     `list.index('value')`     | provides the **position or index** of an item in a list                                      |
 |        `sorted(list)`         | provides the items in a list sorted in **alphabetic/numeric order**, ascending               |
-|     `del list[index_num]      | deletes the element in the list with the corresponding index_num                             |
+|     `del list[index_num]`     | deletes the element in the list with the corresponding index_num                             |
 |         `list[:int]`          | slices list from the beginning element of the list to element with **int-1** index           |
 |         `list[int:]`          | slices list from the element with **int** index to the last element in the list              |
 |   `list[start_int:end_int]`   | slices list from element with index **start_num** to the element with **end_num-1** index    |
