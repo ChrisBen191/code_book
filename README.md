@@ -22,11 +22,9 @@
 + [Collections Module](Python/python_snippets.md#COLLECTIONS-MODULE)
 + [Itertools Module](Python/python_snippets.md#ITERTOOLS-MODULE)
 + [Sets](Python/python_snippets.md#SETS)
-
 + [Lists](Python/python_snippets.md#LISTS)
 + [List Comprehensions](Python/python_snippets.md#LIST-COMPREHENSIONS)
 + [Dictionaries](Python/python_snippets.md#DICTIONARIES)
-
 + [Functions](Python/python_snippets.md#FUNCTIONS)
 
 
