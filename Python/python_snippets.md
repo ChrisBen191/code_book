@@ -11,38 +11,47 @@
 
 ## IMPORTING DATA
 
-Creates a list composed of each row in the csv stored as a list; assigned to the **data** variable
+### CSV
+Creates a **list** composed of each row in the CSV passed; assigned to the **data** variable.
+
+```python
+import csv
+
+csv_file = open('filename.csv')
+
+# storing as list assigned to data
+csv_reader = csv.reader(csv_file)
+
+# stores csv as list in data variable
+data = list(csv_reader)
+```
+
+Creates a **dictionary** composed of each row in the CSV passed; assigned to the **data** variable.
 
 ```python
 import csv
 
 csv_file = open('file.csv')
 
-# using reader from csv to import the csv file; storing as list assigned to data
-csv_reader = csv.reader(csv_file)
-data = list(csv_reader)
+# storing as list of dicts assigned to data
+dict_reader = csv.DictReader(csv_file)
+
+# stores csv as list in data variable
+data = list(dict_reader)
 ```
 
-Reads a csv file using the _os_ dependency; **os.path.join()** requires no back or forward slashes in the filepath
-
+Imports a CSV using the **os module**; does not require back/forward slashes in the filepath
 ```python
+import csv
 import os 
 
 csv_file = os.path.join("folder_name", "file.csv")
 
-"""Continue same as above"""
-```
+# using reader from csv to import the csv file; storing as list assigned to data
+csv_reader = csv.reader(csv_file)
 
-Creates a dictionary composed of each row in the csv; assigned to the **data** variable
-
-```python
-import csv
-
-csv_file = open('file.csv')
-
-# using DictReader from csv to import the csv file; storing as list of dicts assigned to data
-dict_reader = csv.DictReader(csv_file)
-data = list(dict_reader)
+# stores csv as list in data variable
+data = list(csv_reader)
 ```
 
 Imports data from similar files using the **glob** library (wildcard search)
@@ -69,44 +78,9 @@ for list_element in csv_list:
 # concatinating the stored dfs together, row-wise or union-style
 complete_df = pd.concat(df_list, axis=0)
 ```
+## Modifier Commands
 
-## INSPECTING DATA
-
-Displays the num of items in an object, num of characters in a string, num of elements in an array, etc.
-
-```python
-len(object)
-```
-
-## MODIFIER COMMANDS
-
-Displays the text below with the variables specified
-
-```python
-name = 'Chris'
-age = 29
-
-f_string = f'Hello, {name}. You are {age}.'
-```
-
-Converts the string specified into an integer, if possible
-
-```python
-int('string')
-```
-
-Converts the string specified into a number with decimal places, if possible
-
-```python
-float('string')
-```
-
-Converts the number specified into a string
-
-```python
-str(1000)
-```
-
+### Range object
 Creates a **range object** using specified **start** and **stop** values (stop not inclusive)
 
 ```python
@@ -117,6 +91,7 @@ num_range = range(start, stop, step)
 nums_list = list(num_range)
 ```
 
+### Enumerate object
 Creates an **enumerate object** with an **index-item pair** for each item in the object specified
 
 ```python
@@ -127,7 +102,8 @@ enumerate_values = enumerate(list, start = int)
 indexed_list = list(enumerate_values)
 ```
 
-Passes a function using **map** to each item on the list
+### Map object
+Passes a function to each item on the list passed by creating a **map object.**
 
 ```python
 rounded_values = map(round, list)
@@ -141,6 +117,9 @@ squared_values = map(lambda x: x**2, list)
 # converts the MAP OBJECT to a list
 squares_list = list(squared_values)
 ```
+
+## Collections Module
+Contains useful methods such as Counter, defaultdict, OrderedDict, and namedtuple
 
 Utilizes the **counter module** to create a **counter dict** of each value and their counts
 
@@ -156,7 +135,9 @@ print(counter_dict)
 # displays the most_common values by frequency specified (i.e. most_common(5) == top 5)
 print(counter_dict.most_common(5))
 ```
-Utilizes the defaultdict module to create a dictionary specified with the default value passed;
+
+### defaultdict
+Creates a dictionary specified with the default value passed;
 this prevents Python from returning a KeyError if a value doesn't exist
 
 ```python
@@ -172,8 +153,31 @@ for value1, value_list in data_dict:
 print(list(new_dict))
 ```
 
+### namedtuple
+Tuple used when there is no need for a nested dictionary structure, or to avoid the overhead
+of a pandas dataframe. Nametuples have accessible elements, or attributes.
+
 ```python
-from collections import OrderedDict
+from collections import namedtuple
+
+# naming namedtuple 'Eatery', and passing list of field names for attributes
+Eatery = namedtuple('Eatery', ['name', 'location', 'park_id'])
+
+# instantiating list to hold created Nametuples
+eateries = []
+
+# looping over nyc_eateries dict
+for eatery in nyc_eateries:
+
+    # creating nametuple from looped dict in nyc_eateries, w/values stored as nametuple's attributes
+    details = Eatery(
+        eatery['name'],
+        eatery['location'],
+        eatery['park_id']
+    )
+
+    # appending nametuple created in each loop to the eateries list
+    eateries.append(details)
 ```
 
 Determines all possible **combinations** in a list specified
