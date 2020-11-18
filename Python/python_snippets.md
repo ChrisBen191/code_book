@@ -1,58 +1,12 @@
 # NATIVE PYTHON
 
-## DEPENDENCIES
-
-|     Command     |                                            |
-| :-------------: | ------------------------------------------ |
-|  `import csv`   | dependency for manipulating **csv** files  |
-|  `import json`  | dependency for manipulating **json** files |
-|   `import os`   | depdendency for **os.path.join()** command |
-| `import pickle` | dependency for manipulating pickle files   |
-
 ## IMPORTING DATA
 
 ### CSV
+
 Creates a **list** composed of each row in the CSV passed; assigned to the **data** variable.
 
-```python
-import csv
-
-csv_file = open('filename.csv')
-
-# storing as list assigned to data
-csv_reader = csv.reader(csv_file)
-
-# stores csv as list in data variable
-data = list(csv_reader)
-```
-
-Creates a **dictionary** composed of each row in the CSV passed; assigned to the **data** variable.
-
-```python
-import csv
-
-csv_file = open('file.csv')
-
-# storing as list of dicts assigned to data
-dict_reader = csv.DictReader(csv_file)
-
-# stores csv as list in data variable
-data = list(dict_reader)
-```
-
-Imports a CSV using the **os module**; does not require back/forward slashes in the filepath
-```python
-import csv
-import os 
-
-csv_file = os.path.join("folder_name", "file.csv")
-
-# using reader from csv to import the csv file; storing as list assigned to data
-csv_reader = csv.reader(csv_file)
-
-# stores csv as list in data variable
-data = list(csv_reader)
-```
+````python
 
 Imports data from similar files using the **glob** library (wildcard search)
 
@@ -77,10 +31,12 @@ for list_element in csv_list:
 
 # concatinating the stored dfs together, row-wise or union-style
 complete_df = pd.concat(df_list, axis=0)
-```
+````
+
 ## Modifier Commands
 
 ### Range object
+
 Creates a **range object** using specified **start** and **stop** values (stop not inclusive)
 
 ```python
@@ -92,6 +48,7 @@ nums_list = list(num_range)
 ```
 
 ### Enumerate object
+
 Creates an **enumerate object** with an **index-item pair** for each item in the object specified
 
 ```python
@@ -103,6 +60,7 @@ indexed_list = list(enumerate_values)
 ```
 
 ### Map object
+
 Passes a function to each item on the list passed by creating a **map object.**
 
 ```python
@@ -119,6 +77,7 @@ squares_list = list(squared_values)
 ```
 
 ## Collections Module
+
 Contains useful methods such as Counter, defaultdict, OrderedDict, and namedtuple
 
 Utilizes the **counter module** to create a **counter dict** of each value and their counts
@@ -137,6 +96,7 @@ print(counter_dict.most_common(5))
 ```
 
 ### defaultdict
+
 Creates a dictionary specified with the default value passed;
 this prevents Python from returning a KeyError if a value doesn't exist
 
@@ -146,7 +106,7 @@ from collections import defaultdict
 # creating a new dict, with the default value of an empty list
 new_dict = defaultdict(list)
 
-# looping over dict w/data, appending value_list to the new_dict dict where key==value1 
+# looping over dict w/data, appending value_list to the new_dict dict where key==value1
 for value1, value_list in data_dict:
     new_dict[value1].append(value_list)
 
@@ -154,6 +114,7 @@ print(list(new_dict))
 ```
 
 ### namedtuple
+
 Tuple used when there is no need for a nested dictionary structure, or to avoid the overhead
 of a pandas dataframe. Nametuples have accessible elements, or attributes.
 
@@ -240,30 +201,10 @@ if 'Possible Value' in set:
 |  `list_one.extend(list_two)`  | "appends" list_two to list_one; similar to .append()                                         |
 |     `list.index('value')`     | provides the **position or index** of an item in a list                                      |
 |        `sorted(list)`         | provides the items in a list sorted in **alphabetic/numeric order**, ascending               |
-
-Deletes the element with the 'index_num' from the list specified
-
-```python
-del list[index_num]
-```
-
-_Slices_ elements from the beginning of the list through 4 (0,1,2,3,4) from the list specified then assigned to 'slice_list'
-
-```python
-slice_list = list[:5]
-```
-
-_Slices_ elements 2 through 4 (2,3,4) from the list specified then assigned to 'slice_list'
-
-```python
-slice_list = list[2:5]
-```
-
-_Slices_ elements from the 2nd element through the end of the list specified, then assigned to the 'slice_list'
-
-```python
-slice_list = list[2:]
-```
+|     `del list[index_num]      | deletes the element in the list with the corresponding index_num                             |
+|         `list[:int]`          | slices list from the beginning element of the list to element with **int-1** index           |
+|         `list[int:]`          | slices list from the element with **int** index to the last element in the list              |
+|   `list[start_int:end_int]`   | slices list from element with index **start_num** to the element with **end_num-1** index    |
 
 Creates a **zip object** by combining two lists; the '\*' unpacks the zip_object into a list
 
