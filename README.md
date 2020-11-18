@@ -16,11 +16,19 @@
 + [Linux](Shell/shell_snippets.md#LINUX)
 
 ## Python
-[Python](Python/python_snippets.md#NATIVE-PYTHON)
-+ [Timing / Profiling Code](Python/python_snippets.md#TIMING-AND-PROFILING-CODE)
-+ [Numpy](Python/python_snippets.md#NUMPY)
-+ [Pandas](Python/python_snippets.md#PANDAS)
-+ [SQLAlchemy](Python/python_snippets.md#SQLALCHEMY)
+[Python](Python/python_snippets.md#PYTHON)
++ [Importing Data](Python/python_snippets.md#IMPORTING-DATA)
++ [Iterators](Python/python_snippets.md#ITERATORS)
++ [Collections Module](Python/python_snippets.md#COLLECTIONS-MODULE)
++ [Itertools Module](Python/python_snippets.md#ITERTOOLS-MODULE)
++ [Sets](Python/python_snippets.md#SETS)
+
++ [Lists](Python/python_snippets.md#LISTS)
++ [List Comprehensions](Python/python_snippets.md#LIST-COMPREHENSIONS)
++ [Dictionaries](Python/python_snippets.md#DICTIONARIES)
+
++ [Functions](Python/python_snippets.md#FUNCTIONS)
+
 
 [Data Visualization](Python/data_visualization.md)
 + [Matplotlib](Python/data_visualization.md#MATPLOTLIB)
