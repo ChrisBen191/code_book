@@ -175,7 +175,7 @@ const ironMan = {
 console.log(ironMan.firstName);
 console.log(ironMan['lastName']);
 
-// adding new elemnts to the object by assigning the values in dot/bracket notation
+// adding new elements to the object by assigning the values in dot/bracket notation
 ironMan.location = 'California';
 ironMan['twitter'] = '@ironMan2003';
 ```
