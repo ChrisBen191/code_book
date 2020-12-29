@@ -14,19 +14,36 @@ script provides the method to import a JS file
 
 ## COMMANDS
 
-|              Command              |                                                                     |
-| :-------------------------------: | ------------------------------------------------------------------- |
-|           `use strict;`           | turns on strict mode, which doesn't allow silent errors             |
-|   `console.log('Hello World!')`   | displays output (text, variable, etc.) to the browser's console log |
-|      `alert('Hello World!')`      | displays browser alert with output (text, variable, etc.)           |
-| `prompt('What is todays' date?')` | displays browser prompt for user input; can be stored as a variable |
-|  `console.log(typeof variable)`   | displays the variable's data type to the browser's console log      |
-|                ``                 |                                                                     |
+|              Command              |                                                                            |
+| :-------------------------------: | -------------------------------------------------------------------------- |
+|           `use strict;`           | turns on strict mode, which doesn't allow silent errors                    |
+|   `console.log('Hello World!')`   | displays output (text, variable, etc.) to the browser's console log        |
+|     `alertF('Hello World!')`      | displays browser alert with output (text, variable, etc.)                  |
+| `prompt('What is todays' date?')` | displays browser prompt for user input; can be stored as a variable        |
+|  `console.log(typeof variable)`   | displays the variable's data type to the browser's console log             |
+|          `array.length`           | calculates the length of the array specified                               |
+|     `array.indexOf('Value')`      | returns the index of the element in the array                              |
+|     `array.includes('Value')`     | returns boolean T/F if the element is in the array                         |
+|     `array.unshift('Value')`      | adds an element to the beginning of an array; captures new length of array |
+|       `array.push('Value')`       | adds an element to the end of an array; captures new length of array       |
+|          `array.shift()`          | removes the first element from an array; captures the element removed      |
+|           `array.pop()`           | removes the last element from an array; captures the element removed       |
+
 
 defines a variable
-
 ```javascript
 var variable_name = "Chris";
+```
+
+defines an array
+```javascript
+// using bracket notation
+const friends = ['Iron Man', 'Incredible Hulk', 'Dr. Strange'];
+console.log(friends);
+
+// using Array method
+const years = new Array(1991, 1984, 2008, 2020);
+console.log(years);
 ```
 
 ### If/Else statements
@@ -141,4 +158,24 @@ const calcAge3 = birthYear => 2037 - birthYear;
 
 const age3 = calcAge3(1990);
 console.log(age3);
+```
+
+### Objects
+Building an object using *object literal syntax*
+```javascript
+// building an object using object literal syntax
+const ironMan = {
+  firstName: 'Tony',
+  lastName: 'Stark',
+  job: 'superhero',
+  friends: ['Thor', 'Dr. Strange', 'Hulk']
+};
+
+// dot vs. bracket notation
+console.log(ironMan.firstName);
+console.log(ironMan['lastName']);
+
+// adding new elemnts to the object by assigning the values in dot/bracket notation
+ironMan.location = 'California';
+ironMan['twitter'] = '@ironMan2003';
 ```
