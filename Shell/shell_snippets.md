@@ -146,6 +146,14 @@ imports a **yml file** to reproduce an environment with exact versions of the pa
 conda env create -f env-name.yml
 ```
 
+converts the specified jupyter notebook into the format specified (typically '--to script')
+```console
+jupyter nbconvert --to FORMAT notebook.ipynb
+
+# FLAG
+-to : script, markdown, pdf, latex, asciidoc
+```
+
 # LINUX
 display which version of the Linux kernel is running
 ```console
