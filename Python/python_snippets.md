@@ -5,7 +5,6 @@
 
 ### Glob
 
-
 ```python
 import glob
 
@@ -29,12 +28,28 @@ for list_element in csv_list:
 # concatinating the stored dfs together, row-wise or union-style
 complete_df = pd.concat(df_list, axis=0)
 ```
+### Path
+```python
+from pathlib import Path
+
+# variable holding the folder to be created; exist_ok=True will allow the folder to be overwritten
+filepath = 'path/to/folder'
+Path(filepath).mkdir(parents=True, exist_ok=True)
+
+# can also use try/except clause for reporting purposes
+try:
+    Path(filepath).mkdir(parents=True, exist_ok=False)
+    print('Folder has been created.')
+
+# if exist_ok=False and folder exists, it will trigger a FileExistsError
+except FileExistsError:
+    print('The folder already exists.')
+```
 
 ## Iterators
 ---
 
 ### Range
-
 
 ```python
 # increments are specified using STEP
@@ -338,7 +353,7 @@ if 'burger' in tx_set:
 ## Lists
 ---
 
-|            Command             | Behavior                                                                                             |
+|            Command            | Behavior                                                                                     |
 | :---------------------------: | -------------------------------------------------------------------------------------------- |
 |    `list.append('value')`     | adds the value specified to the **end** of list                                              |
 | `list.insert(index, 'value')` | **inserts** the value into the list at the index specified                                   |
@@ -428,13 +443,13 @@ print(f'Prices after GiftCard applied:\n {after_gc}')
 ## Dictionaries
 ---
 
-|           Command            | Behavior                                                                                                                  |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Command                     | Behavior                                                                                                          |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | `dict[new_key] = new_value` | updates the dict with a new k:v pair denoted by passed key and value                                              |
 | `dict.update(second_dict)`  | updates the dict with a passed dictionary, tuple(s), etc.                                                         |
-|      `dict.pop(value)`      | safely removes the value from the dict if it exists                                                               |
-|   `dict.get(value, 'NA')`   | safely retrieves the value from the dict if it exists, else it returns secondary value (default None)             |
-|        `key in dict`        | boolean statement for if key exists in specified dict; commonly used in conditional statements when parsing dicts |
+| `dict.pop(value)`           | safely removes the value from the dict if it exists                                                               |
+| `dict.get(value, 'NA')`     | safely retrieves the value from the dict if it exists, else it returns secondary value (default None)             |
+| `key in dict`               | boolean statement for if key exists in specified dict; commonly used in conditional statements when parsing dicts |
 
 ### dictionary
 
