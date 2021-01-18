@@ -5,8 +5,10 @@
 
 ### Glob
 
+
 ```python
 import glob
+import pandas as pd
 
 # list stating the differences in the csvs to be imported
 csv_list = ['northern', 'southern', 'eastern', 'western']
@@ -28,28 +30,12 @@ for list_element in csv_list:
 # concatinating the stored dfs together, row-wise or union-style
 complete_df = pd.concat(df_list, axis=0)
 ```
-### Path
-```python
-from pathlib import Path
-
-# variable holding the folder to be created; exist_ok=True will allow the folder to be overwritten
-filepath = 'path/to/folder'
-Path(filepath).mkdir(parents=True, exist_ok=True)
-
-# can also use try/except clause for reporting purposes
-try:
-    Path(filepath).mkdir(parents=True, exist_ok=False)
-    print('Folder has been created.')
-
-# if exist_ok=False and folder exists, it will trigger a FileExistsError
-except FileExistsError:
-    print('The folder already exists.')
-```
 
 ## Iterators
 ---
 
 ### Range
+
 
 ```python
 # increments are specified using STEP
@@ -272,6 +258,9 @@ both_sets = tx_set.intersection(co_set)
 print(both_sets)
 ```
 
+    {'mediterranean', 'chili', 'steak', 'wings'}
+
+
 ### difference
 
 
@@ -285,10 +274,10 @@ print(f'Only a Colorado favorite\n {co_set_only}')
 ```
 
     Only a Texas favorite
-     {'hatch chilies', 'bbq', 'brisket', 'burritos', 'queso'}
+     {'bbq', 'brisket', 'burritos', 'hatch chilies', 'queso'}
     
     Only a Colorado favorite
-     {'pizza', 'sushi', 'green chilies'}
+     {'sushi', 'green chilies', 'pizza'}
 
 
 ### symmetric difference
@@ -301,7 +290,7 @@ print(f'Either Texas/Colorado Favorite, BUT NOT BOTH\n {differences}\n')
 ```
 
     Either Texas/Colorado Favorite, BUT NOT BOTH
-     {'pizza', 'hatch chilies', 'bbq', 'sushi', 'green chilies', 'brisket', 'burritos', 'queso'}
+     {'sushi', 'brisket', 'pizza', 'bbq', 'green chilies', 'burritos', 'hatch chilies', 'queso'}
     
 
 
@@ -315,7 +304,7 @@ print(f'All Favorites (both states), NO DUPLICATES\n {union_set}\n')
 ```
 
     All Favorites (both states), NO DUPLICATES
-     {'pizza', 'hatch chilies', 'chili', 'wings', 'bbq', 'sushi', 'green chilies', 'mediterranean', 'brisket', 'burritos', 'queso', 'steak'}
+     {'pizza', 'bbq', 'sushi', 'wings', 'brisket', 'green chilies', 'steak', 'burritos', 'mediterranean', 'hatch chilies', 'queso', 'chili'}
     
 
 
@@ -336,8 +325,8 @@ print(tx_set)
 print(co_set)
 ```
 
-    {'hatch chilies', 'chili', 'wings', 'burger', 'bbq', 'mediterranean', 'brisket', 'burritos', 'queso', 'steak'}
-    {'breakfast skillet', 'pizza', 'chili', 'wings', 'mediterranean', 'sushi', 'green chilies', 'buffalo burger', 'steak'}
+    {'bbq', 'burger', 'wings', 'brisket', 'steak', 'burritos', 'mediterranean', 'hatch chilies', 'queso', 'chili'}
+    {'pizza', 'buffalo burger', 'sushi', 'green chilies', 'wings', 'breakfast skillet', 'steak', 'mediterranean', 'chili'}
 
 
 
@@ -353,7 +342,7 @@ if 'burger' in tx_set:
 ## Lists
 ---
 
-|            Command            | Behavior                                                                                     |
+|            Command             | Behavior                                                                                             |
 | :---------------------------: | -------------------------------------------------------------------------------------------- |
 |    `list.append('value')`     | adds the value specified to the **end** of list                                              |
 | `list.insert(index, 'value')` | **inserts** the value into the list at the index specified                                   |
@@ -443,13 +432,13 @@ print(f'Prices after GiftCard applied:\n {after_gc}')
 ## Dictionaries
 ---
 
-| Command                     | Behavior                                                                                                          |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+|           Command            | Behavior                                                                                                                  |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | `dict[new_key] = new_value` | updates the dict with a new k:v pair denoted by passed key and value                                              |
 | `dict.update(second_dict)`  | updates the dict with a passed dictionary, tuple(s), etc.                                                         |
-| `dict.pop(value)`           | safely removes the value from the dict if it exists                                                               |
-| `dict.get(value, 'NA')`     | safely retrieves the value from the dict if it exists, else it returns secondary value (default None)             |
-| `key in dict`               | boolean statement for if key exists in specified dict; commonly used in conditional statements when parsing dicts |
+|      `dict.pop(value)`      | safely removes the value from the dict if it exists                                                               |
+|   `dict.get(value, 'NA')`   | safely retrieves the value from the dict if it exists, else it returns secondary value (default None)             |
+|        `key in dict`        | boolean statement for if key exists in specified dict; commonly used in conditional statements when parsing dicts |
 
 ### dictionary
 
@@ -498,7 +487,7 @@ list_of_dicts.append(snack)
 print(list_of_dicts)
 ```
 
-    [{'breakfast': 'scrambled eggs'}, {'lunch': 'sandwich'}, {'dinner': 'steak'}, {'snack': 'cheezits'}, {'snack': 'cheezits'}, {'snack': 'cheezits'}]
+    [{'breakfast': 'scrambled eggs'}, {'lunch': 'sandwich'}, {'dinner': 'steak'}, {'snack': 'cheezits'}]
 
 
 ### Dict of dictionaries
@@ -567,33 +556,178 @@ if 'cowboys' in sport_dict['football']:
 print('List of Sports: (keys representing each sport)')
 for sport in sport_dict.keys():
     print(sport)
-
-# loops through sport_dict to display the list of teams
-print('\nList of Teams: (values for each sport key)')
-for teams in sport_dict.values():
-    print(teams)
-    
-# loops through sport_dict to display the sport keys and corresponding team values
-for sport, teams in sport_dict.items():
-    print(f'\n{sport} Teams: \n {teams}')
 ```
 
     List of Sports: (keys representing each sport)
     basketball
     football
-    soccer
+
+
+
+```python
+# loops through sport_dict to display the list of teams
+print('\nList of Teams: (values for each sport key)')
+for teams in sport_dict.values():
+    print(teams)
+```
+
     
     List of Teams: (values for each sport key)
     ['lakers', 'spurs', 'nets']
     ['cowboys', 'chiefs', 'seahawks']
-    ['dynamo', 'red bulls', 'rockies']
+
+
+
+```python
+# loops through sport_dict to display the sport keys and corresponding team values
+for sport, teams in sport_dict.items():
+    print(f'\n{sport} Teams: \n {teams}')
+```
+
     
     basketball Teams: 
      ['lakers', 'spurs', 'nets']
     
     football Teams: 
      ['cowboys', 'chiefs', 'seahawks']
+
+
+## Functions
+---
+
+### docstring example
+
+
+```python
+def function(arg_1, arg_2=42):
+	"""Description of what the function does. Google Docstring Style
+	Args:
+    arg_1 (str): Description of arg_1 that can break onto the next line if needed.
+    arg_2 (int, optional): Write optional when an argument has a default value.
+
+    Returns:
+    bool: Optional description of the return value Extra lines are not indented.
+
+    Raises:
+    ValueError: Include any error types that the function intentionally raises.
+
+    Notes:
+    See https://www.datacamp.com/community/tutorials/docstrings-python for more info.
+	"""
+```
+
+### unpacking arguments
+
+
+```python
+def multiply(*args):
+    """
+    Using * lets the function know to unpack the arguments; allows for any number
+    of arguments to be passed into the function.
+    """
+    print(args)
     
-    soccer Teams: 
-     ['dynamo', 'red bulls', 'rockies']
+    total = 1
+    for arg in args:
+        # multiplies the unpacked arguements
+        total = total * arg
+        
+    return total
+    
+# runs the multiply function with several sets of values
+print(multiply(1,3,5), '\n')
+print(multiply(-1), '\n')
+print(multiply(12,3,44,-4))
+```
+
+    (1, 3, 5)
+    15 
+    
+    (-1,)
+    -1 
+    
+    (12, 3, 44, -4)
+    -6336
+
+
+### destructuring arguments into parameters
+
+
+```python
+def add(x,y):
+    """
+    Using * when calling the add function breaks down the parameter into the x,y variables;
+    requires the amount of desctructured parameters and function variables are the same.
+    """
+    return x + y
+
+
+# using '*' allows the list passed to be deconstructed
+nums = [3,5]
+print(add(*nums), '\n')
+
+# using '**' allows the dictionary passed to be deconstructed
+nums_dict = {'x':10, 'y':10}
+print(add(**nums_dict))
+```
+
+    8 
+    
+    20
+
+
+## keyword arguments
+
+
+```python
+def named(**kwargs):
+    """
+    Specifying **kwargs will process any number of passed keyword parameters inside dict
+    """
+    print(kwargs,'\n')
+    
+named(name='bob', age=25)
+```
+
+    {'name': 'bob', 'age': 25} 
+    
+
+
+
+```python
+def print_nicely(**kwargs):
+    """
+    Passing the kwargs and iterating over any number of parameters
+    """
+    named(**kwargs)
+    
+    for arg, value in kwargs.items():
+        print(f'{arg}: {value}')
+    
+# dict containing kw arguments to be passed into print_nicely function
+details = {'name':'bob', 'age':25}
+print_nicely(**details)
+```
+
+    {'name': 'bob', 'age': 25} 
+    
+    name: bob
+    age: 25
+
+
+
+```python
+def both(*args, **kwargs):
+    """
+    this setup is typically used so all arguments can be passed into another function
+    """
+    print(args, '\n')
+    print(kwargs)
+    
+both(1,2,3,12, name='bob', age=25)
+```
+
+    (1, 2, 3, 12) 
+    
+    {'name': 'bob', 'age': 25}
 
