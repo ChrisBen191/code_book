@@ -731,3 +731,223 @@ both(1,2,3,12, name='bob', age=25)
     
     {'name': 'bob', 'age': 25}
 
+
+## Classes (Object Oriented Programming)
+---
+
+
+```python
+class Student:
+    
+    # init will run when class is called
+    def __init__(self, name, grades):
+        self.name = name
+        self.grades = grades
+        
+        
+    # function inside of class is called a 'method'
+    def average(self):
+        '''
+        average function uses the created student (aka 'self')
+        '''
+        return sum(self.grades) / len(self.grades)
+        
+        
+# calling the Student class, providing parameters for the class
+student = Student('Anakin', (80, 82, 85, 78, 92))
+print(student.name)
+print(student.grades)
+```
+
+    Anakin
+    (80, 82, 85, 78, 92)
+
+
+
+```python
+# calling Student class with new passed parameters, saved as student2
+student2 = Student('Obi Wan', (90, 90, 93, 78, 90))
+print(student2.name)
+
+# average is a method in the class and requires ()
+print(student2.average())
+```
+
+    Obi Wan
+    88.2
+
+
+### magic methods
+
+
+```python
+class Person:
+    
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        
+        
+    # magic method called automatically when turning the object into a string
+    def __str__(self):
+        return f'Person: {self.name}, {self.age} years old.\n'
+    
+    # magic method designed to return a string that can reconstruct the original object
+    def __repr__(self):
+        return f'<Person({self.name}, {self.age})>'
+        
+vader = Person('Anakin', 35)
+
+# displays a string representation of the object if __str__ not defined, else return defined __str__
+print(vader)
+
+# prints the unambiguous representation of the object
+print(vader.__repr__())
+```
+
+    Person: Anakin, 35 years old.
+    
+    <Person(Anakin, 35)>
+
+
+### @classmethod and @staticmethod
+
+
+```python
+class ClassTest:
+    
+    # instance methods are methods that use the class object self
+    def instance_method(self):
+        print(f'Called instance_method of {self}')
+        
+    # classmethod are methods that use the cls object, or the Class object itself
+    @classmethod
+    def class_method(cls):
+        print(f'Called class_method of {cls}')
+        
+    # static methods are methods that do not have passed parameters self/cls;  
+    @staticmethod
+    def static_method():
+        print('Called static_method.')
+```
+
+
+```python
+# saving instance of ClassTest and displaying instance method
+test = ClassTest()
+test.instance_method()
+
+# used for actions, uses data inside the object created, either manipulating or modifying
+```
+
+    Called instance_method of <__main__.ClassTest object at 0x7ff7803d71f0>
+
+
+
+```python
+# python will know to pass ClassTest due to @classmethod decorator
+ClassTest.class_method()
+
+# often used to create 'factories'
+```
+
+    Called class_method of <class '__main__.ClassTest'>
+
+
+
+```python
+# essentially a function in the class does not use any parameters
+ClassTest.static_method()
+
+# used to place a method inside a class, belongs with the class logically
+```
+
+    Called static_method.
+
+
+
+```python
+class Book:
+    # class variables that make sense to go with this class
+    TYPES = ('hardcover', 'paperback')
+    
+    def __init__(self, name, book_type, weight):
+        self.name = name 
+        self.book_type = book_type
+        self.weight = weight
+        
+    def __str__(self):
+        return f'Book: {self.name}, {self.book_type}...weighing {self.weight}g.'
+    
+    def __repr__(self):
+        return f'<Book({self.name}, {self.book_type}, {self.weight})>'
+
+    @classmethod
+    def hardcover(cls, name, page_weight):
+        
+        # creates new Book instance, using first type (hardcover), increasing page weight by 100
+        return cls(name, cls.TYPES[0], page_weight + 100)
+    
+    @classmethod
+    def paperback(cls, name, page_weight):
+        
+        # creates new Book instance, using second type (paperback), keeping original page weight
+        return cls(name, cls.TYPES[1], page_weight)
+```
+
+
+```python
+print(Book.TYPES)
+```
+
+    ('hardcover', 'paperback')
+
+
+
+```python
+# creating Book instance as book
+book = Book('Harry Potter', 'hardcover', 1500)
+
+# displaying the defined __str__ method and __repr__ method strings
+print(book)
+print(book.__repr__())
+
+# when class instance is called by itself, the __repr__ method defined string will be displayed
+book
+```
+
+    Book: Harry Potter, hardcover...weighing 1500g.
+    <Book(Harry Potter, hardcover, 1500)>
+
+
+
+
+
+    <Book(Harry Potter, hardcover, 1500)>
+
+
+
+
+```python
+# using the classmethod hardcover, creating hardcover instance of HP 
+hc_book = Book.hardcover('Harry Potter', 1500)
+print(hc_book)
+```
+
+    Book: Harry Potter, hardcover...weighing 1600g.
+
+
+
+```python
+# using the classmethod paperback, creating paperback instance of HP
+pb_book = Book.paperback('Harry Potter', 1500)
+print(pb_book)
+```
+
+    Book: Harry Potter, paperback...weighing 1500g.
+
+
+
+```python
+
+```
