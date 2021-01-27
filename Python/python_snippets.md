@@ -31,6 +31,36 @@ for list_element in csv_list:
 complete_df = pd.concat(df_list, axis=0)
 ```
 
+
+    ---------------------------------------------------------------------------
+
+    ValueError                                Traceback (most recent call last)
+
+    <ipython-input-14-b6910ba8d346> in <module>
+         20 
+         21 # concatinating the stored dfs together, row-wise or union-style
+    ---> 22 complete_df = pd.concat(df_list, axis=0)
+    
+
+    ~/opt/anaconda3/lib/python3.8/site-packages/pandas/core/reshape/concat.py in concat(objs, axis, join, ignore_index, keys, levels, names, verify_integrity, sort, copy)
+        272     ValueError: Indexes have overlapping values: ['a']
+        273     """
+    --> 274     op = _Concatenator(
+        275         objs,
+        276         axis=axis,
+
+
+    ~/opt/anaconda3/lib/python3.8/site-packages/pandas/core/reshape/concat.py in __init__(self, objs, axis, join, keys, levels, names, ignore_index, verify_integrity, copy, sort)
+        329 
+        330         if len(objs) == 0:
+    --> 331             raise ValueError("No objects to concatenate")
+        332 
+        333         if keys is None:
+
+
+    ValueError: No objects to concatenate
+
+
 ## Iterators
 ---
 
@@ -46,9 +76,6 @@ nums_list = list(num_range)
 print(nums_list)
 ```
 
-    [0, 2, 4, 6, 8, 10, 12, 14]
-
-
 ### Enumerate
 
 
@@ -61,9 +88,6 @@ indexed_list = list(enumerate_values)
 
 print(indexed_list)
 ```
-
-    [(10, 'cat'), (11, 'dog'), (12, 'monkey'), (13, 'lemur')]
-
 
 ### Map
 
@@ -91,14 +115,6 @@ squares_list = list(squared_values)
 print(f'Squared Values: {squares_list}\n')
 ```
 
-    Rounded Values: [12, 14, 18]
-    
-    Titled Values: ['Denver', 'Longbeach', 'Hobbs']
-    
-    Squared Values: [36, 64, 81, 144, 196]
-    
-
-
 ## Collections Module
 ---
 
@@ -119,13 +135,6 @@ print(f'COUNTER Object (dict)\n {counter_dict}\n')
 top_3 = counter_dict.most_common(3)
 print(f'Top 3 Popular Pets\n {top_3}')
 ```
-
-    COUNTER Object (dict)
-     Counter({'dog': 4, 'cat': 4, 'parrot': 3, 'frog': 2, 'horse': 2, 'hamster': 2, 'snake': 2, 'monkey': 1})
-    
-    Top 3 Popular Pets
-     [('dog', 4), ('cat', 4), ('parrot', 3)]
-
 
 ### defaultdict
 
@@ -154,12 +163,6 @@ print(f'Frog value does not exist yet: {new_dict["frog"]}\n')
 # frog key now exists in new_dict, with an empty list as it's value by default
 print(f'Frog value defaulted to empty list due to DEFAULTDICT\n {new_dict}')
 ```
-
-    Frog value does not exist yet: []
-    
-    Frog value defaulted to empty list due to DEFAULTDICT
-     defaultdict(<class 'list'>, {'dog': [['golden', 'brindle']], 'cat': [['black', 'calico']], 'horse': [['chocolate', 'spotted']], 'frog': []})
-
 
 ### namedtuple
 
@@ -258,7 +261,7 @@ both_sets = tx_set.intersection(co_set)
 print(both_sets)
 ```
 
-    {'mediterranean', 'chili', 'steak', 'wings'}
+    {'wings', 'steak', 'mediterranean', 'chili'}
 
 
 ### difference
@@ -274,10 +277,10 @@ print(f'Only a Colorado favorite\n {co_set_only}')
 ```
 
     Only a Texas favorite
-     {'bbq', 'brisket', 'burritos', 'hatch chilies', 'queso'}
+     {'bbq', 'burritos', 'queso', 'hatch chilies', 'brisket'}
     
     Only a Colorado favorite
-     {'sushi', 'green chilies', 'pizza'}
+     {'green chilies', 'sushi', 'pizza'}
 
 
 ### symmetric difference
@@ -290,7 +293,7 @@ print(f'Either Texas/Colorado Favorite, BUT NOT BOTH\n {differences}\n')
 ```
 
     Either Texas/Colorado Favorite, BUT NOT BOTH
-     {'sushi', 'brisket', 'pizza', 'bbq', 'green chilies', 'burritos', 'hatch chilies', 'queso'}
+     {'green chilies', 'bbq', 'pizza', 'burritos', 'queso', 'hatch chilies', 'brisket', 'sushi'}
     
 
 
@@ -304,7 +307,7 @@ print(f'All Favorites (both states), NO DUPLICATES\n {union_set}\n')
 ```
 
     All Favorites (both states), NO DUPLICATES
-     {'pizza', 'bbq', 'sushi', 'wings', 'brisket', 'green chilies', 'steak', 'burritos', 'mediterranean', 'hatch chilies', 'queso', 'chili'}
+     {'wings', 'green chilies', 'bbq', 'burritos', 'queso', 'chili', 'hatch chilies', 'pizza', 'steak', 'brisket', 'mediterranean', 'sushi'}
     
 
 
@@ -325,8 +328,8 @@ print(tx_set)
 print(co_set)
 ```
 
-    {'bbq', 'burger', 'wings', 'brisket', 'steak', 'burritos', 'mediterranean', 'hatch chilies', 'queso', 'chili'}
-    {'pizza', 'buffalo burger', 'sushi', 'green chilies', 'wings', 'breakfast skillet', 'steak', 'mediterranean', 'chili'}
+    {'wings', 'bbq', 'burritos', 'queso', 'chili', 'hatch chilies', 'burger', 'steak', 'brisket', 'mediterranean'}
+    {'wings', 'green chilies', 'breakfast skillet', 'chili', 'buffalo burger', 'pizza', 'steak', 'sushi', 'mediterranean'}
 
 
 
@@ -805,7 +808,7 @@ print(vader)
 print(vader.__repr__())
 ```
 
-    Person: Anakin, 35 years old.
+    Person: 'Anakin', 35 years old.
     
     <Person(Anakin, 35)>
 
@@ -840,7 +843,7 @@ test.instance_method()
 # used for actions, uses data inside the object created, either manipulating or modifying
 ```
 
-    Called instance_method of <__main__.ClassTest object at 0x7ff7803d71f0>
+    Called instance_method of <__main__.ClassTest object at 0x7fcb510245b0>
 
 
 
@@ -945,6 +948,145 @@ print(pb_book)
 ```
 
     Book: Harry Potter, paperback...weighing 1500g.
+
+
+# Pandas
+---
+
+
+```python
+import pandas as pd
+
+# defines a df
+df = pd.DataFrame({'num_legs': [2, 4, 4, 6], 'num_wings': [2, 0, 0, 0]},
+                  index=['falcon', 'dog', 'cat', 'ant'])
+
+# stores the value counts of the values in num_legs column
+series_frequency = df['num_legs'].value_counts()
+
+# looping over series_frequency, providing a way to display value counts in reports w/ addition info
+for value, count in series_frequency.items():
+    print(f'There are {count} animal(s) with {value} legs')
+```
+
+    There are 2 animal(s) with 4 legs
+    There are 1 animal(s) with 6 legs
+    There are 1 animal(s) with 2 legs
+
+
+### Inheritance
+
+
+```python
+class Device:
+    
+    def __init__(self, name, connected_by):
+        self.name = name
+        self.connected_by = connected_by
+        self.connected = True
+        
+    def __str__(self):
+        # !r is a shorthand way to include quotes around value
+        return f'Device {self.name!r} ({self.connected_by})'
+    
+    def disconnect(self):
+        self.connected = False
+        print('Disconnected.')
+```
+
+
+```python
+printer = Device("Printer", "USB")
+print(printer)
+printer.disconnect()
+```
+
+    Device 'Printer' (USB)
+    Disconnected.
+
+
+
+```python
+# inheritance is assigned by passing the class as a parameter
+class Printer(Device):
+    
+    def __init__(self, name, connected_by, capacity):
+        
+        # super() calls the init class of the parent class, Device
+        super().__init__(name, connected_by)
+        self.capacity = capacity
+        self.remaining_pages = capacity
+
+    def __str__(self):
+        return f'{super().__str__()} ({self.remaining_pages} pages remaining)'
+    
+    def print(self, pages):
+        '''Prints out the # of pages passed, subtracts pages from remaining_pages value.'''
+        
+        if not self.connected:
+            print('Your printer is not connected!')
+            return
+        
+        print(f'Printing {pages} pages.\n')
+        self.remaining_pages -= pages
+```
+
+
+```python
+# creating instance of PRINTER class, displaying __str__ value
+printer = Printer("Printer", "USB", 500)
+print(printer)
+
+# running print function in Printer class, again displaying the modified __str__ value 
+printer.print(20)
+print(printer)
+
+# calling the disconnect function from Device, testing if not self.connected clause
+printer.disconnect()
+printer.print(30)
+```
+
+    Device 'Printer' (USB) (500 pages remaining)
+    Printing 20 pages.
+    
+    Device 'Printer' (USB) (480 pages remaining)
+    Disconnected.
+    Your printer is not connected!
+
+
+### Composition - More common than Inheritance
+
+
+```python
+class BookShelf:
+    # *books expects to have any number of Book objects passed
+    def __init__(self, *books):
+        self.books = books
+        
+    def __str__(self):
+        return f'BookShelf with {len(self.books)} books.'
+    
+class Book:
+    
+    def __init__(self, name):
+        self.name = name
+        
+    def __str__(self):
+        return f'Book {self.name}'
+```
+
+
+```python
+# creating two instances of Book Class
+book = Book('Harry Potter')
+book2 = Book('The Dark Tower')
+
+# with inheritance, the book objects were passed to define the BookShelf
+shelf = BookShelf(book, book2)
+print(shelf)
+```
+
+    BookShelf with 2 books.
 
 
 
