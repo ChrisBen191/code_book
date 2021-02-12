@@ -27,6 +27,7 @@
 + [Dictionaries](Python/python_snippets.md#DICTIONARIES)
 + [Functions](Python/python_snippets.md#FUNCTIONS)
 
++ [Regular Expressions](Python/regular_expression.md)
 
 [Data Visualization](Python/data_visualization.md)
 + [Matplotlib](Python/data_visualization.md#MATPLOTLIB)
