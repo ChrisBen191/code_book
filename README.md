@@ -26,7 +26,7 @@
 + [List Comprehensions](Python/python_snippets.md#LIST-COMPREHENSIONS)
 + [Dictionaries](Python/python_snippets.md#DICTIONARIES)
 + [Functions](Python/python_snippets.md#FUNCTIONS)
-
++ [Pyinput Module](Python/pyinput_plus.md)
 + [Regular Expressions](Python/regular_expression.md)
 
 [Data Visualization](Python/data_visualization.md)

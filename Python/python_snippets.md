@@ -31,36 +31,6 @@ for list_element in csv_list:
 complete_df = pd.concat(df_list, axis=0)
 ```
 
-
-    ---------------------------------------------------------------------------
-
-    ValueError                                Traceback (most recent call last)
-
-    <ipython-input-14-b6910ba8d346> in <module>
-         20 
-         21 # concatinating the stored dfs together, row-wise or union-style
-    ---> 22 complete_df = pd.concat(df_list, axis=0)
-    
-
-    ~/opt/anaconda3/lib/python3.8/site-packages/pandas/core/reshape/concat.py in concat(objs, axis, join, ignore_index, keys, levels, names, verify_integrity, sort, copy)
-        272     ValueError: Indexes have overlapping values: ['a']
-        273     """
-    --> 274     op = _Concatenator(
-        275         objs,
-        276         axis=axis,
-
-
-    ~/opt/anaconda3/lib/python3.8/site-packages/pandas/core/reshape/concat.py in __init__(self, objs, axis, join, keys, levels, names, ignore_index, verify_integrity, copy, sort)
-        329 
-        330         if len(objs) == 0:
-    --> 331             raise ValueError("No objects to concatenate")
-        332 
-        333         if keys is None:
-
-
-    ValueError: No objects to concatenate
-
-
 ## Iterators
 ---
 
@@ -1089,7 +1059,183 @@ print(shelf)
     BookShelf with 2 books.
 
 
+## decorators
+
 
 ```python
+user = {'username': 'chris', 'access_level': 'guest'}
 
+
+def get_admin_password():
+    return '1234'
+
+def make_secure(func):
+    def secure_function():
+        if user['access_level'] == 'admin':
+            return func()
+        else:
+            return f"No admin permissions for {user['username']}."
+        
+    return secure_function
+    
+get_admin_password = make_secure(get_admin_password)
+print(get_admin_password())
+```
+
+    No admin permissions for chris.
+
+
+## decorators; @ syntax
+
+
+```python
+import functools
+
+user = {'username': 'chris', 'access_level': 'admin'}
+
+
+def make_secure(func):
+    
+    # the functools.wraps tells secure_fuction it is a wrapper for get_admin_password, and prevents
+    # get_admin_password function name/documentation from being replaced w/secure_function name/documentation
+    @functools.wraps(func)
+    def secure_function():
+        if user['access_level'] == 'admin':
+            return func()
+        else:
+            return f"No admin permissions for {user['username']}."
+        
+    return secure_function
+
+# this @make_secure decorator call will create the function and then pass it through make_secure
+@make_secure
+def get_admin_password():
+    return '1234'
+
+# w/out the @functools.wraps(func) call, this print would display 'secure_function', not 'get_admin_password'
+print(get_admin_password.__name__)
+
+print(get_admin_password())
+```
+
+    get_admin_password
+    1234
+
+
+### decorating functions w/parameters
+
+
+```python
+import functools
+user = {'username': 'chris', 'access_level': 'billing'}
+
+def make_secure(func):
+    
+    @functools.wraps(func)
+    # by providing (*args, **kwargs) the function can take any number of parameters from any function passed to decorator
+    def secure_function(*args, **kwargs):
+
+        # if access_level == 'admin' or 'billing', then returns the func(get_password) with parameters  
+        if (user['access_level'] == 'admin') | (user['access_level'] == 'billing'):
+            return func(*args, **kwargs)
+
+        else:
+            return f"No admin permissions for {user['username']}."
+        
+    return secure_function
+
+@make_secure
+def get_password(panel):
+    # after running through make_secure, appropriate password is returned
+    if panel == 'admin':
+        return '1234'
+    elif panel == 'billing':
+        return 'super_secure_password'
+
+get_password('billing')
+```
+
+
+
+
+    'super_secure_password'
+
+
+
+## decorators w/parameters
+
+
+```python
+import functools
+
+# make_secure has now access_level parameter passed into function
+def make_secure(access_level):
+    
+    # decorator function does the access level testing; if an access level is passed that @make_secure decorator
+    # has as a parameter, continue w/passed function, ELSE print string information.
+    def decorator(func):
+        
+        @functools.wraps(func)
+        def secure_function(*args, **kwargs):
+            if user['access_level'] == access_level:
+                return func(*args, **kwargs)
+            else:
+                return f"No {access_level} permissions for {user['username']}."
+
+        # secure function is returned by decorator when run
+        return secure_function
+    # decorator function is returned by make_secure when run
+    return decorator
+    
+# including 'admin' parameter in @make_secure decorator
+@make_secure('admin')
+def get_admin_password():
+    return 'admin: 1234'
+
+# including 'user' parameter in @make_secure decorator
+@make_secure('user')
+def get_dashboard_password():
+    return 'user: user_password'
+```
+
+
+```python
+user = {'username': 'Bruce Wayne', 'access_level': 'user'}
+print(get_admin_password())
+print(get_dashboard_password())
+```
+
+    No admin permissions for Bruce Wayne.
+    user: user_password
+
+
+
+```python
+user = {'username': 'Batman', 'access_level': 'admin'}
+
+print(get_admin_password())
+print(get_dashboard_password())
+```
+
+    admin: 1234
+    No user permissions for Batman.
+
+
+## mutability
+
+
+```python
+a = []
+b = a
+print(id(b))
+print(id(a))
+```
+
+    140305482601856
+    140305482601856
+
+
+
+```python
+ 
 ```
