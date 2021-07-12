@@ -16,8 +16,8 @@
 + [Linux](Shell/shell_snippets.md#LINUX)
 
 ## SQL / GraphQL
-[SQL](SQL/sql_snippets.md)
-[Cypher](Cypher/cypher_snippets.md)
++ [SQL](SQL/sql_snippets.md)
++ [Cypher](Cypher/cypher_snippets.md)
 
 ## Python
 [Python](Python/python_snippets.md#PYTHON)
