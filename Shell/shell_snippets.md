@@ -71,6 +71,10 @@ wc file_name
 ---
 ## MODIFIER COMMANDS
 
+Initializes a repository to be tracked by Git (must be inside of folder you wish to track)
+```console
+git init
+```
 Clones the specified respository to the local machine
 ```console
 git clone "URL-OF-REPOSITORY-TO-BE-CLONED"
@@ -88,7 +92,7 @@ git add -A
 
 Removes a file added in an earlier commit
 ```console
-git rm
+git rm <filename>
 ```
 
 Commits the staged files to be pushed to remote repository; requires message
