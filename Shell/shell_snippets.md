@@ -134,7 +134,7 @@ git commit -m 'My branch merge request info.'
 
 git push origin my-new-branch
 
-// GitLab prompts you with a direct link for creating a merge request, copy/paste link into broswer to complete
+# GitLab prompts you with a direct link for creating a merge request, copy/paste link into broswer to complete
 ```
 
 # CONDA 
