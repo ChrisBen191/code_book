@@ -105,11 +105,6 @@ Pushes the committed files to remote repository
 git push	
 ```
 
-Resets the local machine to last instance pulled from master. **All local changes will be lost.**
-```console
-git reset --hard
-```
-
 Stashes local changes to the repository before performing a 'git pull'. **Local changes will not be lost.**
 ```console
 git stash	
@@ -122,6 +117,24 @@ git pull
 Performed after a **git pull**; reapplies stashed local files and changes to the repository
 ```console
 git stash pop	
+```
+
+Resets the local machine to last instance pulled from master. **All local changes will be lost.**
+```console
+git reset --hard
+```
+
+
+Creates a merge request by checking out a branch (from the repository directory) and updating with files.
+```console
+git checkout -b my-new-branch
+
+gid add.
+git commit -m 'My branch merge request info.'
+
+git push origin my-new-branch
+
+// GitLab prompts you with a direct link for creating a merge request, copy/paste link into broswer to complete
 ```
 
 # CONDA 
