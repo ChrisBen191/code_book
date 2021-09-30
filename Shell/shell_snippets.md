@@ -67,7 +67,7 @@ wc file_name
 -l : counts lines in file
 ```
 
-# GITHUB
+# GIT
 ---
 ## MODIFIER COMMANDS
 
@@ -88,6 +88,10 @@ git status
 Stages all unstaged files to be uploaded
 ```console
 git add -A
+```
+Unstages any file in "stage" to prevent from being uploaded
+```console
+git rm --cached <filename>
 ```
 
 Removes a file added in an earlier commit
@@ -124,6 +128,10 @@ Resets the local machine to last instance pulled from master. **All local change
 git reset --hard
 ```
 
+Lists all branches for a git project
+```
+git branch -a
+```
 
 Creates a merge request by checking out a branch (from the repository directory) and updating with files.
 ```console
