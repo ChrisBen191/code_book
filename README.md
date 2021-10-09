@@ -11,9 +11,11 @@
 ## Shell
 [Shell](Shell/shell_snippets.md)
 + [Shell](Shell/shell_snippets.md#SHELL)
-+ [Github](Shell/shell_snippets.md#GITHUB)
++ [Git](Shell/shell_snippets.md#GIT)
 + [Conda](Shell/shell_snippets.md#CONDA)
-+ [Linux](Shell/shell_snippets.md#LINUX)
++ [Unix](Shell/shell_snippets.md#UNIX)
++ [Tmux](Shell/shell_snippets.md#TMUX)
++ [PostgreSQL](Shell/shell_snippets.md#POSTGRESQL)
 
 ## SQL / GraphQL
 + [SQL](SQL/sql_snippets.md)

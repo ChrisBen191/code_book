@@ -179,7 +179,7 @@ jupyter nbconvert --to FORMAT notebook.ipynb
 -to : script, markdown, pdf, latex, asciidoc
 ```
 
-# LINUX
+# UNIX
 display which version of the Linux kernel is running
 ```console
 uname -srm
@@ -190,19 +190,71 @@ uname --kernel-name --kernel-release --machine
 
 display information on what distribution is running on a system
 ```console
-cat /etc/os-release`
+cat /etc/os-release
 ```
 
-creates a **log of the output of a .py file** to the file specified
+creates a user, that can be set with specific permissions
+```console
+adduser user-name
+
+# make sure password is different from ROOT user password
+```
+
+allows the specified user to **temporarily** gain access to ROOT user privledges.
+```console
+# run 'visudo' command to access file.
+visudo
+
+# add user under 'User privilege specification' column matching ROOT credentials
+# save file and exit
+```
+
+allows the user to login directly to the server
+```console
+# run to access config file
+vi /etc/ssh/sshd_config
+
+# confirm Authentication --> PermitRootLogin = no
+# scroll to end of document and insert 'AllowUsers <username>'
+# enter ':wq' to write to file and quit
+
+# reloads the service to accept the new cofguration
+service sshd reload
+```
+
+switches from the current user config to the **root** user config
+```console
+sudo su
+```
+
+create user with PostgreSQL permissions
+```console
+# login as root from user
+sudo su
+
+# from root login as postgres user
+sudo -i -u postgres
+
+# create postgresSQL user w/same name as user profile and enter password
+createuser <username> -P
+
+# creates database for the user 
+createdb username
+
+# by default, connnecting w/'psql' connects to database named the same as the user
+```
+
+creates a **log of the output** of a .py file to the file specified
 ```console
 ipython python_file.py prod 2>&1 | tee log/output_file.txt
 
--- 'ipython' or 'python' can be used
--- 'prod 2>&1' indicates to record "standard errors" (2) in the same location as "standard output" (1)
--- 'tee' displays output and records it to log/output_file.txt 
+# ipython/python can be used
+# 'prod 2>&1' indicates to record "standard errors" (2) in the same location as "standard output" (1)
+# 'tee' displays output and records it to log/output_file.txt 
 ```
+
 ## TMUX
-| Commands `C-b==CTRL+b` `C-d==CTRL+d` |                                                                 |
+|               Commands               | `C-b==CTRL+b` `C-d==CTRL+d`                                     |
 | :----------------------------------: | --------------------------------------------------------------- |
 |      `tmux new -s session-name`      | creates new session named `session-name`                        |
 |              `tmux ls`               | displays all **sessions** currently running (detached/attached) |
@@ -230,3 +282,18 @@ C-b :
 resize-pane -<D, U, L, R> 10
 ```
 
+## POSTGRESQL
+|  Commands   |                                                                           |
+| :---------: | ------------------------------------------------------------------------- |
+|   `psql`    | connects to the PostgreSQL shell.                                         |
+| `\conninfo` | displays the database, user, socket, and port information for connection. |
+|    `\q`     | leaves the PostgresSQL sheel.                                             |
+
+instead of postgresSQL accepting connection via same name of user/database, it will request the user password. Allows SQLAlchemy to preform correctly.
+```console
+# navigates to the postgresSQL security file as ROOT user
+sudo vi /etc/postgresql/<version>/main/pg_hba.conf
+
+# confirm the "'local' is for Unix domain socket connections only" METHOD value is set to 'md5' not 'peer'
+
+```
