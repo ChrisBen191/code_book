@@ -195,6 +195,15 @@ jupyter nbconvert --to FORMAT notebook.ipynb
 |           `systemctl status <engine>`            | provides system level information on the engine passed.                       |
 |     `systemctl start/stop/restart <engine>`      | starts, stops, or resets the engine from systemctl.                           |
 
+creates a **log of the output** of a .py file to the file specified
+```console
+ipython python_file.py prod 2>&1 | tee log/output_file.txt
+
+# ipython/python can be used
+# 'prod 2>&1' indicates to record "standard errors" (2) in the same location as "standard output" (1)
+# 'tee' displays output and records it to log/output_file.txt 
+```
+
 ## SETUP OF UNIX USER
 
 allows the specified user to **temporarily** gain access to ROOT user privledges.
@@ -217,15 +226,6 @@ vi /etc/ssh/sshd_config
 
 # reloads the service to accept the new cofguration
 service sshd reload
-```
-
-creates a **log of the output** of a .py file to the file specified
-```console
-ipython python_file.py prod 2>&1 | tee log/output_file.txt
-
-# ipython/python can be used
-# 'prod 2>&1' indicates to record "standard errors" (2) in the same location as "standard output" (1)
-# 'tee' displays output and records it to log/output_file.txt 
 ```
 
 ## SETUP OF NGINX ON SERVER
