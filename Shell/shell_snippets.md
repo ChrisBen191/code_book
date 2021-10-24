@@ -180,25 +180,22 @@ jupyter nbconvert --to FORMAT notebook.ipynb
 ```
 
 # UNIX
-display which version of the Linux kernel is running
-```console
-uname -srm
 
-# provide a longer, more descriptive version
-uname --kernel-name --kernel-release --machine
-```
+|                     Commands                     |                                                                               |
+| :----------------------------------------------: | ----------------------------------------------------------------------------- |
+|                   `uname -srm`                   | display which version of the Linux kernel is running.                         |
+| `uname --kernel-name --kernel-release --machine` | provide a longer, more descriptive version.                                   |
+|              `cat /etc/os-release`               | display information on what distribution is running on the system.            |
+|               `adduser user-name`                | creates a user on the system that can be set with non-root permissions.       |
+|                    `sudo su`                     | switches from current user configuration to the **root** user configuration.  |
+|                 `apt-get update`                 | gets updates for the server, with applying them; add `sudo` to apply changes. |
+|             `apt-get <package-name>`             | install a single package to the server.                                       |
+|                `sudo ufw status`                 | check status of the Ubuntu firewall for the server.                           |
+|                `sudo ufw enable`                 | enables the firewall on the server.                                           |
+|           `systemctl status <engine>`            | provides system level information on the engine passed.                       |
+|     `systemctl start/stop/restart <engine>`      | starts, stops, or resets the engine from systemctl.                           |
 
-display information on what distribution is running on a system
-```console
-cat /etc/os-release
-```
-
-creates a user, that can be set with specific permissions
-```console
-adduser user-name
-
-# make sure password is different from ROOT user password
-```
+## SETUP OF UNIX USER
 
 allows the specified user to **temporarily** gain access to ROOT user privledges.
 ```console
@@ -209,7 +206,7 @@ visudo
 # save file and exit
 ```
 
-allows the user to login directly to the server
+allows the user to login directly to the UNIX server
 ```console
 # run to access config file
 vi /etc/ssh/sshd_config
@@ -222,28 +219,6 @@ vi /etc/ssh/sshd_config
 service sshd reload
 ```
 
-switches from the current user config to the **root** user config
-```console
-sudo su
-```
-
-create user with PostgreSQL permissions
-```console
-# login as root from user
-sudo su
-
-# from root login as postgres user
-sudo -i -u postgres
-
-# create postgresSQL user w/same name as user profile and enter password
-createuser <username> -P
-
-# creates database for the user 
-createdb username
-
-# by default, connnecting w/'psql' connects to database named the same as the user
-```
-
 creates a **log of the output** of a .py file to the file specified
 ```console
 ipython python_file.py prod 2>&1 | tee log/output_file.txt
@@ -253,7 +228,28 @@ ipython python_file.py prod 2>&1 | tee log/output_file.txt
 # 'tee' displays output and records it to log/output_file.txt 
 ```
 
-## TMUX
+## SETUP OF NGINX ON SERVER
+allows nginx to bypass the firewall
+```console
+# enter root user
+sudo su
+
+# enables firewall on server if not yet enabled.
+sudo ufw enable
+
+# adds nginx to access the server through the firewall
+sudo ufw allow 'Nginx HTTP'
+
+# setup nginx config file to accept REST API 
+sudo vi /etc/nginx/sites-available/items-rest.conf
+
+# create symlink to config file to the 'sites-enabled' folder where nginx reads config properties
+sudo ln -s /etc/nginx/sites-available/items-rest.conf /etc/nginx/sites-enabled
+
+
+```
+
+# TMUX
 |               Commands               | `C-b==CTRL+b` `C-d==CTRL+d`                                     |
 | :----------------------------------: | --------------------------------------------------------------- |
 |      `tmux new -s session-name`      | creates new session named `session-name`                        |
@@ -282,18 +278,32 @@ C-b :
 resize-pane -<D, U, L, R> 10
 ```
 
-## POSTGRESQL
+# POSTGRESQL
 |  Commands   |                                                                           |
 | :---------: | ------------------------------------------------------------------------- |
 |   `psql`    | connects to the PostgreSQL shell.                                         |
 | `\conninfo` | displays the database, user, socket, and port information for connection. |
 |    `\q`     | leaves the PostgresSQL sheel.                                             |
 
-instead of postgresSQL accepting connection via same name of user/database, it will request the user password. Allows SQLAlchemy to preform correctly.
+instead of postgresSQL accepting connection via same name of user/database, the commands below will make postgresSQL request the user password. Allows SQLAlchemy to preform correctly.
 ```console
 # navigates to the postgresSQL security file as ROOT user
 sudo vi /etc/postgresql/<version>/main/pg_hba.conf
 
 # confirm the "'local' is for Unix domain socket connections only" METHOD value is set to 'md5' not 'peer'
 
+```
+
+create UNIX user, in postgres user (created when postgres installed) with PostgreSQL permissions
+```console
+# login as postgres user from root/user
+sudo -i -u postgres
+
+# create postgresSQL user w/same name as user profile and enter password
+createuser <username> -P
+
+# creates database for the user 
+createdb username
+
+# by default, connnecting w/'psql' connects to database named the same as the user
 ```
