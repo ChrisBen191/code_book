@@ -1,12 +1,13 @@
 # JavaScript
 
 ---
+Javascript Datatypes : `Number`, `String`, `Boolean`, `Undefined`, `Null`.
 
-5 different dtypes in Javascript: Number, String, Boolean, Undefined, Null
+Falsy Values : `0`, `''`, `undefined`, `null`, `NaN`
+
 JavaScript allows type coercion; or converting dtype of value as needed
 
-script provides the method to import a JS file
-
+code snippet added to html file to import the `src` javascript file.
 ```javascript
 <script type="text/javascript" src="app.js"></script>
 // src is "source" of js **file**
@@ -14,48 +15,62 @@ script provides the method to import a JS file
 
 ## COMMANDS
 
-|              Command              |                                                                            |
-| :-------------------------------: | -------------------------------------------------------------------------- |
-|           `use strict;`           | turns on strict mode, which doesn't allow silent errors                    |
-|   `console.log('Hello World!')`   | displays output (text, variable, etc.) to the browser's console log        |
-|     `alertF('Hello World!')`      | displays browser alert with output (text, variable, etc.)                  |
-| `prompt('What is todays' date?')` | displays browser prompt for user input; can be stored as a variable        |
-|  `console.log(typeof variable)`   | displays the variable's data type to the browser's console log             |
-|          `array.length`           | calculates the length of the array specified                               |
-|     `array.indexOf('Value')`      | returns the index of the element in the array                              |
-|     `array.includes('Value')`     | returns boolean T/F if the element is in the array                         |
-|     `array.unshift('Value')`      | adds an element to the beginning of an array; captures new length of array |
-|       `array.push('Value')`       | adds an element to the end of an array; captures new length of array       |
-|          `array.shift()`          | removes the first element from an array; captures the element removed      |
-|           `array.pop()`           | removes the last element from an array; captures the element removed       |
+|              Command              |                                                                     |
+| :-------------------------------: | ------------------------------------------------------------------- |
+|           `use strict;`           | turns on strict mode, which doesn't allow silent errors             |
+|   `console.log('Hello World!')`   | displays output (text, variable, etc.) to the browser's console log |
+|     `alertF('Hello World!')`      | displays browser alert with output (text, variable, etc.)           |
+| `prompt('What is todays' date?')` | displays browser prompt for user input; can be stored as a variable |
+|  `console.log(typeof variable)`   | displays the variable's data type to the browser's console log      |
 
-
-defines a variable
+datatype conversions for `String` and `Int`
 ```javascript
-var variable_name = "Chris";
+// converts the string 1991 into an integer
+console.log(Number('1991'));
+
+// converts the integer into a string
+console.log(String(1991));
 ```
 
-defines an array
+### Template Strings / Literals
+Defines a string with passed values from defined variables using backticks. Newline incorporated automatically.
+```javascript
+let normalName = 'Peter Parker';
+let superheroName = 'Spider-Man';
+
+console.log(`Do you belive ${normalName} could be ${superheroName?`)
+```
+
+### Arrays
 ```javascript
 // using bracket notation
 const friends = ['Iron Man', 'Incredible Hulk', 'Dr. Strange'];
-console.log(friends);
 
 // using Array method
 const years = new Array(1991, 1984, 2008, 2020);
-console.log(years);
 ```
 
-### If/Else statements
-Displays a message to the console depending on the value of the boolean using if/else logic.
-```javascript
-// creating boolean value isMale
-var isMale = true;
+|          Command          |                                                                            |
+| :-----------------------: | -------------------------------------------------------------------------- |
+|      `array.length`       | calculates the length of the array specified                               |
+| `array.indexOf('Value')`  | returns the index of the element in the array                              |
+| `array.includes('Value')` | returns boolean T/F if the element is in the array                         |
+| `array.unshift('Value')`  | adds an element to the beginning of an array; captures new length of array |
+|   `array.push('Value')`   | adds an element to the end of an array; captures new length of array       |
+|      `array.shift()`      | removes the first element from an array; captures the element removed      |
+|       `array.pop()`       | removes the last element from an array; captures the element removed       |
 
-if (isMale) {
-  console.log(isMale + " , he is male.");
+
+### If/Else Statements
+`if(conditional) {do this} else {do this instead}` allows code to be ran conditionally. 
+```javascript
+//  javascript will convert the code passed to the if into a boolean
+var lowInk = true;
+
+if (lowInk) {
+  console.log(`Order more ink for the printer, it's running low.`);
 } else {
-  console.log(isMale + " , she is female.");
+  console.log(`You don't have to order more ink for now.`);
 }
 ```
 
@@ -66,8 +81,8 @@ var alias = "Peter Parker";
 
 // ternary operators are setups as: conditional ? programming if TRUE : programming if FALSE;
 alias === "Peter Parker"
-  ? console.log("I think that dude is Spiderman?")
-  : console.log("Their name is " + alias + ".");
+  ? console.log(`I think that dude is Spiderman?`);
+  : console.log(`I think his name is ${alias}.`);
 
 //  ternary operators can also be assigned to variables
 var criminalsJailed = 100;
