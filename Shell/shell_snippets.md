@@ -246,7 +246,8 @@ sudo vi /etc/nginx/sites-available/items-rest.conf
 # create symlink to config file to the 'sites-enabled' folder where nginx reads config properties
 sudo ln -s /etc/nginx/sites-available/items-rest.conf /etc/nginx/sites-enabled
 
-
+# create directory for the app
+sudo mkdir /var/www/html/items-rest
 ```
 
 # TMUX
@@ -291,7 +292,6 @@ instead of postgresSQL accepting connection via same name of user/database, the 
 sudo vi /etc/postgresql/<version>/main/pg_hba.conf
 
 # confirm the "'local' is for Unix domain socket connections only" METHOD value is set to 'md5' not 'peer'
-
 ```
 
 create UNIX user, in postgres user (created when postgres installed) with PostgreSQL permissions

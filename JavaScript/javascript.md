@@ -12,12 +12,12 @@ code snippet added to html file to import the `src` javascript file.
 <script type="text/javascript" src="app.js"></script>
 // src is "source" of js **file**
 ```
-
+****
 ## COMMANDS
 
 |              Command              |                                                                     |
 | :-------------------------------: | ------------------------------------------------------------------- |
-|           `use strict;`           | turns on strict mode, which doesn't allow silent errors             |
+|          `'use strict';`          | turns on strict mode, which doesn't allow silent errors             |
 |   `console.log('Hello World!')`   | displays output (text, variable, etc.) to the browser's console log |
 |     `alertF('Hello World!')`      | displays browser alert with output (text, variable, etc.)           |
 | `prompt('What is todays' date?')` | displays browser prompt for user input; can be stored as a variable |
@@ -35,8 +35,8 @@ console.log(String(1991));
 ### Template Strings / Literals
 Defines a string with passed values from defined variables using backticks. Newline incorporated automatically.
 ```javascript
-let normalName = 'Peter Parker';
-let superheroName = 'Spider-Man';
+const normalName = 'Peter Parker';
+const superheroName = 'Spider-Man';
 
 console.log(`Do you belive ${normalName} could be ${superheroName?`)
 ```
@@ -77,7 +77,7 @@ if (lowInk) {
 ### Ternary Operators
 More effectively define an if/else statement; provide shorthand defining same logic
 ```javascript
-var alias = "Peter Parker";
+const alias = "Peter Parker";
 
 // ternary operators are setups as: conditional ? programming if TRUE : programming if FALSE;
 alias === "Peter Parker"
@@ -85,10 +85,10 @@ alias === "Peter Parker"
   : console.log(`I think his name is ${alias}.`);
 
 //  ternary operators can also be assigned to variables
-var criminalsJailed = 100;
+const criminalsJailed = 100;
 
 // conditional ? programming if TRUE assigned : programming if FALSE assigned;
-var ability = criminalsJailed >= 80 ? "novice" : "veteran";
+const ability = criminalsJailed >= 80 ? "novice" : "veteran";
 
 console.log("That superhero is a well known " + ability);
 ```
@@ -96,8 +96,8 @@ console.log("That superhero is a well known " + ability);
 ### Switch Statements
 Provide logic for if/else comparisons over multiple cases
 ```javascript
-var job = "photographer";
-var criminalsJailed = 100;
+const job = "photographer";
+const criminalsJailed = 100;
 
 // will switch the case to be triggered according to the job value passed through.
 switch (job) {
@@ -133,13 +133,15 @@ switch (true) {
 ```
 
 ### Functions
-Store code that is invoked when the function name is called
+
+***Function Declarations*** define a generic function; can be called/invoked before being defined.
 ```javascript
 // create function to determine makeup of juice from apples/oranges
 function fruitProcessor(apples, oranges) {
 
   // display the count of apples and oranges
   console.log(apples, oranges);
+
   // storing the makeup of juice string with apple/orange parameters to juice, returning
   const juice = `Juice with ${apples} apples and ${oranges} oranges.`;
   return juice;
@@ -154,7 +156,7 @@ const appleOrangeJuice = fruitProcessor(2,4);
 console.log(appleOrangeJuice);
 ```
 
-Creates an ***Anoymous Function or Function Expression*** which can be stored as a variable.
+***Anoymous Functions or Function Expressions*** can be stored as a variable; cannot be called/invoked before being defined.
 ```javascript
 // creates an anomyous function, also known as a FUNCTION DECLARATION
 const calcAge = function (birthYear) {
@@ -166,13 +168,29 @@ console.log(age);
 ```
 
 ### Arrow Function
-More effectively defines a function; provides same logic
+***Arrow Functions*** more effectively define a function using arrow notation. Does not have the ***this*** keyword. 
 ```javascript
 //one liner functions do not require the 'return' statement
-const calcAge3 = birthYear => 2037 - birthYear;
+const calcAge = birthYear => 2037 - birthYear;
 
-const age3 = calcAge3(1990);
-console.log(age3);
+const age = calcAge(1990);
+console.log(age);
+```
+
+```javascript
+// arrow function with multiple parameters
+const yearsUntilRetirement = (birthYear, firstName) => {
+
+    // defining the age and retirement values
+    const age = 2037 - birthYear;
+    const retirement = 65 - age;
+
+    // returning string with firstName and retirement values
+    return `${firstName} retires in ${retirement} years.`;
+}
+
+// logging function to the console
+console.log(yearsUntilRetirement(1990, 'Chris'));
 ```
 
 ### Objects
