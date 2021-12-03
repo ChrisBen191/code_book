@@ -1,6 +1,18 @@
-# JavaScript
+# JavaScript <!-- omit in toc --> 
 
----
+## Table of Contents <!-- omit in toc --> 
+- [## Commands](#-commands)
+- [## Template Strings / Literals](#-template-strings--literals)
+- [## Arrays](#-arrays)
+- [## If/Else Statements](#-ifelse-statements)
+  - [Ternary Operators](#ternary-operators)
+  - [Switch Statements](#switch-statements)
+- [## Functions](#-functions)
+  - [Function Declaration](#function-declaration)
+  - [Function Expression / Anoymous Function](#function-expression--anoymous-function)
+  - [Arrow Function](#arrow-function)
+- [## Objects](#-objects)
+
 Javascript Datatypes : `Number`, `String`, `Boolean`, `Undefined`, `Null`.
 
 Falsy Values : `0`, `''`, `undefined`, `null`, `NaN`
@@ -12,15 +24,15 @@ code snippet added to html file to import the `src` javascript file.
 <script type="text/javascript" src="app.js"></script>
 // src is "source" of js **file**
 ```
-****
-## COMMANDS
 
+## Commands
+---
 |              Command              |                                                                     |
 | :-------------------------------: | ------------------------------------------------------------------- |
 |          `'use strict';`          | turns on strict mode, which doesn't allow silent errors             |
 |   `console.log('Hello World!')`   | displays output (text, variable, etc.) to the browser's console log |
 |     `alertF('Hello World!')`      | displays browser alert with output (text, variable, etc.)           |
-| `prompt('What is todays' date?')` | displays browser prompt for user input; can be stored as a variable |
+| `prompt("What is todays' date?")` | displays browser prompt for user input; can be stored as a variable |
 |  `console.log(typeof variable)`   | displays the variable's data type to the browser's console log      |
 
 datatype conversions for `String` and `Int`
@@ -32,7 +44,8 @@ console.log(Number('1991'));
 console.log(String(1991));
 ```
 
-### Template Strings / Literals
+## Template Strings / Literals
+---
 Defines a string with passed values from defined variables using backticks. Newline incorporated automatically.
 ```javascript
 const normalName = 'Peter Parker';
@@ -41,7 +54,8 @@ const superheroName = 'Spider-Man';
 console.log(`Do you belive ${normalName} could be ${superheroName?`)
 ```
 
-### Arrays
+## Arrays
+---
 ```javascript
 // using bracket notation
 const friends = ['Iron Man', 'Incredible Hulk', 'Dr. Strange'];
@@ -53,7 +67,7 @@ const years = new Array(1991, 1984, 2008, 2020);
 |          Command          |                                                                            |
 | :-----------------------: | -------------------------------------------------------------------------- |
 |      `array.length`       | calculates the length of the array specified                               |
-| `array.indexOf('Value')`  | returns the index of the element in the array                              |
+| `array.indexOf('Value')`  | returns the index of the element in the array if existing else returns -1  |
 | `array.includes('Value')` | returns boolean T/F if the element is in the array                         |
 | `array.unshift('Value')`  | adds an element to the beginning of an array; captures new length of array |
 |   `array.push('Value')`   | adds an element to the end of an array; captures new length of array       |
@@ -61,7 +75,8 @@ const years = new Array(1991, 1984, 2008, 2020);
 |       `array.pop()`       | removes the last element from an array; captures the element removed       |
 
 
-### If/Else Statements
+## If/Else Statements
+---
 `if(conditional) {do this} else {do this instead}` allows code to be ran conditionally. 
 ```javascript
 //  javascript will convert the code passed to the if into a boolean
@@ -132,8 +147,9 @@ switch (true) {
 }
 ```
 
-### Functions
-
+## Functions
+---
+### Function Declaration
 ***Function Declarations*** define a generic function; can be called/invoked before being defined.
 ```javascript
 // create function to determine makeup of juice from apples/oranges
@@ -155,7 +171,7 @@ console.log(appleJuice);
 const appleOrangeJuice = fruitProcessor(2,4);
 console.log(appleOrangeJuice);
 ```
-
+### Function Expression / Anoymous Function
 ***Anoymous Functions or Function Expressions*** can be stored as a variable; cannot be called/invoked before being defined.
 ```javascript
 // creates an anomyous function, also known as a FUNCTION DECLARATION
@@ -193,7 +209,8 @@ const yearsUntilRetirement = (birthYear, firstName) => {
 console.log(yearsUntilRetirement(1990, 'Chris'));
 ```
 
-### Objects
+## Objects
+---
 Building an object using *object literal syntax*
 ```javascript
 // building an object using object literal syntax
