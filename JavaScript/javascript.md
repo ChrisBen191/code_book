@@ -1,17 +1,18 @@
-# JavaScript <!-- omit in toc --> 
+# JavaScript Snippets
 
-## Table of Contents <!-- omit in toc --> 
-- [## Commands](#-commands)
-- [## Template Strings / Literals](#-template-strings--literals)
-- [## Arrays](#-arrays)
-- [## If/Else Statements](#-ifelse-statements)
+# Table of Contents
+- [Commands](#-commands)
+- [Template Strings/Literals](#-template-strings--literals)
+- [Arrays](#-arrays)
+- [If/Else Statements](#-ifelse-statements)
   - [Ternary Operators](#ternary-operators)
   - [Switch Statements](#switch-statements)
-- [## Functions](#-functions)
+- [Functions](#-functions)
   - [Function Declaration](#function-declaration)
-  - [Function Expression / Anoymous Function](#function-expression--anoymous-function)
+  - [Function Expression / Anoymous](#function-expression--anoymous-function)
   - [Arrow Function](#arrow-function)
-- [## Objects](#-objects)
+---
+
 
 Javascript Datatypes : `Number`, `String`, `Boolean`, `Undefined`, `Null`.
 
@@ -25,7 +26,7 @@ code snippet added to html file to import the `src` javascript file.
 // src is "source" of js **file**
 ```
 
-## Commands
+# Commands
 ---
 |              Command              |                                                                     |
 | :-------------------------------: | ------------------------------------------------------------------- |
@@ -44,7 +45,7 @@ console.log(Number('1991'));
 console.log(String(1991));
 ```
 
-## Template Strings / Literals
+# Template Strings / Literals
 ---
 Defines a string with passed values from defined variables using backticks. Newline incorporated automatically.
 ```javascript
@@ -54,7 +55,7 @@ const superheroName = 'Spider-Man';
 console.log(`Do you belive ${normalName} could be ${superheroName?`)
 ```
 
-## Arrays
+# Arrays
 ---
 ```javascript
 // using bracket notation
@@ -75,7 +76,7 @@ const years = new Array(1991, 1984, 2008, 2020);
 |       `array.pop()`       | removes the last element from an array; captures the element removed       |
 
 
-## If/Else Statements
+# If/Else Statements
 ---
 `if(conditional) {do this} else {do this instead}` allows code to be ran conditionally. 
 ```javascript
@@ -89,7 +90,7 @@ if (lowInk) {
 }
 ```
 
-### Ternary Operators
+## Ternary Operators
 More effectively define an if/else statement; provide shorthand defining same logic
 ```javascript
 const alias = "Peter Parker";
@@ -108,7 +109,7 @@ const ability = criminalsJailed >= 80 ? "novice" : "veteran";
 console.log("That superhero is a well known " + ability);
 ```
 
-### Switch Statements
+## Switch Statements
 Provide logic for if/else comparisons over multiple cases
 ```javascript
 const job = "photographer";
@@ -147,9 +148,9 @@ switch (true) {
 }
 ```
 
-## Functions
+# Functions
 ---
-### Function Declaration
+## Function Declaration
 ***Function Declarations*** define a generic function; can be called/invoked before being defined.
 ```javascript
 // create function to determine makeup of juice from apples/oranges
@@ -171,7 +172,7 @@ console.log(appleJuice);
 const appleOrangeJuice = fruitProcessor(2,4);
 console.log(appleOrangeJuice);
 ```
-### Function Expression / Anoymous Function
+## Function Expression / Anoymous Function
 ***Anoymous Functions or Function Expressions*** can be stored as a variable; cannot be called/invoked before being defined.
 ```javascript
 // creates an anomyous function, also known as a FUNCTION DECLARATION
@@ -183,7 +184,7 @@ const age = calcAge(1990);
 console.log(age);
 ```
 
-### Arrow Function
+## Arrow Function
 ***Arrow Functions*** more effectively define a function using arrow notation. Does not have the ***this*** keyword. 
 ```javascript
 //one liner functions do not require the 'return' statement
@@ -209,7 +210,7 @@ const yearsUntilRetirement = (birthYear, firstName) => {
 console.log(yearsUntilRetirement(1990, 'Chris'));
 ```
 
-## Objects
+# Objects
 ---
 Building an object using *object literal syntax*
 ```javascript

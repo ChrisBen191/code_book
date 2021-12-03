@@ -21,6 +21,9 @@
 + [SQL](SQL/sql_snippets.md)
 + [Cypher](Cypher/cypher_snippets.md)
 
+## JavaScript
++ [JavaScript](JavaScript/javascript.md)
+
 ## Python
 [Python](Python/python_snippets.md#PYTHON)
 + [Importing Data](Python/python_snippets.md#IMPORTING-DATA)
