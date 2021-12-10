@@ -11,6 +11,7 @@
   - [Function Declaration](#function-declaration)
   - [Function Expression / Anoymous](#function-expression--anoymous-function)
   - [Arrow Function](#arrow-function)
+- [Objects](#-objects)
 ---
 
 
@@ -30,7 +31,7 @@ code snippet added to html file to import the `src` javascript file.
 ---
 |              Command              |                                                                     |
 | :-------------------------------: | ------------------------------------------------------------------- |
-|          `'use strict';`          | turns on strict mode, which doesn't allow silent errors             |
+|          `'use strict';`          | turns on strict mode, which doesn't allow silent errors; insert at top of file.            |
 |   `console.log('Hello World!')`   | displays output (text, variable, etc.) to the browser's console log |
 |     `alertF('Hello World!')`      | displays browser alert with output (text, variable, etc.)           |
 | `prompt("What is todays' date?")` | displays browser prompt for user input; can be stored as a variable |
