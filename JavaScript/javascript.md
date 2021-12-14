@@ -7,6 +7,7 @@
 - [If/Else Statements](#-ifelse-statements)
   - [Ternary Operators](#ternary-operators)
   - [Switch Statements](#switch-statements)
+- [Loops](#-loops)
 - [Functions](#-functions)
   - [Function Declaration](#function-declaration)
   - [Function Expression / Anoymous](#function-expression--anoymous-function)
@@ -148,6 +149,31 @@ switch (true) {
     console.log("The Spider Menace");
 }
 ```
+# Loops
+
+***For Loops*** keep running while the condition is TRUE
+```javascript
+for (let rep = 1; rep <= 10; rep++) {
+    // printing 10 reps to the console
+    console.log(`Lifting Weights repetition: ${rep} 🏋🏻‍♂️`);
+};
+```
+
+Loops are used to dynamically read from or create ***arrays.***
+```javascript
+const breakfastFoods = ['Doughnuts', 'Bagel Sandwich', 'Breakfast Burrito', 'Cinnamon Roll'];
+const coffeeToo = [];
+
+for (let i = 0; i < breakfastFoods.length; i++) {
+
+    // reading from an array
+    console.log(breakfastFoods[i]);
+
+    // filling a new array
+    coffeeToo.push(`${breakfastFoods[i]} & Coffee`);
+}
+```
+
 
 # Functions
 ---
@@ -230,4 +256,32 @@ console.log(ironMan['lastName']);
 // adding new elements to the object by assigning the values in dot/bracket notation
 ironMan.location = 'California';
 ironMan['twitter'] = '@ironMan2003';
+```
+
+## Object Method (Function)
+Methods are functions nested directly in an object.
+```javascript
+const capt_america = {
+  name: 'Steve Rogers',
+  mass: 92,
+  height: 1.95,
+  birthYear: 1918,
+
+  calcBMI: function () {
+    // this assigns a new element (bmi) to 'this' current object
+    this.bmi = this.mass / (this.height ** 2);
+    return this.bmi;
+  },
+
+  calcAge: function () {
+    // this assigns a new element (age) to 'this' current object
+    this.age = 2021 - this.birthYear;
+    return this.age;
+  }
+};
+
+
+// calls the methods in object to calculate new elements
+console.log(capt_america.calcBMI());
+console.log(capt_america.calcAge());
 ```
