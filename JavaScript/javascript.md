@@ -34,13 +34,14 @@ code snippet added to html file to import the `src` javascript file.
 
 ---
 
-|              Command              |                                                                                 |
-| :-------------------------------: | ------------------------------------------------------------------------------- |
-|          `'use strict';`          | turns on strict mode, which doesn't allow silent errors; insert at top of file. |
-|   `console.log('Hello World!')`   | displays output (text, variable, etc.) to the browser's console log             |
-|     `alertF('Hello World!')`      | displays browser alert with output (text, variable, etc.)                       |
-| `prompt("What is todays' date?")` | displays browser prompt for user input; can be stored as a variable             |
-|  `console.log(typeof variable)`   | displays the variable's data type to the browser's console log                  |
+|                 Command                  |                                                                                 |
+| :--------------------------------------: | ------------------------------------------------------------------------------- |
+|             `'use strict';`              | turns on strict mode, which doesn't allow silent errors; insert at top of file. |
+| `document.querySelector('html-element')` | accesses the HTML element passed to allow for DOM manipulation.                 |
+|      `console.log('Hello World!')`       | displays output (text, variable, etc.) to the browser's console log             |
+|         `alertF('Hello World!')`         | displays browser alert with output (text, variable, etc.)                       |
+|    `prompt("What is todays' date?")`     | displays browser prompt for user input; can be stored as a variable             |
+|      `console.log(typeof variable)`      | displays the variable's data type to the browser's console log                  |
 
 datatype conversions for `String` and `Int`
 
