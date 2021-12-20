@@ -41,13 +41,13 @@ code snippet added to html file to import the `src` javascript file.
 |      `console.log('Hello World!')`       | displays output (text, variable, etc.) to the browser's console log             |
 |         `alertF('Hello World!')`         | displays browser alert with output (text, variable, etc.)                       |
 |    `prompt("What is todays' date?")`     | displays browser prompt for user input; can be stored as a variable             |
-|      `console.log(typeof variable)`      | displays the variable's data type to the browser's console log                  |
+|    `console.log(typeof variableName)`    | displays the variable's data type to the browser's console log                  |
 
 datatype conversions for `String` and `Int`
 
 ```javascript
 // converts the string 1991 into an integer
-console.log(Number("1991"));
+console.log(Number('1991'));
 
 // converts the integer into a string
 console.log(String(1991));
@@ -72,7 +72,7 @@ console.log(`Do you belive ${normalName} could be ${superheroName?`)
 
 ```javascript
 // using bracket notation
-const friends = ["Iron Man", "Incredible Hulk", "Dr. Strange"];
+const friends = ['Iron Man', 'Incredible Hulk', 'Dr. Strange'];
 
 // using Array method
 const years = new Array(1991, 1984, 2008, 2020);
@@ -131,39 +131,39 @@ console.log("That superhero is a well known " + ability);
 Provide logic for if/else comparisons over multiple cases
 
 ```javascript
-const job = "photographer";
+const job = 'photographer';
 const criminalsJailed = 100;
 
 // will switch the case to be triggered according to the job value passed through.
 switch (job) {
-  case "photographer":
-    console.log("I think I found the PERFECT job.");
+  case 'photographer':
+    console.log('I think I found the PERFECT job.');
     break;
-  case "student assistant":
+  case 'student assistant':
     console.log("Horizon High tuition isn't going to pay itself!!");
     break;
-  case "wrestler":
-    console.log("With great power comes great responsibility.");
+  case 'wrestler':
+    console.log('With great power comes great responsibility.');
     break;
 
   // deafult statements identify the "else" block to trigger
   default:
-    console.log("Do superheroes have jobs?");
+    console.log('Do superheroes have jobs?');
 }
 
 // using TRUE in switch to trigger block of code where conditional is TRUE; useful for range conditionals.
 switch (true) {
   case criminalsJailed <= 100:
-    console.log("Friendly Neighborhood Spiderman");
+    console.log('Friendly Neighborhood Spiderman');
 
   case criminalsJailed > 100 && criminalsJailed <= 500:
-    console.log("The Amazing Spiderman");
+    console.log('The Amazing Spiderman');
 
   case criminalsJailed > 500:
-    console.log("The Superior Spiderman");
+    console.log('The Superior Spiderman');
 
   default:
-    console.log("The Spider Menace");
+    console.log('The Spider Menace');
 }
 ```
 
@@ -182,10 +182,10 @@ Loops are used to dynamically read from or create **_arrays._**
 
 ```javascript
 const breakfastFoods = [
-  "Doughnuts",
-  "Bagel Sandwich",
-  "Breakfast Burrito",
-  "Cinnamon Roll",
+  'Doughnuts',
+  'Bagel Sandwich',
+  'Breakfast Burrito',
+  'Cinnamon Roll',
 ];
 const coffeeToo = [];
 
@@ -246,7 +246,7 @@ console.log(age);
 
 ```javascript
 //one liner functions do not require the 'return' statement
-const calcAge = (birthYear) => 2037 - birthYear;
+const calcAge = birthYear => 2037 - birthYear;
 
 const age = calcAge(1990);
 console.log(age);
@@ -264,7 +264,7 @@ const yearsUntilRetirement = (birthYear, firstName) => {
 };
 
 // logging function to the console
-console.log(yearsUntilRetirement(1990, "Chris"));
+console.log(yearsUntilRetirement(1990, 'Chris'));
 ```
 
 # Objects
@@ -276,19 +276,19 @@ Building an object using _object literal syntax_
 ```javascript
 // building an object using object literal syntax
 const ironMan = {
-  firstName: "Tony",
-  lastName: "Stark",
-  job: "superhero",
-  friends: ["Thor", "Dr. Strange", "Hulk"],
+  firstName: 'Tony',
+  lastName: 'Stark',
+  job: 'superhero',
+  friends: ['Thor', 'Dr. Strange', 'Hulk'],
 };
 
 // dot vs. bracket notation
 console.log(ironMan.firstName);
-console.log(ironMan["lastName"]);
+console.log(ironMan['lastName']);
 
 // adding new elements to the object by assigning the values in dot/bracket notation
-ironMan.location = "California";
-ironMan["twitter"] = "@ironMan2003";
+ironMan.location = 'California';
+ironMan['twitter'] = '@ironMan2003';
 ```
 
 ## Object Method (Function)
@@ -297,7 +297,7 @@ Methods are functions nested directly in an object.
 
 ```javascript
 const capt_america = {
-  name: "Steve Rogers",
+  name: 'Steve Rogers',
   mass: 92,
   height: 1.95,
   birthYear: 1918,
@@ -318,4 +318,45 @@ const capt_america = {
 // calls the methods in object to calculate new elements
 console.log(capt_america.calcBMI());
 console.log(capt_america.calcAge());
+```
+
+# DOM Manipulation
+
+|                   Command                   |                                                                 |
+| :-----------------------------------------: | --------------------------------------------------------------- |
+|  `document.querySelector('html-element')`   | accesses the HTML element passed to allow for DOM manipulation. |
+| `document.querySelectorAll('html-element')` | accesses all HTML elements as `nodes`, similar to arrays.       |
+
+Selecting an element in a `div` or `span` element to update the text
+
+```javascript
+let messageDiv = document.querySelector('.message');
+messageDiv.textContent = `Updated text for '.message' div.`;
+```
+
+Selecting the `body` element to update the background color
+
+```javascript
+let bodyDiv = document.querySelector('body');
+bodyDiv.style.backgroundColor = 'red';
+```
+
+Adds an "event listener" function to decide what actions to preform when a the "check" button is "clicked"
+
+```javascript
+document.querySelector('.check').addEventListener('click', function () {
+  const message = `You've clicked the check button!`;
+  console.log(message);
+```
+
+Adds/Removes a class attribute from specified HTML element (ie. show/hide elements on page).
+
+```javascript
+let topBanner = document.querySelector('.banner');
+
+// removes hidden class which would then show the banner element
+topBanner.classList.remove('hidden');
+
+// adds the hidden class which would then hide the banner element
+topBanner.classList.add('hidden');
 ```
