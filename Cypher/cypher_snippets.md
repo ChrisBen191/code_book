@@ -19,24 +19,24 @@
 
 # Common Commands
 
-    | Syntax                                                                       | Meaning                                                                                                               |
-    | ---------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------- |
-    | `()` or `(n)`                                                                | Represents a node; use (n) to denote an "anonymous" node for further query processing in the query                    |
-    | `(p:Person)` or `(:Person)`                                                  | Represents node labels; node labels can also be used with anonymous nodes and more than one label can be denoted.     |
-    | `{propertyKey: propertyValue}`                                               | Represents a property for a specified node; can help further filter a graph similar to labels.                        |
-    | `CALL db.schema.visualization()`                                             | Visualizes the data model of the graph, to better understand the nodes, labels, and relationships of the graph.       |
-    | `CALL db.propertyKeys()`                                                     | Displays the values for properties keys of a graph; does not define which nodes utilize each property key displayed.  |
-    | `CALL db.constraints()` or `CALL CONSTRAINTS`                                | Displays the set of constraints that have been defined for the graph.                                                 |
-    | `CALL db.indexes()` or `SHOW INDEXES`                                        | Displays a list of all full-text schema indexes for the graph                                                         |
-    | `:params {paramName: 'paramValue, ...'}` OR `:param paramName => paramValue` | Sets defined parameter and its value in the current session.                                                          |
-    | `:params`                                                                    | Displays the current parameters in session and their values                                                           |
-    | `:queries`                                                                   | Displays current running queries to allow for monitoring/troubleshooting                                              |
-    | `EXPLAIN MATCH...`                                                           | Provides the Cypher query plan; provides estimates of the graph engine processing that will occur (doesn't run query) |
-    | `PROFILE MATCH...`                                                           | Runs the Cypher query statement, and provides run-time performance metrics                                            |
-    | `:sysinfo`                                                                   | Displays the Page Cache, an in-memory copy of part or all of the graph managed by the DBMS                            |
-    | `:schema`                                                                    | Displays all the defined indexes for the graph                                                                        |
-    | `CALL gds.graph.list()`                                                      | Displays all created named graphs and their related graph information                                                 |
-    | `CALL gds.graph.drop(<graph-name>)`                                          | Drops the named graph specified.                                                                                      |
+| Syntax                                                                       | Meaning                                                                                                               |
+| ---------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------- |
+| `()` or `(n)`                                                                | Represents a node; use (n) to denote an "anonymous" node for further query processing in the query                    |
+| `(p:Person)` or `(:Person)`                                                  | Represents node labels; node labels can also be used with anonymous nodes and more than one label can be denoted.     |
+| `{propertyKey: propertyValue}`                                               | Represents a property for a specified node; can help further filter a graph similar to labels.                        |
+| `CALL db.schema.visualization()`                                             | Visualizes the data model of the graph, to better understand the nodes, labels, and relationships of the graph.       |
+| `CALL db.propertyKeys()`                                                     | Displays the values for properties keys of a graph; does not define which nodes utilize each property key displayed.  |
+| `CALL db.constraints()` or `CALL CONSTRAINTS`                                | Displays the set of constraints that have been defined for the graph.                                                 |
+| `CALL db.indexes()` or `SHOW INDEXES`                                        | Displays a list of all full-text schema indexes for the graph                                                         |
+| `:params {paramName: 'paramValue, ...'}` OR `:param paramName => paramValue` | Sets defined parameter and its value in the current session.                                                          |
+| `:params`                                                                    | Displays the current parameters in session and their values                                                           |
+| `:queries`                                                                   | Displays current running queries to allow for monitoring/troubleshooting                                              |
+| `EXPLAIN MATCH...`                                                           | Provides the Cypher query plan; provides estimates of the graph engine processing that will occur (doesn't run query) |
+| `PROFILE MATCH...`                                                           | Runs the Cypher query statement, and provides run-time performance metrics                                            |
+| `:sysinfo`                                                                   | Displays the Page Cache, an in-memory copy of part or all of the graph managed by the DBMS                            |
+| `:schema`                                                                    | Displays all the defined indexes for the graph                                                                        |
+| `CALL gds.graph.list()`                                                      | Displays all created named graphs and their related graph information                                                 |
+| `CALL gds.graph.drop(<graph-name>)`                                          | Drops the named graph specified.                                                                                      |
 
 | Node Syntax |                       Meaning                        |
 | :---------: | :--------------------------------------------------: |
