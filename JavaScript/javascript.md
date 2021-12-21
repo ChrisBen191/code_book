@@ -1,19 +1,22 @@
-# JavaScript Snippets
+# JavaScript Snippets <!-- omit in toc -->
 
-# Table of Contents
+# Table of Contents <!-- omit in toc -->
 
-- [Commands](#-commands)
-- [Template Strings/Literals](#-template-strings--literals)
-- [Arrays](#-arrays)
-- [If/Else Statements](#-ifelse-statements)
+- [Commands](#commands)
+- [Template Strings / Literals](#template-strings--literals)
+- [Arrays](#arrays)
+- [If/Else Statements](#ifelse-statements)
   - [Ternary Operators](#ternary-operators)
   - [Switch Statements](#switch-statements)
-- [Loops](#-loops)
-- [Functions](#-functions)
+- [Loops](#loops)
+  - [forEach](#foreach)
+- [Functions](#functions)
   - [Function Declaration](#function-declaration)
-  - [Function Expression / Anoymous](#function-expression--anoymous-function)
+  - [Function Expression / Anoymous Function](#function-expression--anoymous-function)
   - [Arrow Function](#arrow-function)
-- [Objects](#-objects)
+- [Objects](#objects)
+  - [Object Method (Function)](#object-method-function)
+- [DOM Manipulation](#dom-manipulation)
 
 ---
 
@@ -87,6 +90,9 @@ const years = new Array(1991, 1984, 2008, 2020);
 |   `array.push('Value')`   | adds an element to the end of an array; captures new length of array       |
 |      `array.shift()`      | removes the first element from an array; captures the element removed      |
 |       `array.pop()`       | removes the last element from an array; captures the element removed       |
+|   `array.slice(index)`    | returns selected index value for an array                                  |
+|     `array.join(',')`     | joins items in array as a string with passed separator                     |
+|    `array.split(',')`     | splitsa string into an array using passed separator                        |
 
 # If/Else Statements
 
@@ -198,6 +204,20 @@ for (let i = 0; i < breakfastFoods.length; i++) {
 }
 ```
 
+## forEach
+
+Shorthand way to call a function on each element in an array
+
+```javascript
+// array of student names
+var students = ['Johnny', 'Tyler', 'Bodhi', 'Pappas'];
+
+// iterates through each element and displays
+students.forEach(function (name) {
+  console.log(name);
+});
+```
+
 # Functions
 
 ---
@@ -289,6 +309,15 @@ console.log(ironMan['lastName']);
 // adding new elements to the object by assigning the values in dot/bracket notation
 ironMan.location = 'California';
 ironMan['twitter'] = '@ironMan2003';
+
+// displays the keys of the object
+console.log(Object.keys(ironMan));
+
+// displays the values of the object
+console.log(Object.values(ironMan));
+
+// displays the key-value pairs of the object
+console.log(Object.entries(ironMan));
 ```
 
 ## Object Method (Function)
