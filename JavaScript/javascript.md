@@ -193,7 +193,7 @@ const breakfastFoods = [
   'Breakfast Burrito',
   'Cinnamon Roll',
 ];
-const coffeeToo = [];
+let coffeeToo = [];
 
 for (let i = 0; i < breakfastFoods.length; i++) {
   // reading from an array
@@ -206,7 +206,7 @@ for (let i = 0; i < breakfastFoods.length; i++) {
 
 ## forEach
 
-Shorthand way to call a function on each element in an array
+**_forEach_** iterates over each element in an array and applies the function defined
 
 ```javascript
 // array of student names
