@@ -4,6 +4,7 @@
 
 - [Commands](#commands)
 - [Template Strings / Literals](#template-strings--literals)
+- [Dates](#dates)
 - [Arrays](#arrays)
 - [If/Else Statements](#ifelse-statements)
   - [Ternary Operators](#ternary-operators)
@@ -66,8 +67,19 @@ Defines a string with passed values from defined variables using backticks. Newl
 const normalName = 'Peter Parker';
 const superheroName = 'Spider-Man';
 
-console.log(`Do you belive ${normalName} could be ${superheroName?`)
+console.log(`Do you belive ${normalName} could be ${superheroName}?`);
 ```
+
+# Dates
+
+|             Command              |                                                         |
+| :------------------------------: | ------------------------------------------------------- |
+|    `dateValue.toTimeString()`    | converts date object to "time" string.                  |
+|    `dateValue.toDateString()`    | converts date object to "date" string.                  |
+|    `dateValue.toUTCString()`     | converts date object to "UTC" string.                   |
+|    `dateValue.toISOString()`     | converts date object to "ISO" string.                   |
+|    `dateValue.toGMTString()`     | converts date object to "GMT" string.                   |
+| `dateValue.toLocaleDateString()` | converts date object to "locale" sensitive date string. |
 
 # Arrays
 
@@ -79,6 +91,24 @@ const friends = ['Iron Man', 'Incredible Hulk', 'Dr. Strange'];
 
 // using Array method
 const years = new Array(1991, 1984, 2008, 2020);
+```
+
+Capture the specified element(s) in an array and assign to a variable in one step
+
+```javascript
+const restaurant = {
+  name: 'Classico Italiano',
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+};
+
+// captures the first two elements in the object's array
+const [first, second] = restaurant.starterMenu;
+console.log(first, second);
+
+// captures the third and fourth elements in the object's array
+const [, , third, fourth] = restaurant.starterMenu;
+console.log(third, fourth);
 ```
 
 |          Command          |                                                                            |
@@ -351,10 +381,13 @@ console.log(capt_america.calcAge());
 
 # DOM Manipulation
 
-|                   Command                   |                                                                 |
-| :-----------------------------------------: | --------------------------------------------------------------- |
-|  `document.querySelector('html-element')`   | accesses the HTML element passed to allow for DOM manipulation. |
-| `document.querySelectorAll('html-element')` | accesses all HTML elements as `nodes`, similar to arrays.       |
+|                   Command                   |                                                                          |
+| :-----------------------------------------: | ------------------------------------------------------------------------ |
+|  `document.querySelector('html-element')`   | accesses the HTML element passed to allow for DOM manipulation.          |
+| `document.querySelectorAll('html-element')` | accesses all HTML elements as `nodes`, similar to arrays.                |
+| `document.querySelector('.class-element')`  | accesses the HTML class element passed to allow for DOM manipulation.    |
+|   `document.querySelector('#element-id')`   | accesses the HTML id class element passed to allow for DOM manipulation. |
+|   `document.getElementById('element-id')`   | accesses the HTML id element passed to allow for DOM manipulation.       |
 
 Selecting an element in a `div` or `span` element to update the text
 
@@ -388,4 +421,7 @@ topBanner.classList.remove('hidden');
 
 // adds the hidden class which would then hide the banner element
 topBanner.classList.add('hidden');
+
+// use 'toggle' when wanting to add/remove css class depending on it's current state
+topBanner.classList.toggle('hidden');
 ```
