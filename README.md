@@ -12,13 +12,13 @@ _Contains the current languages and libraries I'm developing in._
 
 [Shell](Shell/shell_snippets.md)
 
-- [Bash](Shell/shell_snippets.md#BASH)
-- [Git](Shell/shell_snippets.md#GIT)
-- [Conda](Shell/shell_snippets.md#CONDA)
-- [Jupyter](Shell/shell_snippets.md#JUPYTER)
-- [Unix](Shell/shell_snippets.md#UNIX)
-- [Tmux](Shell/shell_snippets.md#TMUX)
-- [PostgreSQL](Shell/shell_snippets.md#POSTGRESQL)
+- [Bash](Shell/shell_snippets.md##BASH)
+- [Git](Shell/shell_snippets.md##GIT)
+- [Conda](Shell/shell_snippets.md##CONDA)
+- [Jupyter](Shell/shell_snippets.md##JUPYTER)
+- [Unix](Shell/shell_snippets.md##UNIX)
+- [Tmux](Shell/shell_snippets.md##TMUX)
+- [PostgreSQL](Shell/shell_snippets.md##POSTGRESQL)
 
 ## SQL / GraphQL
 
