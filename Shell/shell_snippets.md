@@ -1,16 +1,18 @@
 # SHELL SNIPPETS <!-- omit in toc -->
 
 - [BASH](#bash)
-  - [Navigation Commands](#navigation-commands)
-  - [Modifier Commands](#modifier-commands)
+  - [Navigating BASH Shell](#navigating-bash-shell)
+  - [Modifying Files and Folders](#modifying-files-and-folders)
 - [GIT](#git)
   - [Local Repository Setup / Update](#local-repository-setup--update)
   - [Update Main Repository](#update-main-repository)
   - [Branch Repository](#branch-repository)
 - [CONDA](#conda)
+  - [Virtual Environment](#virtual-environment)
+- [JUPYTER](#jupyter)
 - [UNIX](#unix)
-  - [SETUP OF UNIX USER](#setup-of-unix-user)
-  - [SETUP OF NGINX ON SERVER](#setup-of-nginx-on-server)
+  - [Unix User Setup](#unix-user-setup)
+  - [NGINX Setup on Server](#nginx-setup-on-server)
 - [TMUX](#tmux)
 - [POSTGRESQL](#postgresql)
 
@@ -18,30 +20,30 @@
 
 ---
 
-### Navigation Commands
+### Navigating BASH Shell
 
-|      Commands       |                                                                                                 |
-| :-----------------: | ----------------------------------------------------------------------------------------------- |
-|        `pwd`        | Displays the **present working directory**, or the path to the current directory                |
-|        `ls`         | **Lists** all non-hidden items/documents in the current directory; add '-A' flag to show hidden |
-|  `cd folder_name`   | Used to **change directory**, or to navigate into the directory/folder specified                |
-|      `history`      | Provides the **historical** commands passed through the Shell                                   |
-| `man shell_command` | Provides the **manual** for the shell command specified                                         |
-|  ` cat file-name`   | Displays the first few lines of a file in the shell                                             |
+|      Commands       |                                                                                     |
+| :-----------------: | ----------------------------------------------------------------------------------- |
+| `man shell_command` | displays the 'manual' for `shell_command`                                           |
+|      `history`      | displays previous commands passed through the shell                                 |
+|        `pwd`        | displays the path to the current directory                                          |
+|  `cd folder_name`   | changes the current directory/folder to `folder_name` directory                     |
+|        `ls`         | displays files/folders in the current directory; add `-a` flag to show hidden files |
+|  ` cat file_name`   | displays the first few lines of `file_name` in the shell                            |
 
-### Modifier Commands
+### Modifying Files and Folders
 
-|                Commands                |                                                                                  |
-| :------------------------------------: | -------------------------------------------------------------------------------- |
-|      `touch file_name.file_type`       | **Creates a file** in the current location/directory, in the file type specified |
-|         `mkdir new_directory`          | creates a new directory in current location                                      |
-|             `rm file_name`             | **Deletes the file** specified (cannot delete a folder/directory)                |
-|          `rm -rf folder_name`          | **Deletes an entire folder/directory** and its contents                          |
-|   `cp file_name copy/location/path`    | copies file_name to the directory specified                                      |
-|    `mv file_name new/location/path`    | moves file_name to the directory specified                                       |
-| `cp -R folder_name copy/location/path` | copies folder_name to the directory specified                                    |
-| `mv -R folder_name new/location/path`  | moves folder_name to the directory specified                                     |
-|          `echo hello world!`           | displays or prints the variable or string specified                              |
+|                Commands                |                                                        |
+| :------------------------------------: | ------------------------------------------------------ |
+|      `touch file_name.file_type`       | creates `file_name.file_type` in the current directory |
+|          `mkdir folder_name`           | creates `folder_name` folder in the current directory  |
+|             `rm file_name`             | deletes `file_name`                                    |
+|          `rm -rf folder_name`          | deletes `folder_name` and its contents                 |
+|   `cp file_name copy/location/path`    | copies `file_name` to the directory specified          |
+|    `mv file_name new/location/path`    | moves `file_name` to the directory specified           |
+| `cp -R folder_name copy/location/path` | copies `folder_name` to the directory specified        |
+| `mv -R folder_name new/location/path`  | moves `folder_name` to the directory specified         |
+|          `echo hello world!`           | displays the string message                            |
 
 `grep` searches `file_name` for `search_term`
 
@@ -77,7 +79,7 @@ wc file_name
 |                   Commands                   |                                                                                                              |
 | :------------------------------------------: | ------------------------------------------------------------------------------------------------------------ |
 |                  `git init`                  | initializes the current repository to be tracked by Git                                                      |
-| `git clone "URL-OF-REPOSITORY-TO-BE-CLONED"` | clones the repository using the respository URL to the local machine                                         |
+| `git clone "URL-OF-REPOSITORY-TO-BE-CLONED"` | clones the repository using the repository URL to the local machine                                          |
 |                 `git stash`                  | stashes local repository file/folder changes before running `git pull`                                       |
 |                  `git pull`                  | updates local repository with the main repository                                                            |
 |               `git stash pop`                | after a `git pull`, reapplies stashed local repository file/folder changes                                   |
@@ -85,14 +87,14 @@ wc file_name
 
 ### Update Main Repository
 
-|             Commands             |                                                                                        |
-| :------------------------------: | -------------------------------------------------------------------------------------- |
-|           `git status`           | displays the status of the local repository, tracked/untracked files, etc.             |
-| `git add file_name folder_name`  | stages untracked files/folders to be uploaded to the main repository                   |
-|   `git rm --cached file_name`    | unstages files/folder previously staged by running `git add`                           |
-| `git commit -m "commit message"` | commits files/folders by running `git add`to the main repository w/accompaning message |
-|        `git rm file_name`        | removes files/folders previously committed by running `git commit`                     |
-|            `git push`            | pushes the committed files/folders to the main repository                              |
+|             Commands             |                                                                                         |
+| :------------------------------: | --------------------------------------------------------------------------------------- |
+|           `git status`           | displays the status of the local repository, tracked/untracked files, etc.              |
+| `git add file_name folder_name`  | stages untracked files/folders to be uploaded to the main repository                    |
+|   `git rm --cached file_name`    | unstages files/folder previously staged by running `git add`                            |
+| `git commit -m "commit message"` | commits files/folders by running `git add`to the main repository w/accompanying message |
+|        `git rm file_name`        | removes files/folders previously committed by running `git commit`                      |
+|            `git push`            | pushes the committed files/folders to the main repository                               |
 
 ### Branch Repository
 
@@ -110,39 +112,29 @@ git commit -m 'My branch merge request info.'
 
 git push origin my-new-branch
 
-# GitLab prompts you with a direct link for creating a merge request, copy/paste link into broswer to complete
+# GitLab prompts you with a direct link for creating a merge request, copy/paste link into browser to complete
 ```
 
 ## CONDA
 
 ---
 
-|            Commands             |                                                                |
-| :-----------------------------: | -------------------------------------------------------------- |
-|        `conda env list`         | displays a list of all **environments** on the system          |
-|          `conda list`           | displays all packages installed in **the current environment** |
-|   `conda create -n env-name`    | **creates** the environment with the name specified            |
-| `conda env remove --n env-name` | **deletes** the environment specified from the system          |
-|    `conda activate env-name`    | activates the **environment** specified                        |
-|       `conda deactivate`        | **deactivates** the current environment in use                 |
+### Virtual Environment
 
-creates a **yml file** that contains the exact versions of packages in an environment for reproducibility
-
-```console
-conda env export > env-name.yml
-
-# FLAGS
--n : specify the name of environment to export if not current active environment
--f : saves the environment info to a file; can use 'shell piping' instead
-```
-
-imports a **yml file** to reproduce an environment with exact versions of the packages being used
-
-```console
-conda env create -f env-name.yml
-```
+|              Commands              |                                                                   |
+| :--------------------------------: | ----------------------------------------------------------------- |
+|          `conda env list`          | displays a list of all conda environments on the system           |
+|            `conda list`            | displays all packages installed in current environment            |
+|     `conda create -n env-name`     | creates the virtual environment `env-name`                        |
+|  `conda env remove --n env-name`   | deletes the `env-name` virtual environment                        |
+|     `conda activate env-name`      | activates the `env-name` virtual environment                      |
+|         `conda deactivate`         | deactivates any virtual environment currently active              |
+| `conda env export > env-name.yml`  | exports current active virtual environment to `env-name.yml` file |
+| `conda env create -f env-name.yml` | imports the `env-name.yml` file to create a virtual environment   |
 
 converts the specified jupyter notebook into the format specified (typically '--to script')
+
+## JUPYTER
 
 ```console
 jupyter nbconvert --to FORMAT notebook.ipynb
@@ -169,7 +161,7 @@ jupyter nbconvert --to FORMAT notebook.ipynb
 |           `systemctl status <engine>`            | provides system level information on the engine passed.                       |
 |     `systemctl start/stop/restart <engine>`      | starts, stops, or resets the engine from systemctl.                           |
 
-creates a **log of the output** of a .py file to the file specified
+creates a log of the output of `python_file.py` to `output_file.txt`
 
 ```console
 ipython python_file.py prod 2>&1 | tee log/output_file.txt
@@ -179,9 +171,9 @@ ipython python_file.py prod 2>&1 | tee log/output_file.txt
 # 'tee' displays output and records it to log/output_file.txt
 ```
 
-### SETUP OF UNIX USER
+### Unix User Setup
 
-allows the specified user to **temporarily** gain access to ROOT user privledges.
+allows the specified user to temporarily gain access to ROOT user privileges.
 
 ```console
 # run 'visudo' command to access file.
@@ -201,11 +193,11 @@ vi /etc/ssh/sshd_config
 # scroll to end of document and insert 'AllowUsers <username>'
 # enter ':wq' to write to file and quit
 
-# reloads the service to accept the new cofguration
+# reloads the service to accept the new configuration
 service sshd reload
 ```
 
-### SETUP OF NGINX ON SERVER
+### NGINX Setup on Server
 
 allows nginx to bypass the firewall
 
@@ -233,26 +225,26 @@ sudo mkdir /var/www/html/items-rest
 
 ---
 
-|               Commands               | `C-b==CTRL+b` `C-d==CTRL+d`                                     |
-| :----------------------------------: | --------------------------------------------------------------- |
-|      `tmux new -s session-name`      | creates new session named `session-name`                        |
-|              `tmux ls`               | displays all **sessions** currently running (detached/attached) |
-|          `C-b d` or `C-b D`          | detaches current **session** _(D allows selection)_             |
-| `tmux a -t session-name` OR `tmux a` | attaches to `session-name` OR will connect to last session      |
-|        `tmux kill-session -a`        | kill all sessions but the **current session**                   |
-| `tmux kill-session -t session-name`  | kill `session-name` specified                                   |
-|               `C-b "`                | splits **panes** horizontally                                   |
-|               `C-b %`                | splits **panes** vertically                                     |
-|          `C-b <arrow key>`           | navigates split **panes**                                       |
-|               `C-b z`                | fullscreen/minimizes active **pane**                            |
-|           `C-d` OR `exit`            | closes currently active **pane**                                |
-|               `C-b c`                | creates new **window**                                          |
-|               `C-b p`                | switches to **previous window**                                 |
-|               `C-b n`                | switches to **next window**                                     |
-|               `C-b ,`                | renames current **window**                                      |
-|               `C-b &`                | closes current **window**                                       |
+|               Commands               | `C-b==CTRL+b` `C-d==CTRL+d`                                 |
+| :----------------------------------: | ----------------------------------------------------------- |
+|      `tmux new -s session-name`      | creates new session named `session-name`                    |
+|              `tmux ls`               | displays all sessions currently running (detached/attached) |
+|          `C-b d` or `C-b D`          | detaches current session _(D allows selection)_             |
+| `tmux a -t session-name` OR `tmux a` | attaches to `session-name` OR will connect to last session  |
+|        `tmux kill-session -a`        | kill all sessions but the but the current session           |
+| `tmux kill-session -t session-name`  | kills `session-name` session                                |
+|               `C-b "`                | splits tmux panes horizontally                              |
+|               `C-b %`                | splits tmux panes vertically                                |
+|          `C-b <arrow key>`           | navigates split tmux panes                                  |
+|               `C-b z`                | full screen/minimizes active tmux pane                      |
+|           `C-d` OR `exit`            | closes active tmux pane                                     |
+|               `C-b c`                | creates new tmux window                                     |
+|               `C-b p`                | switches to the previous tmux window                        |
+|               `C-b n`                | switches to the next tmux window                            |
+|               `C-b ,`                | renames current tmux window                                 |
+|               `C-b &`                | closes current tmux window                                  |
 
-Enters **pane resizing** mode by bringing up a prompt at the bottom of the pane
+Enters pane resizing mode by bringing up a prompt at the bottom of the pane
 
 ```console
 C-b :
@@ -270,7 +262,7 @@ resize-pane -<D, U, L, R> 10
 | :---------: | ------------------------------------------------------------------------- |
 |   `psql`    | connects to the PostgreSQL shell.                                         |
 | `\conninfo` | displays the database, user, socket, and port information for connection. |
-|    `\q`     | leaves the PostgresSQL sheel.                                             |
+|    `\q`     | leaves the PostgresSQL shell.                                             |
 
 instead of postgresSQL accepting connection via same name of user/database, the commands below will make postgresSQL request the user password. Allows SQLAlchemy to preform correctly.
 
@@ -293,5 +285,5 @@ createuser <username> -P
 # creates database for the user
 createdb username
 
-# by default, connnecting w/'psql' connects to database named the same as the user
+# by default, connecting w/'psql' connects to database named the same as the user
 ```
