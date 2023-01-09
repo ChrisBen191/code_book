@@ -34,27 +34,27 @@
 
 ## Definitions
 
-**Accuracy** - the porportion of correct predictions made by a model over the total # of predictions.
+`Accuracy` - the porportion of correct predictions made by a model over the total # of predictions.
 
     # of correct predictions (TP + TN) / total # of predictions
 
-**Missclassification (Error) Rate** - the porportion of incorrect predictions made by a model over the total # of predictions.
+`Missclassification (Error) Rate` - the porportion of incorrect predictions made by a model over the total # of predictions.
 
     # of incorrect predictions (FP + FN) / total # of predictions
 
-**Recall** - the ability of a model to find all the revelant cases within a dataset.
+`Recall` - the ability of a model to find all the revelant cases within a dataset.
 
     # of true positives (TP) / [# of true positives (TP) + # of false negatives (FN)]
 
-**Precision** - the porportion of cases the models says was revelant and cases that were actually revelant.
+`Precision` - the porportion of cases the models says was revelant and cases that were actually revelant.
 
     # of true positives (TP) / [# of true positives (TP) + # of false positives (FP)]
 
-**F1 Score** - the optimal blend of precision and recall to take into account both metrics. F1 provides the harmonic mean, which unlike the simple mean, punishes extreme values.
+`F1 Score` - the optimal blend of precision and recall to take into account both metrics. F1 provides the harmonic mean, which unlike the simple mean, punishes extreme values.
 
     F1 = 2 * (precision * recall) / (precision + recall)
 
-**Bootstramp Samples** - sampling from the dataset with replacement
+`Bootstramp Samples` - sampling from the dataset with replacement
 
 ### Bias Variance Trade-Off
 
@@ -67,7 +67,7 @@
 
 ### Train Test Split
 
-Split the data into separate **Train (X_train, y_train)** and **Test (X_test, y_test)** sets
+Split the data into separate train `(X_train, y_train)` and test `(X_test, y_test)` sets
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -86,7 +86,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, rando
 
 ### Scalers
 
-Scale feature data using **scale** in **sklearn.preprocessing**
+Scale feature data using `scale` in `sklearn.preprocessing`
 
 ```python
 from sklearn.preprocessing import scale
@@ -101,7 +101,7 @@ X_scaled = scale(X, axis=0)
 # axis=1 standardizes each record
 ```
 
-Scale data using **StandardScaler** transformer in **sklearn.preprocessing**
+Scale data using `StandardScaler` transformer in `sklearn.preprocessing`
 
 ```python
 from sklearn.preprocessing import StandardScaler
@@ -120,7 +120,7 @@ samples_scaled = scaler.transform(X)
 
 ### Imputers
 
-Replace missing data using **Imputer** transformer in **sklearn.preprocessing**
+Replace missing data using `Imputer` transformer in `sklearn.preprocessing`
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -141,7 +141,7 @@ X = imp.transform(X)
 
 ### Cross Validation
 
-Using a **Linear Regression** model:
+> _This will potentionally be moved_
 
 ```python
 from sklearn.model_selection import cross_val_score
@@ -170,7 +170,7 @@ cv_results = cross_val_score(reg, X, y, cv=5)
   - great with balanced classes, but not great with unbalanced classes (ie. 100 images with 99 dog images, 1 cat image)
 
 - Precision
-  - measured by the ability of the model to identify only the revelant data points.
+  - measured by the ability of the model to identify only the relevant data points.
 
 #### K-Nearest Neighbors
 
