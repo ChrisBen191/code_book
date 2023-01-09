@@ -1,13 +1,40 @@
-# Machine Learning
+# Machine Learning <!-- omit in toc -->
+
 ---
+
+## Table of Contents <!-- omit in toc -->
+
+- [PRE-PROCESSING](#pre-processing)
+  - [Cross Validation](#cross-validation)
+- [SUPERVISED LEARNING](#supervised-learning)
+  - [CLASSIFICATION MODELS](#classification-models)
+    - [K-Nearest Neighbors](#k-nearest-neighbors)
+    - [Logistic Regression](#logistic-regression)
+    - [Support Vector Machines (SVC)](#support-vector-machines-svc)
+    - [LinearSVC](#linearsvc)
+  - [REGRESSION MODELS](#regression-models)
+    - [Linear Regression](#linear-regression)
+    - [Ridge](#ridge)
+    - [Lasso](#lasso)
+  - [FEATURE TUNING](#feature-tuning)
+    - [Confusion Matrix](#confusion-matrix)
+    - [Classification Report](#classification-report)
+    - [ROC (Receiver Operating Characteristic) Curve](#roc-receiver-operating-characteristic-curve)
+    - [AUC (Area under ROC Curve) - Large AUC = better model](#auc-area-under-roc-curve---large-auc--better-model)
+  - [HYPERPARAMETER TUNING](#hyperparameter-tuning)
+  - [GridSearchCV (Grid Search Cross Validation)](#gridsearchcv-grid-search-cross-validation)
+    - [RandomizedSearchCV (Randomized GridSearchCV)](#randomizedsearchcv-randomized-gridsearchcv)
+  - [PIPELINES](#pipelines)
+
 ## PRE-PROCESSING
 
 Scale data using **scale** in **sklearn.preprocessing**
+
 ```python
 # importing SCALE
 from sklearn.preprocessing import scale
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # axis=0 standardizes each feature, axis=1 standardizes each record
@@ -15,6 +42,7 @@ X_scaled = scale(X, axis=0)
 ```
 
 Scale data using **StandardScaler** transformer in **sklearn.preprocessing**
+
 ```python
 # importing STANDARD_SCALER
 from sklearn.preprocessing import StandardScaler
@@ -33,12 +61,13 @@ samples_scaled = scaler.transform(X)
 ```
 
 Replace missing data using **Imputer** transformer in **sklearn.preprocessing**
+
 ```python
 # importing TRAIN_TEST_SPLIT and IMPUTER
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import Imputer
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # instantiating IMPUTER transformer, axis=0 indicates columns
@@ -52,6 +81,7 @@ X = imp.transform(X)
 ```
 
 Splits the data into separate **Train (X_train, y_train)** and **Test (X_test, y_test)** sets
+
 ```python
 # importing TRAIN_TEST_SPLIT
 from sklearn.model_selection import train_test_split
@@ -59,7 +89,7 @@ from sklearn.model_selection import train_test_split
 # creates an array for the TARGET values
 y = df['Target_Column'].values
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # splitting the data into TRAIN/TEST (70%/30%) sets
@@ -69,7 +99,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, rando
 ```
 
 ### Cross Validation
+
 Using a **Linear Regression** model:
+
 ```python
 # importing CROSS_VALIDATION and LINEAR_REGRESSION
 from sklearn.model_selection import cross_val_score
@@ -78,7 +110,7 @@ from sklearn.linear_model import LinearRegression
 # creates an array for the TARGET values
 y = df['Target_Column'].values
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # instantiating a LINEAR_REGRESSION regressor
@@ -90,11 +122,12 @@ cv_results = cross_val_score(reg, X, y, cv=5)
 # cv_results = array of CV scores (R-squared for LR)
 ```
 
-# SUPERVISED LEARNING
+## SUPERVISED LEARNING
 
-## CLASSIFICATION MODELS
+### CLASSIFICATION MODELS
 
-### K-Nearest Neighbors
+#### K-Nearest Neighbors
+
 ```python
 # importing TRAIN_TEST_SPLIT and KNEIGHBORS_CLASSIFIER
 from sklearn.model_selection import train_test_split
@@ -103,7 +136,7 @@ from sklearn.neighbors import KNeighborsClassifier
 # creates an array for the TARGET values
 y = df['Target_Column'].values
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # splitting the data into TRAIN/TEST (70%/30%) sets
@@ -123,7 +156,8 @@ train_score = knn.score(X_train, y_train)
 test_score = knn.score( X_test, y_test)
 ```
 
-### Logistic Regression
+#### Logistic Regression
+
 ```python
 # importing TRAIN_TEST_SPLIT and LOGISTIC_REGRESSION
 from sklearn.model_selection import train_test_split
@@ -146,7 +180,8 @@ train_score = lr.score(X_train, y_train)
 test_score = lr.score(X_test, y_test)
 ```
 
-### Support Vector Machines (SVC)
+#### Support Vector Machines (SVC)
+
 ```python
 # importing TRAIN_TEST_SPLIT and SVC
 from sklearn.model_selection import train_test_split
@@ -169,7 +204,8 @@ train_score = svm.score(X_train, y_train)
 test_score = svm.score(X_test, y_test)
 ```
 
-### LinearSVC
+#### LinearSVC
+
 ```python
 # importing TRAIN_TEST_SPLIT and LINEARSVC
 from sklearn.model_selection import train_test_split
@@ -192,9 +228,10 @@ train_score = svm.score(X_train, y_train)
 test_score = svm.score(X_test, y_test)
 ```
 
-## REGRESSION MODELS
+### REGRESSION MODELS
 
-### Linear Regression
+#### Linear Regression
+
 ```python
 # importing TRAIN_TEST_SPLIT and LINEAR_REGRESSION
 from sklearn.model_selection import train_test_split
@@ -203,7 +240,7 @@ from sklearn.linear_model import LinearRegression
 # creates an array for the TARGET values
 y = df['Target_Column'].values
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # splitting the data into TRAIN/TEST (70%/30%) sets
@@ -215,7 +252,7 @@ reg = LinearRegression()
 # fit the model to the training data
 regl.fit(X_train, y_train)
 
-# predicting the labels for the X_TEST set 
+# predicting the labels for the X_TEST set
 y_pred = reg.predict(X_test)
 
 # scoring the model accuracy with the TRAIN and TEST data
@@ -223,7 +260,8 @@ train_score = reg.score(X_train, y_train)
 test_score = reg.score(X_test, y_test)
 ```
 
-### Ridge
+#### Ridge
+
 ```python
 # importing TRAIN_TEST_SPLIT and RIDGE
 from sklearn.model_selection import train_test_split
@@ -232,7 +270,7 @@ from sklearn.linear_model import Ridge
 # creates an array for the TARGET values
 y = df['Target_Column'].values
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # splitting the data into TRAIN/TEST (70%/30%) sets
@@ -252,7 +290,8 @@ train_score = ridge.score(X_train, y_train)
 test_score = ridge.score(X_test, y_test)
 ```
 
-### Lasso
+#### Lasso
+
 ```python
 # importing TRAIN_TEST_SPLIT and LASSO
 from sklearn.model_selection import train_test_split
@@ -261,7 +300,7 @@ from sklearn.linear_model import Lasso
 # creates an array for the TARGET values
 y = df['Target_Column'].values
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # splitting the data into TRAIN/TEST (70%/30%) sets
@@ -281,11 +320,12 @@ train_score = lasso.score(X_train, y_train)
 test_score = lasso.score(X_test, y_test)
 ```
 
-## FEATURE TUNING
+### FEATURE TUNING
 
-### Confusion Matrix
+#### Confusion Matrix
 
 Using a **K-Nearest Neighbors** Model:
+
 ```python
 # importing TRAIN_TEST_SPLIT, KNEIGHBORS_CLASSIFIER, and CONFUSION_MATRIX
 from sklearn.model_selection import train_test_split
@@ -295,7 +335,7 @@ from sklearn.metrics import confusion_matrix
 # creates an array for the TARGET values
 y = df['Target_Column'].values
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # splitting the data into TRAIN/TEST (70%/30%) sets
@@ -317,9 +357,10 @@ confusion_m = confusion_matrix(y_test, y_pred)
 print(confusion_m)
 ```
 
-### Classification Report
+#### Classification Report
 
 Using a **K-Nearest Neighbors** Model:
+
 ```python
 # importing TRAIN_TEST_SPLIT, KNEIGHBORS_CLASSIFIER, and CLASSIFICATION_REPORT
 from sklearn.model_selection import train_test_split
@@ -329,7 +370,7 @@ from sklearn.metrics import classification_report
 # creates an array for the TARGET values
 y = df['Target_Column'].values
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # splitting the data into TRAIN/TEST (70%/30%) sets
@@ -357,7 +398,8 @@ HIGH RECALL = predicted most spam emails correctly
 '''
 ```
 
-### ROC (Receiver Operating Characteristic) Curve
+#### ROC (Receiver Operating Characteristic) Curve
+
 ```python
 # importing TRAIN_TEST_SPLIT and ROC_CURVE
 from sklearn.model_selection import train_test_split
@@ -366,7 +408,7 @@ from sklearn.metrics import roc_curve
 # creates an array for the TARGET values
 y = df['Target_Column'].values
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # splitting the data into TRAIN/TEST (70%/30%) sets
@@ -387,18 +429,19 @@ tpr = TRUE POSITIVE RATE
 '''
 ```
 
-### AUC (Area under ROC Curve) - Large AUC = better model
+#### AUC (Area under ROC Curve) - Large AUC = better model
 
 Using **roc_auc_score** in **sklearn.metrics**; produces one AUC Score.
+
 ```python
 # importing TRAIN_TEST_SPLIT and ROC_AUC_SCORE
-from sklearn.model_selection import train_test_split 
+from sklearn.model_selection import train_test_split
 from sklearn.metrics import roc_auc_score
 
 # creates an array for the TARGET values
 y = df['Target_Column'].values
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # splitting the data into TRAIN/TEST (70%/30%) sets
@@ -419,6 +462,7 @@ score = roc_auc_score(y_test, y_pred_prob)
 ```
 
 Using **cross_val_score** from **sklearn.model_selection** (Cross Validation); produces multiple AUC Scores
+
 ```python
 # importing CROSS_VAL_SCORE
 from sklearn.model_selection import cross_val_score
@@ -426,7 +470,7 @@ from sklearn.model_selection import cross_val_score
 # creates an array for the TARGET values
 y = df['Target_Column'].values
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # instantiating a LOGISTIC_REGRESSION classifier
@@ -439,10 +483,12 @@ cv_results = cross_val_score(lr, X, y, cv=5, scoring='roc_auc')
 mean_score = np.mean(cv_results)
 ```
 
-## HYPERPARAMETER TUNING
+### HYPERPARAMETER TUNING
 
-## GridSearchCV (Grid Search Cross Validation)
+### GridSearchCV (Grid Search Cross Validation)
+
 Using a **Logistic Regression** Model
+
 ```python
 # importing TRAIN_TEST_SPLIT, LOGISTIC_REGRESSION, and GRIDSEARCH_CV
 from sklearn.model_selection import train_test_split
@@ -452,7 +498,7 @@ from sklearn.model_selection import GridSearchCV
 # creates an array for the TARGET values
 y = df['Target_Column'].values
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # splitting the data into TRAIN/TEST (70%/30%) sets
@@ -471,13 +517,14 @@ lr_cv = GridSearchCV(lr, param_grid, cv=5)
 lr_cv.fit(X_train, y_train)
 
 # returns a DICT of the BEST PREFORMING parameters and values
-best_p = lr_cv.best_params_ 
+best_p = lr_cv.best_params_
 
 # returns the SCORE of the BEST PREFORMING parameter
 best_score = lr_cv.best_score_
 ```
 
 Using a **K-Nearest Neighbors** Model
+
 ```python
 # importing TRAIN_TEST_SPLIT, LOGISTIC_REGRESSION, and GRIDSEARCH_CV
 from sklearn.model_selection import train_test_split
@@ -487,7 +534,7 @@ from sklearn.model_selection import GridSearchCV
 # creates an array for the TARGET values
 y = df['Target_Column'].values
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # splitting the data into TRAIN/TEST (70%/30%) sets
@@ -513,6 +560,7 @@ best_score = knn_cv.best_score_
 ```
 
 Using a **ElasticNet** Model
+
 ```python
 # importing TRAIN_TEST_SPLIT, ELASTIC_NET, MEAN_SQUARED_E, and GRIDSEARCH_CV
 from sklearn.model_selection import train_test_split, GridSearchCV
@@ -522,7 +570,7 @@ from sklearn.linear_model import ElasticNet
 # creates an array for the TARGET values
 y = df['Target_Column'].values
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # splitting the data into TRAIN/TEST (70%/30%) sets
@@ -559,8 +607,10 @@ print("Tuned ElasticNet R squared: {}".format(r2))
 print("Tuned ElasticNet MSE: {}".format(mse))
 ```
 
-### RandomizedSearchCV (Randomized GridSearchCV)
+#### RandomizedSearchCV (Randomized GridSearchCV)
+
 Not as computationally expensive as **GridSearchCV**
+
 ```python
 # importing TRAIN_TEST_SPLIT, DECISION_TREE, RANDOMIZED_GRIDSEARCH, and RANDINT
 from sklearn.model_selection import train_test_split
@@ -571,7 +621,7 @@ from sklearn.model_selection import RandomizedSearchCV
 # creates an array for the TARGET values
 y = df['Target_Column'].values
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # splitting the data into TRAIN/TEST (70%/30%) sets
@@ -597,8 +647,10 @@ best_p = tree_cv.best_params_
 best_score = tree_cv.best_score_
 ```
 
-## PIPELINES
+### PIPELINES
+
 Using **K-Nearest Neighbors** Model; scaling data using **StandardScaler** and comparing scaled/un-scaled scores.
+
 ```python
 
 # importing TRAIN_TEST_SPLIT, STANDARD_SCALER, KNEIGHBORS, and PIPELINE
@@ -610,7 +662,7 @@ from sklearn.pipeline import Pipeline
 # creates an array for the TARGET values
 y = df['Target_Column'].values
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # splitting the data into TRAIN/TEST (70%/30%) sets
@@ -619,7 +671,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, rando
 # setup STEPS with TRANSFORMERS/ESTIMATORS
 steps = [('scaler', StandardScaler()),
         ('knn', KNeighborsClassifier())]
-        
+
 # instantiating PIPELINE
 pipeline = Pipeline(steps)
 
@@ -633,7 +685,9 @@ knn_unscaled = KNeighborsClassifier().fit(X_train, y_train)
 scaled_score = knn_scaled.score(X_test, y_test)
 unscaled_score = knn_unscaled.score(X_test, y_test)
 ```
+
 Using **SVC (Support Vector Machine)** Model; producing **Classification Report** on predictions after cleaning up missing data
+
 ```python
 # importing TRAIN_TEST_SPLIT, SVC, IMPUTER, CLASS_REPORT, and PIPELINE
 from sklearn.model_selection import train_test_split
@@ -645,7 +699,7 @@ from sklearn.pipeline import Pipeline
 # creates an array for the TARGET values
 y = df['Target_Column'].values
 
-# creates a column for the FEATURES 
+# creates a column for the FEATURES
 X = df.drop('Target_Column', axis=1).values
 
 # splitting the data into TRAIN/TEST (70%/30%) sets
