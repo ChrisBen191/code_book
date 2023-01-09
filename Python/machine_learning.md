@@ -4,7 +4,12 @@
 
 ## Table of Contents <!-- omit in toc -->
 
+- [Definitions](#definitions)
+  - [Bias Variance Trade-Off](#bias-variance-trade-off)
 - [PRE-PROCESSING](#pre-processing)
+  - [Train Test Split](#train-test-split)
+  - [Scalers](#scalers)
+  - [Imputers](#imputers)
   - [Cross Validation](#cross-validation)
 - [SUPERVISED LEARNING](#supervised-learning)
   - [CLASSIFICATION MODELS](#classification-models)
@@ -12,6 +17,7 @@
     - [Logistic Regression](#logistic-regression)
     - [Support Vector Machines (SVC)](#support-vector-machines-svc)
     - [LinearSVC](#linearsvc)
+    - [Random Forests](#random-forests)
   - [REGRESSION MODELS](#regression-models)
     - [Linear Regression](#linear-regression)
     - [Ridge](#ridge)
@@ -26,76 +32,111 @@
     - [RandomizedSearchCV (Randomized GridSearchCV)](#randomizedsearchcv-randomized-gridsearchcv)
   - [PIPELINES](#pipelines)
 
+## Definitions
+
+**Accuracy** - the porportion of correct predictions made by a model over the total # of predictions.
+
+    # of correct predictions (TP + TN) / total # of predictions
+
+**Missclassification (Error) Rate** - the porportion of incorrect predictions made by a model over the total # of predictions.
+
+    # of incorrect predictions (FP + FN) / total # of predictions
+
+**Recall** - the ability of a model to find all the revelant cases within a dataset.
+
+    # of true positives (TP) / [# of true positives (TP) + # of false negatives (FN)]
+
+**Precision** - the porportion of cases the models says was revelant and cases that were actually revelant.
+
+    # of true positives (TP) / [# of true positives (TP) + # of false positives (FP)]
+
+**F1 Score** - the optimal blend of precision and recall to take into account both metrics. F1 provides the harmonic mean, which unlike the simple mean, punishes extreme values.
+
+    F1 = 2 * (precision * recall) / (precision + recall)
+
+**Bootstramp Samples** - sampling from the dataset with replacement
+
+### Bias Variance Trade-Off
+
+- Low Bias / Low Variance - most accurate model
+- Low Bias / High Variance - accurate predictions and more dispersed outliers
+- High Bias / Low Variance - biased predictions and minimal outliers
+- High Bias / High Variance biased predictions and more disperesed outliers
+
 ## PRE-PROCESSING
 
-Scale data using **scale** in **sklearn.preprocessing**
+### Train Test Split
+
+Split the data into separate **Train (X_train, y_train)** and **Test (X_test, y_test)** sets
 
 ```python
-# importing SCALE
+from sklearn.model_selection import train_test_split
+
+# target values
+y = df['Target_Column']
+
+# feature values
+X = df.drop('Target_Column', axis=1)
+
+# splitting the data into train/test (70%/30%) sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42, stratify=True)
+
+# test_size = % of test set, stratify = proportionate labels in each set
+```
+
+### Scalers
+
+Scale feature data using **scale** in **sklearn.preprocessing**
+
+```python
 from sklearn.preprocessing import scale
 
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
+# feature values
+X = df.drop('Target_Column', axis=1)
 
-# axis=0 standardizes each feature, axis=1 standardizes each record
+# scaled feature values
 X_scaled = scale(X, axis=0)
+
+# axis=0 standardizes each feature
+# axis=1 standardizes each record
 ```
 
 Scale data using **StandardScaler** transformer in **sklearn.preprocessing**
 
 ```python
-# importing STANDARD_SCALER
 from sklearn.preprocessing import StandardScaler
 
-# initializing the STANDARD SCALER
 scaler = StandardScaler()
 
-# fitting scaler to the data being scaled
+# fitting feature data using scaler
 scaler.fit(X)
 
 # each feature to have MEAN=0 and STD=1
 StandardScaler(copy=True, with_mean=True, with_std=True)
 
-# transform data
+# transform data for scaled feature values
 samples_scaled = scaler.transform(X)
 ```
+
+### Imputers
 
 Replace missing data using **Imputer** transformer in **sklearn.preprocessing**
 
 ```python
-# importing TRAIN_TEST_SPLIT and IMPUTER
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import Imputer
 
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
+# feature values
+X = df.drop('Target_Column', axis=1)
 
-# instantiating IMPUTER transformer, axis=0 indicates columns
+# axis=0 indicates columns, axis=1 indicates records
 imp = Imputer(missing_values='NaN', strategy='most_frequent', axis=0)
 
-# fitting IMPUTER to the data
+# filling missing data using imputer
 imp.fit(X)
 
-# transforming the X data
+# transform data for imputed feature values
 X = imp.transform(X)
-```
-
-Splits the data into separate **Train (X_train, y_train)** and **Test (X_test, y_test)** sets
-
-```python
-# importing TRAIN_TEST_SPLIT
-from sklearn.model_selection import train_test_split
-
-# creates an array for the TARGET values
-y = df['Target_Column'].values
-
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
-
-# splitting the data into TRAIN/TEST (70%/30%) sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42, stratify=True)
-
-# test_size = % of test set, stratify = porportionate labels in each set
 ```
 
 ### Cross Validation
@@ -103,17 +144,15 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, rando
 Using a **Linear Regression** model:
 
 ```python
-# importing CROSS_VALIDATION and LINEAR_REGRESSION
 from sklearn.model_selection import cross_val_score
 from sklearn.linear_model import LinearRegression
 
-# creates an array for the TARGET values
-y = df['Target_Column'].values
+# target values
+y = df['Target_Column']
 
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
+# feature values
+X = df.drop('Target_Column', axis=1)
 
-# instantiating a LINEAR_REGRESSION regressor
 reg = LinearRegression()
 
 # CROSS VALIDATING the model; cv= # of CROSS-VALIDATION folds
@@ -126,44 +165,55 @@ cv_results = cross_val_score(reg, X, y, cv=5)
 
 ### CLASSIFICATION MODELS
 
+- Accuracy
+
+  - great with balanced classes, but not great with unbalanced classes (ie. 100 images with 99 dog images, 1 cat image)
+
+- Precision
+  - measured by the ability of the model to identify only the revelant data points.
+
 #### K-Nearest Neighbors
 
+- Classification algorithm that operates as:
+
+  - calculates the distance from "x" to all points in the data
+  - sorts the points by increasing distance from "x"
+  - predicts the majority label of the "k" closest points
+
+- Does not handle categorical data well
+
 ```python
-# importing TRAIN_TEST_SPLIT and KNEIGHBORS_CLASSIFIER
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 
-# creates an array for the TARGET values
-y = df['Target_Column'].values
-
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
-
-# splitting the data into TRAIN/TEST (70%/30%) sets
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
-# instantiating a KNEIGHBORS classifier
+# defining n_neighbors for model
 knn = KNeighborsClassifier(n_neighbors=6)
 
-# fit the model to the training data
+# fit the model to training data
 knn.fit(X_train, y_train)
 
-# predict the labels for the TEST data
+# predict the labels for the test data
 pred = knn.predict(X_test)
 
-# scoring the model accuracy with the TRAIN and TEST data
+# scoring the model accuracy with the train/test data
 train_score = knn.score(X_train, y_train)
 test_score = knn.score( X_test, y_test)
 ```
 
 #### Logistic Regression
 
+- Logistic (Sigmoid) Function takes in any value and outputs it between 0 and 1.
+
 ```python
-# importing TRAIN_TEST_SPLIT and LOGISTIC_REGRESSION
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
-# splitting the data into TRAIN/TEST (70%/30%) sets
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
 # instantiating a LOGISTIC_REGRESSION classifier
@@ -172,10 +222,10 @@ lr = LogisticRegression()
 # fit the model to the training data
 lr.fit(X_train, y_train)
 
-# predict the labels for the TEST data
+# predict the labels for the test data
 y_pred = lr.predict(X_test)
 
-# scoring the model accuracy with the TRAIN and TEST data
+# scoring the model accuracy with the train/test data
 train_score = lr.score(X_train, y_train)
 test_score = lr.score(X_test, y_test)
 ```
@@ -183,23 +233,22 @@ test_score = lr.score(X_test, y_test)
 #### Support Vector Machines (SVC)
 
 ```python
-# importing TRAIN_TEST_SPLIT and SVC
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 
-# splitting the data into TRAIN/TEST (70%/30%) sets
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
-# instantiating a SVC classifier
 svm = SVC()
 
 # fit the model to the training data
 svm.fit(X_train, y_train)
 
-# predict the labels for the TEST data
+# predict the labels for the test data
 pred = svm.predict(X_test)
 
-# scoring the model accuracy with the TRAIN and TEST data
+# scoring the model accuracy with the train/test data
 train_score = svm.score(X_train, y_train)
 test_score = svm.score(X_test, y_test)
 ```
@@ -207,55 +256,65 @@ test_score = svm.score(X_test, y_test)
 #### LinearSVC
 
 ```python
-# importing TRAIN_TEST_SPLIT and LINEARSVC
 from sklearn.model_selection import train_test_split
 from sklearn.svm import LinearSVC
 
-# splitting the data into TRAIN/TEST (70%/30%) sets
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
-# instantiating a LINEARSVC classifier
 svm = LinearSVC()
 
 # fit the model to the training data
 svm.fit(X_train, y_train)
 
-# predict the labels for the TEST data
+# predict the labels for the test data
 pred = svm.predict(X_test)
 
-# scoring the model accuracy with the TRAIN and TEST data
+# scoring the model accuracy with the train/test data
 train_score = svm.score(X_train, y_train)
 test_score = svm.score(X_test, y_test)
 ```
 
+#### Random Forests
+
+Uses many trees with a random sample of features chosen as the split. Alleviates one very strong feature from creating an ensemble of highly similar trees that use the strong feature at the top split.
+
+- a new random sample of features is chosen for every single tree, at every single split.
+- in a classification random forest model, `m` features is typically chosen to be the `sqrt(p)` or square root of the `p` full set of features.
+
 ### REGRESSION MODELS
+
+- Mean Absolute Error (MAE)
+
+  - the mean of the absolute value of errors `ie. true value - predicted value`, easy to understand but won't punish large errors.
+
+- Mean Squared Error (MSE)
+
+  - the mean of the value of errors squared `ie. (true value - predicted_value)^2`, accounts for large errors but also squares units.
+
+- Root Mean Square Error (RMSE)
+  - the square root of the mean of the values of errors squared `ie. sqrt((true_value - predicted value)^2)` to punish large values and provides same units as y.
 
 #### Linear Regression
 
 ```python
-# importing TRAIN_TEST_SPLIT and LINEAR_REGRESSION
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 
-# creates an array for the TARGET values
-y = df['Target_Column'].values
-
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
-
-# splitting the data into TRAIN/TEST (70%/30%) sets
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
-# # instantiating a LINEAR_REGRESSION regressor
 reg = LinearRegression()
 
 # fit the model to the training data
-regl.fit(X_train, y_train)
+reg.fit(X_train, y_train)
 
-# predicting the labels for the X_TEST set
+# predict the labels for the test data
 y_pred = reg.predict(X_test)
 
-# scoring the model accuracy with the TRAIN and TEST data
+# scoring the model accuracy with the train/test data
 train_score = reg.score(X_train, y_train)
 test_score = reg.score(X_test, y_test)
 ```
@@ -263,29 +322,23 @@ test_score = reg.score(X_test, y_test)
 #### Ridge
 
 ```python
-# importing TRAIN_TEST_SPLIT and RIDGE
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import Ridge
 
-# creates an array for the TARGET values
-y = df['Target_Column'].values
-
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
-
-# splitting the data into TRAIN/TEST (70%/30%) sets
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
-# instantiating a RIDGE regressor; normalize=True normalizes all variables
+# normalize=True normalizes all variables
 ridge = Ridge(alpha=0.1, normalize=True)
 
 # fit the model to the training data
 ridge.fit(X_train, y_train)
 
-# predicting the labels for the X_TEST set
+# predict the labels for the test data
 ridge_pred = ridge.predict(X_test)
 
-# scoring the model accuracy with the TRAIN and TEST data
+# scoring the model accuracy with the train/test data
 train_score = ridge.score(X_train, y_train)
 test_score = ridge.score(X_test, y_test)
 ```
@@ -293,29 +346,23 @@ test_score = ridge.score(X_test, y_test)
 #### Lasso
 
 ```python
-# importing TRAIN_TEST_SPLIT and LASSO
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import Lasso
 
-# creates an array for the TARGET values
-y = df['Target_Column'].values
-
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
-
-# splitting the data into TRAIN/TEST (70%/30%) sets
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
-# instantiating a LASSO regressor; normalize=True normalizes all variables
+# normalize=True normalizes all variables
 lasso = Lasso(alpha=0.1, normalize=True)
 
 # fit the model to the training data
 lasso.fit(X_train, y_train)
 
-# predicting the labels for the X_TEST set
+# predict the labels for the test data
 lasso_pred = lasso.predict(X_test)
 
-# scoring the model accuracy with the TRAIN and TEST data
+# scoring the model accuracy with the train/test data
 train_score = lasso.score(X_train, y_train)
 test_score = lasso.score(X_test, y_test)
 ```
@@ -324,33 +371,38 @@ test_score = lasso.score(X_test, y_test)
 
 #### Confusion Matrix
 
+<p align="center">
+<img src="confusion-matrix.png" width="600" height="400">
+</p>
+
+Fundamentally a Confusion Matrix provides ways to compare predicted values versus true values.
+
+- **True Positive (TP)** - model predicts positive, outcome is positive
+- **False Positive (FP) Type I Error** - model predicts positive, outcome is negative
+- **True Negative (TN)** - model predicts negative, outcome is negative
+- **False Negative (FN) Type II Error** - model predicts negative, outcome is positive
+
 Using a **K-Nearest Neighbors** Model:
 
 ```python
-# importing TRAIN_TEST_SPLIT, KNEIGHBORS_CLASSIFIER, and CONFUSION_MATRIX
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix
 
-# creates an array for the TARGET values
-y = df['Target_Column'].values
-
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
-
-# splitting the data into TRAIN/TEST (70%/30%) sets
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
-# instantiating a KNEIGHBORS_CLASSIFIER
+# defining n_neighbors for the model
 knn = KNeighborsClassifier(n_neighbors=6)
 
 # fit the model to the training data
 knn.fit(X_train, y_train)
 
-# Predict the labels of the test data: y_pred
+# predict the labels for the test data
 y_pred = knn.predict(X_test)
 
-# generate CONFUSION_MATRIX on actual/predicted labels
+# generate the confusion_matrix on actual/predicted labels
 confusion_m = confusion_matrix(y_test, y_pred)
 
 # print confusion_m = [[TP, FN], [FP,TN]]
@@ -362,30 +414,24 @@ print(confusion_m)
 Using a **K-Nearest Neighbors** Model:
 
 ```python
-# importing TRAIN_TEST_SPLIT, KNEIGHBORS_CLASSIFIER, and CLASSIFICATION_REPORT
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report
 
-# creates an array for the TARGET values
-y = df['Target_Column'].values
-
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
-
-# splitting the data into TRAIN/TEST (70%/30%) sets
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
-# instantiating a KNEIGHBORS_CLASSIFIER
+# defining n_neighbors for the model
 knn = KNeighborsClassifier(n_neighbors=6)
 
 # fit the model to the training data
 knn.fit(X_train, y_train)
 
-# predicting on the TEST set
+# predict the labels for the test data
 y_pred = knn.predict(X_test)
 
-# generate CLASSIFICATION_REPORT on actual/predicted labels
+# generate the classification report on actual/predicted labels
 classification_r = classification_report(y_test, y_pred)
 
 # SUPPORT column provides # of samples of the TRUE RESPONSE that lie in that class
@@ -401,23 +447,16 @@ HIGH RECALL = predicted most spam emails correctly
 #### ROC (Receiver Operating Characteristic) Curve
 
 ```python
-# importing TRAIN_TEST_SPLIT and ROC_CURVE
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import roc_curve
 
-# creates an array for the TARGET values
-y = df['Target_Column'].values
-
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
-
-# splitting the data into TRAIN/TEST (70%/30%) sets
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
-# instantiating a LOGISTIC_REGRESSION classifier
 lr = LogisticRegression()
 
-# PREDICT_PROBA predicts probabilities w/out threshold; [:,1] are labels for the '1' binary label
+# predict_proba gives probabilities w/out threshold; [:,1] are labels for the '1' binary label
 y_pred_prob = lr.predict_proba(X_test)[:,1]
 
 # unpack ROC curve values: fpr, tpr, thresholds
@@ -431,30 +470,22 @@ tpr = TRUE POSITIVE RATE
 
 #### AUC (Area under ROC Curve) - Large AUC = better model
 
-Using **roc_auc_score** in **sklearn.metrics**; produces one AUC Score.
+Produces one AUC Score.
 
 ```python
-# importing TRAIN_TEST_SPLIT and ROC_AUC_SCORE
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import roc_auc_score
 
-# creates an array for the TARGET values
-y = df['Target_Column'].values
-
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
-
-# splitting the data into TRAIN/TEST (70%/30%) sets
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
-# instantiating a LOGISTIC_REGRESSION classifier
 lr = LogisticRegression()
 
-# fit the LOG_REG model
+# fit the model to the training data
 lr.fit(X_train, y_train)
 
-# compute predicted probabilities of model labels w/out threshold;
-# [:,1] are labels for the '1' binary label
+# predict_proba gives probabilities w/out threshold; [:,1] are labels for the '1' binary label
 y_pred_prob = lr.predict_proba(X_test)[:,1]
 
 # compute the ROC_AUC_SCORE
@@ -464,14 +495,11 @@ score = roc_auc_score(y_test, y_pred_prob)
 Using **cross_val_score** from **sklearn.model_selection** (Cross Validation); produces multiple AUC Scores
 
 ```python
-# importing CROSS_VAL_SCORE
 from sklearn.model_selection import cross_val_score
 
-# creates an array for the TARGET values
-y = df['Target_Column'].values
 
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
 
 # instantiating a LOGISTIC_REGRESSION classifier
 lr = LogisticRegression()
