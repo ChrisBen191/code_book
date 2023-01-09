@@ -6,55 +6,55 @@
 
 - [Definitions](#definitions)
   - [Bias Variance Trade-Off](#bias-variance-trade-off)
-- [PRE-PROCESSING](#pre-processing)
+- [Pre-processing](#pre-processing)
   - [Train Test Split](#train-test-split)
   - [Scalers](#scalers)
   - [Imputers](#imputers)
   - [Cross Validation](#cross-validation)
-- [SUPERVISED LEARNING](#supervised-learning)
-  - [CLASSIFICATION MODELS](#classification-models)
+- [Supervised Learning](#supervised-learning)
+  - [Classification](#classification)
     - [K-Nearest Neighbors](#k-nearest-neighbors)
     - [Logistic Regression](#logistic-regression)
     - [Support Vector Machines (SVC)](#support-vector-machines-svc)
     - [LinearSVC](#linearsvc)
     - [Random Forests](#random-forests)
-  - [REGRESSION MODELS](#regression-models)
+  - [Regression](#regression)
     - [Linear Regression](#linear-regression)
     - [Ridge](#ridge)
     - [Lasso](#lasso)
-  - [FEATURE TUNING](#feature-tuning)
+  - [Feature Tuning](#feature-tuning)
     - [Confusion Matrix](#confusion-matrix)
     - [Classification Report](#classification-report)
     - [ROC (Receiver Operating Characteristic) Curve](#roc-receiver-operating-characteristic-curve)
-    - [AUC (Area under ROC Curve) - Large AUC = better model](#auc-area-under-roc-curve---large-auc--better-model)
-  - [HYPERPARAMETER TUNING](#hyperparameter-tuning)
+    - [AUC (Area under ROC Curve)](#auc-area-under-roc-curve)
+  - [Hyperparameter Tuning](#hyperparameter-tuning)
   - [GridSearchCV (Grid Search Cross Validation)](#gridsearchcv-grid-search-cross-validation)
     - [RandomizedSearchCV (Randomized GridSearchCV)](#randomizedsearchcv-randomized-gridsearchcv)
-  - [PIPELINES](#pipelines)
+  - [Pipelines](#pipelines)
 
 ## Definitions
 
-`Accuracy` - the porportion of correct predictions made by a model over the total # of predictions.
+- `Accuracy` - the porportion of correct predictions made by a model over the total # of predictions.
 
-    # of correct predictions (TP + TN) / total # of predictions
+  `# of correct predictions (TP + TN) / total # of predictions`
 
-`Missclassification (Error) Rate` - the porportion of incorrect predictions made by a model over the total # of predictions.
+- `Missclassification (Error) Rate` - the porportion of incorrect predictions made by a model over the total # of predictions.
 
-    # of incorrect predictions (FP + FN) / total # of predictions
+  `# of incorrect predictions (FP + FN) / total # of predictions`
 
-`Recall` - the ability of a model to find all the revelant cases within a dataset.
+- `Recall` - the ability of a model to find all the revelant cases within a dataset.
 
-    # of true positives (TP) / [# of true positives (TP) + # of false negatives (FN)]
+  `# of true positives (TP) / [# of true positives (TP) + # of false negatives (FN)]`
 
-`Precision` - the porportion of cases the models says was revelant and cases that were actually revelant.
+- `Precision` - the porportion of cases the models says was revelant and cases that were actually revelant.
 
-    # of true positives (TP) / [# of true positives (TP) + # of false positives (FP)]
+  `# of true positives (TP) / [# of true positives (TP) + # of false positives (FP)]`
 
-`F1 Score` - the optimal blend of precision and recall to take into account both metrics. F1 provides the harmonic mean, which unlike the simple mean, punishes extreme values.
+- `F1 Score` - the optimal blend of precision and recall to take into account both metrics. F1 provides the harmonic mean, which unlike the simple mean, punishes extreme values.
 
-    F1 = 2 * (precision * recall) / (precision + recall)
+  `F1 = 2 (precision _ recall) / (precision + recall)`
 
-`Bootstramp Samples` - sampling from the dataset with replacement
+- `Bootstramp Samples` - sampling from the dataset with replacement
 
 ### Bias Variance Trade-Off
 
@@ -63,7 +63,7 @@
 - High Bias / Low Variance - biased predictions and minimal outliers
 - High Bias / High Variance biased predictions and more disperesed outliers
 
-## PRE-PROCESSING
+## Pre-processing
 
 ### Train Test Split
 
@@ -161,9 +161,9 @@ cv_results = cross_val_score(reg, X, y, cv=5)
 # cv_results = array of CV scores (R-squared for LR)
 ```
 
-## SUPERVISED LEARNING
+## Supervised Learning
 
-### CLASSIFICATION MODELS
+### Classification
 
 - Accuracy
 
@@ -283,7 +283,7 @@ Uses many trees with a random sample of features chosen as the split. Alleviates
 - a new random sample of features is chosen for every single tree, at every single split.
 - in a classification random forest model, `m` features is typically chosen to be the `sqrt(p)` or square root of the `p` full set of features.
 
-### REGRESSION MODELS
+### Regression
 
 - Mean Absolute Error (MAE)
 
@@ -367,7 +367,7 @@ train_score = lasso.score(X_train, y_train)
 test_score = lasso.score(X_test, y_test)
 ```
 
-### FEATURE TUNING
+### Feature Tuning
 
 #### Confusion Matrix
 
@@ -468,9 +468,9 @@ tpr = TRUE POSITIVE RATE
 '''
 ```
 
-#### AUC (Area under ROC Curve) - Large AUC = better model
+#### AUC (Area under ROC Curve)
 
-Produces one AUC Score.
+- Large AUC = better model; produces one AUC Score.
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -492,7 +492,7 @@ y_pred_prob = lr.predict_proba(X_test)[:,1]
 score = roc_auc_score(y_test, y_pred_prob)
 ```
 
-Using **cross_val_score** from **sklearn.model_selection** (Cross Validation); produces multiple AUC Scores
+Using `cross_val_score` from `sklearn.model_selection` (Cross Validation); produces multiple AUC Scores
 
 ```python
 from sklearn.model_selection import cross_val_score
@@ -511,83 +511,63 @@ cv_results = cross_val_score(lr, X, y, cv=5, scoring='roc_auc')
 mean_score = np.mean(cv_results)
 ```
 
-### HYPERPARAMETER TUNING
+### Hyperparameter Tuning
 
 ### GridSearchCV (Grid Search Cross Validation)
 
-Using a **Logistic Regression** Model
-
 ```python
-# importing TRAIN_TEST_SPLIT, LOGISTIC_REGRESSION, and GRIDSEARCH_CV
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV
 
-# creates an array for the TARGET values
-y = df['Target_Column'].values
-
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
-
-# splitting the data into TRAIN/TEST (70%/30%) sets
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
 # setup HYPERPARAMETER_GRID for model hyperparameter(s)
 param_grid = {'C': np.arange(0, 10, 1)}
 
-# instantiating a LOGISTIC_REGRESSION classifier
 lr = LogisticRegression()
 
-# intantiating the GRIDSEARCH_OBJECT
+# intantiating the gridsearch object
 lr_cv = GridSearchCV(lr, param_grid, cv=5)
 
-# fit the LOG_REG model
+# fit the model to the training data
 lr_cv.fit(X_train, y_train)
 
-# returns a DICT of the BEST PREFORMING parameters and values
+# returns a dict of the best performing features and values
 best_p = lr_cv.best_params_
 
-# returns the SCORE of the BEST PREFORMING parameter
+# returns the score of the best performing feature
 best_score = lr_cv.best_score_
 ```
 
-Using a **K-Nearest Neighbors** Model
-
 ```python
-# importing TRAIN_TEST_SPLIT, LOGISTIC_REGRESSION, and GRIDSEARCH_CV
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import GridSearchCV
 
-# creates an array for the TARGET values
-y = df['Target_Column'].values
-
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
-
-# splitting the data into TRAIN/TEST (70%/30%) sets
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
 # setup HYPERPARAMETER_GRID for model hyperparameter(s)
 param_grid = {'n_neighbors': np.arange(1, 50)}
 
-# instantiating a K_NEAREST classifier
 knn = KNeighborsClassifier()
 
-# intantiating the GRIDSEARCH_OBJECT
+# intantiating the gridsearch object
 knn_cv = GridSearchCV(knn, param_grid, cv=5)
 
-# fit the K_NEAREST model
+# fit the model to the training data
 knn_cv.fit(X_train, y_train)
 
-# returns a DICT of the BEST PREFORMING parameters and values
+# returns a dict of the best performing features and values
 best_p = knn_cv.best_params_
 
-# returns the SCORE of the BEST PREFORMING parameter
+# returns the score of the best performing feature
 best_score = knn_cv.best_score_
 ```
-
-Using a **ElasticNet** Model
 
 ```python
 # importing TRAIN_TEST_SPLIT, ELASTIC_NET, MEAN_SQUARED_E, and GRIDSEARCH_CV
@@ -595,31 +575,25 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import mean_squared_error
 from sklearn.linear_model import ElasticNet
 
-# creates an array for the TARGET values
-y = df['Target_Column'].values
-
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
-
-# splitting the data into TRAIN/TEST (70%/30%) sets
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
 # setup HYPERPARAMETER_GRID for model hyperparameter(s)
 param_grid = {'l1_ratio': np.linspace(0, 1, 30)}
 
-# instantiating a ELASTIC_NET classifier
 elastic_net = ElasticNet()
 
-# intantiating the GRIDSEARCH_OBJECT
+# intantiating the gridsearch object
 gm_cv = GridSearchCV(elastic_net, param_grid, cv=5)
 
-# fit the ELASTIC_NET model
+# fit the model to the training data
 gm_cv.fit(X_train, y_train)
 
-# predicting on the TEST set
+# predict the labels for the test data
 y_pred = gm_cv.predict(X_test)
 
-# scoring the ELASTIC_NET model (REGRESSOR)
+# scoring the elastic_net model (REGRESSOR)
 r2 = gm_cv.score(X_test, y_test)
 
 # computing the MEAN_SQUARED_ERROR using actual/predicted labels
@@ -675,7 +649,7 @@ best_p = tree_cv.best_params_
 best_score = tree_cv.best_score_
 ```
 
-### PIPELINES
+### Pipelines
 
 Using **K-Nearest Neighbors** Model; scaling data using **StandardScaler** and comparing scaled/un-scaled scores.
 
