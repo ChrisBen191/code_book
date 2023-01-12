@@ -10,6 +10,8 @@ _Contains the current languages and libraries I'm developing in._
 
 - [Python](#python)
   - [Python General](#python-general)
+  - [Pandas](#pandas)
+  - [3rd Party Libraries](#3rd-party-libraries)
   - [Data Visualization](#data-visualization)
   - [Machine Learning](#machine-learning)
 - [Shell](#shell)
@@ -32,12 +34,14 @@ _Contains the current languages and libraries I'm developing in._
 - [Dictionaries](Python/python_snippets.md#DICTIONARIES)
 - [Functions](Python/python_snippets.md#FUNCTIONS)
 
-[Pandas](Python/pandas.md)
+### Pandas
 
-- [GroupBy](Python/pandas.md#Groupby)
+- [Pandas](Python/pandas.md)
 
-[Pyinput Module](Python/pyinput_plus.md)
-[Regular Expressions](Python/regular_expression.md)
+### 3rd Party Libraries
+
+- [Pyinput Module](Python/pyinput_plus.md)
+- [Regular Expressions](Python/regular_expression.md)
 
 ### Data Visualization
 
