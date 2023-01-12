@@ -1,10 +1,20 @@
-# Code Book
+# Code Book <!-- omit in toc -->
 
 _Contains the current languages and libraries I'm developing in._
 
 <p align="center">
 <img src="code_book_cover.jpeg" alt="Image of Floating Book" height="450" width="450"/>
 </p>
+
+# Table of Contents <!-- omit in toc -->
+
+- [Shell](#shell)
+- [SQL / GraphQL](#sql--graphql)
+- [JavaScript](#javascript)
+- [Python](#python)
+  - [Python General](#python-general)
+  - [Data Visualization](#data-visualization)
+  - [Machine Learning](#machine-learning)
 
 ---
 
@@ -23,6 +33,7 @@ _Contains the current languages and libraries I'm developing in._
 ## SQL / GraphQL
 
 - [SQL](SQL/sql_snippets.md)
+- [Snowflake](SQL/snowflake.md)
 - [Cypher](Cypher/cypher_snippets.md)
 
 ## JavaScript
@@ -31,7 +42,7 @@ _Contains the current languages and libraries I'm developing in._
 
 ## Python
 
-[Python](Python/python_snippets.md#PYTHON)
+### Python General
 
 - [Importing Data](Python/python_snippets.md#IMPORTING-DATA)
 - [Iterators](Python/python_snippets.md#ITERATORS)
@@ -50,22 +61,17 @@ _Contains the current languages and libraries I'm developing in._
 [Pyinput Module](Python/pyinput_plus.md)
 [Regular Expressions](Python/regular_expression.md)
 
-[Data Visualization](Python/data_visualization.md)
+### Data Visualization
 
 - [Matplotlib](Python/data_visualization.md#MATPLOTLIB)
 - [Seaborn](Python/data_visualization.md#SEABORN)
 - [Bokeh](Python/data_visualization.md#BOKEH)
 
-[Machine Learning](Python/machine_learning.md)
+### Machine Learning
 
-- [Preprocessing](Python/machine_learning.md##PREPROCESSING)
-- [Classifiers](Python/machine_learning.md##CLASSIFICATION-MODELS)
-- [Regressors](Python/machine_learning.md##REGRESSION-MODELS)
-- [Feature Tuning](Python/machine_learning.md##FEATURE-TUNING)
-- [Hyperparameter Tuning](Python/machine_learning.md##HYPERPARAMETER-TUNING)
-- [Pipelines](Python/machine_learning.md##PIPELINES)
-
-[APIs](Python/api.md)
+- [Preprocessing](Python/machine_learning.md#pre-processing)
+- [Supervised Learning](Python/machine_learning.md#supervised-learning)
+- [Feature Tuning](Python/machine_learning.md#feature-tuning)
 
 [Time Series](Python/time_series.md)
 
