@@ -8,37 +8,15 @@ _Contains the current languages and libraries I'm developing in._
 
 # Table of Contents <!-- omit in toc -->
 
-- [Shell](#shell)
-- [SQL / GraphQL](#sql--graphql)
-- [JavaScript](#javascript)
 - [Python](#python)
   - [Python General](#python-general)
   - [Data Visualization](#data-visualization)
   - [Machine Learning](#machine-learning)
+- [Shell](#shell)
+- [SQL](#sql)
+- [JavaScript](#javascript)
 
 ---
-
-## Shell
-
-[Shell](Shell/shell_snippets.md)
-
-- [Bash](Shell/shell_snippets.md##BASH)
-- [Git](Shell/shell_snippets.md##GIT)
-- [Conda](Shell/shell_snippets.md##CONDA)
-- [Jupyter](Shell/shell_snippets.md##JUPYTER)
-- [Unix](Shell/shell_snippets.md##UNIX)
-- [Tmux](Shell/shell_snippets.md##TMUX)
-- [PostgreSQL](Shell/shell_snippets.md##POSTGRESQL)
-
-## SQL / GraphQL
-
-- [SQL](SQL/sql_snippets.md)
-- [Snowflake](SQL/snowflake.md)
-- [Cypher](Cypher/cypher_snippets.md)
-
-## JavaScript
-
-- [JavaScript](JavaScript/javascript.md)
 
 ## Python
 
@@ -74,5 +52,27 @@ _Contains the current languages and libraries I'm developing in._
 - [Feature Tuning](Python/machine_learning.md#feature-tuning)
 
 [Time Series](Python/time_series.md)
+
+## Shell
+
+[Shell](Shell/shell_snippets.md)
+
+- [Bash](Shell/shell_snippets.md##BASH)
+- [Git](Shell/shell_snippets.md##GIT)
+- [Conda](Shell/shell_snippets.md##CONDA)
+- [Jupyter](Shell/shell_snippets.md##JUPYTER)
+- [Unix](Shell/shell_snippets.md##UNIX)
+- [Tmux](Shell/shell_snippets.md##TMUX)
+- [PostgreSQL](Shell/shell_snippets.md##POSTGRESQL)
+
+## SQL
+
+- [SQL](SQL/sql_snippets.md)
+- [Snowflake](SQL/snowflake.md)
+- [Cypher](Cypher/cypher_snippets.md)
+
+## JavaScript
+
+- [JavaScript](JavaScript/javascript.md)
 
 <!-- CLEANUP FILE PATHS -->
