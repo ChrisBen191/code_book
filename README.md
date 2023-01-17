@@ -53,7 +53,9 @@ _Contains the current languages and libraries I'm developing in._
 
 - [Preprocessing](Python/machine_learning.md#pre-processing)
 - [Supervised Learning](Python/machine_learning.md#supervised-learning)
+- [Unsupervised Learning](Python/machine_learning.md#unsupervised-learning)
 - [Feature Tuning](Python/machine_learning.md#feature-tuning)
+- [Hyperparameter Tuning](Python/machine_learning.md#hyperparameter-tuning)
 
 [Time Series](Python/time_series.md)
 
