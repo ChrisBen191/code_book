@@ -22,12 +22,15 @@
     - [Linear Regression](#linear-regression)
     - [Ridge](#ridge)
     - [Lasso](#lasso)
-  - [Feature Tuning](#feature-tuning)
-    - [Confusion Matrix](#confusion-matrix)
-    - [Classification Report](#classification-report)
-    - [ROC (Receiver Operating Characteristic) Curve](#roc-receiver-operating-characteristic-curve)
-    - [AUC (Area under ROC Curve)](#auc-area-under-roc-curve)
-  - [Hyperparameter Tuning](#hyperparameter-tuning)
+- [Unsupervised Learning](#unsupervised-learning)
+  - [Classification](#classification-1)
+    - [K Means Clustering](#k-means-clustering)
+- [Feature Tuning](#feature-tuning)
+  - [Confusion Matrix](#confusion-matrix)
+  - [Classification Report](#classification-report)
+  - [ROC (Receiver Operating Characteristic) Curve](#roc-receiver-operating-characteristic-curve)
+  - [AUC (Area under ROC Curve)](#auc-area-under-roc-curve)
+- [Hyperparameter Tuning](#hyperparameter-tuning)
   - [GridSearchCV (Grid Search Cross Validation)](#gridsearchcv-grid-search-cross-validation)
     - [RandomizedSearchCV (Randomized GridSearchCV)](#randomizedsearchcv-randomized-gridsearchcv)
   - [Pipelines](#pipelines)
@@ -367,9 +370,49 @@ train_score = lasso.score(X_train, y_train)
 test_score = lasso.score(X_test, y_test)
 ```
 
-### Feature Tuning
+## Unsupervised Learning
 
-#### Confusion Matrix
+### Classification
+
+#### K Means Clustering
+
+- Goal is to divide data into similarly distinct groups, defined by number of clusters `k`.
+
+- Process is to **randomly assign** each point in the data to a cluster.
+- Until clusters stop changing:
+
+  - for each cluster, compute the "cluster centroid" by taking the mean vector of points in the cluster.
+  - assign each data point to the cluster for which the centroid is the closest.
+
+- With no best way to choose `k` value, `elbow method` is found to be sufficient.
+
+  - compute the SSE for some values of k (ie. 2, 4, 6, 8).
+  - when plotting `k` against the SSE, the error decreases as `k` gets larger because the number of clusters increases (distortion in a cluster is also smaller).
+    - this observation creates an "elbow effect" when SSE decreases abruptly; the `k` value at the elbow is chosen.
+
+  > **SSE (Sum of Squared Error):** the sum of the squared distance between each member of the cluster and its centroid.
+
+```python
+from sklearn.cluster import KMeans
+
+X = df
+
+# n_clusters tell model how many clusters to create
+kmeans = KMeans(n_clusters=2)
+
+# fit the model to the data
+kmeans.fit(X)
+
+# provides the centers of n_clusters
+cluster_centers = kmeans.cluster_centers_
+
+# gives the predicted labels
+predictions = kmeans.labels_
+```
+
+## Feature Tuning
+
+### Confusion Matrix
 
 <p align="center">
 <img src="confusion-matrix.png" width="600" height="400">
@@ -409,7 +452,7 @@ confusion_m = confusion_matrix(y_test, y_pred)
 print(confusion_m)
 ```
 
-#### Classification Report
+### Classification Report
 
 Using a **K-Nearest Neighbors** Model:
 
@@ -444,7 +487,7 @@ HIGH RECALL = predicted most spam emails correctly
 '''
 ```
 
-#### ROC (Receiver Operating Characteristic) Curve
+### ROC (Receiver Operating Characteristic) Curve
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -468,7 +511,7 @@ tpr = TRUE POSITIVE RATE
 '''
 ```
 
-#### AUC (Area under ROC Curve)
+### AUC (Area under ROC Curve)
 
 - Large AUC = better model; produces one AUC Score.
 
@@ -511,7 +554,7 @@ cv_results = cross_val_score(lr, X, y, cv=5, scoring='roc_auc')
 mean_score = np.mean(cv_results)
 ```
 
-### Hyperparameter Tuning
+## Hyperparameter Tuning
 
 ### GridSearchCV (Grid Search Cross Validation)
 
@@ -570,7 +613,6 @@ best_score = knn_cv.best_score_
 ```
 
 ```python
-# importing TRAIN_TEST_SPLIT, ELASTIC_NET, MEAN_SQUARED_E, and GRIDSEARCH_CV
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import mean_squared_error
 from sklearn.linear_model import ElasticNet
@@ -584,7 +626,7 @@ param_grid = {'l1_ratio': np.linspace(0, 1, 30)}
 
 elastic_net = ElasticNet()
 
-# intantiating the gridsearch object
+# instantiating the gridsearch object
 gm_cv = GridSearchCV(elastic_net, param_grid, cv=5)
 
 # fit the model to the training data
@@ -596,13 +638,13 @@ y_pred = gm_cv.predict(X_test)
 # scoring the elastic_net model (REGRESSOR)
 r2 = gm_cv.score(X_test, y_test)
 
-# computing the MEAN_SQUARED_ERROR using actual/predicted labels
+# computing the mean_squared_error using actual/predicted labels
 mse = mean_squared_error(y_test, y_pred)
 
-# returns a DICT of the BEST PREFORMING parameters and values
+# returns a dict of the best performing features and values
 best_p = gm_cv.best_params_
 
-# returns the SCORE of the BEST PREFORMING parameter
+# returns the score of the best performing feature
 best_score = gm_cv.best_score_
 
 print("Tuned ElasticNet R squared: {}".format(r2))
@@ -611,120 +653,99 @@ print("Tuned ElasticNet MSE: {}".format(mse))
 
 #### RandomizedSearchCV (Randomized GridSearchCV)
 
-Not as computationally expensive as **GridSearchCV**
+Not as computationally expensive as `GridSearchCV`
 
 ```python
-# importing TRAIN_TEST_SPLIT, DECISION_TREE, RANDOMIZED_GRIDSEARCH, and RANDINT
 from sklearn.model_selection import train_test_split
 from scipy.stats import randint
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import RandomizedSearchCV
 
-# creates an array for the TARGET values
-y = df['Target_Column'].values
-
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
-
-# splitting the data into TRAIN/TEST (70%/30%) sets
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
 # setup HYPERPARAMETER_GRID for model hyperparameter(s)
 param_dist = {"max_depth": [3, None], "max_features": randint(1, 9),
               "min_samples_leaf": randint(1, 9), "criterion": ["gini", "entropy"]}
 
-# instantiating a DECISION_TREE classifier
 tree = DecisionTreeClassifier()
 
-# intantiating the GRIDSEARCH_OBJECT
+# instantiating the gridsearch object
 tree_cv = RandomizedSearchCV(tree, param_dist, cv=5)
 
-# fit the DECISION_TREE model
+# fit the model to the training data
 tree_cv.fit(X_train, y_train)
 
-# returns a DICT of the BEST PREFORMING parameters and values
+# returns a dict of the best performing features and values
 best_p = tree_cv.best_params_
 
-# returns the SCORE of the BEST PREFORMING parameter
+# returns the score of the best performing feature
 best_score = tree_cv.best_score_
 ```
 
 ### Pipelines
 
-Using **K-Nearest Neighbors** Model; scaling data using **StandardScaler** and comparing scaled/un-scaled scores.
+Using `K-Nearest Neighbors` Model; scaling data using `StandardScaler` and comparing scaled/un-scaled scores.
 
 ```python
-
-# importing TRAIN_TEST_SPLIT, STANDARD_SCALER, KNEIGHBORS, and PIPELINE
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import Pipeline
 
-# creates an array for the TARGET values
-y = df['Target_Column'].values
-
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
-
-# splitting the data into TRAIN/TEST (70%/30%) sets
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
-# setup STEPS with TRANSFORMERS/ESTIMATORS
+# setup steps with transformer and estimator
 steps = [('scaler', StandardScaler()),
         ('knn', KNeighborsClassifier())]
 
-# instantiating PIPELINE
+# instantiating pipeline
 pipeline = Pipeline(steps)
 
-# fit the PIPELINE, computes 'scaler' then 'knn'
+# fit the pipeline, computes 'scaler' then 'knn'
 knn_scaled = pipeline.fit(X_train, y_train)
 
-# instantiating a KNEIGHBORS classifier, fitting to UN-SCALED data for comparison
+# fitting unscaled training data for comparison
 knn_unscaled = KNeighborsClassifier().fit(X_train, y_train)
 
-# scoring the model accuracy with the SCALED and UN-SCALED TEST data
+# scoring the model accuracy with the scaled/un-scaled test data
 scaled_score = knn_scaled.score(X_test, y_test)
 unscaled_score = knn_unscaled.score(X_test, y_test)
 ```
 
-Using **SVC (Support Vector Machine)** Model; producing **Classification Report** on predictions after cleaning up missing data
+Using `SVC (Support Vector Machine)` Model; producing `Classification Report` on predictions after cleaning up missing data
 
 ```python
-# importing TRAIN_TEST_SPLIT, SVC, IMPUTER, CLASS_REPORT, and PIPELINE
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import Imputer
 from sklearn.svm import SVC
 from sklearn.metrics import classification_report
 from sklearn.pipeline import Pipeline
 
-# creates an array for the TARGET values
-y = df['Target_Column'].values
-
-# creates a column for the FEATURES
-X = df.drop('Target_Column', axis=1).values
-
-# splitting the data into TRAIN/TEST (70%/30%) sets
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 
-# instantiating IMPUTER transformer, axis=0 indicates columns, strategy = replacement method
 imp = Imputer(missing_values='NaN', strategy='most_frequent', axis=0)
 
-# setup STEPS with TRANSFORMERS/ESTIMATORS
+# setup steps with transformer and estimator
 steps = [('imputation', imp), ('SVM', SVC())]
 
-# instantiating PIPELINE
+# instantiating pipeline
 pipeline = Pipeline(steps)
 
-# fit the PIPELINE, computes 'imputation' then 'SVM'
+# fit the pipeline, computes 'imputation' then 'SVM'
 pipeline.fit(X_train, y_train)
 
-# predicting on the TEST set
+# predict the labels for the test data
 y_pred = pipeline.predict(X_test)
 
-# generate CLASSIFICATION_REPORT on actual/predicted labels
+# generate the classification report on actual/predicted labels
 classification_r = classification_report(y_test, y_pred)
 
-# SUPPORT column provides # of samples of the TRUE RESPONSE that lie in that class
+# support column provides # of samples of the TRUE RESPONSE that lie in that class
 print(classification_report(y_test, y_pred))
 ```
