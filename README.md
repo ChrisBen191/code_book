@@ -14,6 +14,7 @@ _Contains the current languages and libraries I'm developing in._
   - [3rd Party Libraries](#3rd-party-libraries)
   - [Data Visualization](#data-visualization)
   - [Machine Learning](#machine-learning)
+- [Docker](#docker)
 - [Shell](#shell)
 - [SQL](#sql)
 - [JavaScript](#javascript)
@@ -58,6 +59,8 @@ _Contains the current languages and libraries I'm developing in._
 - [Hyperparameter Tuning](Python/machine_learning.md#hyperparameter-tuning)
 
 [Time Series](Python/time_series.md)
+
+## [Docker](Docker/docker.md#docker)
 
 ## Shell
 
