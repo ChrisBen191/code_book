@@ -19,8 +19,6 @@ _Contains the current languages and libraries I'm developing in._
 - [SQL](#sql)
 - [JavaScript](#javascript)
 
----
-
 ## Python
 
 ### Python General
@@ -61,6 +59,12 @@ _Contains the current languages and libraries I'm developing in._
 [Time Series](Python/time_series.md)
 
 ## [Docker](Docker/docker.md#docker)
+
+- [Images](Docker/docker.md#images)
+- [Containers](Docker/docker.md#containers)
+- [Volumes](Docker/docker.md#volumes)
+- [Networks](Docker/docker.md#networks)
+- [Dockerfile](Docker/docker.md#dockerfile)
 
 ## Shell
 

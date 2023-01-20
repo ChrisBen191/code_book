@@ -13,6 +13,7 @@
 - [Build Image](#build-image)
 - [Run Docker Container](#run-docker-container)
 - [Docker Compose](#docker-compose)
+- [Utility Containers](#utility-containers)
 
 ## Images
 
@@ -206,7 +207,7 @@ docker stop CONTAINER
 docker run -p 9000:80 --env-file ./.env
 ```
 
-- connects to a detached container and passes a command to be utilized
+- connects to a detached container and passes a command to be ran
 
 ```shell
 docker exec -it CONTAINER_NAME flask run
@@ -244,3 +245,16 @@ docker exec -it CONTAINER_NAME flask run
   - bind mounts are not specified in the top-level `volumes` key.
 
 - anonymous volumes are not specified in the top-level `volumes` key.
+
+## Utility Containers
+
+- useful for when setting up or configuring a project with packages that may not be installed locallly.
+
+run a container in interactive mode while detached
+
+```shell
+docker run python:3.10 -t python-utility
+
+# exec will allow to run commands in a container
+docker exec -it python-utility pip install -r requests.txt
+```
