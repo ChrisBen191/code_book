@@ -4,23 +4,19 @@
 
 # Table of Contents <!-- omit in toc -->
 
-- [MATPLOTLIB](#matplotlib)
-  - [Commands](#commands)
+- [Matplotlib](#matplotlib)
   - [Graphing Attributes](#graphing-attributes)
   - [Graphing](#graphing)
+  - [Subplots](#subplots)
 - [Seaborn](#seaborn)
   - [Graphing Attributes](#graphing-attributes-1)
   - [Graphing](#graphing-1)
   - [Axes Grids](#axes-grids)
 - [Bokeh](#bokeh)
-  - [Dependencies](#dependencies)
-  - [Exporting](#exporting)
   - [Graphing](#graphing-2)
   - [Modifier Commands](#modifier-commands)
 
-## MATPLOTLIB
-
-### Commands
+## Matplotlib
 
 |                           Command |                                                 |
 | --------------------------------: | ----------------------------------------------- |
@@ -28,19 +24,6 @@
 |              `%matplotlib inline` | added to jupyter notebooks to show in notebook. |
 |             `plt.style.available` | displays all available graph styles.            |
 |         `plt.style.use('ggplot')` | sets the graph style to be used in plotting.    |
-
-loads an image and displays it
-
-```python
-img = plt.imread('image_file.png')
-
-# removes axis on the image and displays
-plt.axis('off')
-plt.imshow(img)
-
-# saving as a 'png' file
-plt.savefig('image_file_copy.png')
-```
 
 ### Graphing Attributes
 
@@ -55,6 +38,32 @@ plt.savefig('image_file_copy.png')
 |                `plt.margins(buffer_pct)` | creates a **margin** around the plot to keep data off of the edges                                                       |
 |                     `plt.tight_layout()` | improves the **spacing** between subplots                                                                                |
 |          `plt.legend(loc='upper right')` | creates a **legend** for the plot; use the 'label' parameter in each **plt** command to specify a different legend label |
+
+loads an image and displays it
+
+```python
+img = plt.imread('image_file.png')
+
+# removes axis on the image and displays
+plt.axis('off')
+plt.imshow(img)
+
+# saving as a 'png' file
+plt.savefig('image_file_copy.png')
+```
+
+### Graphing
+
+plots multiple **line graphs**
+
+```python
+plt.plot(x, y, color='blue')
+
+# can plot another line on same graph
+plt.plot(x, y_2, color='red')
+
+plt.show()
+```
 
 plots a **vertical/horziontal line** on the plot, typically used to indicate **percentiles**
 
@@ -73,58 +82,13 @@ ax.legend()
 plt.show()
 ```
 
-### Graphing
-
-creates a **figure** with the number of **axes** specified
-
-```python
-# creates a plot with 1row/2columns that share y-axis label
-fig, (ax0, ax1) = plt.subplots(nrows=1, ncols=2, sharey=True)
-
-# plot SEABORN distribution on AX0
-sns.distplot(df['Column_Name'], ax=ax0)
-
-# setting axis specific values for AX0
-ax0.set(title, xlabel, ylabel, xlim, ylim, ...)
-
-# plot SEABORN distribution on AX1
-sns.distplot(df['Column_Name_2'], ax=ax1)
-
-# setting axis specific values for AX1
-ax1.set(title, xlabel, ylabel, xlim, ylim, ...)
-
-# add additional axes (ax2, ax3,...) and adjust nrows/ncols to added plots as needed
-plt.show()
-```
-
-plots multiple **line graphs**
-
-```python
-plt.plot(x, y, color='blue')
-
-# can plot another line on same graph
-plt.plot(x, y_2, color='red')
-
-plt.show()
-```
-
 plots a **histogram** with the bins specified
 
 ```python
 # can  pass an integer (bins=10) or an interval for bins instead (bins = [1-2, 3-4, ...])
 plt.hist(array, bins=bins)
-```
 
-**subplot** automatically determines the layout for multiple plots; plots are placed according to parameters
-
-```python
-# 1=nrows, 2=ncols, nsubplot=1
-plt.subplot(1, 2, 1)
-plt.plot(x, y)
-
-# the second subplot would require nsubplot=2; nsubplot starts at the top left corner
-plt.subplot(1, 2, 2)
-plt.plot(x, y_1)
+plt.show()
 ```
 
 creates an **ECDF** (Empirical Cumulative Distribution Function). The **ECDF** allows you to plot a feature of your data, in order from least to greatest, to see the whole featrure as if it's distributed across the data set.
@@ -226,7 +190,43 @@ plt.plot(x, y, marker='.', linestyle='none')
 plt.show()
 ```
 
----
+### Subplots
+
+**subplot** automatically determines the layout for multiple plots; plots are placed according to parameters
+
+```python
+# 1=nrows, 2=ncols, nsubplot=1
+plt.subplot(1, 2, 1)
+plt.plot(x, y)
+
+# the second subplot would require nsubplot=2; nsubplot starts at the top left corner
+plt.subplot(1, 2, 2)
+plt.plot(x, y_1)
+
+plt.show()
+```
+
+creates a **figure** with the number of **axes** specified
+
+```python
+# creates a plot with 1row/2columns that share y-axis label
+fig, (ax0, ax1) = plt.subplots(nrows=1, ncols=2, sharey=True)
+
+# plot SEABORN distribution on AX0
+sns.distplot(df['Column_Name'], ax=ax0)
+
+# setting axis specific values for AX0
+ax0.set(title, xlabel, ylabel, xlim, ylim, ...)
+
+# plot SEABORN distribution on AX1
+sns.distplot(df['Column_Name_2'], ax=ax1)
+
+# setting axis specific values for AX1
+ax1.set(title, xlabel, ylabel, xlim, ylim, ...)
+
+# add additional axes (ax2, ax3,...) and adjust nrows/ncols to added plots as needed
+plt.show()
+```
 
 ## Seaborn
 
@@ -475,83 +475,22 @@ g = (sns.jointplot(x="temp",
 plt.show()
 ```
 
----
-
 ## Bokeh
-
----
 
 Visual properties of shapes are called glyphs in Bokeh. The visual properties of these glyphs such as position or color can be assigned single values (size=10, fill_color='red'). Other glyph properties can be set as lists or arrays (x=[1,2,3], size=[10,20,30]).
 
-### Dependencies
-
-allows plots to be saved to an **html file** and using a browser to display the file
-
-```python
-from bokeh.io import output_file, show
-```
-
-allows plots to be displayed inline in a **jupyter notebook**
-
-```python
-from bokeh.io import output_notebook, show
-```
-
-imports the **figure object** to be able to create a figure instance
-
-```python
-from bokeh.plotting import figure
-```
-
-imports **Column Data Source object** to be able to create a ColumnDataSource instance
-
-```python
-from bokeh.models import ColumnDataSource
-```
-
-imports the **Hover Tool object** to be able to create a HoverTool instance
-
-```python
-from bokeh.models import HoverTool
-```
-
-imports the **Categorical Color Mapper object** to be able to create a CategoricalColorMapper instance
-
-```python
-from bokeh.models import CategoricalColorMapper
-```
-
-imports the **row method** to place glyphs side by side
-
-```python
-from bokeh.layouts import row
-```
-
-imports the **column method** to place glyphs on top of one another
-
-```python
-from bokeh.layouts import column
-```
-
-imports the **Grid Plot method** which allows to create rows and columns in one method
-
-```python
-from bokeh.layouts import gridplot
-```
-
-imports **Tabs and Panels** which allow creation of tabbed layouts
-
-```python
-from bokeh.models.widgets import Tabs, Panel
-```
-
-### Exporting
-
-saves the plot to an **html file**
-
-```python
-output_file('file_name.html')
-```
+|                                           Command |                                                                                        |
+| ------------------------------------------------: | -------------------------------------------------------------------------------------- |
+|               `from bokeh.plotting import figure` | import `figure` to be able to create a figure object.                                  |
+|       `from bokeh.models import ColumnDataSource` | import `ColumnDataSource` to be able to create a ColumnDataSource instance.            |
+|              `from bokeh.models import HoverTool` | import `HoverTool` to be able to create a HoverTool instance.                          |
+| `from bokeh.models import CategoricalColorMapper` | import `CategoricalColorMapper`to be able to create a CategoricalColorMapper instance. |
+|              `from bokeh.layouts import gridplot` | import `gridplot` method to create rows and columns in one method.                     |
+|                   `from bokeh.layouts import row` | import `row` method to place glyphs side by side.                                      |
+|                `from bokeh.layouts import column` | import `column` method to place glyphs on top of one another.                          |
+|    `from bokeh.models.widgets import Tabs, Panel` | import `Tabs` and `Panels` to create tabbed layouts.                                   |
+|          `from bokeh.io import output_file, show` | plots can be saved to an html file.                                                    |
+|      `from bokeh.io import output_notebook, show` | plots can be displayed inline in a jupyter notebook.                                   |
 
 ### Graphing
 
@@ -566,7 +505,7 @@ plot = figure(plot_width=400, tools='pan, box_zoom')
 
 ```python
 # can use other markers such as asterisk(), cross(), square(), triangle(), etc.
-plot.circle(x, y)ls
+plot.circle(x, y)
 
 # displays the plot in a browser(HTML) or inline a Jupyter Notebook
 show(plot)
@@ -579,6 +518,12 @@ show(plot)
  plot.line(x, y)
 
 show(plot)
+```
+
+saves the plot to an **html file**
+
+```python
+output_file('file_name.html')
 ```
 
 ### Modifier Commands
