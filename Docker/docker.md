@@ -206,13 +206,21 @@ docker stop CONTAINER
 docker run -p 9000:80 --env-file ./.env
 ```
 
+- connects to a detached container and passes a command to be utilized
+
+```shell
+docker exec -it CONTAINER_NAME flask run
+# using -it flag will stay connected to the container for interactivity
+```
+
 ## Docker Compose
 
-|               command | definition                                           |
-| --------------------: | :--------------------------------------------------- |
-|   `docker-compose up` | runs containers/volumes/etc. in `docker-compose.yml` |
-| `docker-compose down` | stops running docker compose                         |
-|                       |                                                      |
+|                     command | definition                                           |
+| --------------------------: | :--------------------------------------------------- |
+|         `docker-compose up` | runs containers/volumes/etc. in `docker-compose.yml` |
+| `docker-compose up --build` | rebuilds images before running containers.           |
+|      `docker-compose build` | builds missing images and does not run containers.   |
+|       `docker-compose down` | stops running docker compose                         |
 
 - use the `build` key in `docker-compose.yml` to specify the location of a Dockerfile to build an image for a service.
 
