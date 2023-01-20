@@ -7,17 +7,16 @@
 - [MATPLOTLIB](#matplotlib)
   - [Commands](#commands)
   - [Graphing Attributes](#graphing-attributes)
-- [Graphing](#graphing)
-- [SEABORN](#seaborn)
-- [IMPORTS](#imports)
-- [GRAPHING ATTRIBUTES](#graphing-attributes-1)
-- [GRAPHING](#graphing-1)
-- [AXES GRIDS](#axes-grids)
-- [BOKEH](#bokeh)
-- [DEPENDENCIES](#dependencies)
-- [EXPORTING](#exporting)
-- [GRAPHING](#graphing-2)
-- [MODIFIER COMMANDS](#modifier-commands)
+  - [Graphing](#graphing)
+- [Seaborn](#seaborn)
+  - [Graphing Attributes](#graphing-attributes-1)
+  - [Graphing](#graphing-1)
+  - [Axes Grids](#axes-grids)
+- [Bokeh](#bokeh)
+  - [Dependencies](#dependencies)
+  - [Exporting](#exporting)
+  - [Graphing](#graphing-2)
+  - [Modifier Commands](#modifier-commands)
 
 ## MATPLOTLIB
 
@@ -74,7 +73,7 @@ ax.legend()
 plt.show()
 ```
 
-## Graphing
+### Graphing
 
 creates a **figure** with the number of **axes** specified
 
@@ -229,23 +228,13 @@ plt.show()
 
 ---
 
-## SEABORN
+## Seaborn
 
----
-
-## IMPORTS
-
-imports the **seaborn** dependency to create plots with pandas DataFrames
-
-```python
-# seaborn is built on top of matplotlib; plt.show() displays seaborn plots
-import seaborn as sns
-```
-
-## GRAPHING ATTRIBUTES
+### Graphing Attributes
 
 |               Command                |                                                                                 |
 | :----------------------------------: | ------------------------------------------------------------------------------- |
+|       `import seaborn as sns`        | imports seaborn.                                                                |
 | `sns.despine(left=True, right=True)` | removes spines of the plot; add parameters of spines as needed                  |
 |        `sns.color_palette()`         | returns the current color palette in use                                        |
 |           `sns.palplot()`            | displays the color palettes in jupyter notebook                                 |
@@ -253,7 +242,7 @@ import seaborn as sns
 |     `sns.set(color_codes=True)`      | sets plots to use matplotlib color codes                                        |
 |      `sns.set_palette(palette)`      | sets the SEABORN color palette (deep, muted, pastell, bright, dark, colorblind) |
 
-## GRAPHING
+### Graphing
 
 plots a barplot, which provides the stats of a categorical column specified
 
@@ -381,7 +370,7 @@ sns.heatmap(df.corr())
 plt.show()
 ```
 
-## AXES GRIDS
+### Axes Grids
 
 creates a **FacetGrid**, useful for plotting conditional relationships
 
@@ -488,13 +477,13 @@ plt.show()
 
 ---
 
-## BOKEH
+## Bokeh
 
 ---
 
 Visual properties of shapes are called glyphs in Bokeh. The visual properties of these glyphs such as position or color can be assigned single values (size=10, fill_color='red'). Other glyph properties can be set as lists or arrays (x=[1,2,3], size=[10,20,30]).
 
-## DEPENDENCIES
+### Dependencies
 
 allows plots to be saved to an **html file** and using a browser to display the file
 
@@ -556,7 +545,7 @@ imports **Tabs and Panels** which allow creation of tabbed layouts
 from bokeh.models.widgets import Tabs, Panel
 ```
 
-## EXPORTING
+### Exporting
 
 saves the plot to an **html file**
 
@@ -564,7 +553,7 @@ saves the plot to an **html file**
 output_file('file_name.html')
 ```
 
-## GRAPHING
+### Graphing
 
 creates the **figure object** to be used; plot is commonly referenced as 'p'
 
@@ -592,7 +581,7 @@ show(plot)
 show(plot)
 ```
 
-## MODIFIER COMMANDS
+### Modifier Commands
 
 creates a **ColumnDataSource instance** which defines data that can be used on multiple glyphs in a plot
 
