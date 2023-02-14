@@ -18,6 +18,7 @@ _Contains the current languages and libraries I'm developing in._
 - [Shell](#shell)
 - [SQL](#sql)
 - [JavaScript](#javascript)
+- [HTML / CSS](#html--css)
 
 ## Python
 
@@ -89,3 +90,7 @@ _Contains the current languages and libraries I'm developing in._
 - [JavaScript](JavaScript/javascript.md)
 
 <!-- CLEANUP FILE PATHS -->
+
+## HTML / CSS
+
+- [HTML](HTML_CSS/html.md)
