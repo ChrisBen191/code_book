@@ -21,9 +21,9 @@
 
 | Syntax                                                                       | Meaning                                                                                                               |
 | ---------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------- |
-| `()` or `(n)`                                                                | Represents a node; use (n) to denote an "anonymous" node for further query processing in the query                    |
-| `(p:Person)` or `(:Person)`                                                  | Represents node labels; node labels can also be used with anonymous nodes and more than one label can be denoted.     |
-| `{propertyKey: propertyValue}`                                               | Represents a property for a specified node; can help further filter a graph similar to labels.                        |
+| `()` or `(n)`                                                                | use (n) to denote an "anonymous" node for further query processing in the query                                       |
+| `(p:Person)` or `(:Person)`                                                  | node labels can also be used with anonymous nodes and more than one label can be denoted.                             |
+| `{propertyKey: propertyValue}`                                               | node properties can help further filter a graph similar to labels.                                                    |
 | `CALL db.schema.visualization()`                                             | Visualizes the data model of the graph, to better understand the nodes, labels, and relationships of the graph.       |
 | `CALL db.propertyKeys()`                                                     | Displays the values for properties keys of a graph; does not define which nodes utilize each property key displayed.  |
 | `CALL db.constraints()` or `CALL CONSTRAINTS`                                | Displays the set of constraints that have been defined for the graph.                                                 |
@@ -58,7 +58,7 @@ MATCH (a:Person)-[:ACTED_IN]->(m:Movie), (m)<-[:DIRECTED]-(d:Person)
 WHERE m.released = 2000
 Return a.name as ACTOR, m.title AS TITLE, d.name AS DIRECTOR
 
-// when multi patterns are specified in a MATCH clause, no relationship is traveresed more than one time
+// when multi patterns are specified in a MATCH clause, no relationship is traversed more than one time
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d:Person)
 WHERE m.released = 2000
 Return a.name as ACTOR, m.title AS TITLE, d.name AS DIRECTOR
@@ -79,7 +79,7 @@ Traversal using multiple patterns in a **MATCH** clause
 
 ```cypher
 MATCH (valKilmer:Person)-[:ACTED_IN]->(m:Movie),    //pattern retrieves TopGun node
-      (actor:Person)-[:ACTED_IN]->(m)               // pattern retreives TopGun actor nodes
+      (actor:Person)-[:ACTED_IN]->(m)               // pattern retrieves TopGun actor nodes
 WHERE valKilmer.name = 'Val Kilmer'
 RETURN m.title as movie , actor.name
 
@@ -89,7 +89,7 @@ RETURN m.title as movie , actor.name
 **MATCH** clause that defines the number of hops for relationship on a path
 
 ```cypher
-// retreives all person nodes that are two hops away
+// retrieves all person nodes that are two hops away
 MATCH (follower:Person)-[:FOLLOWS*2]->(p:Person)
 WHERE follower.name = 'Paul Blythe'
 RETURN p.name
@@ -124,7 +124,7 @@ OPTIONAL MATCH (p)-[r:REVIEWED]->(m:Movie) // if 'James' is an actor, null will 
 RETURN p.name, type(r), m.title
 ```
 
-Common way to aggregrate data using **count()** function
+Common way to aggregate data using **count()** function
 
 ```cypher
 // counts # of movies where actor and director included in same movie
@@ -132,7 +132,7 @@ MATCH (a:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(d:Person)
 RETURN a.name, d.name, count(m)
 ```
 
-The **collect()** method will aggregrate a value into a list.
+The **collect()** method will aggregate a value into a list.
 
 ```cypher
 MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
@@ -145,14 +145,14 @@ WHERE p.name = 'Tom Cruise'
 RETURN collect(m) AS `movies for Tom Cruise` // movies returned as nodes
 ```
 
-Counting the **paths** found for each actor/director colloboration and returning movies as list.
+Counting the **paths** found for each actor/director collaboration and returning movies as list.
 
 ```cypher
 MATCH (actor:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(director:Person)
 RETURN
     actor.name,
     director.name,
-    count(m) AS collaborations, // count of colloborations
+    count(m) AS collaborations, // count of collaboration
     collect(m.title) AS movies  // list of movies for each actor/director collaboration
 ```
 
