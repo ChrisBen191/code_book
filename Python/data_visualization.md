@@ -7,7 +7,9 @@
 - [Matplotlib](#matplotlib)
   - [Graphing Attributes](#graphing-attributes)
   - [Graphing](#graphing)
-  - [Subplots](#subplots)
+    - [Legends](#legends)
+    - [Line Color \& Styling](#line-color--styling)
+    - [Subplot](#subplot)
 - [Seaborn](#seaborn)
   - [Graphing Attributes](#graphing-attributes-1)
   - [Graphing](#graphing-1)
@@ -27,206 +29,212 @@
 
 ### Graphing Attributes
 
-|                                  Command |                                                                                                                          |
-| ---------------------------------------: | ------------------------------------------------------------------------------------------------------------------------ |
-|             `plt.title('Title of Plot')` | creates a **title** for the plot                                                                                         |
-|         `plt.xlabel('Label for X-Axis')` | creates a label for the **x-axis**                                                                                       |
-|         `plt.ylabel('Label for Y-Axis')` | creates a label for the **y-axis**                                                                                       |
-|                 `plt.xlim(x_min, x_max)` | resizes the **x limits** of the graph                                                                                    |
-|                 `plt.ylim(y_min, y_max)` | resizes the **y limits** of the graph                                                                                    |
-| `plt.axis((x_min, x_max, y_min, y_max))` | resizes the **x and y limits** of the graph, can use 'equal', 'square' or 'tight' parameters                             |
-|                `plt.margins(buffer_pct)` | creates a **margin** around the plot to keep data off of the edges                                                       |
-|                     `plt.tight_layout()` | improves the **spacing** between subplots                                                                                |
-|          `plt.legend(loc='upper right')` | creates a **legend** for the plot; use the 'label' parameter in each **plt** command to specify a different legend label |
-
-loads an image and displays it
-
-```python
-img = plt.imread('image_file.png')
-
-# removes axis on the image and displays
-plt.axis('off')
-plt.imshow(img)
-
-# saving as a 'png' file
-plt.savefig('image_file_copy.png')
-```
+|                         Command |                                                                      |
+| ------------------------------: | -------------------------------------------------------------------- |
+|  `plt.imread('image_file.png')` | loads an image and displays it                                       |
+| `plt.savefig('image_file.png')` | saves an image in the specified filetype                             |
+|       `plt.margins(buffer_pct)` | creates a **margin** around the figure to keep data off of the edges |
+|            `plt.tight_layout()` | improves the **spacing** between subplots                            |
+|               `plt.axis('off')` | removes the axes off the figure                                      |
 
 ### Graphing
 
-plots multiple **line graphs**
+Creates a basic line plot
 
 ```python
-plt.plot(x, y, color='blue')
+# creating data
+x = np.arange(0, 10)
+y = 2*x
 
-# can plot another line on same graph
-plt.plot(x, y_2, color='red')
-
-plt.show()
-```
-
-plots a **vertical/horziontal line** on the plot, typically used to indicate **percentiles**
-
-```python
-# plots a VERTICAL line, when using matplotlib axes
-ax.axvline(x=df['Column_Name'], color='r', label='Column')
-
-# plots a HORIZONTAL line, when using matplotlib axes
-ax.axhline(x=df['Column_Name'], color='r', label='Column')
-
-# can include LINESTYLE and LINEWIDTH PARAMETERS in addition to others
-
-# call legend to display label
-ax.legend()
-
-plt.show()
-```
-
-plots a **histogram** with the bins specified
-
-```python
-# can  pass an integer (bins=10) or an interval for bins instead (bins = [1-2, 3-4, ...])
-plt.hist(array, bins=bins)
-
-plt.show()
-```
-
-creates an **ECDF** (Empirical Cumulative Distribution Function). The **ECDF** allows you to plot a feature of your data, in order from least to greatest, to see the whole featrure as if it's distributed across the data set.
-
-```python
-# need to sort the x data to propertly plot the ECDF
-x = np.sort(df['Column_Name'])
-
-# creates a y-axis with evenly spaced data points (with a maximum of one)
-y = np.arange(1, len(x)+1) / len(x)
-
-# this will plot data points only without a line connecting the data
-plt.plot(x, y, marker='.', linestyle='none')
-
-# provides a margin keep the data off of the edges
-plt.margins(0.02)
-
-# read from the x-value, then the y-value determines the percentage of the data that is less than the chosen x-value
-plt.show()
-```
-
-creates a **Binomial CDF** plot providing a set of probabilities of discrete outcomes. Numpy's version of **Bernoulli Trials**
-
-```python
-# n= number of Bernoulli trials, p=probability of success, size= # of times to repeat the experiement
-samples = np.random.binomial(n, p, size=int)
-
-# using the 'ecdf' custom function
-x, y = ecdf(samples)
-
-# plots the Binomial CDF with markers and no lines
-plt.plot(x, y, marker='.', linestyle='none')
-
-plt.show()
-```
-
-creates a **Piosson CDF**
-
-```python
-'''
-Poisson Process = the timing of the next event is completely independent of of when the previous event happened
-Poisson Distributed = the average number of arrivals of a Poisson process in a given amount of time; limit of the Binomial distribution for low probability of success and large number of trials
-'''
-
-# r = mean of the Poisson distribution (r = n*p), size = # of times to repeat the experiement
-samples = np.random.poisson(r, size=int)
-
-# using the 'ecdf' custom function
-x, y = ecdf(samples)
-
-# plots the Poisson CDF with markers and no lines
-plt.plot(x, y, marker='.', linestyle='none')
-
-plt.show()
-```
-
-creates a **Normal PDF**
-
-```python
-# compute the mean for the normal distribution
-mean = np.mean(array)
-
-# compute the std for the normal distrubution
-std = np.std(array)
-
-# parametrizes the normal distrubution; size = # of times to repeat the experiement
-samples = np.random.normal(mean, std, size=int)
-
-# plots a histogram of the samples with the # of bins specified
-plt.hist(samples, normed=True, histtype='step', bins=int)
-
-plt.show()
-```
-
-creates a **Normal CDF** and compares it to the **ECDF** of the data
-
-```python
-# compute the mean for the normal distribution
-mean = np.mean(array)
-
-# compute the std for the normal distrubution
-std = np.std(array)
-
-# parametrizes the normal distrubution; size = # of times to repeat the experiement
-samples = np.random.normal(mean, std, size=int)
-
-# computes the ECDF of the data
-x, y = ecdf(array)
-
-# computes the Normal ECDF
-x_theor, y_theor = ecdf(samples)
-
-# plots the Normal ECDF
-plt.plot(x_theor, y_theor)
-
-# plots the ECDF
-plt.plot(x, y, marker='.', linestyle='none')
-
-plt.show()
-```
-
-### Subplots
-
-**subplot** automatically determines the layout for multiple plots; plots are placed according to parameters
-
-```python
-# 1=nrows, 2=ncols, nsubplot=1
-plt.subplot(1, 2, 1)
 plt.plot(x, y)
 
-# the second subplot would require nsubplot=2; nsubplot starts at the top left corner
-plt.subplot(1, 2, 2)
-plt.plot(x, y_1)
+# lables for title and axes
+plt.title("Title of Plot")
+plt.xlabel("X axis label")
+plt.ylabel("Y axis label")
+
+# limits on the axes
+plt.xlim(min(x), max(x))
+plt.ylim(min(y), max(y))
 
 plt.show()
 ```
 
-creates a **figure** with the number of **axes** specified
+![](data/images/myfirstplot.jpg)
+
+Creates a figure object with axes added via ratios
 
 ```python
-# creates a plot with 1row/2columns that share y-axis label
-fig, (ax0, ax1) = plt.subplots(nrows=1, ncols=2, sharey=True)
+# creating data
+x = np.arange(0, 10)
+y = 2*x
 
-# plot SEABORN distribution on AX0
-sns.distplot(df['Column_Name'], ax=ax0)
+a = np.linspace(0, 10, 11)
+b = a**4
 
-# setting axis specific values for AX0
-ax0.set(title, xlabel, ylabel, xlim, ylim, ...)
+# figure object w/dpi setting and figsize
+fig = plt.figure(figsize=(5,5), dpi=100)
 
-# plot SEABORN distribution on AX1
-sns.distplot(df['Column_Name_2'], ax=ax1)
+# adding axes to figure object w/ratios
+axes_1 = fig.add_axes([0, 0, 1, 1])
+axes_1.plot(a, b)
 
-# setting axis specific values for AX1
-ax1.set(title, xlabel, ylabel, xlim, ylim, ...)
+# labels for the major axes
+axes_1.set_title("Big Figure")
+axes_1.set_xlabel("X label")
+axes_1.set_ylabel("Y label")
 
-# add additional axes (ax2, ax3,...) and adjust nrows/ncols to added plots as needed
+# limits on axes_1
+axes_1.set_xlim(min(a), max(a))
+axes_1.set_ylim(min(b), max(b))
+
+# adding axes to figure object w/ratios
+axes_2  = fig.add_axes([0.2,0.5, 0.25, 0.25])
+axes_2.plot(x, y)
+
+# labels for the small axes
+axes_2.set_title("Small Figure")
+
+# limits on axes_2
+axes_2.set_xlim(min(x), max(x))
+axes_2.set_ylim(min(y), max(y))
+
+# saving to file and showing plot
+# plt.savefig("../data/images/sub-figure.jpg", bbox_inches="tight")
 plt.show()
 ```
+
+![](data/images/sub-figure.jpg)
+
+#### Legends
+
+```python
+# creating data
+x = np.linspace(0, 11, 10)
+
+# figure object w/dpi setting and figsize
+fig = plt.figure(figsize=(5,5), dpi=100)
+
+# adding axes to figure object w/ratios
+ax = fig.add_axes([0,0,1,1])
+
+ax.plot(x, x, label="X vs X")
+ax.plot(x, x**2, label="X vs X^2")
+
+# limits on axes
+ax.set_xlim(min(x), max(x))
+
+# labels for ax1
+ax.set_title("Plot w/a Legend")
+ax.set_xlabel("X label")
+ax.set_ylabel("Y label")
+
+# displays legend on figure w/best placement
+# ax.legend(loc="best")
+
+# displays legend off to the side of the figure
+ax.legend(loc=(1.01, 0.5))
+
+# saving file w/bounding box param to show axes
+# plt.savefig("../data/images/legend_plot.png", bbox_inches="tight")
+plt.show()
+```
+
+![](data/images/legend_plot.png)
+
+#### Line Color & Styling
+
+```python
+# creating data
+x = np.linspace(0, 11, 10)
+
+# figure object w/dpi setting and figsize
+fig = plt.figure(figsize=(8, 8), dpi=100)
+
+# adding axes to figure object w/ratios
+ax = fig.add_axes([0,0,1,1])
+
+# limits on axes
+ax.set_xlim(min(x), max(x))
+
+ax.plot(
+    x, x, label="X vs X",
+    # line parameters
+    color="purple", lw=0.5, ls="--",
+    # marker parameters
+    marker='+', ms=5
+)
+
+ax.plot(
+    x, x-1, label="X vs X-1",
+    # line parameters
+    color="orange", lw=3, ls="-.",
+    # marker parameters
+    marker="o", ms=10
+)
+
+ax.plot(
+    x, x-2, label="X vs X-2",
+    # line parameters
+    color="magenta", lw=2, ls="--",
+    # marker parameters
+    marker="s", ms=12, markerfacecolor='lime',
+    markeredgecolor="blue", markeredgewidth=5
+)
+# labels for ax1
+ax.set_title("Plot of Line Colors/Styles")
+ax.set_xlabel("X label")
+ax.set_ylabel("Y label")
+
+# grid for the figure
+ax.grid(color='grey', alpha=0.5, linestyle='--', linewidth=1)
+
+# displays legend off of the figure
+ax.legend(loc=(1.01, 0.5))
+
+# saving file w/bounding box param to show axes
+# fig.savefig("../data/images/linestyles.png", bbox_inches="tight")
+plt.show()
+```
+
+![](data/images/linestyles.png)
+
+#### Subplot
+
+Subplot with the axes contained as an `np.ndarray` accessed by element index.
+
+```python
+# creating data
+x = np.arange(0, 10)
+y = 2*x
+
+a = np.linspace(0, 10, 11)
+b = a**4
+
+# figure object w/dpi setting and figsize and axes array
+fig, axes = plt.subplots(figsize=(10,5), dpi=100, nrows=2, ncols=1)
+
+# axes are now np.ndarray w/each axes as element
+axes[0].plot(x,y)
+axes[1].plot(a,b)
+
+axes[0].set_title("Plot of x/y")
+axes[0].set_xlabel("X label for x/y plot")
+axes[0].set_ylabel("Y label for x/y plot")
+
+axes[1].set_title("Plot of a/b")
+axes[1].set_xlabel("X label for a/b plot")
+axes[1].set_ylabel("Y label for a/b plot")
+
+# prevents axes from overlapping
+plt.tight_layout()
+
+# saving to file and showing plot
+# plt.savefig("../data/images/subplot-array.jpg", bbox_inches="tight")
+plt.show()
+```
+
+![](data/images/subplot-array.jpg)
 
 ## Seaborn
 
