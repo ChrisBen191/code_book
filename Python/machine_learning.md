@@ -8,7 +8,10 @@
   - [Bias Variance Trade-Off](#bias-variance-trade-off)
 - [Pre-processing](#pre-processing)
   - [Train Test Split](#train-test-split)
-  - [Scalers](#scalers)
+  - [Feature Scaling](#feature-scaling)
+    - [Standardization Scaling](#standardization-scaling)
+    - [Normalization Scaling](#normalization-scaling)
+    - [Scalers](#scalers)
   - [Imputers](#imputers)
   - [Cross Validation](#cross-validation)
 - [Supervised Learning](#supervised-learning)
@@ -20,8 +23,13 @@
     - [Random Forests](#random-forests)
   - [Regression](#regression)
     - [Linear Regression](#linear-regression)
-    - [Ridge](#ridge)
-    - [Lasso](#lasso)
+    - [Polynominal Regression](#polynominal-regression)
+    - [Regularization](#regularization)
+      - [L1 Regularization](#l1-regularization)
+        - [Lasso](#lasso)
+      - [L2 Regularization](#l2-regularization)
+      - [Ridge](#ridge)
+      - [Elastic Net](#elastic-net)
 - [Unsupervised Learning](#unsupervised-learning)
   - [Classification](#classification-1)
     - [K Means Clustering](#k-means-clustering)
@@ -36,6 +44,26 @@
   - [Pipelines](#pipelines)
 
 ## Definitions
+
+|       Definition       | Meaning                                                                                     |
+| :--------------------: | :------------------------------------------------------------------------------------------ |
+|    Reducible Error     | error that can be improved upon by a statistical learning technique.                        |
+|   Irreducible Error    | error that cannot be predicted and therefore cannot be reduced.                             |
+| Quantitative Variables | variables that take on numerical on continuous values.                                      |
+| Qualitative Variables  | variables that take on values in one of any number of different classes or categories.      |
+|       Regression       | problems with a quantitative, or numerical response.omz                                     |
+|     Classification     | problems with a qualitative, or classifying response.                                       |
+|          MSE           | Mean Squared Error                                                                          |
+|    Cross-Validation    | method for estimating the test mean squared error (MSE) using the training data.            |
+|   Bootstrap Sampling   | sampling from the dataset with replacement.                                                 |
+|        Residual        | the difference between the actual value and the predicted value.                            |
+|          RSS           | Residual Sum of Squares                                                                     |
+|     Standard Error     | the average amount that the sample mean differs from the actual population mean.            |
+|          RSE           | Residual Standard Error                                                                     |
+|   Hypothesis Testing   | statistical method used in making statistical decisions using experimental                  |
+|    Null Hypothesis     | statement claiming that there is no relationship between X and Y(denoted by H<sub>0</sub>). |
+| Alternative Hypothesis | statement directly contradicting the Null Hypothesis (denoted by H<sub>a</sub>).            |
+|      Data Leakage      | Calculating statistics from full a dataset instead of just the training set.                |
 
 - `Accuracy` - the porportion of correct predictions made by a model over the total # of predictions.
 
@@ -57,9 +85,18 @@
 
   `F1 = 2 (precision _ recall) / (precision + recall)`
 
-- `Bootstramp Samples` - sampling from the dataset with replacement
-
 ### Bias Variance Trade-Off
+
+- Typically caused by model complexity in search for better performance.
+- Overfitting
+  - Model is fitting too much noise and variance in the training data.
+  - Preforms well on training data, but poorly on new unseen data.
+  - Harder to detect as good performance on training data could allude to the model performing well.
+- Underfitting
+
+  - Model doesn't capture the underlying trend of the data, and does not fit well enough.
+  - Low variance, but high bias.
+  - Often a result of an excessively simple model.
 
 - Low Bias / Low Variance - most accurate model
 - Low Bias / High Variance - accurate predictions and more dispersed outliers
@@ -87,7 +124,33 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, rando
 # test_size = % of test set, stratify = proportionate labels in each set
 ```
 
-### Scalers
+### Feature Scaling
+
+- Improves the convergence of "steepest descent" algorithms, or machine learning models that rely on distance metrics.
+- When features are on different scales, certain weights may update faster than others since the feature values are considered in the weight updates.
+- Allows for comparing measurements that have different units, and to directly compare model coefficients to each other.
+
+> Caveats
+>
+> - Must always scale new unseen data before feding to the model.
+> - Effects of direct interpretability of feature coefficients.
+>   - It becomes easier to compare coefficients to one another, but harder to relate back to the original unscaled feature.
+
+> Benefits
+>
+> - Absolutely necessary for some models.
+> - No "real" downside to scaling features.
+
+#### Standardization Scaling
+
+- Rescales data to have a mean of 0 and a standard deviation of 1.
+- Sometimes referred to as "Z-score normalization".
+
+#### Normalization Scaling
+
+- Rescales data values to be between 0 and 1.
+
+#### Scalers
 
 Scale feature data using `scale` in `sklearn.preprocessing`
 
@@ -166,7 +229,13 @@ cv_results = cross_val_score(reg, X, y, cv=5)
 
 ## Supervised Learning
 
+- Uses `historical` and `labeled` data; the machine learning model predicts a value.
+  - Historical - known results and data from the past.
+  - Labeled - the desired output is known.
+
 ### Classification
+
+- Machine learning models that calculate a categorical value; predicts an "assigned" category.
 
 - Accuracy
 
@@ -288,6 +357,16 @@ Uses many trees with a random sample of features chosen as the split. Alleviates
 
 ### Regression
 
+- Machine learning models that calculates a continuous value; predicts a continuous value like prices, scores, etc.
+
+- Residual Error
+
+  - the measurement/value of the error line from real data points; can be positive or negative.
+
+- Ordinary Least Squares (OLS)
+
+  - minimizing the sum of the squares of differences between the observed dependent variable and the variable predicted by the linear function.
+
 - Mean Absolute Error (MAE)
 
   - the mean of the absolute value of errors `ie. true value - predicted value`, easy to understand but won't punish large errors.
@@ -300,6 +379,9 @@ Uses many trees with a random sample of features chosen as the split. Alleviates
   - the square root of the mean of the values of errors squared `ie. sqrt((true_value - predicted value)^2)` to punish large values and provides same units as y.
 
 #### Linear Regression
+
+- OLS Theory
+  - allows the solving for slope m and intercept b
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -322,31 +404,43 @@ train_score = reg.score(X_train, y_train)
 test_score = reg.score(X_test, y_test)
 ```
 
-#### Ridge
+#### Polynominal Regression
 
-```python
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import Ridge
+- Regression model that considers higher order relationships on the features.
 
-y = df['Target_Column']
-X = df.drop('Target_Column', axis=1)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
+- Addresses two issues not addressed with Linear Regression.
 
-# normalize=True normalizes all variables
-ridge = Ridge(alpha=0.1, normalize=True)
+  - Non-linear feature relationships to labels.
+  - Interaction terms between features.
 
-# fit the model to the training data
-ridge.fit(X_train, y_train)
+- Interaction Terms: applies to features that are only significant when in sync with another feature.
 
-# predict the labels for the test data
-ridge_pred = ridge.predict(X_test)
+  - A feature that multiplies two existing features together.
+  - Incorporated along with the original features and provided to the regression model.
 
-# scoring the model accuracy with the train/test data
-train_score = ridge.score(X_train, y_train)
-test_score = ridge.score(X_test, y_test)
-```
+- _PolynominalFeatures_ scikitlearn preprocessing library will automatically create both higher order feature polynominals and the interaction terms between all feature combinations.
 
-#### Lasso
+#### Regularization
+
+A method to reduce model fitting and variance by adding more bias. Solves these model issues by:
+
+- minimizing model complexity
+- penalizing the loss function
+- reducing model overfitting
+- searching for an optimal penalty hyperparameter.
+
+> Caveats:
+>
+> - introducing an additional hyperparameter that needs to be tuned.
+> - a multiplier to the penalty to decide the "strength" of the penalty.
+
+##### L1 Regularization
+
+- Adds a penalty equal to the **absolute value** of the magnitude of coefficients.
+  - Limits the size of coefficients.
+  - Can yield sparse models where some coefficients can become zero.
+
+###### Lasso
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -370,7 +464,45 @@ train_score = lasso.score(X_train, y_train)
 test_score = lasso.score(X_test, y_test)
 ```
 
+##### L2 Regularization
+
+- Adds a penalty equal to the **square** of the magnitude of coefficients.
+  - All coefficients are shrunk by the same factor.
+  - Does not necessarily eliminate coefficients.
+
+##### Ridge
+
+```python
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import Ridge
+
+y = df['Target_Column']
+X = df.drop('Target_Column', axis=1)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
+
+# normalize=True normalizes all variables
+ridge = Ridge(alpha=0.1, normalize=True)
+
+# fit the model to the training data
+ridge.fit(X_train, y_train)
+
+# predict the labels for the test data
+ridge_pred = ridge.predict(X_test)
+
+# scoring the model accuracy with the train/test data
+train_score = ridge.score(X_train, y_train)
+test_score = ridge.score(X_test, y_test)
+```
+
+##### Elastic Net
+
+- Combines **L1** and **L2** with the addition of an aplha parameter deciding the ratio between them.
+
 ## Unsupervised Learning
+
+- Uses unlabeled data; the machine learning model discovers possible patterns in the data.
+  - clusters population into separate groups based off their behavior features.
+- No historical correct label, hard to evaluate performance of an unsupervised algorithm.
 
 ### Classification
 
