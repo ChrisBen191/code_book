@@ -1,11 +1,17 @@
-# Neo4j <!-- omit in toc -->
+# Neo4j Knowledge <!-- omit in toc -->
+
+Knowledge on Neo4j, the native graph database utilizing index-free adjacency (IFA).
 
 # Table of Contents <!-- omit in toc -->
 
-- [Common Commands](#common-commands)
-- [Common Cypher Queries](#common-cypher-queries)
+- [Graph Data Modeling](#graph-data-modeling)
+- [Index-Free Adjacency (IFA)](#index-free-adjacency-ifa)
+- [Definitions](#definitions)
+- [Neo4j Browser Commands](#neo4j-browser-commands)
+- [Cypher Syntax](#cypher-syntax)
 - [Creating / Updating Nodes](#creating--updating-nodes)
-- [Creating Relationships](#creating-relationships)
+- [Creating / Updating Relationships](#creating--updating-relationships)
+- [Common Cypher Queries](#common-cypher-queries)
 - [Merging Data in the Graph](#merging-data-in-the-graph)
 - [Using Indexes](#using-indexes)
   - [Constraints](#constraints)
@@ -17,41 +23,226 @@
   - [CSV](#csv)
 - [APOC](#apoc)
 
-# Common Commands
+# Graph Data Modeling
+Two types of models are required when preforming the graph data modeling process for an application:
+    1. Data model - describes the labels, relationships, and properties for the graph; does not have specific data.
+    2. Instance model - set of sample data to test the data model against any number of use cases.
 
-| Syntax                                                                       | Meaning                                                                                                               |
-| ---------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------- |
-| `()` or `(n)`                                                                | use (n) to denote an "anonymous" node for further query processing in the query                                       |
-| `(p:Person)` or `(:Person)`                                                  | node labels can also be used with anonymous nodes and more than one label can be denoted.                             |
-| `{propertyKey: propertyValue}`                                               | node properties can help further filter a graph similar to labels.                                                    |
-| `CALL db.schema.visualization()`                                             | Visualizes the data model of the graph, to better understand the nodes, labels, and relationships of the graph.       |
-| `CALL db.propertyKeys()`                                                     | Displays the values for properties keys of a graph; does not define which nodes utilize each property key displayed.  |
-| `CALL db.constraints()` or `CALL CONSTRAINTS`                                | Displays the set of constraints that have been defined for the graph.                                                 |
-| `CALL db.indexes()` or `SHOW INDEXES`                                        | Displays a list of all full-text schema indexes for the graph                                                         |
-| `:params {paramName: 'paramValue, ...'}` OR `:param paramName => paramValue` | Sets defined parameter and its value in the current session.                                                          |
-| `:params`                                                                    | Displays the current parameters in session and their values                                                           |
-| `:queries`                                                                   | Displays current running queries to allow for monitoring/troubleshooting                                              |
-| `EXPLAIN MATCH...`                                                           | Provides the Cypher query plan; provides estimates of the graph engine processing that will occur (doesn't run query) |
-| `PROFILE MATCH...`                                                           | Runs the Cypher query statement, and provides run-time performance metrics                                            |
-| `:sysinfo`                                                                   | Displays the Page Cache, an in-memory copy of part or all of the graph managed by the DBMS                            |
-| `:schema`                                                                    | Displays all the defined indexes for the graph                                                                        |
-| `CALL gds.graph.list()`                                                      | Displays all created named graphs and their related graph information                                                 |
-| `CALL gds.graph.drop(<graph-name>)`                                          | Drops the named graph specified.                                                                                      |
+# Index-Free Adjacency (IFA)
 
-| Node Syntax |                       Meaning                        |
-| :---------: | :--------------------------------------------------: |
-|    `()`     |                        a node                        |
-|  `()--()`   |        2 nodes have some type of relationship        |
-| `()-[]-()`  |        2 nodes have some type of relationship        |
-|  `()-->()`  | the first node has a relationship to the second node |
-|  `()<--()`  | the second node has a relationship to the first node |
+Utilized in graph databases; relationships are stored at write-time in a graph database, meaning the query time will remain consistent to the size of the data that is actually touched during a query.
 
----
+# Definitions
+
+| Definition             | Meaning                                                                                  |
+| :--------------------- | :--------------------------------------------------------------------------------------- |
+| node                   | vertices in a data graph; represent objects, entities, or things.                        |
+| node label             | identifies the subset a node belongs to.                                                 |
+| node property          | key, value pair of info providing additional context about the node.                     |
+| relationship           | line or edge in a data graph; describes how nodes are connected together.                |
+| relationship direction | identifies the direction of connection between nodes, important in context of hierarchy. |
+| relationship type      | identifies which part of the graph to traverse.                                          |
+| relationship property  | key, value pair of info providing additional context about the relationship.             |
+| undirected graph       | graph with bi-directional or symmetric relationships.                                    |
+| directed graph         | graph with single directional or asymmetrical relationships.                             |
+| weighted graph         | graph with relationships that carry a value tha represents a weight or measure.          |
+| unweighted graph       | graph with relationships that do not carry a measurable value.                           |
+| graph traversal        | the path or relationships traveled to obtain the graph.                                  |
+
+# Neo4j Browser Commands
+
+| Command                                       | Definition                                                                                                             |
+| --------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------- |
+| `:clear`                                      | removes all frames from the stream.                                                                                    |
+| `:config`                                     | displays configuration settings.                                                                                       |
+| `:history`                                    | displays history of executed commands.                                                                                 |
+| `:schema`                                     | displays info about the database schema indexes and constraints.                                                       |
+| `:sysinfo`                                    | displays info about store size, id allocation, page cache, etc.                                                        |
+| `CALL db.schema.visualization()`              | Visualizes the data model of the graph, to better understand the nodes, labels, and relationships of the graph.        |
+| `CALL db.constraints()` or `CALL CONSTRAINTS` | Displays the set of constraints that have been defined for the graph.                                                  |
+| `CALL db.indexes()` or `SHOW INDEXES`         | Displays a list of all full-text schema indexes for the graph.                                                         |
+| `CALL gds.graph.list()`                       | Displays all created named graphs and their related graph information.                                                 |
+| `PROFILE MATCH...`                            | Runs the Cypher query statement, and provides run-time performance metrics.                                            |
+| `EXPLAIN MATCH...`                            | Provides the Cypher query plan; provides estimates of the graph engine processing that will occur (doesn't run query). |
+
+# Cypher Syntax
+
+|            Node Syntax            | Meaning                                                                                   |
+| :-------------------------------: | :---------------------------------------------------------------------------------------- |
+|           `()` or `(n)`           | use (n) to denote an "anonymous" node for further query processing in the query.          |
+| `(n:NodeLabel)` or `(:NodeLabel)` | node labels can also be used with anonymous nodes and more than one label can be denoted. |
+|             `()--()`              | 2 nodes and any symmetrical relationship.                                                 |
+|   `()-[:RELATIONSHIP_TYPE]-()`    | 2 nodes and a specific symmetrical relationship type.                                     |
+|      `(first)-[]->(second)`       | the `first` node with any relationship type to the `second` node.                         |
+|      `(first)<-[]-(second)`       | the `second` node with any relationship type to the `first` node.                         |
+
+# Creating / Updating Nodes
+
+Create a node using `CREATE`; this method does not look up the primary key before adding the node and can create duplicates.
+```cypher
+CREATE (nodeVariable: NodeLabels {optionalProperties})
+
+// adding a 'hero' node to the graph w/name property
+CREATE (h:Hero {name: 'Peter Parker'})
+```
+
+Create a node using `MERGE`; this method looks up the primary key before adding the node, therefore avoiding duplication.
+```cypher
+// adding a 'hero' node to the graph if not existing 
+MERGE (h:Hero {name: 'Peter Parker'})
+```
+
+When defining label for a node, dominant nouns are assigned to the entities in the graph (ie. ingredient, movie, person, etc.).
+Node labels serve as an anchor point for a query; using a label helps reduce the amount of data that is retrieved. 
+
+
+Add/Remove node labels using `SET` and `REMOVE`
+```cypher
+MATCH (h:Hero)
+WHERE h.name = 'Peter Parker'
+
+// adding label to the hero node if not already existing
+SET h:Avenger, h:Amateur
+
+// removing label from the hero node
+REMOVE h:Amateur
+
+// returns labels associated w/the node
+RETURN labels(h)
+```
+
+Add node label based on a relationship.
+```cypher
+MATCH (h:Hero)
+WHERE exists ((h)-[:WON_AGAINST]-())
+
+// adding label to the hero node w/WON_AGAINST relationship
+SET h:Champion
+```
+
+Properties for a node uniquely identify a node, provide flags, and return data.
+
+Add/Remove node properties using `SET` and `REMOVE`
+```cypher
+MATCH (h:Hero)
+WHERE h.name = 'Peter Parker'
+
+// adding one property to hero node
+SET h.alias = 'Spiderman'
+
+// this method must include all properties/values as all existing properties are overwritten
+SET h = {name: 'Peter Parker', alias: 'Spiderman', employment: 'Unemployed'}
+
+// this method will update existing and add properties not existing
+SET h += {employment: 'Daily Bugle', symbiote: False}
+
+// removing property from the hero node
+REMOVE m.symbiote
+
+// removing property from the hero node by setting to NULL
+SET h.employment = null
+
+RETURN h
+```
+
+Delete a node using `DELETE`; this method is successful provided no relationships w/the node exist.
+```cypher
+MATCH (h:Hero)
+WHERE h.name = 'Peter Parker'
+DELETE h
+```
+
+Delete a node using `DETACH DELETE`; this method removes a node w/existing relationships.
+```cypher
+MATCH (h:Hero)
+WHERE h.name = 'Peter Parker'
+DETACH DELETE  h
+```
+
+# Creating / Updating Relationships
+Relationships are the connection between entities or nodes. When defining a relationship type, verbs are assigned to the connections in the 
+graph. (ie. USES, MARRIED_TO, FOUGHT_AGAINST).
+
+A direction must either be specified explicitly, or inferred by the left-to-right direction in the pattern specified.
+
+Fanout occurs when entities are spread out and represented as a network or linked nodes. Fanout can lead to supernodes, or very dense nodes;
+the splitting up of nodes should be done only to answer questions or use cases. 
+
+Create a relationship using `CREATE`; this method does not account for existing relationships and can create duplicates.
+```cypher
+MATCH (h:Hero), (v:Villain)
+WHERE h.name = 'Peter Parker'
+    AND v.alias = 'Green Goblin'
+
+// creates the relationship between nodes
+CREATE (h)-[:FOUGHT_AGAINST]->(v)
+
+RETURN h, v
+```
+
+Create a relationship using `MERGE`; this method accounts for existing relationships, therefore avoiding duplication.
+```cypher
+MATCH (h:Hero), (v:Villain), (s:Sidekick)
+WHERE h.hame = 'Peter Parker'
+    AND v.alias = 'Green Goblin'
+    AND s.alias = 'Shockwave'
+
+// creates multiple relationships to the nodes, if not existing
+MERGE (h)-[:FOUGHT_AGAINST]->(v)<-[:SIDEKICK_OF]-(s)
+
+RETURN h, v, s
+```
+
+Add/Remove relationship properties using `SET` and `REMOVE`
+```cypher
+MATCH (h:Hero)-[rel:FOUGHT_AGAINST]->(v:Villain)
+
+WHERE h.name = 'Peter Parker'
+    AND v.alias = 'Green Goblin'
+
+// adding location and times properties for relationship
+SET 
+    rel.location = ['Times Square', 'MSG', 'Avenger Tower'], 
+    rel.times = [2002, 2006, 2010]
+
+// removing property from relationship
+REMOVE rel.times
+
+// removing property from relationship by setting to NULL
+rel.location = null
+
+RETURN h, rel, v
+```
 
 # Common Cypher Queries
 
-Creating a **MATCH** clause that includes a pattern specified by two paths.
+| Command                                                                      | Definition                                                                                   |
+| ---------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------- |
+| `CALL db.propertyKeys()`                                                     | Displays all properties of a graph; does not what define which each property key belongs to. |
+| `MATCH (n:Node) RETURN keys(n)`                                              | Displays the properties of a node.                                                           |
+| `:params {paramName: 'paramValue, ...'}` OR `:param paramName => paramValue` | Sets defined parameter and its value in the current session.                                 |
+| `:params`                                                                    | Displays the current parameters in session and their values                                  |
+| `:queries`                                                                   | Displays current running queries to allow for monitoring/troubleshooting                     |
+| `CALL gds.graph.drop(<graph-name>)`                                          | Drops the named graph specified.                                                             |
 
+
+Create/Update properties depending on if a node exists or not using `ON CREATE SET` and `ON MATCH SET`
+```cypher
+MERGE (h:Hero {name: 'Peter Parker'})
+
+// property is created if node is created
+ON CREATE SET h.alias = 'Spiderman'
+
+// property is updated if node is existing
+ON MATCH SET h.employed = 'Daily Bugle'
+
+// property is set regardless
+SET h.loveInterest = 'Gwen Stacy'
+
+RETURN h
+```
+
+Creating a **MATCH** clause that includes a pattern specified by two paths.
 ```cypher
 // returning actors and director from movie(s) released in 2000.
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie), (m)<-[:DIRECTED]-(d:Person)
@@ -240,149 +431,6 @@ RETURN m.title, m.released
 
 ---
 
-# Creating / Updating Nodes
-
-Use **CREATE** clause to create a **node with optional properties**; does not account for node existing and can create duplicates.
-
-```cypher
-// generic framework
-CREATE (nodeVariable: NodeLabels {optionalProperties})
-
-// adding a node to the graph of types Movies and Action, with 'Batman Begins' title
-CREATE (m:Movie:Action {title: 'Batman Begins'})
-```
-
-You can add labels to a node using the **SET** clause, helpful when you may not know labels ahead of time
-
-```cypher
-// if adding a label to a node for which the label already exists, SET will be ignored
-MATCH (m:Movie)
-WHERE m.title = 'Batman Begins'
-SET m:Fantasy
-RETURN labels(m)  // labels() function will return labels associated with a node
-```
-
-Use **SET** after creating a node to add properties; if property exists it will be updated.
-
-```cypher
-// adding one property to x node
-SET x.propertyName = value
-
-// this method must include all properties/values as all existing properties are overwritten
-SET x = {propertyName1: value1, propertyName2: value2}
-
-// this method will update existing and add properties not existing
-SET x += {propertyName1: value1, propertyName2: value2}
-```
-
-Use **REMOVE** clause to remove labels from a node
-
-```cypher
-// if removing a label to a node that does not exist, REMOVE will be ignored
-MATCH (m:Action)
-REMOVE m:Action, m:Fantasy
-RETURN labels(m)
-```
-
-Use **REMOVE** clause to remove properties from a node
-
-```cypher
-MATCH (m:Movie)
-WHERE m.title = 'Batman Begins'
-SET m.grossMillions = null  // setting property as null will remove it
-REMOVE m.videoFormat        // using REMOVE clause will remove property
-RETURN m
-```
-
-Use **DELETE** to remove a node; can be deleted provided you can reference it and no relationships exist.
-
-```cypher
-MATCH (p:Person)
-WHERE p.name = 'Jane Doe'
-DELETE p
-```
-
-To **DELETE** a node with existing relationships, use the **DETACH DELETE** clause.
-
-```cypher
-MATCH (p:Person)
-WHERE p.name = 'Liam Neeson'
-DETACH DELETE  p
-```
-
----
-
-# Creating Relationships
-
-Use **CREATE** clause to create a **relationship with optional properties**; does not account for relationship existing and can create duplicates.
-
-```cypher
-MATCH (a:Person), (m:Movie)
-WHERE a.name = 'Michael Caine' AND m.title = 'Batman Begins'
-CREATE (a)-[:ACTED_IN]->(m)   // the CREATE clause creates the relationship between nodes
-RETURN a, m
-```
-
-You can create **multiple relationships** by providing the pattern for the creation
-
-```cypher
-MATCH (a:Person), (m:Movie), (p:Person)
-WHERE a.name = 'Liam Neeson' AND m.title = 'Batman Begins' AND p.name = 'Benjamin Melniker'
-CREATE (a)-[:ACTED_IN]->(m)<-[:PRODUCED]-(p)   // the CREATE clause creates the relationship to the nodes
-RETURN a, m, p
-```
-
-Creating a relationship and defining relationship properties using the **SET** clause.
-
-```cypher
-MATCH (a:Person), (m:Movie)
-WHERE a.name = 'Christian Bale' AND m.title = 'Batman Begins'
-CREATE (a)-[rel:ACTED_IN]->(m)
-SET rel.roles = ['Bruce Wayne', 'Batman']
-RETURN a, rel, m
-```
-
-**Inline** relationship properties can be created by passing the relationship properties within the **SET** clause.
-
-```cypher
-MATCH (a:Person), (m:Movie)
-WHERE a.name = 'Katie Holmes' AND m.title = 'Batman Begins'
-CREATE (a)-[rel:ACTED_IN {roles: ['Rachel','Rachel Dawes']}]->(m) // properties defined for relationship
-RETURN a.name, rel, m.title
-```
-
-Creating a **node** and **relationship** in one query
-
-```cypher
-MATCH (m:Movie)
-WHERE m.title = 'Batman Begins'
-
-CREATE (a:Person)-[:ACTED_IN]->(m)          // creating the relationship from Person to Movie nodes
-SET a.name = 'Gary Oldman', a.born=1958     // defining the node properties for Person
-RETURN a, m
-```
-
-Use the **REMOVE** clause to remove **relationship properties**; can also set property to _null_.
-
-```cypher
-MATCH (a:Person)-[rel:ACTED_IN]->(m:Movie)
-WHERE a.name = 'Christian Bale' AND m.title = 'Batman Begins'
-
-REMOVE rel.roles    // removes the 'roles' relationship property; can also use SET rel.roles=null
-RETURN a, rel, m
-```
-
-Use the **DELETE** clause to remove a relationship (and its properties)
-
-```cypher
-MATCH (a:Person)-[rel:WROTE | DIRECTED]->(m:Movie)              // matching relationships 'wrote' and 'directed' between Person/Movie nodes
-WHERE a.name = 'Katie Holmes' AND m.title = 'Batman Begins'
-
-DELETE rel                                                      // deleting all 'wrote' and 'directed' relationships between 'katie holmes' and 'batman begins'
-RETURN a, m
-```
-
----
 
 # Merging Data in the Graph
 
