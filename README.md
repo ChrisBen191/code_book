@@ -20,9 +20,9 @@ _Contains the current languages and libraries I'm developing in._
 - [JavaScript](#javascript)
 - [HTML / CSS](#html--css)
 
-## Python
+# Python
 
-### Python General
+## Python General
 
 - [Importing Data](Python/python_snippets.md#IMPORTING-DATA)
 - [Iterators](Python/python_snippets.md#ITERATORS)
@@ -34,22 +34,22 @@ _Contains the current languages and libraries I'm developing in._
 - [Dictionaries](Python/python_snippets.md#DICTIONARIES)
 - [Functions](Python/python_snippets.md#FUNCTIONS)
 
-### Pandas
+## Pandas
 
 - [Pandas](Python/pandas.md)
 
-### 3rd Party Libraries
+## 3rd Party Libraries
 
 - [Pyinput Module](Python/pyinput_plus.md)
 - [Regular Expressions](Python/regular_expression.md)
 
-### Data Visualization
+## Data Visualization
 
 - [Matplotlib](Python/data_visualization.md#MATPLOTLIB)
 - [Seaborn](Python/data_visualization.md#SEABORN)
 - [Bokeh](Python/data_visualization.md#BOKEH)
 
-### Machine Learning
+## Machine Learning
 
 - [Preprocessing](Python/machine_learning.md#pre-processing)
 - [Supervised Learning](Python/machine_learning.md#supervised-learning)
@@ -59,7 +59,7 @@ _Contains the current languages and libraries I'm developing in._
 
 [Time Series](Python/time_series.md)
 
-## [Docker](Docker/docker.md#docker)
+# [Docker](Docker/docker.md#docker)
 
 - [Images](Docker/docker.md#images)
 - [Containers](Docker/docker.md#containers)
@@ -67,7 +67,7 @@ _Contains the current languages and libraries I'm developing in._
 - [Networks](Docker/docker.md#networks)
 - [Dockerfile](Docker/docker.md#dockerfile)
 
-## Shell
+# Shell
 
 [Shell](Shell/shell_snippets.md)
 
@@ -79,18 +79,18 @@ _Contains the current languages and libraries I'm developing in._
 - [Tmux](Shell/shell_snippets.md##TMUX)
 - [PostgreSQL](Shell/shell_snippets.md##POSTGRESQL)
 
-## SQL
+# SQL
 
 - [SQL](SQL/sql_snippets.md)
 - [Snowflake](SQL/snowflake.md)
 - [Cypher](Cypher/cypher_snippets.md)
 
-## JavaScript
+# JavaScript
 
 - [JavaScript](JavaScript/javascript.md)
 
 <!-- CLEANUP FILE PATHS -->
 
-## HTML / CSS
+# HTML / CSS
 
 - [HTML](HTML_CSS/html.md)
