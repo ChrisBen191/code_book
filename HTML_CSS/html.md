@@ -4,21 +4,21 @@
 
 - [Content Categories for Elements](#content-categories-for-elements)
   - [Flow Content](#flow-content)
-    - [Sectioning Content](#sectioning-content)
-    - [Heading Content](#heading-content)
-    - [Phrasing Content](#phrasing-content)
+  - [Sectioning Content](#sectioning-content)
+  - [Heading Content](#heading-content)
+  - [Phrasing Content](#phrasing-content)
 - [Elements](#elements)
 - [Attributes](#attributes)
 
 ---
 
-## Content Categories for Elements
+# Content Categories for Elements
 
-### Flow Content
+## Flow Content
 
 - generally contain text or embedded content such as images and videos.
 
-#### Sectioning Content
+## Sectioning Content
 
 - includes special container elements used for grouping other elements into meaningful collections.
 
@@ -42,17 +42,17 @@
 - `<footer>` element
   - section things like social media links, secondary navigation, and site smallprint.
 
-#### Heading Content
+## Heading Content
 
 - reserved for the six heading elements in HTML; can only contain phrasing content.
   - ie. `<h1>`, `<h2>`, `<h3>`, etc.
 
-#### Phrasing Content
+## Phrasing Content
 
 - represents the text of the document and the elements which mark up that text.
   - also includes `<img>`, `<audio>`, and `<video>` as these elements revert to plain text if the relevant resource can't be retrieved.
 
-## Elements
+# Elements
 
 |  Command  |                                                                      |
 | :-------: | -------------------------------------------------------------------- |
@@ -93,7 +93,7 @@ form `<form>` element is used to retrieve information from the user
 </form>
 ```
 
-## Attributes
+# Attributes
 
 - `<class>` attribute
   - "global" attribute; can be applied to any HTML element.
