@@ -14,14 +14,18 @@
 
 ## Flow Content
 
-- generally contain text or embedded content such as images and videos.
+- generally contain text or embedded content such as images and videos. Also includes phrasing elements, or elements that become plain text due to offline or resource not available.
 
 - `<header>` element
   - represents introductory content, typically a group of introductory or navigational aids.
+  - `<nav>` is typically used in the main `<header>` of a page.
 - `<main>` element
   - represents the main content of the document, content which is unique to this particular page.
+  - only 1 per page, inside the `<body>`.
 - `<footer>` element
-  - section things like social media links, secondary navigation, and site small print.
+  - separates things like social media links, secondary navigation, and site small print.
+  - used inside `<articles>` or `<sections>`, but should be related to the parent element.
+    - ie. `<article>` element w/journalist information, and `<footer>` with links to journalist profile.
 
 ## Sectioning Content
 
@@ -31,14 +35,21 @@
   - note this does not include the `<header>`, `<main>`, and `<footer>` elements
 
 - `<section>` element
-  - represent a thematically related group of elements which forma a component of a larger whole.
-  - ie. website with area for blog posts and area for merchandise links.
+
+  - represent a thematically related group of elements which form a component of a larger whole.
+    - ie. website with area on page for blog posts, an area on page for merchandise links, etc.
+  - generally sections contain a heading as they are separate from one another.
+
 - `<article>` element
+
   - used to mark a self-contained composition w/in a document; element which makes sense on its own as a standalone work.
-  - ie. weather widget w/each daily forecast a separate article.
+  - ie. weather widget w/each daily forecast a separate article, a running stock ticker banner, etc.
+
 - `<div>` element
+
   - very generic by design; don't carry inherent meaning which makes them useful as generic grouping elements.
   - primarily used to aid in styling a page or to add behavior to some section of the browser window.
+
 - `<nav>` element
   - major navigation blocks within the site;
     - ie. header bar with hyperlinks, table of contents, and menus.
