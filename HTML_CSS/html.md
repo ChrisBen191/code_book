@@ -10,13 +10,18 @@
 - [Elements](#elements)
 - [Attributes](#attributes)
 
----
-
 # Content Categories for Elements
 
 ## Flow Content
 
 - generally contain text or embedded content such as images and videos.
+
+- `<header>` element
+  - represents introductory content, typically a group of introductory or navigational aids.
+- `<main>` element
+  - represents the main content of the document, content which is unique to this particular page.
+- `<footer>` element
+  - section things like social media links, secondary navigation, and site small print.
 
 ## Sectioning Content
 
@@ -37,10 +42,6 @@
 - `<nav>` element
   - major navigation blocks within the site;
     - ie. header bar with hyperlinks, table of contents, and menus.
-- `<main>` element
-  - represents the main content of the document, content which is unique to this particular page.
-- `<footer>` element
-  - section things like social media links, secondary navigation, and site smallprint.
 
 ## Heading Content
 
@@ -91,6 +92,13 @@ form `<form>` element is used to retrieve information from the user
   <h1>Form Header</h1>
   <p>You would have form information and data to go here</p>
 </form>
+```
+
+script `<script>` element is used to connect other files to the html document.
+
+```html
+<script type="text/javascript" src="app.js"></script>
+<!-- src is "source" of js file -->
 ```
 
 # Attributes
