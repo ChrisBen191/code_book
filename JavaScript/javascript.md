@@ -1,6 +1,8 @@
 # JavaScript Snippets <!-- omit in toc -->
 JavaScript is a high-level, object-oriented, multi-paradigm programming language. JS can be used to create dynamic effects and web applications in the browser, and can also be run outside of web browsers, using `node.js` for the backend.
 
+>In terms of how `HTML`, `CSS`, and `JS` interact, their relationship can be described as analgous to `nouns`, `adjectives`, and `verbs`. `HTML/nouns` describe the elements (ie. paragraph, header), the `CSS/adjective` provides characterization of the element (ie. red paragraph text, round edges), and `JS/verbs` provide actions for the elements (ie. hide paragraph, blur on hover).
+
 # Table of Contents <!-- omit in toc -->
 
 - [Commands](#commands)
@@ -20,12 +22,9 @@ JavaScript is a high-level, object-oriented, multi-paradigm programming language
   - [Object Method (Function)](#object-method-function)
 - [DOM Manipulation](#dom-manipulation)
 
+JS contains the following datatypes : `Number, String, Boolean, Undefined, Null`. JS also contains the following falsy Values : `0, '',undefined, null, NaN`.
+
 ---
->In terms of how HTML, CSS, and JS interact, their relationship can be described as analgous to "nouns", "adjectives", and "verbs". HTML/nouns describe the elements (ie. paragraph, header), the CSS/adjective provides characterization of the element (ie. red paragraph text, round edges), and JS/verbs provide actions for the elements (ie. hide paragraph, blur on hover).
-
-JS contains the following datatypes : `Number`, `String`, `Boolean`, `Undefined`, `Null`.
-JS also contains the following falsy Values : `0`, `''`, `undefined`, `null`, `NaN`.
-
 Javascript is run by placing the `script` element below in the `body` element of the `HTML` file for a project.
 ```javascript
 <script type="text/javascript" src="app.js"></script>
