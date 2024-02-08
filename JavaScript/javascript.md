@@ -21,7 +21,7 @@ JavaScript is a high-level, object-oriented, multi-paradigm programming language
 - [DOM Manipulation](#dom-manipulation)
 
 ---
-In terms of how HTML, CSS, and JS interact, their relationship can be described as analgous to "nouns", "adjectives", and "verbs". HTML/nouns describe the elements (ie. paragraph, header), the CSS/adjective provides characterization of the element (ie. red paragraph text, round edges), and JS/verbs provide actions for the elements (ie. hide paragraph, blur on hover).
+>In terms of how HTML, CSS, and JS interact, their relationship can be described as analgous to "nouns", "adjectives", and "verbs". HTML/nouns describe the elements (ie. paragraph, header), the CSS/adjective provides characterization of the element (ie. red paragraph text, round edges), and JS/verbs provide actions for the elements (ie. hide paragraph, blur on hover).
 
 JS contains the following datatypes : `Number`, `String`, `Boolean`, `Undefined`, `Null`.
 JS also contains the following falsy Values : `0`, `''`, `undefined`, `null`, `NaN`.
@@ -32,24 +32,33 @@ Javascript is run by placing the `script` element below in the `body` element of
 // src is "source" of js **file**
 ```
 
-Use `let` instead of `var`! `let` is "block" scoped, while `var` is "function" scoped.
+Use `const` when you want to define an *immutable* variable, this should usually be the first choice of defining a variable. Use `let` instead of `var`! Let will define a *mutable* variable; also `let` is "block" scoped, while `var` is "function" scoped. 
+
 ```javascript
+// defines an immutable object
+const birthYear = 1990;
+
+// defines a mutable object
 let superHero = 'Spider-Man';
 
 // created a variable but remains undefined
 let defeats; 
+
+// can define variable, but this creates the variable in the "global" object and SHOULD BE AVOIDED!
+realName = 'Peter Parker';
 ```
+
 # Commands
-|                 Command                  |                                                                                 |
-| :--------------------------------------: | ------------------------------------------------------------------------------- |
-|             `'use strict';`              | turns on strict mode, which doesn't allow silent errors; insert at top of file. |
-|      `console.log('Hello World!')`       | displays output (text, variable, etc.) to the browser's console log             |
+| Command                                  | Definition                                                                      |
+| :--------------------------------------- | ------------------------------------------------------------------------------- |
+| `'use strict';`                          | turns on strict mode, which doesn't allow silent errors; insert at top of file. |
+| `console.log('Hello World!')`            | displays output (text, variable, etc.) to the browser's console log             |
 | `document.querySelector('html-element')` | accesses the HTML element passed to allow for DOM manipulation.                 |
-|         `alertF('Hello World!')`         | displays browser alert with output (text, variable, etc.)                       |
-|    `prompt("What is todays' date?")`     | displays browser prompt for user input; can be stored as a variable             |
-|    `console.log(typeof variableName)`    | displays the variable's data type to the browser's console log                  |
-|             `Number('1990')`             | converts the string into an integer.                                            |
-|              `String(1991)`              | converts the integer into a string.                                             |
+| `alertF('Hello World!')`                 | displays browser alert with output (text, variable, etc.)                       |
+| `prompt("What is todays' date?")`        | displays browser prompt for user input; can be stored as a variable             |
+| `console.log(typeof variableName)`       | displays the variable's data type to the browser's console log                  |
+| `Number('1990')`                         | converts the string into an integer.                                            |
+| `String(1991)`                           | converts the integer into a string.                                             |
 
 
 # Template Strings / Literals
@@ -63,13 +72,13 @@ console.log(`Do you belive ${normalName} could be ${superheroName}?`);
 ```
 
 # Dates
-|             Command              |                                                         |
-| :------------------------------: | ------------------------------------------------------- |
-|    `dateValue.toTimeString()`    | converts date object to "time" string.                  |
-|    `dateValue.toDateString()`    | converts date object to "date" string.                  |
-|    `dateValue.toUTCString()`     | converts date object to "UTC" string.                   |
-|    `dateValue.toISOString()`     | converts date object to "ISO" string.                   |
-|    `dateValue.toGMTString()`     | converts date object to "GMT" string.                   |
+| Command                          | Definition                                              |
+| :------------------------------- | ------------------------------------------------------- |
+| `dateValue.toTimeString()`       | converts date object to "time" string.                  |
+| `dateValue.toDateString()`       | converts date object to "date" string.                  |
+| `dateValue.toUTCString()`        | converts date object to "UTC" string.                   |
+| `dateValue.toISOString()`        | converts date object to "ISO" string.                   |
+| `dateValue.toGMTString()`        | converts date object to "GMT" string.                   |
 | `dateValue.toLocaleDateString()` | converts date object to "locale" sensitive date string. |
 
 ```javascript
