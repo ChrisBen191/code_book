@@ -1,4 +1,5 @@
 # JavaScript Snippets <!-- omit in toc -->
+JavaScript is a high-level, object-oriented, multi-paradigm programming language. JS can be used to create dynamic effects and web applications in the browser, and can also be run outside of web browsers, using `node.js` for the backend.
 
 # Table of Contents <!-- omit in toc -->
 
@@ -20,47 +21,38 @@
 - [DOM Manipulation](#dom-manipulation)
 
 ---
+In terms of how HTML, CSS, and JS interact, their relationship can be described as analgous to "nouns", "adjectives", and "verbs". HTML/nouns describe the elements (ie. paragraph, header), the CSS/adjective provides characterization of the element (ie. red paragraph text, round edges), and JS/verbs provide actions for the elements (ie. hide paragraph, blur on hover).
 
-Javascript Datatypes : `Number`, `String`, `Boolean`, `Undefined`, `Null`.
+JS contains the following datatypes : `Number`, `String`, `Boolean`, `Undefined`, `Null`.
+JS also contains the following falsy Values : `0`, `''`, `undefined`, `null`, `NaN`.
 
-Falsy Values : `0`, `''`, `undefined`, `null`, `NaN`
-
-JavaScript allows type coercion; or converting dtype of value as needed
-
-code snippet added to html file to import the `src` javascript file.
-
+Javascript is run by placing the `script` element below in the `body` element of the `HTML` file for a project.
 ```javascript
 <script type="text/javascript" src="app.js"></script>
 // src is "source" of js **file**
 ```
 
+Use `let` instead of `var`! `let` is "block" scoped, while `var` is "function" scoped.
+```javascript
+let superHero = 'Spider-Man';
+
+// created a variable but remains undefined
+let defeats; 
+```
 # Commands
-
----
-
 |                 Command                  |                                                                                 |
 | :--------------------------------------: | ------------------------------------------------------------------------------- |
 |             `'use strict';`              | turns on strict mode, which doesn't allow silent errors; insert at top of file. |
-| `document.querySelector('html-element')` | accesses the HTML element passed to allow for DOM manipulation.                 |
 |      `console.log('Hello World!')`       | displays output (text, variable, etc.) to the browser's console log             |
+| `document.querySelector('html-element')` | accesses the HTML element passed to allow for DOM manipulation.                 |
 |         `alertF('Hello World!')`         | displays browser alert with output (text, variable, etc.)                       |
 |    `prompt("What is todays' date?")`     | displays browser prompt for user input; can be stored as a variable             |
 |    `console.log(typeof variableName)`    | displays the variable's data type to the browser's console log                  |
+|             `Number('1990')`             | converts the string into an integer.                                            |
+|              `String(1991)`              | converts the integer into a string.                                             |
 
-datatype conversions for `String` and `Int`
-
-```javascript
-// converts the string 1991 into an integer
-console.log(Number('1991'));
-
-// converts the integer into a string
-console.log(String(1991));
-```
 
 # Template Strings / Literals
-
----
-
 Defines a string with passed values from defined variables using backticks. Newline incorporated automatically.
 
 ```javascript
@@ -71,7 +63,6 @@ console.log(`Do you belive ${normalName} could be ${superheroName}?`);
 ```
 
 # Dates
-
 |             Command              |                                                         |
 | :------------------------------: | ------------------------------------------------------- |
 |    `dateValue.toTimeString()`    | converts date object to "time" string.                  |
@@ -81,52 +72,51 @@ console.log(`Do you belive ${normalName} could be ${superheroName}?`);
 |    `dateValue.toGMTString()`     | converts date object to "GMT" string.                   |
 | `dateValue.toLocaleDateString()` | converts date object to "locale" sensitive date string. |
 
+```javascript
+
+let todaysDate = new Date();
+
+console.log(todaysDate);
+// Thu Feb 08 2024 11:09:30 GMT-0700 (Mountain Standard Time)
+
+console.log(todaysDate.toTimeString());
+// 11:07:10 GMT-0700 (Mountain Standard Time)
+
+console.log(todaysDate.toDateString());
+// Thu Feb 08 2024
+
+console.log(todaysDate.toUTCString());
+// Thu, 08 Feb 2024 18:07:10 GMT
+
+console.log(todaysDate.toISOString());
+// 2024-02-08T18:07:10.842Z
+
+console.log(todaysDate.toGMTString());
+// 08 Feb 2024 18:07:10 GMT
+
+console.log(todaysDate.toLocaleDateString());
+// 2/8/2024
+```
+
 # Arrays
-
----
-
-```javascript
-// using bracket notation
-const friends = ['Iron Man', 'Incredible Hulk', 'Dr. Strange'];
-
-// using Array method
-const years = new Array(1991, 1984, 2008, 2020);
-```
-
-Capture the specified element(s) in an array and assign to a variable in one step
-
-```javascript
-const restaurant = {
-  name: 'Classico Italiano',
-  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
-  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-};
-
-// captures the first two elements in the object's array
-const [first, second] = restaurant.starterMenu;
-console.log(first, second);
-
-// captures the third and fourth elements in the object's array
-const [, , third, fourth] = restaurant.starterMenu;
-console.log(third, fourth);
-```
-
-|          Command          |                                                                            |
-| :-----------------------: | -------------------------------------------------------------------------- |
-|      `array.length`       | calculates the length of the array specified                               |
-| `array.indexOf('Value')`  | returns the index of the element in the array if existing else returns -1  |
-| `array.includes('Value')` | returns boolean T/F if the element is in the array                         |
-| `array.unshift('Value')`  | adds an element to the beginning of an array; captures new length of array |
-|   `array.push('Value')`   | adds an element to the end of an array; captures new length of array       |
-|      `array.shift()`      | removes the first element from an array; captures the element removed      |
-|       `array.pop()`       | removes the last element from an array; captures the element removed       |
-|   `array.slice(index)`    | returns selected index value for an array                                  |
-|     `array.join(',')`     | joins items in array as a string with passed separator                     |
-|    `array.split(',')`     | splitsa string into an array using passed separator                        |
+| Command                                                 | Definition                                                                  |
+| :------------------------------------------------------ | --------------------------------------------------------------------------- |
+| `const friendsArray = ['Iron Man', 'Spider-Man'];`      | creates an array using bracket notation.                                    |
+| `const yearsArray = new Array(1991, 1984, 2008, 2024);` | creates an array using Array method.                                        |
+| `let arrayLength = array.length;`                       | calculates the length of the array specified.                               |
+| `let elementIdx = array.indexOf('Value');`              | returns the index of the element in the array if existing else returns -1.  |
+| `let elementTF = array.includes('Value');`              | returns boolean T/F if the element is in the array.                         |
+| `let newArrayLength = array.unshift('Value');`          | adds an element to the beginning of an array; captures new length of array. |
+| `let newArrayLength = array.push('Value')`              | adds an element to the end of an array; captures new length of array.       |
+| `let firstElement = array.shift();`                     | removes the first element from an array; captures the element removed.      |
+| `let lastElement = array.pop();`                        | removes the last element from an array; captures the element removed.       |
+| `let elementsAfterSlice = array.slice(index);`          | captures selected value(s) for an array after the index.                    |
+| `let arrayAsString = array.join(',');`                  | joins elements in array as a string with passed separator.                  |
+| `let StringAsArray = array.split(',');`                 | splits a string into an array of elements using passed separator.           |
+| `const [first, second] = object.SampleArray;`           | captures the first two elements in the object's SampleArray.                |
+| ` const [, , third, fourth] = object.SampleArray;`      | captures the third and fourth elements in the object's SampleArray.         |
 
 # If/Else Statements
-
----
 
 `if(conditional) {do this} else {do this instead}` allows code to be ran conditionally.
 
@@ -234,6 +224,14 @@ for (let i = 0; i < breakfastFoods.length; i++) {
 }
 ```
 
+Loop syntax can also be used when looping is simple
+
+```javascript
+for (const breakfast in breakfastFoods) {
+  console.log(breakfast);
+}
+```
+
 ## forEach
 
 **_forEach_** iterates over each element in an array and applies the function defined
@@ -321,6 +319,12 @@ console.log(yearsUntilRetirement(1990, 'Chris'));
 
 ---
 
+|           Command            |                                               |
+| :--------------------------: | --------------------------------------------- |
+|  `Object.keys(ObjectName)`   | retrieves the keys of the object.             |
+| `Object.values(ObjectName)`  | retrieves the values of the object.           |
+| `Object.entries(ObjectName)` | retrieves the key, value pairs of the object. |
+
 Building an object using _object literal syntax_
 
 ```javascript
@@ -339,15 +343,6 @@ console.log(ironMan['lastName']);
 // adding new elements to the object by assigning the values in dot/bracket notation
 ironMan.location = 'California';
 ironMan['twitter'] = '@ironMan2003';
-
-// displays the keys of the object
-console.log(Object.keys(ironMan));
-
-// displays the values of the object
-console.log(Object.values(ironMan));
-
-// displays the key-value pairs of the object
-console.log(Object.entries(ironMan));
 ```
 
 ## Object Method (Function)
