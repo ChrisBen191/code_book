@@ -5,10 +5,11 @@ JavaScript is a high-level, object-oriented, multi-paradigm programming language
 
 # Table of Contents <!-- omit in toc -->
 
-- [Commands](#commands)
+- [Basic Commands](#basic-commands)
+- [Operators](#operators)
 - [Template Strings / Literals](#template-strings--literals)
-- [Dates](#dates)
 - [Arrays](#arrays)
+- [Dates](#dates)
 - [If/Else Statements](#ifelse-statements)
   - [Ternary Operators](#ternary-operators)
   - [Switch Statements](#switch-statements)
@@ -31,7 +32,19 @@ Javascript is run by placing the `script` element below in the `body` element of
 // src is "source" of js **file**
 ```
 
-Use `const` when you want to define an *immutable* variable, this should usually be the first choice of defining a variable. Use `let` instead of `var`! Let will define a *mutable* variable; also `let` is "block" scoped, while `var` is "function" scoped. 
+# Basic Commands
+| Command                                  | Definition                                                                      |
+| :--------------------------------------- | ------------------------------------------------------------------------------- |
+| `'use strict';`                          | turns on strict mode, which doesn't allow silent errors; insert at top of file. |
+| `console.log('Hello World!')`            | displays output (text, variable, etc.) to the browser's console log             |
+| `prompt("What is todays' date?")`        | displays browser prompt for user input; can be stored as a variable             |
+| `console.log(typeof variableName)`       | displays the variable's data type to the browser's console log                  |
+| `alertF('Hello World!')`                 | displays browser alert with output (text, variable, etc.)                       |
+| `Number('1990')`                         | converts the string into an integer.                                            |
+| `String(1991)`                           | converts the integer into a string.                                             |
+| `document.querySelector('html-element')` | accesses the HTML element passed to allow for DOM manipulation.                 |
+
+Use `const` when you want to define an *immutable* variable, this should usually be the first choice of defining a variable. Use `let` instead of `var`! `let` will define a *mutable* variable; also `let` is "block" scoped, while `var` is "function" scoped. 
 
 ```javascript
 // defines an immutable object
@@ -46,19 +59,28 @@ let defeats;
 // can define variable, but this creates the variable in the "global" object and SHOULD BE AVOIDED!
 realName = 'Peter Parker';
 ```
+# Operators 
+`Assignment` operators are designed to update a variable with shorthand syntax. `Comparison` operators are designed to provide a T/F Boolean value depending on the comparison between two variables.
+```javascript
+let counter = 9 + 1;
+// counter = 10
+counter += 10;
+// counter = 20
+counter *= 4;
+// counter = 80
+counter++;
+// counter = 81
+counter--;
+// counter = 80
+console.log(counter);
 
-# Commands
-| Command                                  | Definition                                                                      |
-| :--------------------------------------- | ------------------------------------------------------------------------------- |
-| `'use strict';`                          | turns on strict mode, which doesn't allow silent errors; insert at top of file. |
-| `console.log('Hello World!')`            | displays output (text, variable, etc.) to the browser's console log             |
-| `document.querySelector('html-element')` | accesses the HTML element passed to allow for DOM manipulation.                 |
-| `alertF('Hello World!')`                 | displays browser alert with output (text, variable, etc.)                       |
-| `prompt("What is todays' date?")`        | displays browser prompt for user input; can be stored as a variable             |
-| `console.log(typeof variableName)`       | displays the variable's data type to the browser's console log                  |
-| `Number('1990')`                         | converts the string into an integer.                                            |
-| `String(1991)`                           | converts the integer into a string.                                             |
+let testAnswer = 85.4;
+let actualAnswer = 85.4;
 
+console.log(testAnswer > actualAnswer);
+console.log(testAnswer >= actualAnswer);
+console.log(testAnswer <> actualAnswer);
+```
 
 # Template Strings / Literals
 Defines a string with passed values from defined variables using backticks. Newline incorporated automatically.
@@ -69,6 +91,24 @@ const superheroName = 'Spider-Man';
 
 console.log(`Do you belive ${normalName} could be ${superheroName}?`);
 ```
+
+# Arrays
+| Command                                                 | Definition                                                                  |
+| :------------------------------------------------------ | --------------------------------------------------------------------------- |
+| `const friendsArray = ['Iron Man', 'Spider-Man'];`      | creates an array using bracket notation.                                    |
+| `const yearsArray = new Array(1991, 1984, 2008, 2024);` | creates an array using Array method.                                        |
+| `let arrayLength = array.length;`                       | calculates the length of the array specified.                               |
+| `let elementIdx = array.indexOf('Value');`              | returns the index of the element in the array if existing else returns -1.  |
+| `let elementTF = array.includes('Value');`              | returns boolean T/F if the element is in the array.                         |
+| `let newArrayLength = array.unshift('Value');`          | adds an element to the beginning of an array; captures new length of array. |
+| `let newArrayLength = array.push('Value')`              | adds an element to the end of an array; captures new length of array.       |
+| `let firstElement = array.shift();`                     | removes the first element from an array; captures the element removed.      |
+| `let lastElement = array.pop();`                        | removes the last element from an array; captures the element removed.       |
+| `let elementsAfterSlice = array.slice(index);`          | captures selected value(s) for an array after the index.                    |
+| `let arrayAsString = array.join(',');`                  | joins elements in array as a string with passed separator.                  |
+| `let StringAsArray = array.split(',');`                 | splits a string into an array of elements using passed separator.           |
+| `const [first, second] = object.SampleArray;`           | captures the first two elements in the object's SampleArray.                |
+| ` const [, , third, fourth] = object.SampleArray;`      | captures the third and fourth elements in the object's SampleArray.         |
 
 # Dates
 | Command                          | Definition                                              |
@@ -105,24 +145,6 @@ console.log(todaysDate.toGMTString());
 console.log(todaysDate.toLocaleDateString());
 // 2/8/2024
 ```
-
-# Arrays
-| Command                                                 | Definition                                                                  |
-| :------------------------------------------------------ | --------------------------------------------------------------------------- |
-| `const friendsArray = ['Iron Man', 'Spider-Man'];`      | creates an array using bracket notation.                                    |
-| `const yearsArray = new Array(1991, 1984, 2008, 2024);` | creates an array using Array method.                                        |
-| `let arrayLength = array.length;`                       | calculates the length of the array specified.                               |
-| `let elementIdx = array.indexOf('Value');`              | returns the index of the element in the array if existing else returns -1.  |
-| `let elementTF = array.includes('Value');`              | returns boolean T/F if the element is in the array.                         |
-| `let newArrayLength = array.unshift('Value');`          | adds an element to the beginning of an array; captures new length of array. |
-| `let newArrayLength = array.push('Value')`              | adds an element to the end of an array; captures new length of array.       |
-| `let firstElement = array.shift();`                     | removes the first element from an array; captures the element removed.      |
-| `let lastElement = array.pop();`                        | removes the last element from an array; captures the element removed.       |
-| `let elementsAfterSlice = array.slice(index);`          | captures selected value(s) for an array after the index.                    |
-| `let arrayAsString = array.join(',');`                  | joins elements in array as a string with passed separator.                  |
-| `let StringAsArray = array.split(',');`                 | splits a string into an array of elements using passed separator.           |
-| `const [first, second] = object.SampleArray;`           | captures the first two elements in the object's SampleArray.                |
-| ` const [, , third, fourth] = object.SampleArray;`      | captures the third and fourth elements in the object's SampleArray.         |
 
 # If/Else Statements
 
