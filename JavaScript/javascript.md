@@ -208,6 +208,13 @@ const criminalsJailed = 100;
 const ability = criminalsJailed >= 80 ? "novice" : "veteran";
 
 console.log("That superhero is a well known " + ability);
+
+// tenerary operator example w/direct assignment to a variable
+const bill = 275;
+
+// if bill is between $50-$300 tip 15%, else tip 20%
+const tip = 50 <= bill <=300 ? bill * .15 : bill * .20;
+console.log(`The bill was ${bill}, the tip was ${tip}, and the total value was ${bill+tip}.`)
 ```
 
 ## Switch Statements
