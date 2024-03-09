@@ -33,16 +33,16 @@ Javascript is run by placing the `script` element below in the `body` element of
 ```
 
 # Basic Commands
-| Command                                  | Definition                                                                      |
-| :--------------------------------------- | ------------------------------------------------------------------------------- |
-| `'use strict';`                          | turns on strict mode, which doesn't allow silent errors; insert at top of file. |
-| `console.log('Hello World!')`            | displays output (text, variable, etc.) to the browser's console log             |
-| `prompt("What is todays' date?")`        | displays browser prompt for user input; can be stored as a variable             |
-| `console.log(typeof variableName)`       | displays the variable's data type to the browser's console log                  |
-| `alertF('Hello World!')`                 | displays browser alert with output (text, variable, etc.)                       |
-| `Number('1990')`                         | converts the string into an integer.                                            |
-| `String(1991)`                           | converts the integer into a string.                                             |
-| `document.querySelector('html-element')` | accesses the HTML element passed to allow for DOM manipulation.                 |
+| Command                                  | Definition                                                                                 |
+| :--------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `'use strict';`                          | turns on strict mode, which doesn't allow silent errors; insert at top of javascript file. |
+| `console.log('Hello World!')`            | displays output (text, variable, etc.) to the browser's console log                        |
+| `prompt("What is todays' date?")`        | displays browser prompt for user input; can be stored as a variable                        |
+| `console.log(typeof variableName)`       | displays the variable's data type to the browser's console log                             |
+| `alertF('Hello World!')`                 | displays browser alert with output (text, variable, etc.)                                  |
+| `Number('1990')`                         | converts the string into an integer.                                                       |
+| `String(1991)`                           | converts the integer into a string.                                                        |
+| `document.querySelector('html-element')` | accesses the HTML element passed to allow for DOM manipulation.                            |
 
 Use `const` when you want to define an *immutable* variable, this should usually be the first choice of defining a variable. Use `let` instead of `var`! `let` will define a *mutable* variable; also `let` is "block" scoped, while `var` is "function" scoped. 
 
