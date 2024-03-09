@@ -60,9 +60,9 @@ let defeats;
 realName = 'Peter Parker';
 ```
 # Operators 
-`Assignment` operators are designed to update a variable with shorthand syntax. `Comparison` operators are designed to provide a T/F Boolean value depending on the comparison between two variables. `Logical` opertators are designed to determine the logic between variables or values.
+`Assignment` operators are designed to update a variable with shorthand syntax. 
+
 ```javascript
-// ASSIGNMENT OPERATORS
 let counter = 9 + 1;
 // counter = 10
 counter += 10;
@@ -74,16 +74,21 @@ counter++;
 counter--;
 // counter = 80
 console.log(counter);
+```
 
-// COMPARISON OPERATORS
+`Comparison` operators are designed to provide a T/F Boolean value depending on the comparison between two variables.
+
+```javascript
 let testAnswer = 85.4;
 let actualAnswer = 85.4;
 
 console.log(testAnswer > actualAnswer);
 console.log(testAnswer >= actualAnswer);
 console.log(testAnswer <> actualAnswer);
+```
+`Logical` opertators are designed to determine the logic between variables or values.
 
-// LOGICAL OPERATORS
+```javascript
 const hasDriversLicense = true;
 const hasGoodVision = false;
 const goodDriveRecord = true;
