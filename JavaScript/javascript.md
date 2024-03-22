@@ -39,7 +39,7 @@ Javascript is run by placing the `script` element below in the `body` element of
 | `console.log('Hello World!')`            | displays output (text, variable, etc.) to the browser's console log                        |
 | `prompt("What is todays' date?")`        | displays browser prompt for user input; can be stored as a variable                        |
 | `console.log(typeof variableName)`       | displays the variable's data type to the browser's console log                             |
-| `alertF('Hello World!')`                 | displays browser alert with output (text, variable, etc.)                                  |
+| `alert('Hello World!')`                  | displays browser alert with output (text, variable, etc.)                                  |
 | `Number('1990')`                         | converts the string into an integer.                                                       |
 | `String(1991)`                           | converts the integer into a string.                                                        |
 | `document.querySelector('html-element')` | accesses the HTML element passed to allow for DOM manipulation.                            |
@@ -428,14 +428,14 @@ const capt_america = {
 
   calcBMI: function () {
     // this assigns a new element (bmi) to 'this' current object
-    this.bmi = this.mass / this.height ** 2;
-    return this.bmi;
+    this.bmi = Math.round((this.mass / this.height ** 2) * 100) / 100;
+    return `The calculated BMI is: ${this.bmi}.`;
   },
 
   calcAge: function () {
     // this assigns a new element (age) to 'this' current object
     this.age = 2021 - this.birthYear;
-    return this.age;
+    return `The calulacted age is: ${this.age}`;
   },
 };
 
@@ -446,6 +446,8 @@ console.log(capt_america.calcAge());
 
 # DOM Manipulation
 
+The DOM (Document Object Model) is a structured representation of HTML documents. It allows JS to access the HTML elements and styles to maniuplate them.
+  * ie. change text, HTML attributes, CSS styles, etc.
 |                   Command                   |                                                                          |
 | :-----------------------------------------: | ------------------------------------------------------------------------ |
 |  `document.querySelector('html-element')`   | accesses the HTML element passed to allow for DOM manipulation.          |
@@ -454,11 +456,15 @@ console.log(capt_america.calcAge());
 |   `document.querySelector('#element-id')`   | accesses the HTML id class element passed to allow for DOM manipulation. |
 |   `document.getElementById('element-id')`   | accesses the HTML id element passed to allow for DOM manipulation.       |
 
-Selecting an element in a `div` or `span` element to update the text
+Selecting an element in a `div` element to update the text.
 
 ```javascript
 let messageDiv = document.querySelector('.message');
-messageDiv.textContent = `Updated text for '.message' div.`;
+messageDiv.textContent = `Updated text for a div element with class=message.`;
+
+// values for input elements are captured w/the .value param
+let inputElement = document.querySelector('.user-input').value;
+console.log(`The current user input value: ${inputElement}!`);
 ```
 
 Selecting the `body` element to update the background color
