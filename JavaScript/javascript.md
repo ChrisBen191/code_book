@@ -448,6 +448,7 @@ console.log(capt_america.calcAge());
 
 The DOM (Document Object Model) is a structured representation of HTML documents. It allows JS to access the HTML elements and styles to maniuplate them.
   * ie. change text, HTML attributes, CSS styles, etc.
+  
 |                   Command                   |                                                                          |
 | :-----------------------------------------: | ------------------------------------------------------------------------ |
 |  `document.querySelector('html-element')`   | accesses the HTML element passed to allow for DOM manipulation.          |
