@@ -127,7 +127,7 @@ console.log(`Do you belive ${normalName} could be ${superheroName}?`);
 
 # Arrays
 | Command                                                 | Definition                                                                  |
-| :------------------------------------------------------ | --------------------------------------------------------------------------- |
+| ------------------------------------------------------- | --------------------------------------------------------------------------- |
 | `const friendsArray = ['Iron Man', 'Spider-Man'];`      | creates an array using bracket notation.                                    |
 | `const yearsArray = new Array(1991, 1984, 2008, 2024);` | creates an array using Array method.                                        |
 | `let arrayLength = array.length;`                       | calculates the length of the array specified.                               |
@@ -145,7 +145,7 @@ console.log(`Do you belive ${normalName} could be ${superheroName}?`);
 
 # Dates
 | Command                          | Definition                                              |
-| :------------------------------- | ------------------------------------------------------- |
+| -------------------------------- | ------------------------------------------------------- |
 | `dateValue.toTimeString()`       | converts date object to "time" string.                  |
 | `dateValue.toDateString()`       | converts date object to "date" string.                  |
 | `dateValue.toUTCString()`        | converts date object to "UTC" string.                   |
@@ -389,9 +389,9 @@ console.log(yearsUntilRetirement(1990, 'Chris'));
 
 ---
 
-|           Command            |                                               |
-| :--------------------------: | --------------------------------------------- |
-|  `Object.keys(ObjectName)`   | retrieves the keys of the object.             |
+| Command                      |                                               |
+| ---------------------------- | --------------------------------------------- |
+| `Object.keys(ObjectName)`    | retrieves the keys of the object.             |
 | `Object.values(ObjectName)`  | retrieves the values of the object.           |
 | `Object.entries(ObjectName)` | retrieves the key, value pairs of the object. |
 
@@ -449,13 +449,13 @@ console.log(capt_america.calcAge());
 The DOM (Document Object Model) is a structured representation of HTML documents. It allows JS to access the HTML elements and styles to maniuplate them.
   * ie. change text, HTML attributes, CSS styles, etc.
   
-|                   Command                   |                                                                          |
-| :-----------------------------------------: | ------------------------------------------------------------------------ |
-|  `document.querySelector('html-element')`   | accesses the HTML element passed to allow for DOM manipulation.          |
+| Command                                     |                                                                          |
+| ------------------------------------------- | ------------------------------------------------------------------------ |
+| `document.querySelector('html-element')`    | accesses the HTML element passed to allow for DOM manipulation.          |
 | `document.querySelectorAll('html-element')` | accesses all HTML elements as `nodes`, similar to arrays.                |
 | `document.querySelector('.class-element')`  | accesses the HTML class element passed to allow for DOM manipulation.    |
-|   `document.querySelector('#element-id')`   | accesses the HTML id class element passed to allow for DOM manipulation. |
-|   `document.getElementById('element-id')`   | accesses the HTML id element passed to allow for DOM manipulation.       |
+| `document.querySelector('#element-id')`     | accesses the HTML id class element passed to allow for DOM manipulation. |
+| `document.getElementById('element-id')`     | accesses the HTML id element passed to allow for DOM manipulation.       |
 
 Selecting an element in a `div` element to update the text.
 
