@@ -21,6 +21,8 @@ JavaScript is a high-level, object-oriented, multi-paradigm programming language
   - [Arrow Function](#arrow-function)
 - [Objects](#objects)
   - [Object Method (Function)](#object-method-function)
+- [Sets](#sets)
+- [Maps](#maps)
 - [DOM Manipulation](#dom-manipulation)
 
 JS contains the following datatypes : `Number, String, Boolean, Undefined, Null`. JS also contains the following falsy Values : `0, '',undefined, null, NaN`.
@@ -443,6 +445,31 @@ const capt_america = {
 console.log(capt_america.calcBMI());
 console.log(capt_america.calcAge());
 ```
+
+# Sets
+Creates an object of unique values, without duplicates.
+
+| Command                               |                                                     |
+| ------------------------------------- | --------------------------------------------------- |
+| `new Set()`                           | creates a new and empty set.                        |
+| `setElement.size`                     | returns the size of the set element.                |
+| `setElement.has('Spider-Man')`        | boolean T/F if element exists or not.               |
+| `setElement.add('Hawkeye')`           | adds element to the set if not existing.            |
+| `setElement.delete('Winter Soldier')` | deletes the element from the set if existing.       |
+| `[...setElement]`                     | spread operator spreads set elements into an array. |
+
+# Maps
+Creates an object with k,v pairs  of any type of element
+
+| Command                                |                                                      |
+| -------------------------------------- | ---------------------------------------------------- |
+| `new Map()`                            | creates a new and empty Map.                         |
+| `mapElement.size`                      | returns the size of the map element.                 |
+| `mapElement.has(2)`                    | boolean T/F if key exists or not.                    |
+| `mapElement.set(1, 'Captain America')` | adds element to the map, can be chained.             |
+| `mapElement.delete(1)`                 | deletes the element with the passed key if existing. |
+
+
 
 # DOM Manipulation
 
