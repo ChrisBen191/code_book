@@ -388,8 +388,7 @@ console.log(yearsUntilRetirement(1990, 'Chris'));
 ```
 
 # Objects
-
----
+Creates an object with `key:value` pairs. 
 
 | Command                      |                                               |
 | ---------------------------- | --------------------------------------------- |
@@ -447,7 +446,7 @@ console.log(capt_america.calcAge());
 ```
 
 # Sets
-Creates an object of unique values, without duplicates.
+Creates an object of unique values, without duplicates. Used when creating a simple list.
 
 | Command                               |                                                     |
 | ------------------------------------- | --------------------------------------------------- |
@@ -458,8 +457,51 @@ Creates an object of unique values, without duplicates.
 | `setElement.delete('Winter Soldier')` | deletes the element from the set if existing.       |
 | `[...setElement]`                     | spread operator spreads set elements into an array. |
 
+```javascript
+const avengerSet = new Set([
+  'Hulk',
+  'Black Widow',
+  'Ant-Man',
+  'Winter Soldier',
+  'Scarlett Witch',
+]);
+console.log(avengerSet);
+
+// returns the size of the set
+console.log(avengerSet.size);
+
+// returns unique elements in string
+console.log(new Set('Guardians of the Galaxy'));
+
+// boolean T/F if element exists or not
+console.log(avengerSet.has('Captain America'));
+console.log(avengerSet.has('Ant-Man'));
+
+// adds elements to the set if not existing
+avengerSet.add('Dr. Strange');
+
+// deletes elements from the set if existing
+avengerSet.delete('Winter Soldier');
+
+// iterates over each element in set
+for (const order of avengerSet) {
+  console.log(order);
+}
+
+const spideyVillians = [
+  'Green Goblin',
+  'Doc Ock',
+  'Sandman',
+  'Green Goblin',
+  'Electro',
+];
+
+// captures only the unique elements, then spreads back into an array
+const uniqueVilliansSet = [...new Set(spideyVillians)];
+console.log(uniqueVilliansSet);
+```
 # Maps
-Creates an object with k,v pairs  of any type of element
+Creates an object with `key:value` pairs; can contain mixed types of elements.
 
 | Command                                |                                                      |
 | -------------------------------------- | ---------------------------------------------------- |
@@ -469,6 +511,49 @@ Creates an object with k,v pairs  of any type of element
 | `mapElement.set(1, 'Captain America')` | adds element to the map, can be chained.             |
 | `mapElement.delete(1)`                 | deletes the element with the passed key if existing. |
 
+```javascript
+const galaxyGuardians = new Map();
+
+// different ways to add elements to a map
+galaxyGuardians.set('Captain', 'Starlord');
+galaxyGuardians.set(2, 'Gamora');
+console.log(galaxyGuardians.set('Co-Captain', 'Rocket'));
+
+// elements can be added inline and can set multiple elements at once
+galaxyGuardians
+  .set('Aliens', ['Mantis', 'Gamora', 'Rocket', 'Drax the Destroyer', 'Groot'])
+  .set('Humans', ['Starlord']);
+
+// booleans can also be mapped
+galaxyGuardians.set(true, 'We are Groot.').set(false, 'I am Groot.');
+
+// displays map with new elements added
+console.log(galaxyGuardians);
+
+// returns T/F if key exists
+console.log(galaxyGuardians.has('Ronan'));
+
+// deletes an element from a map
+galaxyGuardians.delete(2);
+
+// displays the length of the map.
+console.log(galaxyGuardians.size);
+
+// checking to see if current time is during working hours or not
+const approachingPerson = 'Rocket';
+
+console.log(
+  // passes two conditionals resulting in T/F response
+  // this boolean is mapped to element true/false
+  galaxyGuardians.get(
+    galaxyGuardians.get('Aliens').includes(approachingPerson) ||
+      galaxyGuardians.get('Humans').includes(approachingPerson)
+  )
+);
+
+// displays the map with new changes
+console.log(galaxyGuardians);
+```
 
 
 # DOM Manipulation
