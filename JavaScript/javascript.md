@@ -539,7 +539,7 @@ galaxyGuardians.delete(2);
 // displays the length of the map.
 console.log(galaxyGuardians.size);
 
-// checking to see if current time is during working hours or not
+// check for boolean values in map
 const approachingPerson = 'Rocket';
 
 console.log(
