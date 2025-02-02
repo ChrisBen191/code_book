@@ -128,6 +128,7 @@ console.log(`Do you belive ${normalName} could be ${superheroName}?`);
 ```
 
 # Arrays
+Creates a list of elements; used when you need ordered list of values (with duplicates) or when manipulating data.
 | Command                                                 | Definition                                                                  |
 | ------------------------------------------------------- | --------------------------------------------------------------------------- |
 | `const friendsArray = ['Iron Man', 'Spider-Man'];`      | creates an array using bracket notation.                                    |
@@ -388,7 +389,7 @@ console.log(yearsUntilRetirement(1990, 'Chris'));
 ```
 
 # Objects
-Creates an object with `key:value` pairs. 
+Creates an object with `key:value` pairs. Used when including functions (methods) or when working with JSON data (can convert to a map).
 
 | Command                      |                                               |
 | ---------------------------- | --------------------------------------------- |
@@ -446,7 +447,7 @@ console.log(capt_america.calcAge());
 ```
 
 # Sets
-Creates an object of unique values, without duplicates. Used when creating a simple list.
+Creates an object of unique values, without duplicates. Used when needing to work with unique values, or when high-performance is important. 
 
 | Command                               |                                                     |
 | ------------------------------------- | --------------------------------------------------- |
@@ -501,7 +502,7 @@ const uniqueVilliansSet = [...new Set(spideyVillians)];
 console.log(uniqueVilliansSet);
 ```
 # Maps
-Creates an object with `key:value` pairs; can contain mixed types of elements.
+Creates an object with `key:value` pairs; keys can have any data type. Used when needing to map keys to values.
 
 | Command                                |                                                      |
 | -------------------------------------- | ---------------------------------------------------- |
